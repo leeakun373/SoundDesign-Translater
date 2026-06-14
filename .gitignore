@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+*.egg-info/
+.venv/
+venv/
+
+# IDE / 本地
+.cursor/
+.vscode/
+*.log
+launch_error.log
+
+# 大文件：模型走 GitHub Release，见 scripts/download_assets.ps1
+nllb_int8_model/
+
+# Release 打包临时目录
+release_assets/
+
+# 测试历史快照（保留 latest_* 即可）
+tests/results/run_*/
+
+# 补词批次临时文件
+glossary/batches/uncovered_batch_*.csv
+
+# OS
+Thumbs.db
+.Desktop.ini

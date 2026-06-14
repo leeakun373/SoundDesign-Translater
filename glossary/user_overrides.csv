@@ -1,0 +1,111 @@
+﻿en,zh,term_type,action,note
+Room Tone,房间底噪,keyword,translate,示例：用户最高优先级覆盖
+Whoosh,呼啸声,keyword,translate,与 Swish 区分
+Swish,嗖嗖声,keyword,translate,
+ICEFric,,catid,never_translate,UCS CatID 永不翻译
+ASO,,vendor,never_translate,厂商/项目码 默认不译
+CO100K,,device,never_translate,录音设备码 默认不译
+Ice Axe,冰斧,keyword,translate,
+Scratch,刮擦,keyword,translate,
+Friction,摩擦,keyword,translate,
+Ice Brick,冰砖,keyword,translate,
+b00m,,device,never_translate,freq=86362;批001;设备码不译
+jse,,device,never_translate,freq=5383;批001;库前缀不译
+nocked,搭箭,keyword,translate,freq=4096;批001;弓箭搭弦
+ewkr,,device,never_translate,freq=2327;批001;库前缀不译
+closing,关闭,keyword,translate,freq=2107;批001;关门声
+exterior,室外,keyword,translate,freq=2090;批001;室外环境
+cal,口径,keyword,translate,freq=2023;批001;枪械口径
+mono,单声道,keyword,translate,freq=1918;批001;单声道
+steady,稳定,keyword,translate,freq=1908;批001;持续稳定
+external,外部,keyword,translate,freq=1753;批001;外部环境
+reverberant,有混响,keyword,translate,freq=1720;批001;混响感
+mock,模拟,keyword,translate,freq=1670;批001;模拟演练
+idle,怠速,keyword,translate,freq=1653;批001;引擎怠速
+shooter,射手,keyword,translate,freq=1538;批001;射击者
+dropping,掉落,keyword,translate,freq=1368;批001;物体掉落
+cwck,,device,never_translate,freq=1344;批001;库前缀不译
+outdoor,户外,keyword,translate,freq=1308;批001;户外环境
+flyby,飞越,keyword,translate,freq=1256;批001;飞过声
+cwb,,device,never_translate,freq=1251;批001;库前缀不译
+insects,昆虫,keyword,translate,freq=1188;批001;昆虫群
+vemf,,device,never_translate,freq=1179;批001;库前缀不译
+shut,关上,keyword,translate,freq=1118;批001;关闭声
+bright,明亮,keyword,translate,freq=1110;批001;音色明亮
+rev,轰油门,keyword,translate,freq=1090;批001;引擎转速
+generic,通用,keyword,translate,freq=1063;批001;通用撞击
+driveby,驶过,keyword,translate,freq=1042;批001;车辆驶过
+thin,纤细,keyword,translate,freq=1027;批001;音色纤细
+mag,弹匣,keyword,translate,freq=1026;批001;枪械弹匣
+bamboo,竹子,keyword,translate,freq=1024;批001;竹材
+ww2fc,,device,never_translate,freq=1013;批001;设备码不译
+clicks,咔哒声,keyword,translate,freq=983;批001;机械咔哒
+ueck,,device,never_translate,freq=966;批001;库前缀不译
+sanken,,vendor,never_translate,freq=960;批001;厂商码不译
+disturbance,干扰,keyword,translate,freq=953;批001;干扰声
+ceck,,device,never_translate,freq=952;批001;库前缀不译
+mmck,,device,never_translate,freq=946;批001;库前缀不译
+alck,,device,never_translate,freq=693;批002;库前缀不译
+soviet,苏式,keyword,translate,freq=691;批002;苏式装备
+decay,衰减,keyword,translate,freq=685;批002;尾音衰减
+malck,,device,never_translate,freq=684;批002;库前缀不译
+crhck,,device,never_translate,freq=678;批002;库前缀不译
+echoing,有回声,keyword,translate,freq=664;批002;回声感
+modulated,调制,keyword,translate,freq=652;批002;调制声
+continuous,持续,keyword,translate,freq=652;批002;持续声
+plasticrest,,device,never_translate,freq=654;批002;库前缀不译
+cack,,device,never_translate,freq=639;批002;库前缀不译
+sfmck,,device,never_translate,freq=630;批002;库前缀不译
+attarget,命中,keyword,translate,freq=626;批002;命中目标
+screw,螺丝,keyword,translate,freq=616;批002;拧螺丝
+porsche,保时捷,keyword,translate,freq=608;批002;保时捷车型
+mawck,,device,never_translate,freq=607;批002;库前缀不译
+cick,,device,never_translate,freq=606;批002;库前缀不译
+variations,变体,keyword,translate,freq=604;批002;多种变体
+insert,插入,keyword,translate,freq=646;批002;插入动作
+cwds,,device,never_translate,freq=576;批002;库前缀不译
+emotion,情绪,keyword,translate,freq=574;批002;情绪表达
+pressing,按压,keyword,translate,freq=569;批002;按压声
+mixed,混合,keyword,translate,freq=566;批002;混合版本
+cuck,,device,never_translate,freq=560;批002;库前缀不译
+bunretsu,分节,keyword,translate,freq=560;批002;日语分节标记
+sustain,延音,keyword,translate,freq=559;批002;延音
+strongtransient,强瞬态,keyword,translate,freq=558;批002;强瞬态冲击
+cxck,,device,never_translate,freq=554;批002;库前缀不译
+mbtg,,device,never_translate,freq=554;批002;库前缀不译
+shck,,device,never_translate,freq=549;批002;库前缀不译
+clothes,衣物,keyword,translate,freq=546;批002;衣物摩擦
+longcompoundbow,复合长弓,keyword,translate,freq=538;批002;复合长弓
+ak74,,device,never_translate,freq=538;批002;枪型码不译
+qp08,,device,never_translate,freq=384;批003;录音项目码不译
+decid,落叶林,keyword,translate,freq=384;批003;落叶林缩写
+espresso,浓缩咖啡,keyword,translate,freq=381;批003;意式咖啡机
+scanning,扫描,keyword,translate,freq=379;批003;扫描声
+forests,森林,keyword,translate,freq=378;批003;森林环境
+carabiner,登山扣,keyword,translate,freq=376;批003;快挂
+audi,奥迪,keyword,translate,freq=374;批003;奥迪车型
+revving,轰油门,keyword,translate,freq=371;批003;引擎轰油门
+warm,温暖,keyword,translate,freq=369;批003;温暖音色
+ortf3d,,device,never_translate,freq=368;批003;ORTF3D录音制式
+orc,兽人,keyword,translate,freq=367;批003;兽人角色
+uaz,嘎斯,keyword,translate,freq=367;批003;苏式UAZ车
+qp11,,device,never_translate,freq=362;批003;录音项目码不译
+conif,针叶林,keyword,translate,freq=362;批003;针叶林缩写
+croak,蛙鸣,keyword,translate,freq=360;批003;青蛙叫声
+inserting,插入,keyword,translate,freq=360;批003;插入动作
+leatherrest,皮托,keyword,translate,freq=360;批003;弓弦皮托
+alt2,,device,never_translate,freq=354;批003;备用版本码
+whip-panning,甩镜,keyword,translate,freq=354;批003;快速摇镜
+wipe,划变,keyword,translate,freq=350;批003;转场划像
+parquet,木地板,keyword,translate,freq=333;批003; parquet地板
+punchy,冲击感,keyword,translate,freq=327;批003; punchy音色
+accelerating,加速,keyword,translate,freq=318;批003;加速
+pillow,枕头,keyword,translate,freq=316;批003;枕头
+ueds,,device,never_translate,freq=336;批003;库前缀不译
+gaz,嘎斯,keyword,translate,freq=314;批003;嘎斯货车
+volkswagen,大众,keyword,translate,freq=313;批003;大众车型
+drawing,拉弦,keyword,translate,批003体验;弓拉弦
+Hi,,device,never_translate,录音 Hi 电平不译
+Lo,,device,never_translate,录音 Lo 电平不译
+FIRING,,keyword,never_translate,filename 字段不译
+Pounder,,keyword,never_translate,16 Pounder 炮名不译
