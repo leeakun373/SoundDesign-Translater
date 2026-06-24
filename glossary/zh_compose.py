@@ -5,6 +5,7 @@ from __future__ import annotations
 import csv
 import re
 import sqlite3
+from dataclasses import dataclass, field
 from pathlib import Path
 
 from glossary.matcher import GlossaryEntry, GlossaryMatcher
@@ -35,6 +36,27 @@ FILLER_PHRASES = (
 
 PUNCT = re.compile(r"[\s，。、；：！？,.!?;:\(\)（）\[\]【】\"'""]+")
 ASCII_WORD = re.compile(r"[A-Za-z][A-Za-z0-9+\-]*")
+
+FX_PATTERN_ALIASES: tuple[tuple[str, str, str], ...] = (
+    ("前门", "Front Door", "fx_object"),
+    ("木门", "Wood Door", "fx_object"),
+    ("木头", "Wood", "fx_material"),
+    ("木制", "Wood", "fx_material"),
+    ("门", "Door", "fx_object"),
+    ("滑动", "Slide", "fx_action"),
+    ("滑开", "Slide", "fx_action"),
+    ("推开", "Push Open", "fx_action"),
+    ("拉开", "Pull Open", "fx_action"),
+)
+
+
+@dataclass(frozen=True)
+class ComposeDiagnostics:
+    text: str
+    glossary_hits: int
+    coverage: float
+    unknown_zh: list[str] = field(default_factory=list)
+    matched_terms: list[dict[str, str | int]] = field(default_factory=list)
 
 
 def _split_zh_variants(zh: str) -> list[str]:
@@ -144,40 +166,71 @@ def build_compose_index(matcher: GlossaryMatcher) -> list[tuple[str, GlossaryEnt
     for zh, en in _load_oral_aliases().items():
         add(zh, en, "oral", force=True)
 
+    for zh, en, term_type in FX_PATTERN_ALIASES:
+        add(zh, en, term_type, force=True)
+
     index.sort(key=lambda item: len(item[0]), reverse=True)
     return index
 
 
-def compose_zh_to_en(text: str, matcher: GlossaryMatcher) -> tuple[str, int]:
+def _zh_char_count(text: str) -> int:
+    return sum(1 for c in text if "\u4e00" <= c <= "\u9fff")
+
+
+def _append_token(parts: list[str], token: str) -> bool:
+    token = token.strip()
+    if not token:
+        return False
+    if parts and parts[-1].lower() == token.lower():
+        return False
+    parts.append(token)
+    return True
+
+
+def compose_zh_to_en_debug(
+    text: str, matcher: GlossaryMatcher
+) -> tuple[str, ComposeDiagnostics]:
     """
     从中文描述组装空格分隔的英文 FX 关键词。
     未识别字符跳过，整句不送 NLLB 碎块（避免幻觉）。
     """
     if not text.strip():
-        return "", 0
+        return "", ComposeDiagnostics(text="", glossary_hits=0, coverage=0.0)
 
     index = build_compose_index(matcher)
     parts: list[str] = []
     hits = 0
+    covered_zh = 0
+    content_zh = 0
+    unknown: list[str] = []
+    unknown_buf: list[str] = []
+    matched_terms: list[dict[str, str | int]] = []
     i = 0
     n = len(text)
 
+    def flush_unknown() -> None:
+        if unknown_buf:
+            unknown.append("".join(unknown_buf))
+            unknown_buf.clear()
+
     while i < n:
         if text[i].isspace() or PUNCT.match(text[i]):
+            flush_unknown()
             i += 1
             continue
 
         word_m = ASCII_WORD.match(text, i)
         if word_m:
+            flush_unknown()
             token = word_m.group(0)
-            if token and (not parts or parts[-1].lower() != token.lower()):
-                parts.append(token)
+            _append_token(parts, token)
             i = word_m.end()
             continue
 
         skipped = False
         for fp in sorted(FILLER_PHRASES, key=len, reverse=True):
             if text.startswith(fp, i):
+                flush_unknown()
                 i += len(fp)
                 skipped = True
                 break
@@ -185,49 +238,59 @@ def compose_zh_to_en(text: str, matcher: GlossaryMatcher) -> tuple[str, int]:
             continue
 
         if text[i] in FILLER_CHARS:
+            flush_unknown()
             i += 1
             continue
 
         matched = False
         for zh, entry in index:
             if text.startswith(zh, i):
+                flush_unknown()
                 token = entry.en.strip()
-                if token and (not parts or parts[-1].lower() != token.lower()):
-                    parts.append(token)
+                if _append_token(parts, token):
                     hits += 1
+                zh_len = _zh_char_count(zh)
+                covered_zh += zh_len
+                content_zh += zh_len
+                matched_terms.append(
+                    {
+                        "zh": zh,
+                        "en": token,
+                        "type": entry.term_type,
+                        "start": i,
+                        "end": i + len(zh),
+                    }
+                )
                 i += len(zh)
                 matched = True
                 break
 
         if not matched:
+            if "\u4e00" <= text[i] <= "\u9fff":
+                content_zh += 1
+                unknown_buf.append(text[i])
+            else:
+                flush_unknown()
             i += 1
 
-    return " ".join(parts), hits
+    flush_unknown()
+    coverage = covered_zh / content_zh if content_zh else 0.0
+    diagnostics = ComposeDiagnostics(
+        text=" ".join(parts),
+        glossary_hits=hits,
+        coverage=coverage,
+        unknown_zh=unknown,
+        matched_terms=matched_terms,
+    )
+    return diagnostics.text, diagnostics
+
+
+def compose_zh_to_en(text: str, matcher: GlossaryMatcher) -> tuple[str, int]:
+    composed, diagnostics = compose_zh_to_en_debug(text, matcher)
+    return composed, diagnostics.glossary_hits
 
 
 def compose_coverage(text: str, matcher: GlossaryMatcher) -> float:
     """粗略估计术语表对中文字符的覆盖率。"""
-    if not text.strip():
-        return 0.0
-    index = build_compose_index(matcher)
-    zh_chars = [c for c in text if "\u4e00" <= c <= "\u9fff"]
-    if not zh_chars:
-        return 0.0
-    covered = 0
-    i = 0
-    while i < len(text):
-        if text[i] not in zh_chars and not ("\u4e00" <= text[i] <= "\u9fff"):
-            i += 1
-            continue
-        matched = False
-        for zh, _ in index:
-            if text.startswith(zh, i):
-                covered += len(zh)
-                i += len(zh)
-                matched = True
-                break
-        if not matched:
-            if "\u4e00" <= text[i] <= "\u9fff" and text[i] not in FILLER_CHARS:
-                pass
-            i += 1
-    return covered / len(zh_chars)
+    _, diagnostics = compose_zh_to_en_debug(text, matcher)
+    return diagnostics.coverage

@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 import urllib.error
 import urllib.request
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any
 
 
@@ -19,6 +19,7 @@ class TranslateResponse:
     glossary_hits: int
     direction: str
     ms: int
+    debug: dict[str, Any] = field(default_factory=dict)
 
 
 class LocalTranslateClient:
@@ -45,6 +46,7 @@ class LocalTranslateClient:
             glossary_hits=data["glossary_hits"],
             direction=data["direction"],
             ms=data["ms"],
+            debug=data.get("debug", {}),
         )
 
     def _get(self, path: str) -> dict[str, Any]:

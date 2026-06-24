@@ -1,0 +1,116 @@
+"""FX name normalization and validation helpers."""
+
+from __future__ import annotations
+
+import re
+from dataclasses import dataclass, field
+
+
+ARTICLE_RE = re.compile(r"^(?:the|a|an)\s+", re.IGNORECASE)
+WORD_RE = re.compile(r"[A-Za-z][A-Za-z0-9+\-]*")
+SENTENCE_VERBS = re.compile(
+    r"\b(?:slipped|slides|sliding|opened|opens|pushed|pushes|pulled|pulls)\b",
+    re.IGNORECASE,
+)
+
+
+@dataclass(frozen=True)
+class FxNameQuality:
+    quality: str
+    issues: list[str] = field(default_factory=list)
+    required_tokens: list[str] = field(default_factory=list)
+    forbidden_tokens: list[str] = field(default_factory=list)
+
+
+def sanitize_fx_fragment(text: str) -> str:
+    """Convert a short NLLB fallback fragment into FX-name style tokens."""
+    out = text.strip().strip(" .!?;:，。！？；：")
+    out = ARTICLE_RE.sub("", out)
+    replacements = (
+        (r"\bslipped\b|\bslid\b|\bsliding\b|\bslides\b", "Slide"),
+        (r"\bpushed\s+open\b|\bpushed\b|\bpushes\b", "Push Open"),
+        (r"\bpulled\s+open\b|\bpulled\b|\bpulls\b", "Pull Open"),
+        (r"\bopened\b|\bopens\b", "Open"),
+    )
+    for pattern, replacement in replacements:
+        out = re.sub(pattern, replacement, out, flags=re.IGNORECASE)
+    words = WORD_RE.findall(out)
+    return " ".join(_title_fx_word(w) for w in words)
+
+
+def validate_fx_name(src_text: str, output: str) -> FxNameQuality:
+    issues: list[str] = []
+    required = _required_tokens(src_text)
+    forbidden = _forbidden_tokens(src_text)
+    words = WORD_RE.findall(output)
+    out_lower = output.lower()
+
+    if _looks_like_sentence(output):
+        issues.append("natural_sentence")
+    if len(words) <= 1 or out_lower in {"wood", "front"}:
+        issues.append("low_information")
+
+    missing = [token for token in required if token.lower() not in out_lower]
+    if missing:
+        issues.extend(f"missing:{token}" for token in missing)
+
+    present_forbidden = [
+        token for token in forbidden if re.search(rf"\b{re.escape(token)}\b", output, re.IGNORECASE)
+    ]
+    if present_forbidden:
+        issues.extend(f"forbidden:{token}" for token in present_forbidden)
+
+    return FxNameQuality(
+        quality="pass" if not issues else "fail",
+        issues=issues,
+        required_tokens=required,
+        forbidden_tokens=forbidden,
+    )
+
+
+def _required_tokens(src_text: str) -> list[str]:
+    required: list[str] = []
+
+    def add(token: str) -> None:
+        if token not in required:
+            required.append(token)
+
+    if "木门" in src_text:
+        add("Wood")
+        add("Door")
+    elif "木头" in src_text or "木制" in src_text:
+        add("Wood")
+    elif "门" in src_text:
+        add("Door")
+
+    if "滑动" in src_text or "滑开" in src_text:
+        add("Slide")
+    if "推开" in src_text:
+        add("Push")
+        add("Open")
+    if "拉开" in src_text:
+        add("Pull")
+        add("Open")
+    return required
+
+
+def _forbidden_tokens(src_text: str) -> list[str]:
+    if "前门" in src_text:
+        return []
+    return ["Front"]
+
+
+def _looks_like_sentence(output: str) -> bool:
+    stripped = output.strip()
+    if stripped.endswith((".", "?", "!")):
+        return True
+    if ARTICLE_RE.match(stripped):
+        return True
+    return bool(SENTENCE_VERBS.search(stripped))
+
+
+def _title_fx_word(word: str) -> str:
+    upper_words = {"FX", "SFX", "UCS"}
+    if word.upper() in upper_words:
+        return word.upper()
+    return word[:1].upper() + word[1:].lower()

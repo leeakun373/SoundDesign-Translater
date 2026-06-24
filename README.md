@@ -86,6 +86,7 @@ python tools/find_uncovered_terms.py --db %UCS_COMMERCIAL_DB%
 
 ## 文档
 
+- [docs/开发历史.md](docs/开发历史.md) — **开发上下文压缩版（给后续会话用）**
 - [docs/模型与配置.md](docs/模型与配置.md)
 - [glossary/README.md](glossary/README.md)
 - [docs/补词批量验收指南.md](docs/补词批量验收指南.md)

@@ -130,6 +130,7 @@ class TranslateHandler(BaseHTTPRequestHandler):
                 "mode": result.mode,
                 "pro_mode": result.pro_mode,
                 "glossary_hits": result.glossary_hits,
+                "debug": result.debug,
                 "direction": result.direction_label,
                 "ms": ms,
             },

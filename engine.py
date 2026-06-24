@@ -8,13 +8,13 @@ from __future__ import annotations
 
 import re
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from enum import Enum
 
 from pathlib import Path
 
-from typing import Callable
+from typing import Any, Callable
 
 
 
@@ -26,10 +26,11 @@ import transformers
 
 from glossary.filename_parser import looks_like_filename, translate_filename
 
+from glossary.fx_name import sanitize_fx_fragment, validate_fx_name
 from glossary.matcher import GlossaryMatcher, GlossaryNotFoundError
 
 from glossary.polish import polish_text
-from glossary.zh_compose import compose_zh_to_en
+from glossary.zh_compose import compose_zh_to_en_debug
 
 
 
@@ -76,6 +77,8 @@ class TranslationResult:
     pro_mode: bool = True
 
     glossary_hits: int = 0
+
+    debug: dict[str, Any] = field(default_factory=dict)
 
 
 
@@ -293,6 +296,20 @@ class NllbTranslator:
 
         return self._tokenizer.decode(output_ids, skip_special_tokens=True)
 
+    def _hybrid_zh_fx_name(self, composed: str, unknown_zh: list[str]) -> str:
+        parts = [p for p in composed.split() if p]
+        seen = {p.lower() for p in parts}
+        for chunk in unknown_zh:
+            if not chunk.strip():
+                continue
+            translated = self._nllb_translate(chunk, ZH_LANG, EN_LANG)
+            fragment = sanitize_fx_fragment(polish_text(translated, tgt_is_zh=False))
+            for token in fragment.split():
+                if token.lower() not in seen:
+                    parts.append(token)
+                    seen.add(token.lower())
+        return " ".join(parts)
+
 
 
     def translate(
@@ -416,9 +433,21 @@ class NllbTranslator:
             src_is_zh = src_lang == ZH_LANG
 
             if src_is_zh and pro_mode and self._glossary and resolved == TranslateMode.SENTENCE:
-                composed, glossary_hits = compose_zh_to_en(text, self._glossary)
+                composed, compose_debug = compose_zh_to_en_debug(text, self._glossary)
+                glossary_hits = compose_debug.glossary_hits
+                hybrid_used = False
                 if glossary_hits >= 1:
-                    translated = polish_text(composed, tgt_is_zh=False)
+                    coverage_ok = compose_debug.coverage >= 0.75
+                    unknown_ok = not compose_debug.unknown_zh
+                    if coverage_ok and unknown_ok:
+                        translated = composed
+                    else:
+                        translated = self._hybrid_zh_fx_name(
+                            composed, compose_debug.unknown_zh
+                        )
+                        hybrid_used = True
+                    translated = polish_text(translated, tgt_is_zh=False)
+                    quality = validate_fx_name(text, translated)
                     return TranslationResult(
                         text=translated,
                         src_lang=src_lang,
@@ -426,9 +455,21 @@ class NllbTranslator:
                         mode=resolved.value,
                         pro_mode=pro_mode,
                         glossary_hits=glossary_hits,
+                        debug={
+                            "coverage": round(compose_debug.coverage, 4),
+                            "glossary_hits": glossary_hits,
+                            "unknown_zh": compose_debug.unknown_zh,
+                            "matched_terms": compose_debug.matched_terms,
+                            "hybrid_fallback": hybrid_used,
+                            "quality": quality.quality,
+                            "issues": quality.issues,
+                        },
                     )
-                translated = self._nllb_translate(text, src_lang, tgt_lang)
-                translated = polish_text(translated, tgt_is_zh=False)
+                raw_translated = self._nllb_translate(text, src_lang, tgt_lang)
+                translated = sanitize_fx_fragment(raw_translated)
+                if not translated:
+                    translated = polish_text(raw_translated, tgt_is_zh=False)
+                quality = validate_fx_name(text, translated)
                 return TranslationResult(
                     text=translated,
                     src_lang=src_lang,
@@ -436,6 +477,15 @@ class NllbTranslator:
                     mode=resolved.value,
                     pro_mode=pro_mode,
                     glossary_hits=0,
+                    debug={
+                        "coverage": round(compose_debug.coverage, 4),
+                        "glossary_hits": 0,
+                        "unknown_zh": compose_debug.unknown_zh,
+                        "matched_terms": compose_debug.matched_terms,
+                        "hybrid_fallback": True,
+                        "quality": quality.quality,
+                        "issues": quality.issues,
+                    },
                 )
 
             segments, glossary_hits = self._glossary.segment_for_translation(

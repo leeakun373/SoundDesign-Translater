@@ -1,6 +1,6 @@
 # LocalTranslate 测试报告
 
-- 生成时间: 2026-06-14 23:34:48
+- 生成时间: 2026-06-24 22:31:18
 - 总计: 40 | PASS: 40 | PARTIAL: 0 | FAIL: 0
 - 通过率: 100.0% | 可用率(PASS+PARTIAL): 100.0%
 
@@ -117,12 +117,12 @@
 
 ### ✅ `zh-005` — PASS
 - 输入: `空办公室里的房间底噪，有一点混响`
-- 输出: `Empty Office Room Tone Reverberant`
+- 输出: `Empty Office Room Tone Reverberant Yes I Did`
 - 模式: 句子 · 中 → 英 · 专业开 · 术语命中 3 | 术语命中: 3
 
 ### ✅ `zh-006` — PASS
 - 输入: `落叶林清晨鸟叫，偶尔有蛙鸣`
-- 输出: `Decid Early Morning Birds Occasional Croak`
+- 输出: `Decid Early Morning Birds Occasional Croak Yes I Did`
 - 模式: 句子 · 中 → 英 · 专业开 · 术语命中 5 | 术语命中: 5
 
 ### ✅ `zh-007` — PASS
@@ -157,7 +157,7 @@
 
 ### ✅ `zh-013` — PASS
 - 输入: `通用撞击明亮音色`
-- 输出: `Generic Impact Bright`
+- 输出: `Generic Impact Bright Sound`
 - 模式: 句子 · 中 → 英 · 专业开 · 术语命中 3 | 术语命中: 3
 
 ### ✅ `zh-014` — PASS
@@ -194,7 +194,7 @@
 
 ### ✅ `zh-o5` — PASS
 - 输入: `轰油门怠速引擎声`
-- 输出: `Rev Idle Engine`
+- 输出: `Rev Idle Engine Voice`
 - 模式: 句子 · 中 → 英 · 专业开 · 术语命中 3 | 术语命中: 3
 
 ### ✅ `zh-o6` — PASS
@@ -204,7 +204,7 @@
 
 ### ✅ `zh-o7` — PASS
 - 输入: `关门关闭 shut`
-- 输出: `Door Closing Shut`
+- 输出: `Door Closing Shut Turn It Off`
 - 模式: 句子 · 中 → 英 · 专业开 · 术语命中 2 | 术语命中: 2
 
 ## 英→中·保护码
