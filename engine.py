@@ -26,6 +26,7 @@ import transformers
 
 from glossary.filename_parser import looks_like_filename, translate_filename
 
+from glossary.boom_style import BoomStyleIndex
 from glossary.fx_name import sanitize_fx_fragment, validate_fx_name
 from glossary.matcher import GlossaryMatcher, GlossaryNotFoundError
 
@@ -166,6 +167,8 @@ class NllbTranslator:
 
         self._glossary_error: str | None = None
 
+        self._boom_style: BoomStyleIndex | None = None
+
 
 
     @property
@@ -296,19 +299,42 @@ class NllbTranslator:
 
         return self._tokenizer.decode(output_ids, skip_special_tokens=True)
 
-    def _hybrid_zh_fx_name(self, composed: str, unknown_zh: list[str]) -> str:
+    def _boom_style_index(self) -> BoomStyleIndex:
+        if self._boom_style is None:
+            self._boom_style = BoomStyleIndex()
+        return self._boom_style
+
+    def _style_zh_fx_name(
+        self, text: str, preserve_order: bool = False
+    ) -> tuple[str, dict[str, Any]]:
+        styled = self._boom_style_index().style_fx_name(
+            text, preserve_order=preserve_order
+        )
+        return styled.text, {
+            "boom_index_used": styled.boom_index_used,
+            "boom_phrase_hits": styled.boom_phrase_hits,
+            "selected_terms": styled.selected_terms,
+        }
+
+    def _hybrid_zh_fx_name(
+        self, composed: str, unknown_zh: list[str]
+    ) -> tuple[str, list[str]]:
         parts = [p for p in composed.split() if p]
         seen = {p.lower() for p in parts}
+        candidate_fragments: list[str] = []
         for chunk in unknown_zh:
             if not chunk.strip():
                 continue
             translated = self._nllb_translate(chunk, ZH_LANG, EN_LANG)
             fragment = sanitize_fx_fragment(polish_text(translated, tgt_is_zh=False))
+            fragment, _boom_debug = self._style_zh_fx_name(fragment)
+            if fragment:
+                candidate_fragments.append(fragment)
             for token in fragment.split():
                 if token.lower() not in seen:
                     parts.append(token)
                     seen.add(token.lower())
-        return " ".join(parts)
+        return " ".join(parts), candidate_fragments
 
 
 
@@ -436,17 +462,21 @@ class NllbTranslator:
                 composed, compose_debug = compose_zh_to_en_debug(text, self._glossary)
                 glossary_hits = compose_debug.glossary_hits
                 hybrid_used = False
+                candidate_fragments: list[str] = []
                 if glossary_hits >= 1:
                     coverage_ok = compose_debug.coverage >= 0.75
                     unknown_ok = not compose_debug.unknown_zh
                     if coverage_ok and unknown_ok:
                         translated = composed
                     else:
-                        translated = self._hybrid_zh_fx_name(
+                        translated, candidate_fragments = self._hybrid_zh_fx_name(
                             composed, compose_debug.unknown_zh
                         )
                         hybrid_used = True
                     translated = polish_text(translated, tgt_is_zh=False)
+                    translated, boom_debug = self._style_zh_fx_name(
+                        translated, preserve_order=True
+                    )
                     quality = validate_fx_name(text, translated)
                     return TranslationResult(
                         text=translated,
@@ -461,6 +491,8 @@ class NllbTranslator:
                             "unknown_zh": compose_debug.unknown_zh,
                             "matched_terms": compose_debug.matched_terms,
                             "hybrid_fallback": hybrid_used,
+                            "candidate_fragments": candidate_fragments,
+                            **boom_debug,
                             "quality": quality.quality,
                             "issues": quality.issues,
                         },
@@ -469,6 +501,8 @@ class NllbTranslator:
                 translated = sanitize_fx_fragment(raw_translated)
                 if not translated:
                     translated = polish_text(raw_translated, tgt_is_zh=False)
+                candidate_fragments = [translated] if translated else []
+                translated, boom_debug = self._style_zh_fx_name(translated)
                 quality = validate_fx_name(text, translated)
                 return TranslationResult(
                     text=translated,
@@ -483,6 +517,8 @@ class NllbTranslator:
                         "unknown_zh": compose_debug.unknown_zh,
                         "matched_terms": compose_debug.matched_terms,
                         "hybrid_fallback": True,
+                        "candidate_fragments": candidate_fragments,
+                        **boom_debug,
                         "quality": quality.quality,
                         "issues": quality.issues,
                     },
