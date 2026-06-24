@@ -1,0 +1,56 @@
+zh,en,slot,priority,note
+前门,Front Door,object,120,explicit front door only
+木门,Wood Door,object,120,wooden door compound
+关上门,Close Door,action,120,close door phrase
+关门,Close Door,action,120,close door phrase
+狼嚎,Wolf Howl,creature_sound,120,wolf howl compound
+海克斯,Hex,design,120,League-style hex/hextech descriptor
+木头,Wood,material,100,basic material
+木制,Wood,material,100,basic material
+金属,Metal,material,100,basic material
+玻璃,Glass,material,100,basic material
+塑料,Plastic,material,100,basic material
+纸,Paper,material,100,basic material
+布,Cloth,material,100,basic material
+皮革,Leather,material,100,basic material
+石头,Stone,material,100,basic material
+冰,Ice,material,100,basic material
+水,Water,material,100,basic material
+火,Fire,material,100,basic element
+门,Door,object,100,basic object
+抽屉,Drawer,object,100,basic object
+盒子,Box,object,100,basic object
+杯子,Cup,object,100,basic object
+椅子,Chair,object,100,basic object
+地板,Floor,object,100,basic object
+石块,Rock,object,100,basic object
+火箭,Rocket,object,100,basic object
+滑动,Slide,action,100,basic action
+滑开,Slide,action,100,basic action
+推开,Push Open,action,100,basic action
+拉开,Pull Open,action,100,basic action
+关闭,Close,action,100,basic action
+关上,Close,action,100,basic action
+撞击,Impact,action,100,basic action
+掉落,Drop,action,100,basic action
+拖动,Drag,action,100,basic action
+拖拽,Drag,action,100,basic action
+摩擦,Rub,action,100,basic action
+刮擦,Scratch,action,100,basic action
+破碎,Break,action,100,basic action
+碎裂,Shatter,action,100,basic action
+滚动,Roll,action,100,basic action
+摇晃,Shake,action,100,basic action
+爆炸,Explosion,action,100,basic action
+飞过,Flyby,action,100,basic action
+飞越,Flyby,action,100,basic action
+狼,Wolf,creature_sound,100,basic creature
+吼叫,Roar,creature_sound,100,basic vocalization
+咆哮,Growl,creature_sound,100,basic vocalization
+鸟叫,Birds,creature_sound,100,basic ambience
+鸟鸣,Birds,creature_sound,100,basic ambience
+虫鸣,Insects,creature_sound,100,basic ambience
+魔法,Magic,design,100,basic design
+能量,Energy,design,100,basic design
+宝石,Gemstone,design,100,basic design object
+水晶,Crystal,design,100,basic design object

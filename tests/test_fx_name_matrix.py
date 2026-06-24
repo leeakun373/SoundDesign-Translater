@@ -22,6 +22,7 @@ class FxCase:
     input: str
     required_tokens: list[str]
     forbidden_tokens: list[str] = field(default_factory=list)
+    required_any: list[list[str]] = field(default_factory=list)
     not_sentence: bool = True
 
 
@@ -32,6 +33,14 @@ CASES = [
     FxCase("前门 滑开", ["Front", "Door", "Slide"], []),
     FxCase("木门 推开", ["Wood", "Door", "Push", "Open"], ["Front"]),
     FxCase("木门 拉开", ["Wood", "Door", "Pull", "Open"], ["Front"]),
+    FxCase("狼嚎火箭", ["Wolf", "Howl", "Rocket"]),
+    FxCase("火箭狼嚎飞过", ["Rocket", "Wolf", "Howl", "Flyby"]),
+    FxCase("海克斯宝石", [], required_any=[["Hex", "Hextech"], ["Gemstone", "Crystal"]]),
+    FxCase(
+        "海克斯宝石碎裂",
+        [],
+        required_any=[["Hex", "Hextech"], ["Gemstone", "Crystal"], ["Shatter", "Break"]],
+    ),
 ]
 
 
@@ -60,16 +69,23 @@ def main() -> int:
         missing = [
             token for token in case.required_tokens if token.lower() not in lower_output
         ]
+        missing_any = [
+            group
+            for group in case.required_any
+            if not any(token.lower() in lower_output for token in group)
+        ]
         forbidden = [
             token for token in case.forbidden_tokens if token.lower() in lower_output
         ]
-        if missing or forbidden:
+        if missing or missing_any or forbidden:
             failures.append(
                 f"{case.input!r}: output={output!r}, missing={missing}, "
-                f"forbidden={forbidden}, debug={debug}"
+                f"missing_any={missing_any}, forbidden={forbidden}, debug={debug}"
             )
         if case.not_sentence and "natural_sentence" in quality.issues:
             failures.append(f"{case.input!r}: output looked like a sentence: {output!r}")
+        if output.lower().startswith(("the ", "a ", "an ")):
+            failures.append(f"{case.input!r}: output started with an article: {output!r}")
 
     low_info = validate_fx_name("木头 滑开", "Wood")
     if "low_information" not in low_info.issues:

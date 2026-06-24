@@ -11,6 +11,7 @@ from pathlib import Path
 from glossary.matcher import GlossaryEntry, GlossaryMatcher
 
 ORAL_CSV = Path(__file__).resolve().parent / "zh_oral_aliases.csv"
+FX_PATTERN_CSV = Path(__file__).resolve().parent / "packs" / "zh_fx_patterns.csv"
 
 # 跳过虚词/量词/口语连接（不参与输出）
 FILLER_CHARS = frozenset("的了下着过在与和及或就还把被让给跟从向以很更最里来去到")
@@ -37,16 +38,13 @@ FILLER_PHRASES = (
 PUNCT = re.compile(r"[\s，。、；：！？,.!?;:\(\)（）\[\]【】\"'""]+")
 ASCII_WORD = re.compile(r"[A-Za-z][A-Za-z0-9+\-]*")
 
-FX_PATTERN_ALIASES: tuple[tuple[str, str, str], ...] = (
-    ("前门", "Front Door", "fx_object"),
-    ("木门", "Wood Door", "fx_object"),
-    ("木头", "Wood", "fx_material"),
-    ("木制", "Wood", "fx_material"),
-    ("门", "Door", "fx_object"),
-    ("滑动", "Slide", "fx_action"),
-    ("滑开", "Slide", "fx_action"),
-    ("推开", "Push Open", "fx_action"),
-    ("拉开", "Pull Open", "fx_action"),
+MIN_FX_PATTERN_FALLBACK: tuple[tuple[str, str, str, int], ...] = (
+    ("木门", "Wood Door", "object", 100),
+    ("木头", "Wood", "material", 100),
+    ("木制", "Wood", "material", 100),
+    ("门", "Door", "object", 90),
+    ("滑开", "Slide", "action", 100),
+    ("滑动", "Slide", "action", 100),
 )
 
 
@@ -100,6 +98,26 @@ def _load_oral_aliases() -> dict[str, str]:
                 if zh and en:
                     aliases[zh] = en
     return aliases
+
+
+def _load_fx_patterns() -> list[tuple[str, str, str, int]]:
+    patterns: list[tuple[str, str, str, int]] = []
+    if FX_PATTERN_CSV.is_file():
+        with FX_PATTERN_CSV.open(encoding="utf-8-sig", newline="") as f:
+            for row in csv.DictReader(f):
+                zh = (row.get("zh") or "").strip()
+                en = (row.get("en") or "").strip()
+                slot = (row.get("slot") or "fx").strip()
+                try:
+                    priority = int((row.get("priority") or "0").strip())
+                except ValueError:
+                    priority = 0
+                if zh and en:
+                    patterns.append((zh, en, slot, priority))
+    if not patterns:
+        patterns.extend(MIN_FX_PATTERN_FALLBACK)
+    patterns.sort(key=lambda item: (item[3], len(item[0])))
+    return patterns
 
 
 def _load_best_zh_entries(matcher: GlossaryMatcher) -> dict[str, GlossaryEntry]:
@@ -166,8 +184,8 @@ def build_compose_index(matcher: GlossaryMatcher) -> list[tuple[str, GlossaryEnt
     for zh, en in _load_oral_aliases().items():
         add(zh, en, "oral", force=True)
 
-    for zh, en, term_type in FX_PATTERN_ALIASES:
-        add(zh, en, term_type, force=True)
+    for zh, en, slot, _priority in _load_fx_patterns():
+        add(zh, en, f"fx_{slot}", force=True)
 
     index.sort(key=lambda item: len(item[0]), reverse=True)
     return index
@@ -178,13 +196,27 @@ def _zh_char_count(text: str) -> int:
 
 
 def _append_token(parts: list[str], token: str) -> bool:
-    token = token.strip()
+    token = _title_fx_token(token.strip())
     if not token:
         return False
     if parts and parts[-1].lower() == token.lower():
         return False
     parts.append(token)
     return True
+
+
+def _title_fx_token(token: str) -> str:
+    upper_words = {"FX", "SFX", "UCS", "BB", "DS"}
+    words = token.split()
+    titled: list[str] = []
+    for word in words:
+        if word.upper() in upper_words:
+            titled.append(word.upper())
+        elif word.isupper() and any(c.isdigit() for c in word):
+            titled.append(word)
+        else:
+            titled.append(word[:1].upper() + word[1:].lower())
+    return " ".join(titled)
 
 
 def compose_zh_to_en_debug(

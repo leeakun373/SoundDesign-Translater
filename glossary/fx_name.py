@@ -91,6 +91,25 @@ def _required_tokens(src_text: str) -> list[str]:
     if "拉开" in src_text:
         add("Pull")
         add("Open")
+    if "狼嚎" in src_text:
+        add("Wolf")
+        add("Howl")
+    elif "狼" in src_text:
+        add("Wolf")
+    if "火箭" in src_text:
+        add("Rocket")
+    if "飞过" in src_text or "飞越" in src_text:
+        add("Flyby")
+    if "海克斯" in src_text:
+        add("Hex")
+    if "宝石" in src_text:
+        add("Gemstone")
+    if "水晶" in src_text:
+        add("Crystal")
+    if "碎裂" in src_text:
+        add("Shatter")
+    if "破碎" in src_text:
+        add("Break")
     return required
 
 

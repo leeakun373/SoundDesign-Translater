@@ -1,6 +1,6 @@
 # LocalTranslate 测试报告
 
-- 生成时间: 2026-06-24 22:31:18
+- 生成时间: 2026-06-24 23:02:43
 - 总计: 40 | PASS: 40 | PARTIAL: 0 | FAIL: 0
 - 通过率: 100.0% | 可用率(PASS+PARTIAL): 100.0%
 
@@ -102,7 +102,7 @@
 
 ### ✅ `zh-002` — PASS
 - 输入: `拧螺丝，咔哒几声，然后关上`
-- 输出: `Screw Clicks Shut`
+- 输出: `Screw Clicks Close`
 - 模式: 句子 · 中 → 英 · 专业开 · 术语命中 3 | 术语命中: 3
 
 ### ✅ `zh-003` — PASS
@@ -137,12 +137,12 @@
 
 ### ✅ `zh-009` — PASS
 - 输入: `关门声关闭 exterior shut`
-- 输出: `Closing Exterior Shut`
-- 模式: 句子 · 中 → 英 · 专业开 · 术语命中 1 | 术语命中: 1
+- 输出: `Closing Close Exterior Shut`
+- 模式: 句子 · 中 → 英 · 专业开 · 术语命中 2 | 术语命中: 2
 
 ### ✅ `zh-010` — PASS
 - 输入: `拟音衣物摩擦掉落`
-- 输出: `Foley Clothes Friction Dropping`
+- 输出: `Foley Clothes Rub Drop`
 - 模式: 句子 · 中 → 英 · 专业开 · 术语命中 4 | 术语命中: 4
 
 ### ✅ `zh-011` — PASS
@@ -179,7 +179,7 @@
 
 ### ✅ `zh-o2` — PASS
 - 输入: `咔哒关上门`
-- 输出: `Clicks Shut Door`
+- 输出: `Clicks Close Door`
 - 模式: 句子 · 中 → 英 · 专业开 · 术语命中 2 | 术语命中: 2
 
 ### ✅ `zh-o3` — PASS
@@ -204,7 +204,7 @@
 
 ### ✅ `zh-o7` — PASS
 - 输入: `关门关闭 shut`
-- 输出: `Door Closing Shut Turn It Off`
+- 输出: `Close Door Close Shut`
 - 模式: 句子 · 中 → 英 · 专业开 · 术语命中 2 | 术语命中: 2
 
 ## 英→中·保护码
