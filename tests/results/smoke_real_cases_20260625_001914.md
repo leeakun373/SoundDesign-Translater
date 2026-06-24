@@ -1,0 +1,355 @@
+# Slot-aware FXName Smoke 报告（真实命名）
+
+- 生成时间：2026-06-25 00:19:14
+- 用例数：170
+- quality=pass：170/170 (100.0%)
+- 有标记问题：95
+
+## 汇总标记
+
+- **unknown_zh过多**：82
+- **unknown_zh**：8
+- **object/action顺序错误**：4
+- **过度压缩**：1
+
+## 重点用例
+
+### 塑料盒掉落
+- expected_note: slot：Plastic Box Drop（非 Drop Box）
+- output: `Plastic Box Drop`
+- quality: pass | reorder: preserved
+- assembled_order: Plastic|Box|Drop
+- slots: [{"token": "Plastic", "slot": "material", "source": "compose"}, {"token": "Box", "slot": "object", "source": "compose"}, {"token": "Drop", "slot": "action", "source": "compose"}]
+- flags: （无）
+
+### 水流过石头
+- expected_note: slot：Water Flow Stone（非 Flow Stone）
+- output: `Water Flow Stone`
+- quality: pass | reorder: preserved
+- assembled_order: Water|Flow|Stone
+- slots: [{"token": "Water", "slot": "material", "source": "compose"}, {"token": "Flow", "slot": "action", "source": "compose"}, {"token": "Stone", "slot": "object", "source": "compose"}]
+- flags: object/action顺序错误
+
+### 玻璃杯子掉落破碎
+- expected_note: 杯+掉落+破碎
+- output: `Glass Cup Drop Break`
+- quality: pass | reorder: preserved
+- assembled_order: Glass|Cup|Drop|Break
+- slots: [{"token": "Glass", "slot": "material", "source": "compose"}, {"token": "Cup", "slot": "object", "source": "compose"}, {"token": "Drop", "slot": "action", "source": "compose"}, {"token": "Break", "slot": "action", "source": "compose"}]
+- flags: （无）
+
+### 布椅子拖动摩擦
+- expected_note: 布+椅子+拖+摩擦
+- output: `Cloth Chair Drag Rub`
+- quality: pass | reorder: preserved
+- assembled_order: Cloth|Chair|Drag|Rub
+- slots: [{"token": "Cloth", "slot": "material", "source": "compose"}, {"token": "Chair", "slot": "object", "source": "compose"}, {"token": "Drag", "slot": "action", "source": "compose"}, {"token": "Rub", "slot": "action", "source": "compose"}]
+- flags: （无）
+
+### 木门滑开
+- expected_note: BB/DS基础：Wood Door Slide
+- output: `Wood Door Slide`
+- quality: pass | reorder: preserved
+- assembled_order: Wood|Door|Slide
+- slots: [{"token": "Wood", "slot": "material", "source": "compose"}, {"token": "Door", "slot": "object", "source": "compose"}, {"token": "Slide", "slot": "action", "source": "compose"}]
+- flags: （无）
+
+### 冰斧刮擦冰砖
+- expected_note: 录音命名：ICEFric 风格
+- output: `Ice Axe Ice Brick Scratch`
+- quality: pass | reorder: slot_order
+- assembled_order: Ice|Axe|Ice|Brick|Scratch
+- slots: [{"token": "Ice", "slot": "material", "source": "compose"}, {"token": "Axe", "slot": "material", "source": "compose"}, {"token": "Ice", "slot": "material", "source": "compose"}, {"token": "Brick", "slot": "material", "source": "compose"}, {"token": "Scratch", "slot": "action", "source": "compose"}]
+- flags: （无）
+
+### 保时捷外面轰油门驶过
+- expected_note: 保时捷 driveby
+- output: `Exterior Porsche Rev Driveby`
+- quality: pass | reorder: slot_order
+- assembled_order: Exterior|Porsche|Rev|Driveby
+- slots: [{"token": "Exterior", "slot": "modifier", "source": "compose"}, {"token": "Porsche", "slot": "unknown", "source": "compose"}, {"token": "Rev", "slot": "unknown", "source": "compose"}, {"token": "Driveby", "slot": "unknown", "source": "compose"}]
+- flags: （无）
+
+### 大炮发射飞过
+- expected_note: 火炮 DS
+- output: `Fire Flyby Cannon`
+- quality: pass | reorder: slot_order
+- assembled_order: Fire|Flyby|Cannon
+- slots: [{"token": "Fire", "slot": "material", "source": "fallback"}, {"token": "Flyby", "slot": "action", "source": "compose"}, {"token": "Cannon", "slot": "unknown", "source": "fallback"}]
+- flags: unknown_zh过多
+
+
+## 全部标记问题用例
+
+| input | output | flags | reorder |
+|---|---|---|---|
+| 水流过石头 | `Water Flow Stone` | object/action顺序错误 | preserved |
+| 关门声关闭 | `Close Door Close` | object/action顺序错误 | preserved |
+| 咔哒关上门 | `Close Door Clicks` | object/action顺序错误 | slot_order |
+| 车窗摇下 | `Shake Car It Window` | unknown_zh过多 | slot_order |
+| 嗖的一声飞过去 | `Flyby Swish` | 过度压缩 | slot_order |
+| 大炮发射飞过 | `Fire Flyby Cannon` | unknown_zh过多 | slot_order |
+| 加农炮齐射 | `Shot Down Cannon` | unknown_zh过多 | preserved |
+| 机枪短点射 | `Short Shot Guard` | unknown_zh过多 | preserved |
+| 手枪单发 | `One-headed Pistol` | unknown_zh过多 | preserved |
+| 步枪连发 | `Hair Rifle` | unknown_zh过多 | preserved |
+| 霰弹枪上膛 | `Up Hill Shotgun` | unknown_zh过多 | preserved |
+| 子弹落地 | `Landing Bullets` | unknown_zh过多 | preserved |
+| 弹壳落地 | `Landing Shell` | unknown_zh过多 | preserved |
+| 刀剑挥砍 | `Waving And Cutting Knife Sword` | unknown_zh过多 | preserved |
+| 剑拖在地上 | `Drag On Ground Sword` | unknown_zh过多 | preserved |
+| 盾牌撞击 | `Impact Shield` | unknown_zh过多 | slot_order |
+| 盔甲碰撞 | `Armour Crash` | unknown_zh过多 | preserved |
+| 高跟鞋走路 | `High-heeled Walking` | unknown_zh过多 | preserved |
+| 跑步泥土 | `Running Dirt` | unknown_zh过多 | preserved |
+| 人群呐喊 | `Screaming Crowd` | unknown_zh过多 | preserved |
+| 战场呐喊 | `Battlefield Screams` | unknown_zh过多 | preserved |
+| 僵尸呻吟 | `Zombies Are Moaning` | unknown_zh过多 | preserved |
+| 狼嚎远处 | `Wolf Howl Far Away` | unknown_zh过多 | slot_order |
+| 鸟振翅 | `Wings Bird` | unknown_zh过多 | preserved |
+| 雨水打在屋顶 | `Water Playing Roof Rain` | unknown_zh过多 | slot_order |
+| 雷声远 | `It S Too Loud Thunder` | unknown_zh过多 | preserved |
+| 风声呼啸 | `Voice Wind Whoosh` | unknown_zh | preserved |
+| 树枝折断 | `Branches Are Broken Tree` | unknown_zh过多 | preserved |
+| 沙袋落地 | `Sandbags Landed` | unknown_zh过多 | preserved |
+| 纸箱掉落 | `Paper Box Drop` | unknown_zh | slot_order |
+| 塑料箱砸地 | `Plastic Box Floor` | unknown_zh过多 | slot_order |
+| 门铃响 | `Sound Doorbell` | unknown_zh过多 | preserved |
+| 电话铃声 | `Voice Telephone Bell` | unknown_zh | preserved |
+| 按钮按下 | `Press Button` | unknown_zh过多 | preserved |
+| 键盘敲击 | `Keyboard Strike` | unknown_zh过多 | preserved |
+| 柜子门关上 | `Close Doors To Cabinet` | unknown_zh过多 | slot_order |
+| 冰箱门打开 | `Ice Box Door Open` | unknown_zh过多 | slot_order |
+| 微波炉叮 | `Microwave Boiler Twinkle` | unknown_zh过多 | preserved |
+| 咖啡机蒸汽 | `Coffee Machine Steam` | unknown_zh过多 | preserved |
+| 浓缩咖啡机插入蒸汽 | `Machines Espresso Insert Steam` | unknown_zh | preserved |
+| 盘子碰撞 | `Dishes Crash` | unknown_zh过多 | preserved |
+| 刀切菜 | `Food Knife Chop` | unknown_zh过多 | preserved |
+| 倒水入杯 | `Pour Water Into Cup` | object/action顺序错误 | preserved |
+| 玻璃杯放下 | `Glass Put Down` | unknown_zh过多 | slot_order |
+| 酒瓶碰撞 | `Bottle Of Wine Crash` | unknown_zh过多 | preserved |
+| 开瓶盖 | `Open Bottle Cap` | unknown_zh过多 | preserved |
+| 拉链拉动 | `Pull Moving Zipper` | unknown_zh | slot_order |
+| 皮带扣响 | `Belt Rings` | unknown_zh过多 | preserved |
+| 高跟鞋踩地 | `He S Got High Heels On Ground` | unknown_zh过多 | preserved |
+| 皮鞭抽打 | `Skin I M Going To Shoot Whip` | unknown_zh过多 | preserved |
+| 爆炸冲击波 | `Explosion Wave Punchy` | unknown_zh | slot_order |
+| 传送门开启 | `Door Open Teleport` | unknown_zh过多 | preserved |
+| 激光发射 | `Launched Lasers` | unknown_zh过多 | preserved |
+| 机械伺服 | `Serving Mechanical` | unknown_zh过多 | preserved |
+| 电梯运行 | `Running Elevator` | unknown_zh过多 | preserved |
+| 地铁进站 | `Get To Station Subway` | unknown_zh过多 | preserved |
+| 直升机盘旋 | `Around World Helicopter` | unknown_zh过多 | preserved |
+| 船汽笛 | `Whistle Boat` | unknown_zh过多 | preserved |
+| 碰撞车祸 | `Car Accidents Crash` | unknown_zh过多 | preserved |
+| 砖墙坍塌 | `Wall Collapsed` | unknown_zh过多 | preserved |
+| 木头门踹开 | `Wood Door Open` | unknown_zh过多 | slot_order |
+| 保险箱打开 | `Open Safe` | unknown_zh过多 | slot_order |
+| 收银机开箱 | `Box Open Cash Register` | unknown_zh过多 | slot_order |
+| 打字机按键 | `Press Button Typewriter` | unknown_zh过多 | preserved |
+| 相机快门 | `Camera Shutter` | unknown_zh过多 | preserved |
+| 闪光灯充能 | `Lightning Flashes` | unknown_zh过多 | preserved |
+| 呼吸急促 | `Hurry Up Breathe` | unknown_zh过多 | preserved |
+| 人群鼓掌 | `Applause Crowd` | unknown_zh过多 | preserved |
+| 欢呼声 | `Voice Cheer` | unknown_zh过多 | preserved |
+| 儿童玩耍 | `Playing Children` | unknown_zh过多 | preserved |
+| 猫叫 | `Cat Cries` | unknown_zh过多 | preserved |
+| 狗吠 | `It S Barking Dog` | unknown_zh过多 | preserved |
+| 马蹄奔跑 | `Running Away Horse` | unknown_zh过多 | preserved |
+| 牛叫 | `Cow Is Screaming` | unknown_zh过多 | preserved |
+| 猪叫 | `Pigs Are Screaming` | unknown_zh过多 | preserved |
+| 鸡叫 | `I Was Screaming` | unknown_zh过多 | preserved |
+| 海鸥叫 | `Sea Turtles Are Crying` | unknown_zh过多 | preserved |
+| 鲸鱼叫声 | `Shark Cries` | unknown_zh过多 | preserved |
+| 海豚跳跃 | `Dolphin Jumps` | unknown_zh过多 | preserved |
+| 海浪拍打 | `I M Going To Hit You Waves` | unknown_zh过多 | preserved |
+| 溪流潺潺 | `Rivers Flowing` | unknown_zh过多 | preserved |
+| 瀑布轰鸣 | `It S All Right Waterfall` | unknown_zh过多 | preserved |
+| 洞穴滴水 | `Water Cave Leak` | unknown_zh过多 | slot_order |
+| 回声走廊 | `Echo Corridor` | unknown_zh过多 | preserved |
+| 混响大厅 | `Reverberant Hall Of Fame` | unknown_zh过多 | slot_order |
+| 室外空旷 | `Exterior Empty Desert` | unknown_zh | slot_order |
+| 室内小房间 | `Small Room Interior` | unknown_zh过多 | preserved |
+| 金属管道敲击 | `Metal Pipelines Strike` | unknown_zh过多 | slot_order |
+| 钢管掉落 | `Drop Steel Pipes` | unknown_zh过多 | slot_order |
+| 铁链拖地 | `Iron Chain Tractor` | unknown_zh过多 | preserved |
+| 焊接火花 | `Fire Welding Flowers` | unknown_zh过多 | slot_order |
+| 砂纸打磨 | `Paper Sand How Can I Help You` | unknown_zh过多 | slot_order |
+| 电钻钻孔 | `Electric Drilling Holes` | unknown_zh过多 | preserved |
+| 螺丝拧紧 | `Close It S Screw Twist` | unknown_zh | slot_order |
+| 工具箱放下 | `Box Tools` | unknown_zh过多 | preserved |
+
+## 全量结果
+
+| # | input | output | quality | flags |
+|---:|---|---|---|---|
+| 1 | 木门滑开 | `Wood Door Slide` | pass | - |
+| 2 | 木头滑动 | `Wood Slide` | pass | - |
+| 3 | 金属撞击 | `Metal Impact` | pass | - |
+| 4 | 石头滚动 | `Stone Roll` | pass | - |
+| 5 | 玻璃破碎 | `Glass Break` | pass | - |
+| 6 | 塑料盒掉落 | `Plastic Box Drop` | pass | - |
+| 7 | 水流过石头 | `Water Flow Stone` | pass | object/action顺序错误 |
+| 8 | 火箭飞过 | `Rocket Flyby` | pass | - |
+| 9 | 狼嚎火箭 | `Rocket Wolf Howl` | pass | - |
+| 10 | 火箭狼嚎飞过 | `Rocket Wolf Howl Flyby` | pass | - |
+| 11 | 魔法能量爆炸 | `Magic Energy Explosion` | pass | - |
+| 12 | 海克斯宝石碎裂 | `Hex Gemstone Shatter` | pass | - |
+| 13 | 冰块刮擦 | `Ice Scratch Block` | pass | - |
+| 14 | 纸张撕裂 | `Paper Rip` | pass | - |
+| 15 | 皮革摩擦 | `Leather Rub` | pass | - |
+| 16 | 布椅子拖动摩擦 | `Cloth Chair Drag Rub` | pass | - |
+| 17 | 玻璃杯子掉落破碎 | `Glass Cup Drop Break` | pass | - |
+| 18 | 冰斧刮擦冰砖 | `Ice Axe Ice Brick Scratch` | pass | - |
+| 19 | 冰砖冰斧刮擦 | `Ice Brick Ice Axe Scratch` | pass | - |
+| 20 | 弓搭箭皮托拉弦 | `Bow Nocked Leatherrest Drawing` | pass | - |
+| 21 | 竹子弓箭搭箭 | `Bamboo Bow Nocked` | pass | - |
+| 22 | 拧螺丝咔哒关上 | `Close Screw Clicks` | pass | - |
+| 23 | 关门声关闭 | `Close Door Close` | pass | object/action顺序错误 |
+| 24 | 咔哒关上门 | `Close Door Clicks` | pass | object/action顺序错误 |
+| 25 | 木门推开 | `Wood Door Push Open` | pass | - |
+| 26 | 木门拉开 | `Wood Door Pull Open` | pass | - |
+| 27 | 前门滑开 | `Front Door Slide` | pass | - |
+| 28 | 抽屉关闭 | `Drawer Close` | pass | - |
+| 29 | 金属门撞击 | `Impact Fire-door` | pass | - |
+| 30 | 铁门推开 | `Iron Door Push Open` | pass | - |
+| 31 | 玻璃门滑开 | `Glass Door Slide` | pass | - |
+| 32 | 车窗摇下 | `Shake Car It Window` | pass | unknown_zh过多 |
+| 33 | 引擎怠速轰油门 | `Engine Idle Rev` | pass | - |
+| 34 | 保时捷外面轰油门驶过 | `Exterior Porsche Rev Driveby` | pass | - |
+| 35 | 汽车外面呼呼驶过带混响 | `Exterior Reverberant Car Whoosh Driveby` | pass | - |
+| 36 | 单声道室外混响底噪 | `Exterior Reverberant Mono Room Tone` | pass | - |
+| 37 | 空办公室房间底噪 | `Empty Office Room Tone` | pass | - |
+| 38 | 落叶林清晨鸟叫 | `Birds Decid Early Morning` | pass | - |
+| 39 | 针叶林蛙鸣昆虫 | `Insects Conif Croak` | pass | - |
+| 40 | 户外虫鸣 | `Outdoor Insects` | pass | - |
+| 41 | 嗖的一声飞过去 | `Flyby Swish` | pass | 过度压缩 |
+| 42 | 呼啸飞过 | `Flyby Whoosh` | pass | - |
+| 43 | 大炮发射飞过 | `Fire Flyby Cannon` | pass | unknown_zh过多 |
+| 44 | 加农炮齐射 | `Shot Down Cannon` | pass | unknown_zh过多 |
+| 45 | 机枪短点射 | `Short Shot Guard` | pass | unknown_zh过多 |
+| 46 | 手枪单发 | `One-headed Pistol` | pass | unknown_zh过多 |
+| 47 | 步枪连发 | `Hair Rifle` | pass | unknown_zh过多 |
+| 48 | 霰弹枪上膛 | `Up Hill Shotgun` | pass | unknown_zh过多 |
+| 49 | 子弹落地 | `Landing Bullets` | pass | unknown_zh过多 |
+| 50 | 弹壳落地 | `Landing Shell` | pass | unknown_zh过多 |
+| 51 | 刀剑挥砍 | `Waving And Cutting Knife Sword` | pass | unknown_zh过多 |
+| 52 | 剑拖在地上 | `Drag On Ground Sword` | pass | unknown_zh过多 |
+| 53 | 盾牌撞击 | `Impact Shield` | pass | unknown_zh过多 |
+| 54 | 盔甲碰撞 | `Armour Crash` | pass | unknown_zh过多 |
+| 55 | 脚步声木地板 | `Footsteps Parquet` | pass | - |
+| 56 | 高跟鞋走路 | `High-heeled Walking` | pass | unknown_zh过多 |
+| 57 | 跑步泥土 | `Running Dirt` | pass | unknown_zh过多 |
+| 58 | 人群呐喊 | `Screaming Crowd` | pass | unknown_zh过多 |
+| 59 | 战场呐喊 | `Battlefield Screams` | pass | unknown_zh过多 |
+| 60 | 僵尸呻吟 | `Zombies Are Moaning` | pass | unknown_zh过多 |
+| 61 | 狼嚎远处 | `Wolf Howl Far Away` | pass | unknown_zh过多 |
+| 62 | 鸟振翅 | `Wings Bird` | pass | unknown_zh过多 |
+| 63 | 昆虫嗡嗡 | `Insects Whirr` | pass | - |
+| 64 | 水流滴落 | `Water Flow Drip` | pass | - |
+| 65 | 雨水打在屋顶 | `Water Playing Roof Rain` | pass | unknown_zh过多 |
+| 66 | 雷声远 | `It S Too Loud Thunder` | pass | unknown_zh过多 |
+| 67 | 风声呼啸 | `Voice Wind Whoosh` | pass | unknown_zh |
+| 68 | 火焰燃烧 | `Fire Burning` | pass | - |
+| 69 | 木头断裂 | `Wood Apart` | pass | - |
+| 70 | 树枝折断 | `Branches Are Broken Tree` | pass | unknown_zh过多 |
+| 71 | 石头掉落 | `Stone Drop` | pass | - |
+| 72 | 沙袋落地 | `Sandbags Landed` | pass | unknown_zh过多 |
+| 73 | 纸箱掉落 | `Paper Box Drop` | pass | unknown_zh |
+| 74 | 塑料箱砸地 | `Plastic Box Floor` | pass | unknown_zh过多 |
+| 75 | 硬币掉落 | `Drop Coins` | pass | - |
+| 76 | 钥匙碰撞 | `Keys Crash` | pass | - |
+| 77 | 链条晃动 | `Chain Jiggle` | pass | - |
+| 78 | 锁转动 | `Lock Turn` | pass | - |
+| 79 | 门铃响 | `Sound Doorbell` | pass | unknown_zh过多 |
+| 80 | 电话铃声 | `Voice Telephone Bell` | pass | unknown_zh |
+| 81 | 开关咔哒 | `Switch Clicks` | pass | - |
+| 82 | 按钮按下 | `Press Button` | pass | unknown_zh过多 |
+| 83 | 键盘敲击 | `Keyboard Strike` | pass | unknown_zh过多 |
+| 84 | 鼠标点击 | `Mouse Click` | pass | - |
+| 85 | 抽屉拉开 | `Drawer Pull Open` | pass | - |
+| 86 | 柜子门关上 | `Close Doors To Cabinet` | pass | unknown_zh过多 |
+| 87 | 冰箱门打开 | `Ice Box Door Open` | pass | unknown_zh过多 |
+| 88 | 微波炉叮 | `Microwave Boiler Twinkle` | pass | unknown_zh过多 |
+| 89 | 咖啡机蒸汽 | `Coffee Machine Steam` | pass | unknown_zh过多 |
+| 90 | 浓缩咖啡机插入蒸汽 | `Machines Espresso Insert Steam` | pass | unknown_zh |
+| 91 | 盘子碰撞 | `Dishes Crash` | pass | unknown_zh过多 |
+| 92 | 刀切菜 | `Food Knife Chop` | pass | unknown_zh过多 |
+| 93 | 倒水入杯 | `Pour Water Into Cup` | pass | object/action顺序错误 |
+| 94 | 玻璃杯放下 | `Glass Put Down` | pass | unknown_zh过多 |
+| 95 | 酒瓶碰撞 | `Bottle Of Wine Crash` | pass | unknown_zh过多 |
+| 96 | 开瓶盖 | `Open Bottle Cap` | pass | unknown_zh过多 |
+| 97 | 拉链拉动 | `Pull Moving Zipper` | pass | unknown_zh |
+| 98 | 衣物摩擦 | `Rub Clothes` | pass | - |
+| 99 | 布料抖动 | `Cloth Flutter` | pass | - |
+| 100 | 皮带扣响 | `Belt Rings` | pass | unknown_zh过多 |
+| 101 | 高跟鞋踩地 | `He S Got High Heels On Ground` | pass | unknown_zh过多 |
+| 102 | 雨伞打开 | `Open Rain Umbrella` | pass | - |
+| 103 | 皮鞭抽打 | `Skin I M Going To Shoot Whip` | pass | unknown_zh过多 |
+| 104 | 爆炸冲击波 | `Explosion Wave Punchy` | pass | unknown_zh |
+| 105 | 能量冲击 | `Energy Punchy` | pass | - |
+| 106 | 魔法释放 | `Magic Release` | pass | - |
+| 107 | 传送门开启 | `Door Open Teleport` | pass | unknown_zh过多 |
+| 108 | 激光发射 | `Launched Lasers` | pass | unknown_zh过多 |
+| 109 | 机器人脚步 | `Robots Footsteps` | pass | - |
+| 110 | 机械伺服 | `Serving Mechanical` | pass | unknown_zh过多 |
+| 111 | 液压伸缩 | `Hydraulic Stretch` | pass | - |
+| 112 | 齿轮转动 | `Gear Turn` | pass | - |
+| 113 | 电梯运行 | `Running Elevator` | pass | unknown_zh过多 |
+| 114 | 火车经过 | `Pass By Train` | pass | - |
+| 115 | 地铁进站 | `Get To Station Subway` | pass | unknown_zh过多 |
+| 116 | 飞机飞过 | `Flyby Airplane` | pass | - |
+| 117 | 直升机盘旋 | `Around World Helicopter` | pass | unknown_zh过多 |
+| 118 | 摩托车驶过 | `Motorcycle Driveby` | pass | - |
+| 119 | 自行车铃 | `Bicycle Bell` | pass | - |
+| 120 | 船汽笛 | `Whistle Boat` | pass | unknown_zh过多 |
+| 121 | 汽车喇叭 | `Car Horn` | pass | - |
+| 122 | 刹车尖叫 | `Brake Scream` | pass | - |
+| 123 | 轮胎摩擦 | `Tire Rub` | pass | - |
+| 124 | 碰撞车祸 | `Car Accidents Crash` | pass | unknown_zh过多 |
+| 125 | 玻璃碎裂 | `Glass Shatter` | pass | - |
+| 126 | 窗户破碎 | `Break Windows` | pass | - |
+| 127 | 砖墙坍塌 | `Wall Collapsed` | pass | unknown_zh过多 |
+| 128 | 木头门踹开 | `Wood Door Open` | pass | unknown_zh过多 |
+| 129 | 保险箱打开 | `Open Safe` | pass | unknown_zh过多 |
+| 130 | 收银机开箱 | `Box Open Cash Register` | pass | unknown_zh过多 |
+| 131 | 打字机按键 | `Press Button Typewriter` | pass | unknown_zh过多 |
+| 132 | 相机快门 | `Camera Shutter` | pass | unknown_zh过多 |
+| 133 | 闪光灯充能 | `Lightning Flashes` | pass | unknown_zh过多 |
+| 134 | 心跳 | `Heartbeat` | pass | - |
+| 135 | 呼吸急促 | `Hurry Up Breathe` | pass | unknown_zh过多 |
+| 136 | 咳嗽 | `Cough` | pass | - |
+| 137 | 打喷嚏 | `Sneeze` | pass | - |
+| 138 | 掌声 | `Applause` | pass | - |
+| 139 | 人群鼓掌 | `Applause Crowd` | pass | unknown_zh过多 |
+| 140 | 欢呼声 | `Voice Cheer` | pass | unknown_zh过多 |
+| 141 | 儿童玩耍 | `Playing Children` | pass | unknown_zh过多 |
+| 142 | 婴儿哭泣 | `Baby Crying` | pass | - |
+| 143 | 猫叫 | `Cat Cries` | pass | unknown_zh过多 |
+| 144 | 狗吠 | `It S Barking Dog` | pass | unknown_zh过多 |
+| 145 | 马蹄奔跑 | `Running Away Horse` | pass | unknown_zh过多 |
+| 146 | 牛叫 | `Cow Is Screaming` | pass | unknown_zh过多 |
+| 147 | 猪叫 | `Pigs Are Screaming` | pass | unknown_zh过多 |
+| 148 | 鸡叫 | `I Was Screaming` | pass | unknown_zh过多 |
+| 149 | 海鸥叫 | `Sea Turtles Are Crying` | pass | unknown_zh过多 |
+| 150 | 鲸鱼叫声 | `Shark Cries` | pass | unknown_zh过多 |
+| 151 | 海豚跳跃 | `Dolphin Jumps` | pass | unknown_zh过多 |
+| 152 | 海浪拍打 | `I M Going To Hit You Waves` | pass | unknown_zh过多 |
+| 153 | 溪流潺潺 | `Rivers Flowing` | pass | unknown_zh过多 |
+| 154 | 瀑布轰鸣 | `It S All Right Waterfall` | pass | unknown_zh过多 |
+| 155 | 洞穴滴水 | `Water Cave Leak` | pass | unknown_zh过多 |
+| 156 | 回声走廊 | `Echo Corridor` | pass | unknown_zh过多 |
+| 157 | 混响大厅 | `Reverberant Hall Of Fame` | pass | unknown_zh过多 |
+| 158 | 室外空旷 | `Exterior Empty Desert` | pass | unknown_zh |
+| 159 | 室内小房间 | `Small Room Interior` | pass | unknown_zh过多 |
+| 160 | 金属管道敲击 | `Metal Pipelines Strike` | pass | unknown_zh过多 |
+| 161 | 钢管掉落 | `Drop Steel Pipes` | pass | unknown_zh过多 |
+| 162 | 铁链拖地 | `Iron Chain Tractor` | pass | unknown_zh过多 |
+| 163 | 焊接火花 | `Fire Welding Flowers` | pass | unknown_zh过多 |
+| 164 | 砂纸打磨 | `Paper Sand How Can I Help You` | pass | unknown_zh过多 |
+| 165 | 锯木 | `Saw Wood` | pass | - |
+| 166 | 锤子敲击 | `Hammer Strike` | pass | - |
+| 167 | 电钻钻孔 | `Electric Drilling Holes` | pass | unknown_zh过多 |
+| 168 | 螺丝拧紧 | `Close It S Screw Twist` | pass | unknown_zh |
+| 169 | 扳手转动 | `Wrench Turn` | pass | - |
+| 170 | 工具箱放下 | `Box Tools` | pass | unknown_zh过多 |

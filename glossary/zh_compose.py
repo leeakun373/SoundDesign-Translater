@@ -38,6 +38,7 @@ FILLER_PHRASES = (
 
 PUNCT = re.compile(r"[\s，。、；：！？,.!?;:\(\)（）\[\]【】\"'""]+")
 ASCII_WORD = re.compile(r"[A-Za-z][A-Za-z0-9+\-]*")
+ZH_CHAR_RE = re.compile(r"[\u4e00-\u9fff]")
 
 MIN_FX_PATTERN_FALLBACK: tuple[tuple[str, str, str, int], ...] = (
     ("木门", "Wood Door", "object", 100),
@@ -284,6 +285,8 @@ def compose_zh_to_en_debug(
 
         matched = False
         for zh, entry in index:
+            if zh == "门" and not _is_isolated_zh_term(text, i, len(zh)):
+                continue
             if text.startswith(zh, i):
                 flush_unknown()
                 token = entry.en.strip()
@@ -330,6 +333,13 @@ def compose_zh_to_en_debug(
         slots=slot_terms,
     )
     return diagnostics.text, diagnostics
+
+
+def _is_isolated_zh_term(text: str, start: int, length: int) -> bool:
+    before = text[start - 1] if start > 0 else ""
+    after_idx = start + length
+    after = text[after_idx] if after_idx < len(text) else ""
+    return not ZH_CHAR_RE.match(before) and not ZH_CHAR_RE.match(after)
 
 
 def compose_zh_to_en(text: str, matcher: GlossaryMatcher) -> tuple[str, int]:

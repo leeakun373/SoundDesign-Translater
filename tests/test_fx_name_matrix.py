@@ -29,6 +29,10 @@ class FxCase:
 
 CASES = [
     FxCase("木门滑开", ["Wood", "Door", "Slide"], ["Front"]),
+    FxCase("玻璃门滑开", ["Glass", "Door", "Slide"], ["Front"]),
+    FxCase("倒水入杯", ["Water", "Pour", "Cup"]),
+    FxCase("轮胎摩擦", ["Tire"], required_any=[["Rub", "Friction"]]),
+    FxCase("锯木", ["Saw", "Wood"]),
     FxCase("塑料盒掉落", ["Plastic", "Box", "Drop"], before=[("Box", "Drop")]),
     FxCase("水流过石头", ["Water", "Flow", "Stone"]),
     FxCase("木头 滑开", ["Wood", "Slide"], ["Front"]),
@@ -108,6 +112,23 @@ def main() -> int:
     front = validate_fx_name("木门 滑开", "Front")
     if "forbidden:Front" not in front.issues:
         failures.append("'Front' should be forbidden unless input explicitly says 前门")
+
+    for src in ("油门", "外面", "门外", "门口"):
+        door_quality = validate_fx_name(src, "Exterior")
+        if "missing:Door" in door_quality.issues:
+            failures.append(f"{src!r} should not require Door: {door_quality.issues}")
+
+    for src, output in (
+        ("心跳", "Heartbeat"),
+        ("咳嗽", "Cough"),
+        ("打喷嚏", "Sneeze"),
+        ("掌声", "Applause"),
+    ):
+        event_quality = validate_fx_name(src, output)
+        if "low_information" in event_quality.issues:
+            failures.append(
+                f"{src!r} single event should not be low_information: {event_quality.issues}"
+            )
 
     translator = FakeTranslator(matcher)
     direct = translator.translate("木门滑开", mode="sentence", pro_mode=True)

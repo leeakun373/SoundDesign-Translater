@@ -12,6 +12,26 @@ SENTENCE_VERBS = re.compile(
     r"\b(?:slipped|slides|sliding|opened|opens|pushed|pushes|pulled|pulls)\b",
     re.IGNORECASE,
 )
+ZH_CHAR_RE = re.compile(r"[\u4e00-\u9fff]")
+ISOLATED_DOOR_RE = re.compile(r"(?<![\u4e00-\u9fff])门(?![\u4e00-\u9fff])")
+DOOR_OBJECT_TERMS = (
+    "木门",
+    "玻璃门",
+    "铁门",
+    "车门",
+    "前门",
+    "后门",
+    "滑门",
+    "推拉门",
+)
+DOOR_EVENT_TERMS = ("开门", "关门", "关上门", "推门", "拉门", "敲门")
+SINGLE_EVENT_TOKENS = {
+    "heartbeat",
+    "cough",
+    "sneeze",
+    "applause",
+}
+SINGLE_EVENT_SOURCES = ("心跳", "咳嗽", "打喷嚏", "喷嚏", "掌声")
 
 
 @dataclass(frozen=True)
@@ -47,7 +67,9 @@ def validate_fx_name(src_text: str, output: str) -> FxNameQuality:
 
     if _looks_like_sentence(output):
         issues.append("natural_sentence")
-    if len(words) <= 1 or out_lower in {"wood", "front"}:
+    if (len(words) <= 1 or out_lower in {"wood", "front"}) and not _is_single_event(
+        src_text, words
+    ):
         issues.append("low_information")
 
     missing = [token for token in required if token.lower() not in out_lower]
@@ -80,18 +102,29 @@ def _required_tokens(src_text: str) -> list[str]:
         add("Door")
     elif "木头" in src_text or "木制" in src_text:
         add("Wood")
+    if "锯木" in src_text:
+        add("Saw")
+        add("Wood")
+    if "玻璃" in src_text:
+        add("Glass")
     if "塑料" in src_text:
         add("Plastic")
     if "盒" in src_text:
         add("Box")
-    if "杯子" in src_text:
+    if "杯子" in src_text or "入杯" in src_text:
         add("Cup")
     if "水" in src_text:
         add("Water")
     if "石头" in src_text or "石块" in src_text:
         add("Stone")
-    if "门" in src_text:
+    if _requires_door(src_text):
         add("Door")
+    if "倒水" in src_text:
+        add("Pour")
+    if "轮胎" in src_text:
+        add("Tire")
+    if "摩擦" in src_text:
+        add("Rub")
 
     if "滑动" in src_text or "滑开" in src_text:
         add("Slide")
@@ -125,6 +158,24 @@ def _required_tokens(src_text: str) -> list[str]:
     if "掉落" in src_text:
         add("Drop")
     return required
+
+
+def _requires_door(src_text: str) -> bool:
+    if any(term in src_text for term in DOOR_OBJECT_TERMS):
+        return True
+    if any(term in src_text for term in DOOR_EVENT_TERMS):
+        return True
+    return bool(ISOLATED_DOOR_RE.search(src_text))
+
+
+def _is_single_event(src_text: str, words: list[str]) -> bool:
+    if len(words) != 1:
+        return False
+    if words[0].lower() not in SINGLE_EVENT_TOKENS:
+        return False
+    return any(term in src_text for term in SINGLE_EVENT_SOURCES) or not ZH_CHAR_RE.search(
+        src_text
+    )
 
 
 def _forbidden_tokens(src_text: str) -> list[str]:

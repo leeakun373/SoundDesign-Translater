@@ -1,4 +1,13 @@
 zh,en,slot,priority,note
+玻璃门,Glass Door,object,130,explicit glass door compound
+铁门,Iron Door,object,130,explicit iron door compound
+车门,Car Door,object,130,explicit car door compound
+倒水,Pour Water,action,130,water pour action
+入杯,Into Cup,detail,130,into cup target
+轮胎摩擦,Tire Rub,action,130,tire friction short phrase
+轮胎,Tire,object,130,tire object
+锯木,Saw Wood,action,130,sawing wood short phrase
+掌声,Applause,creature_sound,130,single event applause
 前门,Front Door,object,120,explicit front door only
 木门,Wood Door,object,120,wooden door compound
 关上门,Close Door,action,120,close door phrase
