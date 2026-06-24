@@ -23,11 +23,14 @@ class FxCase:
     required_tokens: list[str]
     forbidden_tokens: list[str] = field(default_factory=list)
     required_any: list[list[str]] = field(default_factory=list)
+    before: list[tuple[str, str]] = field(default_factory=list)
     not_sentence: bool = True
 
 
 CASES = [
     FxCase("木门滑开", ["Wood", "Door", "Slide"], ["Front"]),
+    FxCase("塑料盒掉落", ["Plastic", "Box", "Drop"], before=[("Box", "Drop")]),
+    FxCase("水流过石头", ["Water", "Flow", "Stone"]),
     FxCase("木头 滑开", ["Wood", "Slide"], ["Front"]),
     FxCase("木门 滑开", ["Wood", "Door", "Slide"], ["Front"]),
     FxCase("前门 滑开", ["Front", "Door", "Slide"], []),
@@ -77,10 +80,17 @@ def main() -> int:
         forbidden = [
             token for token in case.forbidden_tokens if token.lower() in lower_output
         ]
-        if missing or missing_any or forbidden:
+        order_errors = []
+        for left, right in case.before:
+            left_idx = lower_output.find(left.lower())
+            right_idx = lower_output.find(right.lower())
+            if left_idx == -1 or right_idx == -1 or left_idx > right_idx:
+                order_errors.append(f"{left} before {right}")
+        if missing or missing_any or forbidden or order_errors:
             failures.append(
                 f"{case.input!r}: output={output!r}, missing={missing}, "
-                f"missing_any={missing_any}, forbidden={forbidden}, debug={debug}"
+                f"missing_any={missing_any}, forbidden={forbidden}, "
+                f"order_errors={order_errors}, debug={debug}"
             )
         if case.not_sentence and "natural_sentence" in quality.issues:
             failures.append(f"{case.input!r}: output looked like a sentence: {output!r}")
@@ -101,6 +111,8 @@ def main() -> int:
 
     translator = FakeTranslator(matcher)
     direct = translator.translate("木门滑开", mode="sentence", pro_mode=True)
+    if direct.text != "Wood Door Slide":
+        failures.append(f"木门滑开 should remain Wood Door Slide, got {direct.text!r}")
     direct_lower = direct.text.lower()
     for token in ("wood", "door", "slide"):
         if token not in direct_lower:

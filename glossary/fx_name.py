@@ -80,7 +80,17 @@ def _required_tokens(src_text: str) -> list[str]:
         add("Door")
     elif "木头" in src_text or "木制" in src_text:
         add("Wood")
-    elif "门" in src_text:
+    if "塑料" in src_text:
+        add("Plastic")
+    if "盒" in src_text:
+        add("Box")
+    if "杯子" in src_text:
+        add("Cup")
+    if "水" in src_text:
+        add("Water")
+    if "石头" in src_text or "石块" in src_text:
+        add("Stone")
+    if "门" in src_text:
         add("Door")
 
     if "滑动" in src_text or "滑开" in src_text:
@@ -110,6 +120,10 @@ def _required_tokens(src_text: str) -> list[str]:
         add("Shatter")
     if "破碎" in src_text:
         add("Break")
+    if "流过" in src_text or "水流" in src_text:
+        add("Flow")
+    if "掉落" in src_text:
+        add("Drop")
     return required
 
 

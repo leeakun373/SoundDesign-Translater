@@ -8,13 +8,14 @@ import sqlite3
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from glossary.fx_slots import SlotTerm, infer_slot, split_slot_terms
 from glossary.matcher import GlossaryEntry, GlossaryMatcher
 
 ORAL_CSV = Path(__file__).resolve().parent / "zh_oral_aliases.csv"
 FX_PATTERN_CSV = Path(__file__).resolve().parent / "packs" / "zh_fx_patterns.csv"
 
 # 跳过虚词/量词/口语连接（不参与输出）
-FILLER_CHARS = frozenset("的了下着过在与和及或就还把被让给跟从向以很更最里来去到")
+FILLER_CHARS = frozenset("的了下着在与和及或就还把被让给跟从向以很更最里来去到")
 FILLER_PHRASES = (
     "一下",
     "几声",
@@ -55,6 +56,7 @@ class ComposeDiagnostics:
     coverage: float
     unknown_zh: list[str] = field(default_factory=list)
     matched_terms: list[dict[str, str | int]] = field(default_factory=list)
+    slots: list[SlotTerm] = field(default_factory=list)
 
 
 def _split_zh_variants(zh: str) -> list[str]:
@@ -237,6 +239,8 @@ def compose_zh_to_en_debug(
     unknown: list[str] = []
     unknown_buf: list[str] = []
     matched_terms: list[dict[str, str | int]] = []
+    slot_terms: list[SlotTerm] = []
+    group_id = 0
     i = 0
     n = len(text)
 
@@ -256,6 +260,10 @@ def compose_zh_to_en_debug(
             flush_unknown()
             token = word_m.group(0)
             _append_token(parts, token)
+            slot_terms.extend(
+                split_slot_terms(token, infer_slot(token), source="ascii", group=group_id)
+            )
+            group_id += 1
             i = word_m.end()
             continue
 
@@ -281,6 +289,11 @@ def compose_zh_to_en_debug(
                 token = entry.en.strip()
                 if _append_token(parts, token):
                     hits += 1
+                slot = infer_slot(token, entry.term_type)
+                slot_terms.extend(
+                    split_slot_terms(token, slot, source="compose", group=group_id)
+                )
+                group_id += 1
                 zh_len = _zh_char_count(zh)
                 covered_zh += zh_len
                 content_zh += zh_len
@@ -289,6 +302,7 @@ def compose_zh_to_en_debug(
                         "zh": zh,
                         "en": token,
                         "type": entry.term_type,
+                        "slot": slot,
                         "start": i,
                         "end": i + len(zh),
                     }
@@ -313,6 +327,7 @@ def compose_zh_to_en_debug(
         coverage=coverage,
         unknown_zh=unknown,
         matched_terms=matched_terms,
+        slots=slot_terms,
     )
     return diagnostics.text, diagnostics
 

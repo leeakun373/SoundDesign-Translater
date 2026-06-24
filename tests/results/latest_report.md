@@ -1,6 +1,6 @@
 # LocalTranslate 测试报告
 
-- 生成时间: 2026-06-24 23:28:09
+- 生成时间: 2026-06-24 23:56:53
 - 总计: 40 | PASS: 40 | PARTIAL: 0 | FAIL: 0
 - 通过率: 100.0% | 可用率(PASS+PARTIAL): 100.0%
 
@@ -97,17 +97,17 @@
 
 ### ✅ `zh-001` — PASS
 - 输入: `冰斧刮擦冰砖的摩擦声`
-- 输出: `Ice Axe Scratch Ice Brick Friction`
+- 输出: `Ice Axe Ice Brick Scratch Friction`
 - 模式: 句子 · 中 → 英 · 专业开 · 术语命中 4 | 术语命中: 4
 
 ### ✅ `zh-002` — PASS
 - 输入: `拧螺丝，咔哒几声，然后关上`
-- 输出: `Screw Clicks Close`
+- 输出: `Close Screw Clicks`
 - 模式: 句子 · 中 → 英 · 专业开 · 术语命中 3 | 术语命中: 3
 
 ### ✅ `zh-003` — PASS
 - 输入: `外面汽车开过去呼呼的，带混响`
-- 输出: `Exterior Car Driveby Whoosh Reverberant`
+- 输出: `Exterior Reverberant Car Driveby Whoosh`
 - 模式: 句子 · 中 → 英 · 专业开 · 术语命中 4 | 术语命中: 4
 
 ### ✅ `zh-004` — PASS
@@ -117,32 +117,32 @@
 
 ### ✅ `zh-005` — PASS
 - 输入: `空办公室里的房间底噪，有一点混响`
-- 输出: `Empty Office Room Tone Reverberant Yes I Did`
+- 输出: `Empty Office Reverberant Yes I Did Room Tone`
 - 模式: 句子 · 中 → 英 · 专业开 · 术语命中 3 | 术语命中: 3
 
 ### ✅ `zh-006` — PASS
 - 输入: `落叶林清晨鸟叫，偶尔有蛙鸣`
-- 输出: `Decid Early Morning Birds Occasional Croak Yes I Did`
+- 输出: `Birds Yes I Did Decid Early Morning Occasional Croak`
 - 模式: 句子 · 中 → 英 · 专业开 · 术语命中 5 | 术语命中: 5
 
 ### ✅ `zh-007` — PASS
 - 输入: `保时捷从外面轰油门快速驶过`
-- 输出: `Porsche Exterior Rev Fast Driveby`
+- 输出: `Exterior Fast Porsche Rev Driveby`
 - 模式: 句子 · 中 → 英 · 专业开 · 术语命中 5 | 术语命中: 5
 
 ### ✅ `zh-008` — PASS
 - 输入: `单声道室外混响底噪`
-- 输出: `Mono Exterior Reverberant Room Tone`
+- 输出: `Exterior Reverberant Mono Room Tone`
 - 模式: 句子 · 中 → 英 · 专业开 · 术语命中 4 | 术语命中: 4
 
 ### ✅ `zh-009` — PASS
 - 输入: `关门声关闭 exterior shut`
-- 输出: `Closing Close Exterior Shut`
+- 输出: `Exterior Close Door Close Shut`
 - 模式: 句子 · 中 → 英 · 专业开 · 术语命中 2 | 术语命中: 2
 
 ### ✅ `zh-010` — PASS
 - 输入: `拟音衣物摩擦掉落`
-- 输出: `Foley Clothes Rub Drop`
+- 输出: `Rub Drop Foley Clothes`
 - 模式: 句子 · 中 → 英 · 专业开 · 术语命中 4 | 术语命中: 4
 
 ### ✅ `zh-011` — PASS
@@ -157,7 +157,7 @@
 
 ### ✅ `zh-013` — PASS
 - 输入: `通用撞击明亮音色`
-- 输出: `Generic Impact Bright Sound`
+- 输出: `Impact Sound Generic Bright`
 - 模式: 句子 · 中 → 英 · 专业开 · 术语命中 3 | 术语命中: 3
 
 ### ✅ `zh-014` — PASS
@@ -174,12 +174,12 @@
 
 ### ✅ `zh-o1` — PASS
 - 输入: `嗖的一声飞过去`
-- 输出: `Swish Flyby`
+- 输出: `Flyby Swish`
 - 模式: 句子 · 中 → 英 · 专业开 · 术语命中 2 | 术语命中: 2
 
 ### ✅ `zh-o2` — PASS
 - 输入: `咔哒关上门`
-- 输出: `Clicks Close Door`
+- 输出: `Close Door Clicks`
 - 模式: 句子 · 中 → 英 · 专业开 · 术语命中 2 | 术语命中: 2
 
 ### ✅ `zh-o3` — PASS
@@ -189,12 +189,12 @@
 
 ### ✅ `zh-o4` — PASS
 - 输入: `木地板脚步 parquet`
-- 输出: `Parquet Footsteps Parquet`
+- 输出: `Parquet Footsteps`
 - 模式: 句子 · 中 → 英 · 专业开 · 术语命中 2 | 术语命中: 2
 
 ### ✅ `zh-o5` — PASS
 - 输入: `轰油门怠速引擎声`
-- 输出: `Rev Idle Engine Voice`
+- 输出: `Voice Rev Idle Engine`
 - 模式: 句子 · 中 → 英 · 专业开 · 术语命中 3 | 术语命中: 3
 
 ### ✅ `zh-o6` — PASS

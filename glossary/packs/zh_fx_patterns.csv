@@ -3,6 +3,7 @@ zh,en,slot,priority,note
 木门,Wood Door,object,120,wooden door compound
 关上门,Close Door,action,120,close door phrase
 关门,Close Door,action,120,close door phrase
+关门声,Close Door,action,120,close door phrase
 狼嚎,Wolf Howl,creature_sound,120,wolf howl compound
 海克斯,Hex,design,120,League-style hex/hextech descriptor
 木头,Wood,material,100,basic material
@@ -20,6 +21,7 @@ zh,en,slot,priority,note
 门,Door,object,100,basic object
 抽屉,Drawer,object,100,basic object
 盒子,Box,object,100,basic object
+盒,Box,object,100,basic object short form
 杯子,Cup,object,100,basic object
 椅子,Chair,object,100,basic object
 地板,Floor,object,100,basic object
@@ -44,6 +46,11 @@ zh,en,slot,priority,note
 爆炸,Explosion,action,100,basic action
 飞过,Flyby,action,100,basic action
 飞越,Flyby,action,100,basic action
+流过,Flow,action,100,basic motion
+水流,Water Flow,action,100,basic water motion
+水流过,Water Flow,action,120,basic water flow through/past
+划过,Pass By,action,100,basic pass-by motion
+经过,Pass By,action,100,basic pass-by motion
 狼,Wolf,creature_sound,100,basic creature
 吼叫,Roar,creature_sound,100,basic vocalization
 咆哮,Growl,creature_sound,100,basic vocalization

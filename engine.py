@@ -28,6 +28,7 @@ from glossary.filename_parser import looks_like_filename, translate_filename
 
 from glossary.boom_style import BoomStyleIndex
 from glossary.fx_name import sanitize_fx_fragment, validate_fx_name
+from glossary.fx_slots import SlotTerm, assemble_fx_name, infer_slot, split_slot_terms
 from glossary.matcher import GlossaryMatcher, GlossaryNotFoundError
 
 from glossary.polish import polish_text
@@ -317,10 +318,10 @@ class NllbTranslator:
         }
 
     def _hybrid_zh_fx_name(
-        self, composed: str, unknown_zh: list[str]
-    ) -> tuple[str, list[str]]:
-        parts = [p for p in composed.split() if p]
-        seen = {p.lower() for p in parts}
+        self, unknown_zh: list[str]
+    ) -> tuple[list[SlotTerm], list[str]]:
+        terms: list[SlotTerm] = []
+        seen = set()
         candidate_fragments: list[str] = []
         for chunk in unknown_zh:
             if not chunk.strip():
@@ -332,9 +333,15 @@ class NllbTranslator:
                 candidate_fragments.append(fragment)
             for token in fragment.split():
                 if token.lower() not in seen:
-                    parts.append(token)
+                    terms.extend(
+                        split_slot_terms(
+                            token,
+                            infer_slot(token),
+                            source="fallback",
+                        )
+                    )
                     seen.add(token.lower())
-        return " ".join(parts), candidate_fragments
+        return terms, candidate_fragments
 
 
 
@@ -466,14 +473,17 @@ class NllbTranslator:
                 if glossary_hits >= 1:
                     coverage_ok = compose_debug.coverage >= 0.75
                     unknown_ok = not compose_debug.unknown_zh
+                    slot_terms = list(compose_debug.slots)
                     if coverage_ok and unknown_ok:
-                        translated = composed
+                        fallback_terms: list[SlotTerm] = []
                     else:
-                        translated, candidate_fragments = self._hybrid_zh_fx_name(
-                            composed, compose_debug.unknown_zh
+                        fallback_terms, candidate_fragments = self._hybrid_zh_fx_name(
+                            compose_debug.unknown_zh
                         )
+                        slot_terms.extend(fallback_terms)
                         hybrid_used = True
-                    translated = polish_text(translated, tgt_is_zh=False)
+                    assembly = assemble_fx_name(slot_terms)
+                    translated = polish_text(assembly.text, tgt_is_zh=False)
                     translated, boom_debug = self._style_zh_fx_name(
                         translated, preserve_order=True
                     )
@@ -493,6 +503,9 @@ class NllbTranslator:
                             "hybrid_fallback": hybrid_used,
                             "candidate_fragments": candidate_fragments,
                             **boom_debug,
+                            "slots": assembly.slots,
+                            "assembled_order": assembly.assembled_order,
+                            "reorder_reason": assembly.reorder_reason,
                             "quality": quality.quality,
                             "issues": quality.issues,
                         },
@@ -503,6 +516,13 @@ class NllbTranslator:
                     translated = polish_text(raw_translated, tgt_is_zh=False)
                 candidate_fragments = [translated] if translated else []
                 translated, boom_debug = self._style_zh_fx_name(translated)
+                slot_terms = [
+                    term
+                    for token in translated.split()
+                    for term in split_slot_terms(token, infer_slot(token), source="fallback")
+                ]
+                assembly = assemble_fx_name(slot_terms)
+                translated = assembly.text
                 quality = validate_fx_name(text, translated)
                 return TranslationResult(
                     text=translated,
@@ -519,6 +539,9 @@ class NllbTranslator:
                         "hybrid_fallback": True,
                         "candidate_fragments": candidate_fragments,
                         **boom_debug,
+                        "slots": assembly.slots,
+                        "assembled_order": assembly.assembled_order,
+                        "reorder_reason": assembly.reorder_reason,
                         "quality": quality.quality,
                         "issues": quality.issues,
                     },
