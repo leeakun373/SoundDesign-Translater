@@ -58,6 +58,54 @@ SENTENCE_VERBS = re.compile(
 )
 
 
+CANONICAL_FX_ISSUES: frozenset[str] = frozenset(
+    {
+        "bad_phrase",
+        "sentence_like_output",
+        "unknown_zh",
+        "mixed_language_residue",
+        "empty_output",
+        "too_long",
+        "over_expanded",
+        "spacing_suspect",
+        "duplicate_token",
+        "nllb_candidate_rejected",
+    }
+)
+
+ISSUE_ALIASES: dict[str, str] = {
+    "natural_sentence": "sentence_like_output",
+    "sentence_like": "sentence_like_output",
+    "nllb_rejected": "nllb_candidate_rejected",
+}
+
+STRUCTURAL_ONLY_ISSUES: frozenset[str] = frozenset({"low_information"})
+
+
+def normalize_fx_issue(issue: str) -> str | None:
+    """Map legacy/structural issue labels to the canonical FXName issue set."""
+    if issue.startswith("rejected_nllb_candidate:"):
+        return "nllb_candidate_rejected"
+    if issue in ISSUE_ALIASES:
+        return ISSUE_ALIASES[issue]
+    if issue in STRUCTURAL_ONLY_ISSUES or issue.startswith(("missing:", "forbidden:")):
+        return None
+    if issue in CANONICAL_FX_ISSUES:
+        return issue
+    return issue
+
+
+def normalize_fx_issues(issues: list[str]) -> list[str]:
+    seen: set[str] = set()
+    normalized: list[str] = []
+    for issue in issues:
+        canon = normalize_fx_issue(issue)
+        if canon and canon not in seen:
+            seen.add(canon)
+            normalized.append(canon)
+    return normalized
+
+
 @dataclass(frozen=True)
 class FxQualityResult:
     quality: str  # pass | needs_review | fail

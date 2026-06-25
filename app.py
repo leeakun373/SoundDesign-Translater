@@ -30,6 +30,8 @@ from engine import (
 
 )
 
+from glossary.fx_quality import normalize_fx_issues
+
 
 
 
@@ -340,7 +342,7 @@ class TranslateApp:
 
         quality = debug.get("quality")
 
-        issues = debug.get("issues") or []
+        issues = normalize_fx_issues(list(debug.get("issues") or []))
 
 
 
@@ -412,11 +414,11 @@ class TranslateApp:
 
                 issue_lines.append(f"unknown_zh: {issue.split(':', 1)[1].strip()}")
 
-            elif issue in {"nllb_candidate_rejected", "nllb_rejected"}:
+            elif issue == "nllb_candidate_rejected":
 
                 has_rejected = True
 
-                issue_lines.append("Rejected NLLB phrase / 已过滤脏短语")
+                issue_lines.append("nllb_candidate_rejected / 已过滤脏短语")
 
             else:
 

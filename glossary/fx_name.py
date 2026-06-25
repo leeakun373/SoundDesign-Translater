@@ -119,7 +119,7 @@ def validate_fx_name(src_text: str, output: str) -> FxNameQuality:
     out_lower = output.lower()
 
     if _looks_like_sentence(output):
-        issues.append("natural_sentence")
+        issues.append("sentence_like_output")
     if (len(words) <= 1 or out_lower in {"wood", "front"}) and not _is_single_event(
         src_text, words
     ):

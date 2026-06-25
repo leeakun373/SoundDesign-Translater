@@ -51,7 +51,9 @@ zh,en,slot,priority,note
 引擎,Engine,source,120,engine source
 打开门,Open Door,action,115,open door phrase
 关闭门,Close Door,action,115,close door phrase
-打开关闭门,Open Close Door,action,120,open close door phrase
+打开关闭门,Door Open Close,action,125,open close door phrase
+开关门,Door Open Close,action,125,switch door open close phrase
+门打开关闭,Door Open Close,action,125,door open close phrase
 停止,Stop,action,110,stop action
 拉动,Pull,action,110,pull cloth curtain
 打磨,Sand,action,110,sanding polish action

@@ -63,7 +63,7 @@ def flag_issues(
     for issue in issues:
         if issue.startswith("missing:"):
             flags.append("输出缺核心词")
-        elif issue == "natural_sentence":
+        elif issue == "sentence_like_output":
             flags.append("输出自然句")
         elif issue == "low_information":
             flags.append("过度压缩")

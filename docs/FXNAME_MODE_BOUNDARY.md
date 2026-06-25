@@ -115,7 +115,7 @@
 | GUI | 无任务区分；中文自动走 FX | 任务选择器，默认 **FXName** |
 | HTTP | 无 `task_mode` | `task_mode` 默认 **fxname** |
 | 质量展示 | GUI 不显示 quality/issues | FXName 模式显示 Quality / Issues |
-| NLLB 信任 | 整句 fallback 可能产出口语脏短语 | FXName 模式：脏短语检测 + `rejected_nllb_candidate` 标注 |
+| NLLB 信任 | 整句 fallback 可能产出口语脏短语 | FXName 模式：脏短语检测 + `nllb_candidate_rejected` 标注 |
 
 ---
 
@@ -123,11 +123,11 @@
 
 | 字段 | 说明 |
 |------|------|
-| `quality` | `pass` / `needs_review` / `fail`（来自 `evaluate_fx_output`） |
-| `issues` | 含 `unknown_zh:…`、`rejected_nllb_candidate:…` 等 |
+| `quality` | `pass` / `needs_review` / `fail`（来自 `evaluate_fx_output` + 引擎门禁） |
+| `issues` | 统一 issue 名：`bad_phrase`、`sentence_like_output`、`unknown_zh`、`mixed_language_residue`、`empty_output`、`too_long`、`over_expanded`、`spacing_suspect`、`duplicate_token`、`nllb_candidate_rejected` |
 | `matched_bad_phrases` | 检测到的脏短语 |
-| `rejected_nllb_candidates` | 被过滤的 NLLB 候选片段列表 |
-| `validate_quality` / `validate_issues` | `validate_fx_name` 原始结果（内部参考） |
+| `rejected_candidates` | 被过滤的 NLLB 候选片段列表（原始文本，debug 用） |
+| `structural_quality` / `structural_issues` | `validate_fx_name` 结构校验（含 `low_information`、`missing:*` 等，不并入对外 `issues`） |
 
 空输出 → `quality=needs_review`，不假装成功。
 

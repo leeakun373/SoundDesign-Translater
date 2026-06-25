@@ -1,6 +1,6 @@
 # SD FXName Quality Harness 0.1 报告
 
-- 生成时间：2026-06-25 01:11:07
+- 生成时间：2026-06-25 21:31:13
 - 用例数：42（随机 fuzz 追加：0）
 
 ## Summary
@@ -125,7 +125,7 @@
 - matched_bad_phrases: （无）
 
 ### 18. 打开关闭门
-- output: `Open Close Door`
+- output: `Door Open Close`
 - quality: **pass** | group: problem_sample
 - issues: （无）
 - matched_bad_phrases: （无）

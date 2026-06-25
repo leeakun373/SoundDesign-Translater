@@ -96,7 +96,7 @@ def main() -> int:
                 f"missing_any={missing_any}, forbidden={forbidden}, "
                 f"order_errors={order_errors}, debug={debug}"
             )
-        if case.not_sentence and "natural_sentence" in quality.issues:
+        if case.not_sentence and "sentence_like_output" in quality.issues:
             failures.append(f"{case.input!r}: output looked like a sentence: {output!r}")
         if output.lower().startswith(("the ", "a ", "an ")):
             failures.append(f"{case.input!r}: output started with an article: {output!r}")
@@ -106,7 +106,7 @@ def main() -> int:
         failures.append("'Wood' should be rejected as low information")
 
     natural = validate_fx_name("木头 滑开", "The Wood Slipped.")
-    if "natural_sentence" not in natural.issues:
+    if "sentence_like_output" not in natural.issues:
         failures.append("'The Wood Slipped.' should be rejected as a natural sentence")
 
     front = validate_fx_name("木门 滑开", "Front")

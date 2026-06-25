@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from glossary.fx_quality import evaluate_fx_output, find_bad_phrases
+from glossary.fx_quality import evaluate_fx_output, find_bad_phrases, normalize_fx_issue
 
 
 def test_absolute_bad_phrases_fail() -> None:
@@ -61,6 +61,14 @@ def test_duplicate_token_needs_review() -> None:
     assert "duplicate_token" in result.issues
 
 
+def test_issue_name_normalization() -> None:
+    assert normalize_fx_issue("natural_sentence") == "sentence_like_output"
+    assert normalize_fx_issue("nllb_rejected") == "nllb_candidate_rejected"
+    assert normalize_fx_issue("rejected_nllb_candidate:foo") == "nllb_candidate_rejected"
+    assert normalize_fx_issue("low_information") is None
+    assert normalize_fx_issue("missing:Door") is None
+
+
 def test_find_bad_phrases() -> None:
     abs_hits, risk_hits = find_bad_phrases("Water Flow Stone It S Over")
     assert "it s" in abs_hits
@@ -75,6 +83,7 @@ def main() -> int:
         test_empty_output_fail,
         test_too_long_needs_review,
         test_duplicate_token_needs_review,
+        test_issue_name_normalization,
         test_find_bad_phrases,
     ]
     failures: list[str] = []

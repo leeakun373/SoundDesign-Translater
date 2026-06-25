@@ -28,7 +28,7 @@ from glossary.filename_parser import looks_like_filename, translate_filename
 
 from glossary.boom_style import BoomStyleIndex
 from glossary.fx_name import accept_nllb_fx_candidate, sanitize_fx_fragment, validate_fx_name
-from glossary.fx_quality import evaluate_fx_output, find_bad_phrases
+from glossary.fx_quality import evaluate_fx_output, find_bad_phrases, normalize_fx_issues
 from glossary.fx_slots import SlotTerm, assemble_fx_name, infer_slot, split_slot_terms
 from glossary.matcher import GlossaryMatcher, GlossaryNotFoundError
 
@@ -439,11 +439,9 @@ class NllbTranslator:
         }
         fx_eval = evaluate_fx_output(text, translated, debug=base_debug)
         issues = list(fx_eval.issues)
-        for issue in structural.issues:
-            if issue not in issues:
-                issues.append(issue)
-        if rejected_candidates and "nllb_rejected" not in issues:
-            issues.append("nllb_rejected")
+        if rejected_candidates and "nllb_candidate_rejected" not in issues:
+            issues.append("nllb_candidate_rejected")
+        issues = normalize_fx_issues(issues)
         abs_in_output, _ = find_bad_phrases(translated)
         if abs_in_output:
             quality_label = "fail"

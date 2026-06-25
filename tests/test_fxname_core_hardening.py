@@ -33,6 +33,12 @@ BAD_INPUT_CASES = [
     "连发",
 ]
 
+DOOR_PHRASE_CASES = [
+    ("打开关闭门", "Door Open Close"),
+    ("开关门", "Door Open Close"),
+    ("门打开关闭", "Door Open Close"),
+]
+
 GOOD_COMPOSE_CASES = [
     ("杯子掉落打碎", ["Cup", "Drop"], [["Shatter", "Break"]]),
     ("拖动摩擦停止", ["Drag"], [["Rub", "Friction"], ["Stop"]]),
@@ -105,6 +111,13 @@ def test_nllb_candidate_reject() -> None:
         assert result.fragment is None, f"should reject {raw!r}, got {result.fragment!r}"
 
 
+def test_compose_door_phrases_exact() -> None:
+    matcher = GlossaryMatcher()
+    for inp, expected in DOOR_PHRASE_CASES:
+        output, _ = compose_zh_to_en_debug(inp, matcher)
+        assert output == expected, f"{inp!r} -> {output!r}, want {expected!r}"
+
+
 def test_compose_good_cases() -> None:
     matcher = GlossaryMatcher()
     for inp, required, *rest in GOOD_COMPOSE_CASES:
@@ -128,6 +141,14 @@ def test_engine_bad_phrase_prevention() -> None:
         result = translator.translate_fxname(inp)
         bad = _contains_bad_phrase(result.text)
         assert not bad, f"{inp!r} -> {result.text!r} contains bad phrases {bad}"
+
+
+def test_engine_door_phrases_exact() -> None:
+    matcher = GlossaryMatcher()
+    translator = FakeTranslator(matcher)
+    for inp, expected in DOOR_PHRASE_CASES:
+        result = translator.translate_fxname(inp)
+        assert result.text == expected, f"{inp!r} -> {result.text!r}, want {expected!r}"
 
 
 def test_engine_good_outputs() -> None:
@@ -165,9 +186,11 @@ def main() -> int:
     tests = [
         test_normalize_spacing,
         test_nllb_candidate_reject,
+        test_compose_door_phrases_exact,
         test_compose_good_cases,
         test_compose_spacing_equivalence,
         test_engine_bad_phrase_prevention,
+        test_engine_door_phrases_exact,
         test_engine_good_outputs,
         test_engine_mixed_english,
         test_task_mode_separation,
