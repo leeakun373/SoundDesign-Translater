@@ -76,8 +76,18 @@ COLUMN_PRIORITY: dict[str, list[str]] = {
     "microphone": ["Microphone", "Mic", "Mics"],
 }
 
-STAT_FIELDS = ("filename", "fx_name", "description", "keywords", "category", "subcategory")
+STAT_FIELDS = ("fx_name", "filename", "description", "keywords", "category", "subcategory")
+PHRASE_FIELDS = STAT_FIELDS
 HIT_RATE_FIELDS = ("filename", "fx_name", "description", "category", "keywords", "cat_id")
+
+FIELD_WEIGHTS: dict[str, int] = {
+    "fx_name": 3,
+    "filename": 2,
+    "description": 1,
+    "keywords": 1,
+    "category": 1,
+    "subcategory": 1,
+}
 
 NOISE_TOKENS = {
     "aif",
@@ -105,7 +115,73 @@ NOISE_TOKENS = {
     "wav",
     "with",
     "www",
+    # library / pack abbreviations
+    "alck",
+    "ae",
+    "st",
+    "alds",
+    "ambswmp",
+    "ambtrop",
+    "anmlaqua",
+    "anmlfarm",
+    "anmlwild",
+    "anmldog",
+    "birdprey",
+    "creasrce",
+    "dsgnsynth",
+    "dsgnmisc",
+    "dsgntonl",
+    "dsgnimpt",
+    "expldsgn",
+    "creamisc",
+    "ap",
+    "ck",
+    "ds",
+    # technical / gear
+    "co100k",
+    "sanken",
+    "microphone",
+    "mic",
+    "mics",
+    "mono",
+    "stereo",
+    "frequency",
+    "response",
+    "schoeps",
+    "ortf",
+    "ortf3d",
+    "designed",
+    "source",
+    "publisher",
+    "manufacturer",
+    "artist",
+    "hi",
 }
+
+LIBRARY_CODE_PREFIXES = (
+    "amb",
+    "anm",
+    "dsg",
+    "cre",
+    "expl",
+)
+
+DS_CODE_RE = re.compile(r"^ds\d{2,3}$", re.IGNORECASE)
+THREE_DS_RE = re.compile(r"^3ds\d{2}$", re.IGNORECASE)
+
+TECHNICAL_PHRASES = frozenset(
+    {
+        "high frequency response",
+        "mono sanken co100k",
+        "sanken co100k high",
+        "co100k high frequency",
+        "frequency response",
+        "sanken co100k",
+        "co100k high",
+        "high frequency",
+    }
+)
+
 WORD_RE = re.compile(r"[A-Za-z][A-Za-z0-9+\-]*")
 
 
@@ -136,6 +212,13 @@ class ImportStats:
     warnings: list[str] = field(default_factory=list)
     field_hits: Counter[str] = field(default_factory=Counter)
     file_rows: list[dict[str, Any]] = field(default_factory=list)
+    clean_token_counts: Counter[str] = field(default_factory=Counter)
+    clean_filename_token_counts: Counter[str] = field(default_factory=Counter)
+    clean_phrase_counts: Counter[str] = field(default_factory=Counter)
+    clean_filename_phrase_counts: Counter[str] = field(default_factory=Counter)
+    raw_token_counts: Counter[str] = field(default_factory=Counter)
+    raw_filename_token_counts: Counter[str] = field(default_factory=Counter)
+    raw_phrase_counts: Counter[str] = field(default_factory=Counter)
 
 
 def main() -> int:
@@ -180,15 +263,24 @@ def main() -> int:
         rebuild=args.rebuild,
     )
 
-    token_rows, phrase_rows = load_token_phrase_stats(db_path)
+    token_rows, _ = load_token_phrase_stats(db_path)
     write_reports(
         stats=stats,
         db_path=db_path,
         report_md=report_md,
         report_csv=report_csv,
         selected_files=selected_files,
+        clean_token_rows=_top_counter_rows(
+            stats.clean_token_counts, stats.clean_filename_token_counts, limit=100
+        ),
+        clean_phrase_rows=_top_phrase_rows(
+            stats.clean_phrase_counts, stats.clean_filename_phrase_counts, limit=100
+        ),
+        raw_token_rows=_top_counter_rows(
+            stats.raw_token_counts, stats.raw_filename_token_counts, limit=100
+        ),
+        raw_phrase_rows=_top_raw_phrase_rows_by_n(stats.raw_phrase_counts, limit=100),
         token_rows=token_rows,
-        phrase_rows=phrase_rows,
     )
 
     print(f"Root: {root}")
@@ -266,10 +358,14 @@ def import_corpus(
             ),
         ).lastrowid
 
-        token_counts: Counter[str] = Counter()
-        filename_token_counts: Counter[str] = Counter()
-        phrase_counts: Counter[str] = Counter()
-        filename_phrase_counts: Counter[str] = Counter()
+        clean_token_counts: Counter[str] = Counter()
+        clean_filename_token_counts: Counter[str] = Counter()
+        clean_phrase_counts: Counter[str] = Counter()
+        clean_filename_phrase_counts: Counter[str] = Counter()
+        raw_token_counts: Counter[str] = Counter()
+        raw_filename_token_counts: Counter[str] = Counter()
+        raw_phrase_counts: Counter[str] = Counter()
+        raw_filename_phrase_counts: Counter[str] = Counter()
 
         for rel_file in selected_files:
             file_path = root / rel_file
@@ -402,10 +498,14 @@ def import_corpus(
                         data_rows=data_rows,
                         mapping=mapping,
                         stats=stats,
-                        token_counts=token_counts,
-                        filename_token_counts=filename_token_counts,
-                        phrase_counts=phrase_counts,
-                        filename_phrase_counts=filename_phrase_counts,
+                        clean_token_counts=clean_token_counts,
+                        clean_filename_token_counts=clean_filename_token_counts,
+                        clean_phrase_counts=clean_phrase_counts,
+                        clean_filename_phrase_counts=clean_filename_phrase_counts,
+                        raw_token_counts=raw_token_counts,
+                        raw_filename_token_counts=raw_filename_token_counts,
+                        raw_phrase_counts=raw_phrase_counts,
+                        raw_filename_phrase_counts=raw_filename_phrase_counts,
                     )
                 except Exception as exc:  # noqa: BLE001
                     warn = f"{rel_file}/{sheet_name}: import failed: {exc}"
@@ -439,13 +539,24 @@ def import_corpus(
             )
 
         write_token_phrase_tables(
-            conn, token_counts, filename_token_counts, phrase_counts, filename_phrase_counts
+            conn,
+            clean_token_counts,
+            clean_filename_token_counts,
+            clean_phrase_counts,
+            clean_filename_phrase_counts,
         )
         conn.execute(
             "UPDATE import_runs SET finished_at = ? WHERE id = ?",
             (_now(), run_id),
         )
 
+    stats.clean_token_counts = clean_token_counts
+    stats.clean_filename_token_counts = clean_filename_token_counts
+    stats.clean_phrase_counts = clean_phrase_counts
+    stats.clean_filename_phrase_counts = clean_filename_phrase_counts
+    stats.raw_token_counts = raw_token_counts
+    stats.raw_filename_token_counts = raw_filename_token_counts
+    stats.raw_phrase_counts = raw_phrase_counts
     return stats
 
 
@@ -459,10 +570,14 @@ def import_sheet_rows(
     data_rows: list[list[str]],
     mapping: dict[str, str],
     stats: ImportStats,
-    token_counts: Counter[str],
-    filename_token_counts: Counter[str],
-    phrase_counts: Counter[str],
-    filename_phrase_counts: Counter[str],
+    clean_token_counts: Counter[str],
+    clean_filename_token_counts: Counter[str],
+    clean_phrase_counts: Counter[str],
+    clean_filename_phrase_counts: Counter[str],
+    raw_token_counts: Counter[str],
+    raw_filename_token_counts: Counter[str],
+    raw_phrase_counts: Counter[str],
+    raw_filename_phrase_counts: Counter[str],
 ) -> tuple[int, int, list[str]]:
     warnings: list[str] = []
     imported = 0
@@ -520,7 +635,17 @@ def import_sheet_rows(
         )
         imported += 1
         stats.imported_fx_records += 1
-        _accumulate_text_stats(record, token_counts, filename_token_counts, phrase_counts, filename_phrase_counts)
+        _accumulate_text_stats(
+            record,
+            clean_token_counts,
+            clean_filename_token_counts,
+            clean_phrase_counts,
+            clean_filename_phrase_counts,
+            raw_token_counts,
+            raw_filename_token_counts,
+            raw_phrase_counts,
+            raw_filename_phrase_counts,
+        )
 
     return imported, skipped, warnings
 
@@ -801,8 +926,11 @@ def write_reports(
     report_md: Path,
     report_csv: Path,
     selected_files: list[str],
+    clean_token_rows: list[tuple[str, int, int]],
+    clean_phrase_rows: list[tuple[str, int, int, int]],
+    raw_token_rows: list[tuple[str, int, int]],
+    raw_phrase_rows: dict[int, list[tuple]],
     token_rows: list[tuple],
-    phrase_rows: dict[int, list[tuple]],
 ) -> None:
     report_md.parent.mkdir(parents=True, exist_ok=True)
     report_csv.parent.mkdir(parents=True, exist_ok=True)
@@ -811,11 +939,12 @@ def write_reports(
     generated = _now()
 
     md_lines = [
-        "# BOOM FXName Style Corpus 0.1B Import Report",
+        "# BOOM FXName Style Corpus 0.1C Clean Style Stats Report",
         "",
         f"- 生成时间：{generated}",
         f"- 数据库：`{db_path.as_posix()}`",
         f"- 选中文件数：**{len(selected_files)}**",
+        f"- 统计策略：字段加权（fx_name×3, filename×2, 其余×1）；排除 library/microphone；clean 过滤库编号/技术词",
         "",
         "## Summary",
         "",
@@ -841,7 +970,51 @@ def write_reports(
         for warning in stats.warnings:
             md_lines.append(f"- {warning}")
 
-    md_lines.extend(["", "## Top 100 tokens", "", "| token | freq | filename_freq |", "| --- | --- | --- |"])
+    md_lines.extend(
+        [
+            "",
+            "## Top 100 clean style tokens",
+            "",
+            "| token | freq | filename_freq |",
+            "| --- | --- | --- |",
+        ]
+    )
+    for token, freq, filename_freq in clean_token_rows:
+        md_lines.append(f"| {token} | {freq} | {filename_freq} |")
+
+    md_lines.extend(
+        [
+            "",
+            "## Top 100 clean style phrases",
+            "",
+            "| phrase | n | freq | filename_freq |",
+            "| --- | --- | --- | --- |",
+        ]
+    )
+    for phrase, n, freq, filename_freq in clean_phrase_rows:
+        md_lines.append(f"| {phrase} | {n} | {freq} | {filename_freq} |")
+
+    md_lines.extend(
+        [
+            "",
+            "## Top 100 raw tokens (unfiltered, for comparison)",
+            "",
+            "| token | freq | filename_freq |",
+            "| --- | --- | --- |",
+        ]
+    )
+    for token, freq, filename_freq in raw_token_rows:
+        md_lines.append(f"| {token} | {freq} | {filename_freq} |")
+
+    md_lines.extend(
+        [
+            "",
+            "## Top 100 indexed tokens (SQLite, clean weighted)",
+            "",
+            "| token | freq | filename_freq |",
+            "| --- | --- | --- |",
+        ]
+    )
     for token, freq, filename_freq in token_rows:
         md_lines.append(f"| {token} | {freq} | {filename_freq} |")
 
@@ -849,13 +1022,13 @@ def write_reports(
         md_lines.extend(
             [
                 "",
-                f"## Top 100 {n}-gram phrases",
+                f"## Top 100 raw {n}-gram phrases (unfiltered, for comparison)",
                 "",
                 "| phrase | freq | filename_freq |",
                 "| --- | --- | --- |",
             ]
         )
-        for phrase, freq, filename_freq in phrase_rows.get(n, []):
+        for phrase, freq, filename_freq in raw_phrase_rows.get(n, []):
             md_lines.append(f"| {phrase} | {freq} | {filename_freq} |")
 
     report_md.write_text("\n".join(md_lines), encoding="utf-8")
@@ -886,30 +1059,53 @@ def _field_hit_rates(stats: ImportStats) -> dict[str, tuple[int, float]]:
 
 def _accumulate_text_stats(
     record: dict[str, Any],
-    token_counts: Counter[str],
-    filename_token_counts: Counter[str],
-    phrase_counts: Counter[str],
-    filename_phrase_counts: Counter[str],
+    clean_token_counts: Counter[str],
+    clean_filename_token_counts: Counter[str],
+    clean_phrase_counts: Counter[str],
+    clean_filename_phrase_counts: Counter[str],
+    raw_token_counts: Counter[str],
+    raw_filename_token_counts: Counter[str],
+    raw_phrase_counts: Counter[str],
+    raw_filename_phrase_counts: Counter[str],
 ) -> None:
-    for field_name in STAT_FIELDS:
+    for field_name in PHRASE_FIELDS:
         text = str(record.get(field_name) or "")
         if not text.strip():
             continue
-        tokens = _extract_tokens(text)
-        if not tokens:
-            continue
-        token_counts.update(tokens)
-        if field_name == "filename":
-            filename_token_counts.update(tokens)
-        for phrase in _extract_phrases(tokens):
-            phrase_counts[phrase] += 1
-            if field_name == "filename":
-                filename_phrase_counts[phrase] += 1
+        weight = FIELD_WEIGHTS.get(field_name, 1)
+        raw_tokens = _extract_raw_tokens(text)
+        clean_tokens = _extract_clean_tokens(text)
+
+        if raw_tokens:
+            for token in raw_tokens:
+                raw_token_counts[token] += weight
+                if field_name == "filename":
+                    raw_filename_token_counts[token] += weight
+            for phrase in _extract_phrases(raw_tokens):
+                raw_phrase_counts[phrase] += weight
+                if field_name == "filename":
+                    raw_filename_phrase_counts[phrase] += weight
+
+        if clean_tokens:
+            for token in clean_tokens:
+                clean_token_counts[token] += weight
+                if field_name == "filename":
+                    clean_filename_token_counts[token] += weight
+            for phrase in _extract_phrases(clean_tokens):
+                if not _is_clean_phrase(phrase):
+                    continue
+                clean_phrase_counts[phrase] += weight
+                if field_name == "filename":
+                    clean_filename_phrase_counts[phrase] += weight
 
 
-def _extract_tokens(text: str) -> list[str]:
+def _extract_raw_tokens(text: str) -> list[str]:
     tokens = [_normalize_token(word) for word in WORD_RE.findall(text)]
-    return [token for token in tokens if token and not _is_noise_token(token)]
+    return [token for token in tokens if token and not _is_basic_noise_token(token)]
+
+
+def _extract_clean_tokens(text: str) -> list[str]:
+    return [token for token in _extract_raw_tokens(text) if _is_style_token(token)]
 
 
 def _extract_phrases(tokens: list[str]) -> Iterable[str]:
@@ -918,16 +1114,101 @@ def _extract_phrases(tokens: list[str]) -> Iterable[str]:
             yield " ".join(tokens[i : i + n])
 
 
-def _normalize_token(token: str) -> str:
-    return token.strip("-_ ").lower()
+def _is_clean_phrase(phrase: str) -> bool:
+    normalized = phrase.strip().lower()
+    if normalized in TECHNICAL_PHRASES:
+        return False
+    for blocked in TECHNICAL_PHRASES:
+        if blocked in normalized:
+            return False
+
+    tokens = normalized.split()
+    if not tokens:
+        return False
+    if any(not _is_style_token(token) for token in tokens):
+        return False
+    if all(_is_library_code_token(token) for token in tokens):
+        return False
+    if not any(_is_style_token(token) and not _is_library_code_token(token) for token in tokens):
+        return False
+    return True
 
 
-def _is_noise_token(token: str) -> bool:
+def _is_style_token(token: str) -> bool:
+    return not _is_noise_token(token)
+
+
+def _is_basic_noise_token(token: str) -> bool:
     if len(token) <= 1:
         return True
     if token.isdigit():
         return True
     return token in NOISE_TOKENS
+
+
+def _is_noise_token(token: str) -> bool:
+    if _is_basic_noise_token(token):
+        return True
+    if _is_library_code_token(token):
+        return True
+    return len(token) == 2 and token.isalpha()
+
+
+def _is_library_code_token(token: str) -> bool:
+    lower = token.lower()
+    if DS_CODE_RE.match(lower) or THREE_DS_RE.match(lower):
+        return True
+    if not lower.isalpha() or len(lower) < 5:
+        return False
+    vowels = sum(ch in "aeiou" for ch in lower)
+    ratio = vowels / len(lower)
+    if ratio <= 0.30 and lower.startswith(LIBRARY_CODE_PREFIXES):
+        return True
+    return False
+
+
+def _normalize_token(token: str) -> str:
+    return token.strip("-_ ").lower()
+
+
+def _top_counter_rows(
+    counter: Counter[str],
+    filename_counter: Counter[str] | None = None,
+    limit: int = 100,
+) -> list[tuple[str, int, int]]:
+    filename_counter = filename_counter or Counter()
+    return [
+        (token, freq, filename_counter.get(token, 0))
+        for token, freq in counter.most_common(limit)
+    ]
+
+
+def _top_phrase_rows(
+    phrase_counts: Counter[str],
+    filename_phrase_counts: Counter[str] | None = None,
+    limit: int = 100,
+) -> list[tuple[str, int, int, int]]:
+    filename_phrase_counts = filename_phrase_counts or Counter()
+    rows: list[tuple[str, int, int, int]] = []
+    for phrase, freq in phrase_counts.most_common(limit):
+        rows.append((phrase, len(phrase.split()), freq, filename_phrase_counts.get(phrase, 0)))
+    return rows
+
+
+def _top_raw_phrase_rows_by_n(
+    phrase_counts: Counter[str],
+    limit: int = 100,
+) -> dict[int, list[tuple]]:
+    by_n: dict[int, list[tuple]] = {2: [], 3: [], 4: []}
+    for n in (2, 3, 4):
+        ranked = [
+            (phrase, freq, 0)
+            for phrase, freq in phrase_counts.items()
+            if len(phrase.split()) == n
+        ]
+        ranked.sort(key=lambda item: (-item[1], item[0]))
+        by_n[n] = ranked[:limit]
+    return by_n
 
 
 def _row_has_content(row: list[str]) -> bool:
