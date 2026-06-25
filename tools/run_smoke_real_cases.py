@@ -228,7 +228,7 @@ def main() -> int:
 
     rows: list[dict] = []
     for case in cases:
-        r = translator.translate(case["input"], mode="sentence", pro_mode=True)
+        r = translator.translate_fxname(case["input"])
         rows.append(row_from_result(case, r))
 
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")

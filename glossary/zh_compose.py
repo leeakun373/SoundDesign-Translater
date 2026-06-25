@@ -8,6 +8,7 @@ import sqlite3
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from glossary.zh_normalize import normalize_fxname_input
 from glossary.fx_slots import SlotTerm, infer_slot, split_slot_terms
 from glossary.matcher import GlossaryEntry, GlossaryMatcher
 
@@ -45,7 +46,7 @@ MIN_FX_PATTERN_FALLBACK: tuple[tuple[str, str, str, int], ...] = (
     ("木头", "Wood", "material", 100),
     ("木制", "Wood", "material", 100),
     ("门", "Door", "object", 90),
-    ("滑开", "Slide", "action", 100),
+    ("滑开", "Slide Open", "action", 100),
     ("滑动", "Slide", "action", 100),
 )
 
@@ -92,6 +93,12 @@ def _load_oral_aliases() -> dict[str, str]:
         "空": "Empty",
         "摩擦声": "Friction",
         "刮擦声": "Scratch",
+        "汽车": "Car",
+        "房间": "Room",
+        "室外": "Exterior",
+        "停止": "Stop",
+        "撕裂": "Tear",
+        "打碎": "Shatter",
     }
     if ORAL_CSV.is_file():
         with ORAL_CSV.open(encoding="utf-8-sig", newline="") as f:
@@ -230,6 +237,10 @@ def compose_zh_to_en_debug(
     未识别字符跳过，整句不送 NLLB 碎块（避免幻觉）。
     """
     if not text.strip():
+        return "", ComposeDiagnostics(text="", glossary_hits=0, coverage=0.0)
+
+    text = normalize_fxname_input(text)
+    if not text:
         return "", ComposeDiagnostics(text="", glossary_hits=0, coverage=0.0)
 
     index = build_compose_index(matcher)

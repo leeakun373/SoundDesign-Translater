@@ -15,6 +15,7 @@ class TranslateResponse:
     src_lang: str
     tgt_lang: str
     mode: str
+    task_mode: str
     pro_mode: bool
     glossary_hits: int
     direction: str
@@ -34,14 +35,21 @@ class LocalTranslateClient:
         text: str,
         mode: str = "auto",
         pro_mode: bool = True,
+        task_mode: str = "fxname",
     ) -> TranslateResponse:
-        payload = {"text": text, "mode": mode, "pro_mode": pro_mode}
+        payload = {
+            "text": text,
+            "mode": mode,
+            "pro_mode": pro_mode,
+            "task_mode": task_mode,
+        }
         data = self._post("/translate", payload)
         return TranslateResponse(
             translation=data["translation"],
             src_lang=data["src_lang"],
             tgt_lang=data["tgt_lang"],
             mode=data["mode"],
+            task_mode=data.get("task_mode", "fxname"),
             pro_mode=data["pro_mode"],
             glossary_hits=data["glossary_hits"],
             direction=data["direction"],

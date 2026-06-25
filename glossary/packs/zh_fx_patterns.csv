@@ -1,4 +1,9 @@
 zh,en,slot,priority,note
+金属门,Metal Door,object,140,metal door compound overrides UCS
+木桌,Wooden Table,object,140,wooden table compound
+塑料盒,Plastic Box,object,135,plastic box compound
+纸袋,Paper Bag,object,135,paper bag compound
+布帘,Cloth Curtain,object,130,cloth curtain compound
 玻璃门,Glass Door,object,130,explicit glass door compound
 铁门,Iron Door,object,130,explicit iron door compound
 车门,Car Door,object,130,explicit car door compound
@@ -37,7 +42,23 @@ zh,en,slot,priority,note
 石块,Rock,object,100,basic object
 火箭,Rocket,object,100,basic object
 滑动,Slide,action,100,basic action
-滑开,Slide,action,100,basic action
+水流过,Water Flow Over,action,125,water flow over surface
+打碎,Shatter,action,120,shatter break
+撕裂,Tear,action,120,tear rip
+怠速,Idle,action,120,engine idle
+轰油门,Rev,action,120,engine rev throttle
+驶过,Driveby,motion,120,vehicle driveby
+引擎,Engine,source,120,engine source
+打开门,Open Door,action,115,open door phrase
+关闭门,Close Door,action,115,close door phrase
+打开关闭门,Open Close Door,action,120,open close door phrase
+停止,Stop,action,110,stop action
+拉动,Pull,action,110,pull cloth curtain
+打磨,Sand,action,110,sanding polish action
+连发,Burst,action,110,gun burst fire
+窗帘,Curtain,object,110,curtain object
+桌子,Table,object,110,table object
+滑开,Slide Open,action,110,slide open door
 推开,Push Open,action,100,basic action
 拉开,Pull Open,action,100,basic action
 关闭,Close,action,100,basic action
@@ -53,8 +74,8 @@ zh,en,slot,priority,note
 滚动,Roll,action,100,basic action
 摇晃,Shake,action,100,basic action
 爆炸,Explosion,action,100,basic action
-飞过,Flyby,action,100,basic action
-飞越,Flyby,action,100,basic action
+飞过,Flyby,motion,110,flyby whoosh motion
+飞越,Flyby,motion,110,flyby motion
 流过,Flow,action,100,basic motion
 水流,Water Flow,action,100,basic water motion
 水流过,Water Flow,action,120,basic water flow through/past

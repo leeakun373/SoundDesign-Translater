@@ -28,8 +28,8 @@ class FxCase:
 
 
 CASES = [
-    FxCase("木门滑开", ["Wood", "Door", "Slide"], ["Front"]),
-    FxCase("玻璃门滑开", ["Glass", "Door", "Slide"], ["Front"]),
+    FxCase("木门滑开", ["Wood", "Door", "Slide", "Open"], ["Front"]),
+    FxCase("玻璃门滑开", ["Glass", "Door", "Slide", "Open"], ["Front"]),
     FxCase("倒水入杯", ["Water", "Pour", "Cup"]),
     FxCase("轮胎摩擦", ["Tire"], required_any=[["Rub", "Friction"]]),
     FxCase("锯木", ["Saw", "Wood"]),
@@ -131,17 +131,17 @@ def main() -> int:
             )
 
     translator = FakeTranslator(matcher)
-    direct = translator.translate("木门滑开", mode="sentence", pro_mode=True)
-    if direct.text != "Wood Door Slide":
-        failures.append(f"木门滑开 should remain Wood Door Slide, got {direct.text!r}")
+    direct = translator.translate_fxname("木门滑开")
+    if direct.text != "Wood Door Slide Open":
+        failures.append(f"木门滑开 should remain Wood Door Slide Open, got {direct.text!r}")
     direct_lower = direct.text.lower()
-    for token in ("wood", "door", "slide"):
+    for token in ("wood", "door", "slide", "open"):
         if token not in direct_lower:
             failures.append(f"engine direct compose missed {token}: {direct.text!r}")
     if direct.debug.get("hybrid_fallback"):
         failures.append(f"engine should not need fallback for full coverage: {direct.debug}")
 
-    hybrid = translator.translate("木门 神秘滑开", mode="sentence", pro_mode=True)
+    hybrid = translator.translate_fxname("木门 神秘滑开")
     if not hybrid.debug.get("hybrid_fallback"):
         failures.append(f"engine should use fallback with unknown zh: {hybrid.debug}")
     for token in ("wood", "door", "slide", "mystery"):

@@ -53,11 +53,11 @@ def main() -> int:
             failures.append(f"missing index should be a no-op, got {missing}")
 
         translator = FakeTranslator(GlossaryMatcher(), index_path)
-        direct = translator.translate("木门滑开", mode="sentence", pro_mode=True)
-        if direct.text != "Wood Door Slide":
+        direct = translator.translate_fxname("木门滑开")
+        if direct.text != "Wood Door Slide Open":
             failures.append(f"full glossary compose should preserve order: {direct.text!r}")
 
-        hybrid = translator.translate("木门 神秘呼喊", mode="sentence", pro_mode=True)
+        hybrid = translator.translate_fxname("木门 神秘呼喊")
         if "神秘呼喊" not in translator.calls:
             failures.append("unknown zh did not call NLLB fallback")
         for token in ("Wood", "Door", "Wolf", "Howl"):

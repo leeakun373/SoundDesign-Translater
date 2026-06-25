@@ -103,6 +103,7 @@ class TranslateHandler(BaseHTTPRequestHandler):
 
         mode = data.get("mode", "auto")
         pro_mode = bool(data.get("pro_mode", True))
+        task_mode = data.get("task_mode", "fxname")
 
         try:
             ensure_loaded()
@@ -114,7 +115,9 @@ class TranslateHandler(BaseHTTPRequestHandler):
         started = time.perf_counter()
         try:
             with _translate_lock:
-                result = translator.translate(text, mode=mode, pro_mode=pro_mode)
+                result = translator.translate(
+                    text, mode=mode, pro_mode=pro_mode, task_mode=task_mode
+                )
         except TranslationError as exc:
             _json_response(self, 500, {"error": str(exc)})
             return
@@ -128,6 +131,7 @@ class TranslateHandler(BaseHTTPRequestHandler):
                 "src_lang": result.src_lang,
                 "tgt_lang": result.tgt_lang,
                 "mode": result.mode,
+                "task_mode": result.task_mode,
                 "pro_mode": result.pro_mode,
                 "glossary_hits": result.glossary_hits,
                 "debug": result.debug,
@@ -145,7 +149,7 @@ def run_server(host: str = DEFAULT_HOST, port: int = DEFAULT_PORT) -> None:
     server = ThreadingHTTPServer((host, port), TranslateHandler)
     print(f"LocalTranslate 服务已启动: http://{host}:{port}")
     print("  GET  /health")
-    print('  POST /translate  {"text": "...", "mode": "auto", "pro_mode": true}')
+    print('  POST /translate  {"text": "...", "mode": "auto", "task_mode": "fxname", "pro_mode": true}')
     try:
         server.serve_forever()
     except KeyboardInterrupt:
