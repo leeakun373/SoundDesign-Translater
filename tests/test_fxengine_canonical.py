@@ -6,6 +6,7 @@ import csv
 from collections import Counter
 from dataclasses import replace
 from pathlib import Path
+from types import SimpleNamespace
 
 from fxengine.canonical_db import CANONICAL_SLOTS, CanonicalDB
 from fxengine.models import (
@@ -223,11 +224,15 @@ def test_no_distance_reports_metadata_candidate_and_issue() -> None:
 
 
 def test_issue_display_format_is_readable() -> None:
-    assert FXNameEngineApp._display_issue("unknown_ascii:kuang") == "unknown_ascii: kuang"
-    assert FXNameEngineApp._display_issue("distance_excluded:5m") == "distance_excluded: 5m"
+    assert FXNameEngineApp._display_issue("unknown_ascii:kuang") == (
+        "未识别英文 / ASCII：kuang"
+    )
+    assert FXNameEngineApp._display_issue("distance_excluded:5m") == (
+        "距离已移至元数据候选：5m"
+    )
     assert (
         FXNameEngineApp._display_issue("unsafe_fragment_rejected")
-        == "unsafe_fragment_rejected"
+        == "已过滤污染短语"
     )
 
 
@@ -246,18 +251,41 @@ def test_token_review_status_labels_show_mapping_source() -> None:
         )
 
     expected = {
-        "mapped_personal": "personal_dictionary",
-        "mapped_canonical": "canonical_csv",
-        "mapped_glossary": "glossary_fallback",
-        "kept_raw": "keep_raw_rule",
-        "unknown": "unknown_review",
-        "ignored_pollution": "pollution_filter",
-        "metadata_candidate": "technical_token_rule",
+        "mapped_personal": ("personal_dictionary", "已映射（个人词典）", "个人词典"),
+        "mapped_canonical": (
+            "canonical_csv",
+            "已映射（标准词库）",
+            "标准词库（Canonical CSV）",
+        ),
+        "mapped_glossary": ("glossary_fallback", "已映射（术语库）", "术语库回退"),
+        "kept_raw": ("keep_raw_rule", "保留原词", "保留原词规则"),
+        "unknown": ("unknown_review", "未识别", "未识别审核"),
+        "ignored_pollution": ("pollution_filter", "已忽略（污染内容）", "污染过滤"),
+        "metadata_candidate": (
+            "technical_token_rule",
+            "元数据候选",
+            "技术 Token 规则",
+        ),
     }
-    for decision, source in expected.items():
+    for decision, (source, status_label, source_label) in expected.items():
         review_token = token(decision, source)
-        assert FXNameEngineApp._review_status(review_token) == decision
+        assert FXNameEngineApp._review_status(review_token) == status_label
         assert review_token.source == source
+        assert FXNameEngineApp._source_label(source) == source_label
+
+
+def test_enter_runs_normalize_and_shift_enter_keeps_newline() -> None:
+    class FakeApp:
+        calls = 0
+
+        def normalize(self) -> None:
+            self.calls += 1
+
+    app = FakeApp()
+    assert FXNameEngineApp._on_input_return(app, SimpleNamespace(state=0)) == "break"
+    assert app.calls == 1
+    assert FXNameEngineApp._on_input_return(app, SimpleNamespace(state=1)) is None
+    assert app.calls == 1
 
 
 def test_review_tokens_have_structured_decisions_and_final_contribution() -> None:

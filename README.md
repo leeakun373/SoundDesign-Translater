@@ -32,8 +32,13 @@ powershell -ExecutionPolicy Bypass -File scripts/download_assets.ps1
 # 或已有模型目录时，仅重建术语库
 build_glossary.bat
 
-# 启动 GUI
+# 双击启动 FXName Review UI（Normalize 不需要加载 NLLB 模型）
 启动翻译工具.bat
+
+# 输入后按 Enter 直接生成；Shift+Enter 可在输入框换行
+
+# 如需旧版完整翻译 GUI / General NLLB
+python app.py
 ```
 
 ---

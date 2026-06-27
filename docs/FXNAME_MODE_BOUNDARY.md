@@ -27,10 +27,11 @@
 
 | 入口 | 文件 | 当前行为 | 建议行为 |
 |------|------|----------|----------|
+| **FXName Review UI** | `fxengine/ui.py` | Normalize + Token Review + Personal Dictionary | ✅ 当前双击入口 |
 | **Translate / 翻译** 按钮 | `app.py` | 用户选择 **任务 Task**（默认 FXName）+ 路由 Mode + Pro | ✅ 已实现 |
-| 启动脚本 | `启动翻译工具.bat` | `pythonw app.py` | 不变 |
+| 启动脚本 | `启动翻译工具.bat` | `pythonw -m fxengine.ui` | 当前默认 |
 
-**GUI 默认：** `task_mode=fxname`（FXName / 音效命名）
+**双击入口默认：** FXName Normalize；旧版完整翻译 GUI 仍可用 `python app.py` 启动。
 
 ### 2.2 HTTP 服务
 
