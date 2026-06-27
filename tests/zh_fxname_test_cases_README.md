@@ -28,9 +28,13 @@
 | `zh_fxname_governance_cases_50.csv` | 批次 1：治理四类基线 + 期望字段（已修订） |
 | `zh_fxname_cases_batch2_plan.md` | 批次 2：50 条分配计划（待编写） |
 
-## 运行（待接入）
+## 运行
 
 ```bash
-# 未来：治理 + 结果分层断言
 python tools/run_zh_fxname_cases.py --csv tests/zh_fxname_governance_cases_50.csv
+python -m pytest tests/test_zh_fxname_governance_cases.py -q
 ```
+
+报告输出：`tests/results/zh_fxname_governance_report.json`
+
+Runner 退出码：有 fail 时为 1（pass + pending 为 0 时退出 0）。第一版 baseline 不要求 50 条全 pass。

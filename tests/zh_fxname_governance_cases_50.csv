@@ -2,7 +2,7 @@ id,input,governance_class,ucs_domain,designer_intent,test_kind,expected_canonica
 001,木门滑开,stable,DOOR,拟音师录门轨时常用短句,both,Slide Open,Wood Door Slide Open,mapped_phrase,phrase_rule,high,Front,稳定短语；Slide Open 组合
 002,金属门撞击,stable,DOOR,商业库 DOORMetl 风格命名,both,Impact,Metal Door Impact,mapped_phrase,phrase_rule,high,,Material + Door + Impact
 003,抽屉拉开又关上,composite,DRWR,柜体开关连续动作,both,Open Close,Drawer Open Close,mapped_phrase,composite_phrase,high,Pull,复合动作非单一稳定 token
-004,保险箱拨轮转动,phrase_rule,MECH,保险柜机制细节,both,Dial Turn,Safe Dial Turn,mapped_phrase,phrase_rule,high,Turn,稳定点在拨轮上下文非泛化转动
+004,保险箱拨轮转动,phrase_rule,MECH,保险柜机制细节,both,Dial Turn,Safe Dial Turn,mapped_phrase,phrase_rule,high,Rotate|Movement,稳定点在拨轮上下文非泛化转动
 005,刮擦铁板,stable,FOLEY,大面积粗糙接触,both,Scrape,Metal Plate Scrape,mapped_phrase,phrase_rule,high,,Scrape 组稳定短语
 006,摩擦皮革,low_confidence,FOLEY,材质摩擦状态,both,Leather Friction,Leather Friction,mapped_phrase,phrase_rule,low,Rub,摩擦默认 Friction；皮革更可能 Rub
 007,冰块刮擦冰砖,stable,ICE,录音师自命名 ICEFric 风格,both,Ice Scrape,Ice Scrape Ice Brick,mapped_phrase,phrase_rule,high,,ICEFric 风格
@@ -45,7 +45,7 @@ id,input,governance_class,ucs_domain,designer_intent,test_kind,expected_canonica
 044,甩鞭,phrase_rule,FOLEY,鞭子 crack,both,Whip Crack,Whip Crack,mapped_phrase,phrase_rule,high,,鞭子特化
 045,金属响,phrase_rule,METL,金属共鸣/余响,both,Metal Resonance,Metal Resonance,mapped_phrase,phrase_rule,high,Ring,材质共振非泛 Ring
 046,铃响,phrase_rule,BELL,铃声结果,both,Ring,Bell Ring,mapped_phrase,phrase_rule,high,,object 决定 Ring
-047,划过水面,phrase_rule,WATER,Swipe/Pass By 待 phrase review,both,,Water Swipe|Pass By Water,review_required,ambiguity_rule,low,Scrape|Scratch,ambiguous_phrase
+047,划过水面,phrase_rule,WATER,Swipe/Pass By 待 phrase review,governance,,,review_required,ambiguity_rule,low,Scrape|Scratch,ambiguous_phrase
 048,来回摩擦毛毯,phrase_rule,CLOTH,修饰语改变 Rub/Friction,both,Rub,Carpet Rub,mapped_phrase,phrase_rule,high,Friction,来回→Rub 非 Friction
 049,轻蹭墙皮,phrase_rule,FOLEY,轻微 Scuff,both,Scuff,Wall Scuff,mapped_phrase,phrase_rule,high,Rub|Scrape,轻蹭→Scuff
 050,敲黑板,phrase_rule,FOLEY,教室场景明确 Knock,both,Knock,Chalkboard Knock,mapped_phrase,phrase_rule,high,Tap,phrase：Knock
