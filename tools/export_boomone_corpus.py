@@ -42,6 +42,7 @@ RECORD_COLUMNS = (
     "microphone",
     "source_file",
 )
+PRIMARY_RECORD_FIELDS = {"filename", "fx_name", "description"}
 CSV_EXPORT_COLUMNS = ("record_id", *RECORD_COLUMNS)
 
 
@@ -222,10 +223,10 @@ def _map_table(
         return [], max(0, len(rows) - header_index - 1), [
             f"{source_name}: no recognized metadata columns"
         ]
-    if not ({"filename", "fx_name", "description"} & set(mapping)):
-        warnings.append(
-            f"{source_name}: no filename/fx_name/description column; metadata-only rows kept"
-        )
+    if not (PRIMARY_RECORD_FIELDS & set(mapping)):
+        return [], max(0, len(rows) - header_index - 1), [
+            f"{source_name}: no filename/fx_name/description column; metadata-only rows skipped"
+        ]
 
     output: list[dict[str, str]] = []
     skipped = 0
@@ -236,7 +237,7 @@ def _map_table(
         record["library"] = record["library"] or default_library
         record["category_full"] = record["category_full"] or _category_full(record)
         record["source_file"] = source_name
-        if not any(record[column] for column in RECORD_COLUMNS[:-1]):
+        if not any(record[column] for column in PRIMARY_RECORD_FIELDS):
             skipped += 1
             continue
         output.append(record)

@@ -37,15 +37,31 @@ python tools/mine_boomone_tokens.py
 ```
 
 The miner deterministically counts English tokens, bigrams, and trigrams in FXName,
-description, and keyword fields. It writes ranked counts and source-record examples
-under `exports/boomone_mining/`. These files are evidence for review; they never
-modify the canonical table. The default mining run also leaves candidates untouched;
-candidate writing requires the explicit option below.
+description, keyword, and filename fields. `record_count` counts an item at most once
+per record; `field_hit_count` counts distinct record/field hits. Repetition within one
+field cannot inflate either metric. Example exports retain `field_source` and
+`field_value`. These files are evidence for review and never modify the canonical
+table. The default mining run also leaves candidates untouched; candidate writing
+requires the explicit option below.
 
-Mining filters pure numbers, audio file extensions, take/index/version markers,
-common metadata boilerplate, and microphone model tokens such as `MKH8040`,
-`CO100K`, and `416`. The original microphone value remains in token/phrase/example
-exports as metadata; it is only excluded from frequency and candidate terms.
+Mining filters pure numbers, audio file extensions, take/index markers, sample rates,
+bit depths, channel/format labels, version/render labels, single-letter noise,
+vendor/category/library codes, common metadata boilerplate, and microphone model
+tokens such as `MKH8040`, `CO100K`, and `416`. Acoustic actions such as `crack`,
+`snap`, and `slam` are explicitly retained. The original microphone value remains in
+SQLite and example exports as metadata.
+
+A real-corpus quality report can be generated without candidates:
+
+```powershell
+python tools/mine_boomone_tokens.py `
+  --quality-report reports/boomone_mining_quality_report.md
+```
+
+The report includes input files, record and field coverage, top tokens/phrases,
+filtered metadata, suspected actions/objects, candidate status, and canonical table
+SHA-256 before/after. The exporter supports CSV/XLSX/XLSM; legacy `.xls` requires a
+separate conversion step and is not silently reclassified.
 
 Candidate generation v0.1 is explicit and conservative:
 
@@ -60,8 +76,8 @@ python tools/mine_boomone_tokens.py `
 - Single-token candidates must belong to the small built-in action vocabulary.
 - Phrase candidates are filtered 2-grams/3-grams containing exactly one known action
   as the final word.
-- Evidence must meet the requested occurrence threshold. Count and record count are
-  recorded in `note` for human review.
+- Evidence must meet the requested distinct-record threshold. `record_count` and
+  `field_hit_count` are recorded in `note` for human review.
 - Every generated row uses `slot=action`, `source=boom_mined`,
   `review_status=review`, `priority=0`, and `ambiguity=medium|high`.
 - Candidate generation never calls promotion and never edits the runtime table.

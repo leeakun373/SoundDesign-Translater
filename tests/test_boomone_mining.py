@@ -57,6 +57,6 @@ def test_csv_corpus_export_and_mining_outputs(tmp_path: Path) -> None:
         encoding="utf-8", newline=""
     ) as handle:
         token_rows = list(csv.DictReader(handle))
-    counts = {row["token"]: int(row["count"]) for row in token_rows}
-    assert counts["door"] >= 4
-    assert counts["knock"] >= 3
+    counts = {row["token"]: int(row["record_count"]) for row in token_rows}
+    assert counts["door"] == 2
+    assert counts["knock"] == 1
