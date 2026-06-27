@@ -4,6 +4,9 @@
 from __future__ import annotations
 
 import sys
+import gc
+import sqlite3
+import tempfile
 from collections import Counter
 from pathlib import Path
 
@@ -20,7 +23,14 @@ from build_boom_style_index import (  # noqa: E402
     _extract_clean_tokens,
     _is_clean_phrase,
     _is_noise_token,
+    classify_phrase_quality,
+    classify_token_quality,
+    create_schema,
+    rebuild_derived_tables,
+    write_reports,
+    ImportStats,
 )
+from glossary.boom_style import BoomStyleIndex  # noqa: E402
 
 
 def test_noise_tokens_filtered():
@@ -40,7 +50,23 @@ def test_noise_tokens_filtered():
     for token in blocked:
         assert _is_noise_token(token), f"expected noise: {token}"
 
-    allowed = ["animal", "room", "tone", "impact", "door", "ambience", "movement"]
+    allowed = [
+        "door",
+        "impact",
+        "movement",
+        "room",
+        "tone",
+        "white",
+        "noise",
+        "debris",
+        "scrape",
+        "whoosh",
+        "metal",
+        "wood",
+        "glass",
+        "water",
+        "animal",
+    ]
     for token in allowed:
         assert not _is_noise_token(token), f"expected style token: {token}"
 
@@ -126,3 +152,128 @@ def test_clean_tokens_from_fx_name():
     assert "breeze" in tokens
     assert "birds" in tokens
     assert "ambtrop" not in tokens
+
+
+def test_review_token_is_not_filtered():
+    quality = classify_token_quality("BRRRT")
+    assert quality["decision"] == "review"
+    assert "low_vowel_ratio" in quality["reasons"]
+    assert not _is_noise_token("BRRRT")
+
+
+def test_phrase_quality_review_and_filter():
+    review = classify_phrase_quality("brrrt impact")
+    assert review["decision"] == "review"
+    assert "low_vowel_ratio" in review["reasons"]
+
+    filtered = classify_phrase_quality("mono sanken co100k")
+    assert filtered["decision"] == "filter"
+    assert "phrase_contains_noise" in filtered["reasons"]
+
+
+def test_review_items_written_to_noise_report():
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        db_path = tmp_path / "boom.sqlite"
+        report_md = tmp_path / "report.md"
+        report_csv = tmp_path / "report.csv"
+        noise_md = tmp_path / "noise.md"
+        coverage_md = tmp_path / "coverage.md"
+
+        conn = sqlite3.connect(db_path)
+        try:
+            create_schema(conn)
+            run_id = conn.execute(
+                """
+                INSERT INTO import_runs (
+                    started_at, root_path, inventory_path, offset_files, limit_files,
+                    rebuild, selected_files
+                ) VALUES ('now', '.', 'inventory.csv', 0, 1, 1, 1)
+                """
+            ).lastrowid
+            file_id = conn.execute(
+                """
+                INSERT INTO source_files (
+                    run_id, file_path, file_name, status, sheet_count,
+                    fx_record_count, skipped_row_count, warnings
+                ) VALUES (?, 'fixture.xlsx', 'fixture.xlsx', 'ok', 1, 1, 0, '[]')
+                """,
+                (run_id,),
+            ).lastrowid
+            conn.execute(
+                """
+                INSERT INTO source_sheets (
+                    file_id, sheet_name, row_count, status, fx_record_count,
+                    skipped_row_count, warnings
+                ) VALUES (?, 'Sheet1', 2, 'ok', 1, 0, '[]')
+                """,
+                (file_id,),
+            )
+            conn.execute(
+                """
+                INSERT INTO fx_records (
+                    source_file, sheet_name, row_number, filename, fx_name,
+                    description, category, subcategory, cat_id, keywords,
+                    library, microphone, raw_json
+                ) VALUES (
+                    'fixture.xlsx', 'Sheet1', 2, 'BRRRT_Impact.wav', 'BRRRT Impact',
+                    '', '', '', '', '', '', '', '{}'
+                )
+                """
+            )
+            rebuild_derived_tables(conn)
+            conn.commit()
+        finally:
+            conn.close()
+
+        write_reports(
+            stats=ImportStats(selected_files=1, imported_files=1, imported_sheets=1, imported_fx_records=1),
+            db_path=db_path,
+            report_md=report_md,
+            report_csv=report_csv,
+            noise_review_md=noise_md,
+            field_coverage_md=coverage_md,
+            selected_files=["fixture.xlsx"],
+        )
+
+        assert "brrrt" in noise_md.read_text(encoding="utf-8")
+        assert report_csv.is_file()
+        assert coverage_md.is_file()
+
+
+def test_schema_compatible_with_boom_style_reader():
+    with tempfile.TemporaryDirectory() as tmp:
+        db_path = Path(tmp) / "boom.sqlite"
+        conn = sqlite3.connect(db_path)
+        try:
+            create_schema(conn)
+            conn.execute(
+                """
+                INSERT INTO fx_records (
+                    source_file, sheet_name, row_number, filename, fx_name,
+                    description, category, subcategory, cat_id, keywords,
+                    library, microphone, raw_json
+                ) VALUES (
+                    'fixture.xlsx', 'Sheet1', 2, 'Door_Impact.wav', 'Door Impact',
+                    '', '', '', '', '', '', '', '{}'
+                )
+                """
+            )
+            rebuild_derived_tables(conn)
+            assert conn.execute(
+                "SELECT 1 FROM tokens WHERE token = 'door'"
+            ).fetchone()
+            assert conn.execute(
+                "SELECT 1 FROM phrases WHERE phrase = 'door impact'"
+            ).fetchone()
+            assert conn.execute(
+                "SELECT 1 FROM token_field_stats WHERE token = 'door'"
+            ).fetchone()
+            conn.commit()
+        finally:
+            conn.close()
+
+        styled = BoomStyleIndex(db_path).style_fx_name("Impact Door")
+        assert styled.boom_index_used
+        del styled
+        gc.collect()
