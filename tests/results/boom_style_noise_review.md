@@ -1,6 +1,6 @@
 # BOOM Style Noise Review
 
-- generated_at: 2026-06-26 02:05:12
+- generated_at: 2026-06-27 16:18:33
 - policy: review items are not added to manual noise rules automatically
 
 ## Top review tokens

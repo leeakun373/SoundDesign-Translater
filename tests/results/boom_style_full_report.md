@@ -1,6 +1,6 @@
 # BOOM FXName Style Corpus 0.2 Full Import Report
 
-- generated_at: 2026-06-26 02:05:13
+- generated_at: 2026-06-27 16:18:33
 - database: `glossary/boom_style_index.sqlite`
 - selected_files_this_run: **115**
 - weighting: fx_name x3, filename x2, description/keywords/category/subcategory x1
