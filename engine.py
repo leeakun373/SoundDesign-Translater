@@ -24,17 +24,14 @@ import transformers
 
 
 
+from fxengine.canonical_db import CanonicalDB
+from fxengine.diagnostics import result_to_debug
+from fxengine.normalizer import FXNameNormalizer
+from fxengine.scorer import BoomScorer
 from glossary.filename_parser import looks_like_filename, translate_filename
-
 from glossary.boom_style import BoomStyleIndex
-from glossary.fx_name import strip_unsafe_fx_phrases, validate_fx_name
-from glossary.fx_quality import evaluate_fx_output, find_bad_phrases, normalize_fx_issues
-from glossary.fx_slots import assemble_fx_name
 from glossary.matcher import GlossaryMatcher, GlossaryNotFoundError
-
 from glossary.polish import polish_text
-from glossary.zh_compose import compose_zh_to_en_debug
-from glossary.zh_normalize import normalize_fxname_input
 
 
 
@@ -200,6 +197,8 @@ class NllbTranslator:
 
         self._boom_style: BoomStyleIndex | None = None
 
+        self._fxname_normalizer: FXNameNormalizer | None = None
+
 
 
     @property
@@ -232,11 +231,15 @@ class NllbTranslator:
 
             self._glossary = GlossaryMatcher()
 
+            self._fxname_normalizer = None
+
             self._glossary_error = None
 
         except GlossaryNotFoundError as exc:
 
             self._glossary = None
+
+            self._fxname_normalizer = None
 
             self._glossary_error = str(exc)
 
@@ -333,22 +336,17 @@ class NllbTranslator:
             self._boom_style = BoomStyleIndex()
         return self._boom_style
 
-    def _style_zh_fx_name(
-        self, text: str, preserve_order: bool = True
-    ) -> tuple[str, dict[str, Any]]:
-        styled = self._boom_style_index().style_fx_name(
-            text, preserve_order=preserve_order
-        )
-        confidence_denominator = max(1, len(styled.selected_terms) - 1)
-        return styled.text, {
-            "boom_index_used": styled.boom_index_used,
-            "boom_phrase_hits": styled.boom_phrase_hits,
-            "boom_confidence": round(
-                min(1.0, len(styled.boom_phrase_hits) / confidence_denominator), 4
-            ),
-            "boom_suggestion": styled.suggested_text,
-            "selected_terms": styled.selected_terms,
-        }
+    def _fxname_normalizer_facade(self) -> FXNameNormalizer:
+        if self._fxname_normalizer is None:
+            if self._glossary is None:
+                raise TranslationError(
+                    "FXName Normalize requires professional mode and a loaded glossary"
+                )
+            self._fxname_normalizer = FXNameNormalizer(
+                canonical_db=CanonicalDB(self._glossary),
+                scorer=BoomScorer(self._boom_style_index()),
+            )
+        return self._fxname_normalizer
 
     @staticmethod
     def _should_use_fxname_pipeline(
@@ -369,84 +367,6 @@ class NllbTranslator:
             return True
         return False
 
-    def _finalize_fx_result(
-        self,
-        *,
-        text: str,
-        normalized: str,
-        translated: str,
-        src_lang: str,
-        tgt_lang: str,
-        mode_value: str,
-        pro_mode: bool,
-        glossary_hits: int,
-        compose_debug: Any,
-        hybrid_used: bool,
-        candidate_fragments: list[str],
-        rejected_candidates: list[dict[str, str]],
-        rejected_unsafe_fragments: list[str],
-        boom_debug: dict[str, Any],
-        assembly: Any,
-    ) -> TranslationResult:
-        structural = validate_fx_name(normalized, translated)
-        base_debug: dict[str, Any] = {
-            "coverage": round(compose_debug.coverage, 4),
-            "glossary_hits": glossary_hits,
-            "unknown_zh": compose_debug.unknown_zh,
-            "matched_terms": compose_debug.matched_terms,
-            "hybrid_fallback": hybrid_used,
-            "candidate_fragments": candidate_fragments,
-            "rejected_candidates": rejected_candidates,
-            "rejected_unsafe_fragments": rejected_unsafe_fragments,
-            "normalized_input": normalized,
-            "normalization_mode": "normalize",
-            "preserve_order": True,
-            "unknown_policy": "review",
-            "nllb_fallback_used": False,
-            "task_mode": TaskMode.FXNAME.value,
-            **boom_debug,
-            "slots": assembly.slots,
-            "assembled_order": assembly.assembled_order,
-            "reorder_reason": assembly.reorder_reason,
-            "structural_quality": structural.quality,
-            "structural_issues": structural.issues,
-        }
-        fx_eval = evaluate_fx_output(text, translated, debug=base_debug)
-        issues = list(fx_eval.issues)
-        if rejected_candidates and "nllb_candidate_rejected" not in issues:
-            issues.append("nllb_candidate_rejected")
-        if rejected_unsafe_fragments and "unsafe_fragment_rejected" not in issues:
-            issues.append("unsafe_fragment_rejected")
-        issues = normalize_fx_issues(issues)
-        abs_in_output, _ = find_bad_phrases(translated)
-        if abs_in_output:
-            quality_label = "fail"
-            if "bad_phrase" not in issues:
-                issues.insert(0, "bad_phrase")
-        elif not translated.strip() and normalized.strip():
-            quality_label = "fail"
-            if "empty_output" not in issues:
-                issues.insert(0, "empty_output")
-        elif issues:
-            quality_label = "needs_review"
-        else:
-            quality_label = "pass"
-        return TranslationResult(
-            text=translated,
-            src_lang=src_lang,
-            tgt_lang=tgt_lang,
-            mode=mode_value,
-            task_mode=TaskMode.FXNAME.value,
-            pro_mode=pro_mode,
-            glossary_hits=glossary_hits,
-            debug={
-                **base_debug,
-                "quality": quality_label,
-                "issues": issues,
-                "matched_bad_phrases": fx_eval.matched_bad_phrases,
-            },
-        )
-
     def _translate_zh_fxname(
         self,
         text: str,
@@ -455,37 +375,42 @@ class NllbTranslator:
         resolved: TranslateMode,
         pro_mode: bool,
     ) -> TranslationResult:
-        normalized = normalize_fxname_input(text)
-        composed, compose_debug = compose_zh_to_en_debug(normalized, self._glossary)
-        glossary_hits = compose_debug.glossary_hits
-        hybrid_used = False
-        candidate_fragments: list[str] = []
-        rejected_candidates: list[dict[str, str]] = []
-        slot_terms = list(compose_debug.slots)
-
-        assembly = assemble_fx_name(slot_terms, preserve_order=True)
-        translated = polish_text(assembly.text, tgt_is_zh=False)
-        translated, rejected_unsafe_fragments = strip_unsafe_fx_phrases(translated)
-        translated, boom_debug = self._style_zh_fx_name(
-            translated, preserve_order=True
+        normalized = self._fxname_normalizer_facade().normalize(text)
+        debug = result_to_debug(normalized)
+        compatibility_issues = list(normalized.issues)
+        if normalized.debug.get("unknown_zh") and "unknown_zh" not in compatibility_issues:
+            compatibility_issues.append("unknown_zh")
+        debug.update(
+            {
+                "task_mode": TaskMode.FXNAME.value,
+                "issues": compatibility_issues,
+                "hybrid_fallback": False,
+                "candidate_fragments": [],
+                "rejected_candidates": [],
+                "selected_terms": normalized.output_fxname.split(),
+                "slots": [
+                    {
+                        "token": token.text,
+                        "slot": token.slot,
+                        "source": token.source,
+                    }
+                    for token in normalized.tokens
+                    if token.text
+                ],
+                "structural_quality": normalized.quality,
+                "structural_issues": compatibility_issues,
+                "matched_bad_phrases": [],
+            }
         )
-
-        return self._finalize_fx_result(
-            text=text,
-            normalized=normalized,
-            translated=translated,
+        return TranslationResult(
+            text=normalized.output_fxname,
             src_lang=src_lang,
             tgt_lang=tgt_lang,
-            mode_value=resolved.value,
+            mode=resolved.value,
+            task_mode=TaskMode.FXNAME.value,
             pro_mode=pro_mode,
-            glossary_hits=glossary_hits,
-            compose_debug=compose_debug,
-            hybrid_used=hybrid_used,
-            candidate_fragments=candidate_fragments,
-            rejected_candidates=rejected_candidates,
-            rejected_unsafe_fragments=rejected_unsafe_fragments,
-            boom_debug=boom_debug,
-            assembly=assembly,
+            glossary_hits=int(normalized.debug.get("glossary_hits", 0)),
+            debug=debug,
         )
 
     def _translate_glossary_segments(

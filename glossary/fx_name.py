@@ -15,7 +15,7 @@ from glossary.fx_quality import (
 
 
 ARTICLE_RE = re.compile(r"^(?:the|a|an)\s+", re.IGNORECASE)
-WORD_RE = re.compile(r"[A-Za-z][A-Za-z0-9+\-]*")
+WORD_RE = re.compile(r"\d+(?:\.\d+)?m\b|[A-Za-z][A-Za-z0-9+\-]*", re.IGNORECASE)
 SENTENCE_VERBS = re.compile(
     r"\b(?:slipped|slides|sliding|opened|opens|pushed|pushes|pulled|pulls)\b",
     re.IGNORECASE,
@@ -91,6 +91,16 @@ def strip_unsafe_fx_phrases(text: str) -> tuple[str, list[str]]:
     if not words:
         return "", []
 
+    removed, rejected = unsafe_fx_word_indices(words)
+    kept = [word for index, word in enumerate(words) if index not in removed]
+    return " ".join(_title_fx_word(word) for word in kept), rejected
+
+
+def unsafe_fx_word_indices(words: list[str]) -> tuple[set[int], list[str]]:
+    """Return unsafe word positions without losing the original token sequence."""
+    if not words:
+        return set(), []
+
     lowered = [word.lower() for word in words]
     blocked = []
     for phrase in (*ABSOLUTE_BAD_PHRASES, *RISK_BAD_PHRASES):
@@ -122,8 +132,7 @@ def strip_unsafe_fx_phrases(text: str) -> tuple[str, list[str]]:
         if lowered[0] not in rejected:
             rejected.append(lowered[0])
 
-    kept = [word for index, word in enumerate(words) if index not in removed]
-    return " ".join(_title_fx_word(word) for word in kept), rejected
+    return removed, rejected
 
 
 def accept_nllb_fx_candidate(text: str) -> NllbCandidateResult:

@@ -4,7 +4,10 @@ from __future__ import annotations
 
 import re
 
-ASCII_TOKEN = re.compile(r"[A-Za-z][A-Za-z0-9+\-]*")
+ASCII_TOKEN = re.compile(
+    r"(?:[A-Za-z][A-Za-z0-9+\-]*|\d+(?:\.\d+)?m)\b",
+    re.IGNORECASE,
+)
 ZH_CHAR = re.compile(r"[\u4e00-\u9fff]")
 
 # Punctuation that separates tokens (not merged across)

@@ -5,7 +5,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 
-WORD_RE = re.compile(r"[A-Za-z][A-Za-z0-9+\-]*")
+WORD_RE = re.compile(r"\d+(?:\.\d+)?m\b|[A-Za-z][A-Za-z0-9+\-]*", re.IGNORECASE)
 ZH_CHAR_RE = re.compile(r"[\u4e00-\u9fff]")
 ARTICLE_RE = re.compile(r"^(?:the|a|an)\s+", re.IGNORECASE)
 

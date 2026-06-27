@@ -1,0 +1,248 @@
+"""Default FXName Normalize facade."""
+
+from __future__ import annotations
+
+from glossary.fx_name import strip_unsafe_fx_phrases, unsafe_fx_word_indices
+from glossary.fx_slots import SlotTerm, assemble_fx_name, infer_slot, split_slot_terms
+from glossary.zh_normalize import normalize_fxname_input
+
+from fxengine.canonical_db import CanonicalDB, CanonicalMatch, title_fx_text
+from fxengine.models import FXNameResult, FXToken
+from fxengine.personal_dictionary import PersonalDictionary, PersonalEntry
+from fxengine.preferences import FXPreferences
+from fxengine.scorer import BoomScorer
+from fxengine.tokenizer import FXTokenizer, RawToken
+
+
+class FXNameNormalizer:
+    """Deterministic canonical normalization with no NLLB dependency."""
+
+    def __init__(
+        self,
+        canonical_db: CanonicalDB | None = None,
+        personal_dictionary: PersonalDictionary | None = None,
+        preferences: FXPreferences | None = None,
+        scorer: BoomScorer | None = None,
+        tokenizer: FXTokenizer | None = None,
+    ) -> None:
+        self.canonical_db = canonical_db or CanonicalDB()
+        self.personal_dictionary = personal_dictionary or PersonalDictionary()
+        self.preferences = preferences or FXPreferences()
+        self.scorer = scorer or BoomScorer()
+        self.tokenizer = tokenizer or FXTokenizer()
+
+    def normalize(
+        self, input_text: str, preferences: FXPreferences | None = None
+    ) -> FXNameResult:
+        prefs = preferences or self.preferences
+        tokens: list[FXToken] = []
+        metadata_candidates: list[str] = []
+        raw_tokens = self.tokenizer.tokenize(input_text)
+        unsafe_positions, input_rejected_fragments = self._unsafe_ascii_positions(raw_tokens)
+
+        for index, raw_token in enumerate(raw_tokens):
+            if index in unsafe_positions:
+                tokens.append(
+                    FXToken(
+                        raw=raw_token.raw,
+                        text="",
+                        canonical=None,
+                        slot="unknown",
+                        source="input_safety",
+                        confidence=1.0,
+                        status="rejected",
+                        issues=["unsafe_fragment_rejected"],
+                    )
+                )
+                continue
+            if raw_token.kind == "distance":
+                tokens.append(self._distance_token(raw_token, prefs, metadata_candidates))
+            elif raw_token.kind == "ascii":
+                tokens.append(self._resolve_ascii(raw_token))
+            else:
+                tokens.extend(self._resolve_chinese(raw_token))
+
+        output_tokens = [token for token in tokens if token.status in {"ok", "needs_review"} and token.text]
+        assembled = self._assemble(output_tokens, prefs)
+        output, output_rejected_fragments = strip_unsafe_fx_phrases(assembled.text)
+        rejected_fragments = list(input_rejected_fragments)
+        for fragment in output_rejected_fragments:
+            if fragment not in rejected_fragments:
+                rejected_fragments.append(fragment)
+
+        issues: list[str] = []
+        unknowns: list[str] = []
+        for token in tokens:
+            if token.status != "ignored":
+                for issue in token.issues:
+                    label = f"{issue}:{token.raw}" if issue.startswith("unknown_") else issue
+                    if label not in issues:
+                        issues.append(label)
+            if token.status == "unknown":
+                unknowns.append(token.raw)
+        if rejected_fragments:
+            issues.append("unsafe_fragment_rejected")
+        if input_text.strip() and not output and not unknowns:
+            issues.append("empty_output")
+
+        boom = self.scorer.score(output) if output else self.scorer.score("")
+        suggestions = [boom.suggestion] if boom.suggestion and boom.suggestion != output else []
+        quality = "fail" if "empty_output" in issues else "needs_review" if issues else "pass"
+        unknown_zh = [token.raw for token in tokens if "unknown_zh" in token.issues]
+        unknown_ascii = [token.raw for token in tokens if "unknown_ascii" in token.issues]
+
+        return FXNameResult(
+            input_text=input_text,
+            output_fxname=output,
+            mode="normalize",
+            tokens=tokens,
+            quality=quality,
+            issues=issues,
+            unknowns=unknowns,
+            suggestions=suggestions,
+            boom_confidence=boom.confidence,
+            boom_suggestion=boom.suggestion,
+            debug={
+                "normalization_mode": "normalize",
+                "normalized_input": normalize_fxname_input(input_text),
+                "preserve_order": prefs.preserve_order,
+                "preferences": {
+                    "name": prefs.name,
+                    "allow_distance_in_fxname": prefs.allow_distance_in_fxname,
+                    "boom_can_reorder": prefs.boom_can_reorder,
+                    "boom_suggestion_only": prefs.boom_suggestion_only,
+                },
+                "metadata_candidates": metadata_candidates,
+                "rejected_unsafe_fragments": rejected_fragments,
+                "unknown_zh": unknown_zh,
+                "unknown_ascii": unknown_ascii,
+                "unknown_policy": "review",
+                "nllb_fallback_used": False,
+                "boom_index_used": boom.available,
+                "boom_phrase_hits": boom.phrase_hits,
+                "boom_reorder_suppressed": not prefs.boom_can_reorder,
+                "assembled_order": assembled.assembled_order,
+                "reorder_reason": assembled.reorder_reason,
+                "glossary_hits": sum(
+                    token.source in {"canonical_db", "canonical_override"}
+                    for token in tokens
+                ),
+            },
+        )
+
+    @staticmethod
+    def _unsafe_ascii_positions(
+        raw_tokens: list[RawToken],
+    ) -> tuple[set[int], list[str]]:
+        """Reject chat phrases before unknown-token handling can split them apart."""
+        removed: set[int] = set()
+        rejected: list[str] = []
+        start = 0
+        while start < len(raw_tokens):
+            if raw_tokens[start].kind != "ascii":
+                start += 1
+                continue
+            end = start
+            while end < len(raw_tokens) and raw_tokens[end].kind == "ascii":
+                end += 1
+            words = [token.raw for token in raw_tokens[start:end]]
+            local_removed, local_rejected = unsafe_fx_word_indices(words)
+            removed.update(start + index for index in local_removed)
+            for fragment in local_rejected:
+                if fragment not in rejected:
+                    rejected.append(fragment)
+            start = end
+        return removed, rejected
+
+    def _resolve_ascii(self, raw_token: RawToken) -> FXToken:
+        personal = self.personal_dictionary.resolve_entry(raw_token.raw)
+        if personal:
+            return self._personal_token(raw_token.raw, personal)
+        match = self.canonical_db.resolve_ascii(raw_token.raw)
+        return _match_to_token(match)
+
+    def _resolve_chinese(self, raw_token: RawToken) -> list[FXToken]:
+        personal = self.personal_dictionary.resolve_entry(raw_token.raw)
+        if personal:
+            return [self._personal_token(raw_token.raw, personal)]
+        return [_match_to_token(match) for match in self.canonical_db.segment_chinese(raw_token.raw)]
+
+    @staticmethod
+    def _personal_token(raw: str, entry: PersonalEntry) -> FXToken:
+        if entry.action == "ignore":
+            return FXToken(raw, "", None, "ignored", "personal_dictionary", 1.0, "ignored", [])
+        canonical = title_fx_text(entry.canonical or raw)
+        return FXToken(
+            raw=raw,
+            text=canonical,
+            canonical=canonical,
+            slot=infer_slot(canonical),
+            source=f"personal_{entry.action}",
+            confidence=1.0,
+            status="ok",
+            issues=[],
+        )
+
+    @staticmethod
+    def _distance_token(
+        raw_token: RawToken,
+        prefs: FXPreferences,
+        metadata_candidates: list[str],
+    ) -> FXToken:
+        if prefs.allow_distance_in_fxname:
+            return FXToken(
+                raw_token.raw,
+                raw_token.raw.lower(),
+                raw_token.raw.lower(),
+                "detail",
+                "distance",
+                1.0,
+                "ok",
+                [],
+            )
+        metadata_candidates.append(raw_token.raw.lower())
+        return FXToken(
+            raw_token.raw,
+            "",
+            None,
+            "detail",
+            "preference",
+            1.0,
+            "ignored",
+            ["distance_excluded"],
+        )
+
+    @staticmethod
+    def _assemble(tokens: list[FXToken], prefs: FXPreferences):
+        slot_terms: list[SlotTerm] = []
+        for group, token in enumerate(tokens):
+            if token.source == "distance":
+                slot_terms.append(SlotTerm(token.text, token.slot, token.source, group))
+            else:
+                slot_terms.extend(
+                    split_slot_terms(token.text, token.slot, source=token.source, group=group)
+                )
+        return assemble_fx_name(slot_terms, preserve_order=prefs.preserve_order)
+
+
+def normalize_fxname(
+    input_text: str,
+    *,
+    normalizer: FXNameNormalizer | None = None,
+    preferences: FXPreferences | None = None,
+) -> FXNameResult:
+    """Convenience facade for callers that do not need dependency injection."""
+    return (normalizer or FXNameNormalizer()).normalize(input_text, preferences)
+
+
+def _match_to_token(match: CanonicalMatch) -> FXToken:
+    return FXToken(
+        raw=match.raw,
+        text=match.canonical or "",
+        canonical=match.canonical,
+        slot=match.slot,
+        source=match.source,
+        confidence=1.0 if match.status in {"ok", "ignored"} else 0.0,
+        status=match.status,
+        issues=list(match.issues),
+    )
