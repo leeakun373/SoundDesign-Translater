@@ -1,249 +1,271 @@
-raw,canonical,slot,lang,priority,tags,note
-金属,Metal,material,zh,100,material,
-铁,Iron,material,zh,95,material,
-钢,Steel,material,zh,95,material,
-钢铁,Steel,material,zh,100,material,
-铝,Aluminum,material,zh,95,material,
-铜,Copper,material,zh,95,material,
-黄铜,Brass,material,zh,100,material,
-木头,Wood,material,zh,100,material,
-木,Wood,material,zh,95,material,
-木制,Wood,material,zh,95,material,
-玻璃,Glass,material,zh,100,material,
-布,Cloth,material,zh,100,material,
-布料,Cloth,material,zh,100,material,
-塑料,Plastic,material,zh,100,material,
-石头,Stone,material,zh,100,material,
-石材,Stone,material,zh,95,material,
-冰,Ice,material,zh,100,material,
-水,Water,material,zh,100,material,
-火,Fire,material,zh,100,material,
-纸,Paper,material,zh,100,material,
-纸张,Paper,material,zh,100,material,
-皮革,Leather,material,zh,100,material,
-橡胶,Rubber,material,zh,100,material,
-陶瓷,Ceramic,material,zh,100,material,
-混凝土,Concrete,material,zh,100,material,
-泥土,Dirt,material,zh,95,material,
-沙子,Sand,material,zh,100,material,
-碎石,Gravel,material,zh,100,material,
-骨头,Bone,material,zh,100,material,
-肉,Flesh,material,zh,90,material,
-泡沫,Foam,material,zh,100,material,
-泡棉,Foam,material,zh,95,material,
-碳纤维,Carbon Fiber,material,zh,100,material,
-锡,Tin,material,zh,90,material,
-银,Silver,material,zh,90,material,
-门,Door,object,zh,100,object,
-木门,Wood Door,object,zh,100,door,
-金属门,Metal Door,object,zh,100,door,
-玻璃门,Glass Door,object,zh,100,door,
-车门,Car Door,object,zh,100,door/car,
-抽屉,Drawer,object,zh,100,object,
-箱子,Box,object,zh,100,object,
-纸箱,Cardboard Box,object,zh,100,object,
-木箱,Wood Box,object,zh,100,object,
-金属箱,Metal Box,object,zh,100,object,
-杯子,Cup,object,zh,100,object,
-瓶子,Bottle,object,zh,100,object,
-玻璃瓶,Glass Bottle,object,zh,100,object,
-塑料瓶,Plastic Bottle,object,zh,100,object,
-袋子,Bag,object,zh,100,object,
-布袋,Cloth Bag,object,zh,100,object,
-窗户,Window,object,zh,100,object,
-地板,Floor,object,zh,100,object,
-桌子,Table,object,zh,100,object,
-椅子,Chair,object,zh,100,object,
-柜子,Cabinet,object,zh,100,object,
-锁,Lock,object,zh,100,object,
-开关,Switch,object,zh,100,object,
-按钮,Button,object,zh,100,object,
-绳子,Rope,object,zh,100,object,
-链条,Chain,object,zh,100,object,
-房间,Room,object,zh,100,room,
-房间底噪,Room Tone,object,zh,100,roomtone,
-办公室,Office,object,zh,100,room,
-走廊,Hallway,object,zh,100,room,
-大厅,Hall,object,zh,100,room,
-管道,Pipe,object,zh,100,object,
-轮胎,Tire,object,zh,100,vehicle,
-车轮,Wheel,object,zh,100,vehicle,
-钥匙,Key,object,zh,100,object,
-火箭,Rocket,source,zh,100,source,
-引擎,Engine,source,zh,100,engine,
-发动机,Engine,source,zh,100,engine,
-车辆,Vehicle,source,zh,100,vehicle,
-汽车,Car,source,zh,100,car,
-卡车,Truck,source,zh,100,vehicle,
-摩托车,Motorcycle,source,zh,100,vehicle,
-自行车,Bicycle,source,zh,100,vehicle,
-飞机,Aircraft,source,zh,100,vehicle,
-直升机,Helicopter,source,zh,100,vehicle,
-火车,Train,source,zh,100,vehicle,
-轮船,Ship,source,zh,100,vehicle,
-机器人,Robot,source,zh,100,source,
-机器,Machine,source,zh,100,machine,
-风扇,Fan,source,zh,100,machine,
-空调,Air Conditioner,source,zh,100,machine,
-电机,Motor,source,zh,100,machine,
-发电机,Generator,source,zh,100,machine,
-武器,Weapon,source,zh,100,weapon,
-手枪,Pistol,source,zh,100,weapon,
-步枪,Rifle,source,zh,100,weapon,
-霰弹枪,Shotgun,source,zh,100,weapon,
-大炮,Cannon,source,zh,100,weapon,
-弓箭,Bow And Arrow,source,zh,100,weapon,
-生物,Creature,source,zh,100,creature,
-怪物,Monster,source,zh,100,creature,
-狗,Dog,source,zh,100,animal,
-狼,Wolf,source,zh,100,animal,
-鸟,Bird,source,zh,100,animal,
-人群,Crowd,source,zh,100,crowd,
-人类,Human,source,zh,100,human,
-无人机,Drone,source,zh,100,vehicle,
-飞船,Spaceship,source,zh,100,vehicle,
-电脑,Computer,source,zh,100,machine,
-撞,Impact,action,zh,100,impact,
-撞击,Impact,action,zh,100,impact,
-碰撞,Impact,action,zh,95,impact,
-砸,Impact,action,zh,90,impact/heavy,
-重击,Heavy Impact,action,zh,100,impact/heavy,
-敲,Knock,action,zh,90,knock,
-敲击,Knock,action,zh,100,knock,
-轻敲,Tap,action,zh,100,tap,
-拍打,Slap,action,zh,100,slap,
-刮,Scrape,action,zh,100,scrape,
-刮擦,Scrape,action,zh,100,scrape,
-摩擦,Friction,action,zh,100,friction,
-拖,Drag,action,zh,100,drag,
-拖动,Drag,action,zh,100,drag,
-滑动,Slide,action,zh,100,slide,
-滑开,Slide Open,action,zh,100,open,
-推开,Push Open,action,zh,100,open,
-拉开,Pull Open,action,zh,100,open,
-关闭,Close,action,zh,100,close,
-关门,Door Close,action,zh,100,door,
-开门,Door Open,action,zh,100,door,
-掉落,Drop,action,zh,100,drop,
-落下,Drop,action,zh,90,drop,
-摔落,Drop,action,zh,100,drop,
-滚动,Roll,action,zh,100,roll,
-旋转,Spin,action,zh,100,spin,
-摇晃,Shake,action,zh,100,shake,
-震动,Vibration,action,zh,100,vibration,
-破裂,Break,action,zh,100,break,
-破碎,Break,action,zh,100,break,
-碎裂,Shatter,action,zh,100,shatter,
-撕裂,Tear,action,zh,100,tear,
-撕开,Tear Open,action,zh,100,tear,
-切割,Cut,action,zh,100,cut,
-刺穿,Pierce,action,zh,100,pierce,
-挤压,Squeeze,action,zh,100,squeeze,
-按下,Press,action,zh,100,press,
-点击,Click,action,zh,100,click,
-弹开,Pop Open,action,zh,100,open,
-锁定,Lock,action,zh,100,lock,
-解锁,Unlock,action,zh,100,lock,
-启动,Start,action,zh,100,start,
-停止,Stop,action,zh,100,stop,
-加速,Accelerate,action,zh,100,vehicle,
-减速,Decelerate,action,zh,100,vehicle,
-怠速,Idle,action,zh,100,vehicle,
-爆炸,Explosion,action,zh,100,explosion,
-发射,Launch,action,zh,100,launch,
-开火,Fire,action,zh,100,weapon,
-射击,Shot,action,zh,100,weapon,
-装填,Reload,action,zh,100,weapon,
-脚步,Footstep,action,zh,100,footstep,
-脚步声,Footstep,action,zh,100,footstep,
-走路,Walk,action,zh,100,footstep,
-跑步,Run,action,zh,100,footstep,
-跳跃,Jump,action,zh,100,movement,
-落地,Land,action,zh,100,movement,
-折断,Snap,action,zh,100,break,
-弯曲,Bend,action,zh,100,bend,
-燃烧,Burn,action,zh,100,fire,
-点燃,Ignite,action,zh,100,fire,
-喷射,Spray,action,zh,100,spray,
-甩动,Swipe,motion,zh,90,swipe,
-嗖,Whoosh,motion,zh,100,whoosh,
-呼啸,Whoosh,motion,zh,100,whoosh,
-挥动,Whoosh,motion,zh,95,whoosh,
-掠过,Flyby,motion,zh,100,flyby,
-飞过,Flyby,motion,zh,100,flyby,
-驶过,Driveby,motion,zh,100,driveby,
-摆动,Swing,motion,zh,100,movement,
-扫过,Sweep,motion,zh,100,movement,
-快速移动,Fast Movement,motion,zh,100,movement,
-缓慢移动,Slow Movement,motion,zh,100,movement,
-移动,Movement,motion,zh,100,movement,
-上升,Rise,motion,zh,100,movement,
-下降,Fall,motion,zh,100,movement,
-接近,Approach,motion,zh,100,movement,
-远离,Recede,motion,zh,100,movement,
-环绕,Orbit,motion,zh,100,movement,
-回旋,Swirl,motion,zh,100,movement,
-穿过,Pass Through,motion,zh,100,movement,
-划过,Passby,motion,zh,100,movement,
-飞越,Flyover,motion,zh,100,flyby,
-冲过,Rushby,motion,zh,100,movement,
-长尾,Long Tail,detail,zh,100,tail,
-尾音长,Long Tail,detail,zh,100,tail,
-短促,Short,detail,zh,100,length,
-硬,Hard,detail,zh,80,texture,
-柔软,Soft,detail,zh,80,texture,
-重,Heavy,detail,zh,85,weight,
-轻,Light,detail,zh,85,weight,
-快速,Fast,detail,zh,90,speed,
-缓慢,Slow,detail,zh,90,speed,
-单次,Single,detail,zh,100,count,
-连续,Continuous,detail,zh,100,count,
-双重,Double,detail,zh,100,count,
-多次,Multiple,detail,zh,100,count,
-干脆,Crisp,detail,zh,100,texture,
-沉闷,Dull,detail,zh,100,texture,
-明亮,Bright,detail,zh,100,tone,
-尖锐,Sharp,detail,zh,100,tone,
-低沉,Deep,detail,zh,100,tone,
-高频,High Frequency,detail,zh,100,frequency,
-低频,Low Frequency,detail,zh,100,frequency,
-厚重,Heavy,detail,zh,100,weight,
-微小,Tiny,detail,zh,100,size,
-巨大,Huge,detail,zh,100,size,
-短尾,Short Tail,detail,zh,100,tail,
-长混响,Long Reverb,detail,zh,100,reverb,
-短混响,Short Reverb,detail,zh,100,reverb,
-干声,Dry,detail,zh,100,reverb,
-湿声,Wet,detail,zh,100,reverb,
-细小,Small,detail,zh,100,size,
-强烈,Intense,detail,zh,100,intensity,
-室内,Interior,modifier,zh,100,perspective,
-室外,Exterior,modifier,zh,100,perspective,
-远处,Distant,modifier,zh,100,perspective,
-近处,Close,modifier,zh,100,perspective,
-水下,Underwater,modifier,zh,100,perspective,
-空旷,Open,modifier,zh,100,space,
-封闭,Enclosed,modifier,zh,100,space,
-空房间,Empty Room,modifier,zh,100,space,
-大空间,Large Space,modifier,zh,100,space,
-小空间,Small Space,modifier,zh,100,space,
-地下室,Basement,modifier,zh,100,space,
-户外,Outdoor,modifier,zh,100,perspective,
-外部,Exterior,modifier,zh,100,perspective,
-内部,Interior,modifier,zh,100,perspective,
-左侧,Left,modifier,zh,100,direction,
-右侧,Right,modifier,zh,100,direction,
-前方,Front,modifier,zh,100,direction,
-后方,Rear,modifier,zh,100,direction,
-上方,Above,modifier,zh,100,direction,
-下方,Below,modifier,zh,100,direction,
-中心,Center,modifier,zh,100,direction,
-环绕声,Surround,modifier,zh,100,perspective,
-混响,Reverberant,modifier,zh,100,reverb,
-无混响,Dry,modifier,zh,100,reverb,
-远景,Distant,modifier,zh,100,perspective,
-近景,Close,modifier,zh,100,perspective,
-头顶,Overhead,modifier,zh,100,direction,
-背后,Behind,modifier,zh,100,direction,
-开阔,Open,modifier,zh,100,space,
-密闭,Enclosed,modifier,zh,100,space,
+﻿"raw","canonical","slot","lang","priority","rule_type","review_status","ambiguity","tags","source","note"
+"金属","Metal","material","zh","100","phrase","keep","low","material","manual",""
+"铁","Iron","material","zh","95","stable_single","keep","low","material","manual",""
+"钢","Steel","material","zh","95","stable_single","keep","low","material","manual",""
+"钢铁","Steel","material","zh","100","phrase","keep","low","material","manual",""
+"铝","Aluminum","material","zh","95","stable_single","keep","low","material","manual",""
+"铜","Copper","material","zh","95","stable_single","keep","low","material","manual",""
+"黄铜","Brass","material","zh","100","phrase","keep","low","material","manual",""
+"木头","Wood","material","zh","100","phrase","keep","low","material","manual",""
+"木","Wood","material","zh","95","stable_single","keep","low","material","manual",""
+"木制","Wood","material","zh","95","phrase","keep","low","material","manual",""
+"玻璃","Glass","material","zh","100","phrase","keep","low","material","manual",""
+"布","Cloth","material","zh","100","stable_single","keep","low","material","manual",""
+"布料","Cloth","material","zh","100","phrase","keep","low","material","manual",""
+"塑料","Plastic","material","zh","100","phrase","keep","low","material","manual",""
+"石头","Stone","material","zh","100","phrase","keep","low","material","manual",""
+"石材","Stone","material","zh","95","phrase","keep","low","material","manual",""
+"冰","Ice","material","zh","100","stable_single","keep","low","material","manual",""
+"水","Water","material","zh","100","stable_single","keep","low","material","manual",""
+"火","Fire","material","zh","100","stable_single","keep","low","material","manual",""
+"纸","Paper","material","zh","100","stable_single","keep","low","material","manual",""
+"纸张","Paper","material","zh","100","phrase","keep","low","material","manual",""
+"皮革","Leather","material","zh","100","phrase","keep","low","material","manual",""
+"橡胶","Rubber","material","zh","100","phrase","keep","low","material","manual",""
+"陶瓷","Ceramic","material","zh","100","phrase","keep","low","material","manual",""
+"混凝土","Concrete","material","zh","100","phrase","keep","low","material","manual",""
+"泥土","Dirt","material","zh","95","phrase","keep","low","material","manual",""
+"沙子","Sand","material","zh","100","phrase","keep","low","material","manual",""
+"碎石","Gravel","material","zh","100","phrase","keep","low","material","manual",""
+"骨头","Bone","material","zh","100","phrase","keep","low","material","manual",""
+"肉","Flesh","material","zh","90","stable_single","keep","low","material","manual",""
+"泡沫","Foam","material","zh","100","phrase","keep","low","material","manual",""
+"泡棉","Foam","material","zh","95","phrase","keep","low","material","manual",""
+"碳纤维","Carbon Fiber","material","zh","100","phrase","keep","low","material","manual",""
+"锡","Tin","material","zh","90","stable_single","keep","low","material","manual",""
+"银","Silver","material","zh","90","stable_single","keep","low","material","manual",""
+"门","Door","object","zh","100","stable_single","keep","low","object","manual",""
+"木门","Wood Door","object","zh","100","phrase","keep","low","door","manual",""
+"金属门","Metal Door","object","zh","100","phrase","keep","low","door","manual",""
+"玻璃门","Glass Door","object","zh","100","phrase","keep","low","door","manual",""
+"车门","Car Door","object","zh","100","phrase","keep","low","door/car","manual",""
+"抽屉","Drawer","object","zh","100","phrase","keep","low","object","manual",""
+"箱子","Box","object","zh","100","phrase","keep","low","object","manual",""
+"纸箱","Cardboard Box","object","zh","100","phrase","keep","low","object","manual",""
+"木箱","Wood Box","object","zh","100","phrase","keep","low","object","manual",""
+"金属箱","Metal Box","object","zh","100","phrase","keep","low","object","manual",""
+"杯子","Cup","object","zh","100","phrase","keep","low","object","manual",""
+"瓶子","Bottle","object","zh","100","phrase","keep","low","object","manual",""
+"玻璃瓶","Glass Bottle","object","zh","100","phrase","keep","low","object","manual",""
+"塑料瓶","Plastic Bottle","object","zh","100","phrase","keep","low","object","manual",""
+"袋子","Bag","object","zh","100","phrase","keep","low","object","manual",""
+"布袋","Cloth Bag","object","zh","100","phrase","keep","low","object","manual",""
+"窗户","Window","object","zh","100","phrase","keep","low","object","manual",""
+"地板","Floor","object","zh","100","phrase","keep","low","object","manual",""
+"桌子","Table","object","zh","100","phrase","keep","low","object","manual",""
+"椅子","Chair","object","zh","100","phrase","keep","low","object","manual",""
+"柜子","Cabinet","object","zh","100","phrase","keep","low","object","manual",""
+"锁","Lock","object","zh","100","stable_single","keep","low","object","manual",""
+"开关","Switch","object","zh","100","phrase","keep","low","object","manual",""
+"按钮","Button","object","zh","100","phrase","keep","low","object","manual",""
+"绳子","Rope","object","zh","100","phrase","keep","low","object","manual",""
+"链条","Chain","object","zh","100","phrase","keep","low","object","manual",""
+"房间","Room","object","zh","100","phrase","keep","low","room","manual",""
+"房间底噪","Room Tone","object","zh","100","phrase","keep","low","roomtone","manual",""
+"办公室","Office","object","zh","100","phrase","keep","low","room","manual",""
+"走廊","Hallway","object","zh","100","phrase","keep","low","room","manual",""
+"大厅","Hall","object","zh","100","phrase","keep","low","room","manual",""
+"管道","Pipe","object","zh","100","phrase","keep","low","object","manual",""
+"轮胎","Tire","object","zh","100","phrase","keep","low","vehicle","manual",""
+"车轮","Wheel","object","zh","100","phrase","keep","low","vehicle","manual",""
+"钥匙","Key","object","zh","100","phrase","keep","low","object","manual",""
+"火箭","Rocket","source","zh","100","phrase","keep","low","source","manual",""
+"引擎","Engine","source","zh","100","phrase","keep","low","engine","manual",""
+"发动机","Engine","source","zh","100","phrase","keep","low","engine","manual",""
+"车辆","Vehicle","source","zh","100","phrase","keep","low","vehicle","manual",""
+"汽车","Car","source","zh","100","phrase","keep","low","car","manual",""
+"卡车","Truck","source","zh","100","phrase","keep","low","vehicle","manual",""
+"摩托车","Motorcycle","source","zh","100","phrase","keep","low","vehicle","manual",""
+"自行车","Bicycle","source","zh","100","phrase","keep","low","vehicle","manual",""
+"飞机","Aircraft","source","zh","100","phrase","keep","low","vehicle","manual",""
+"直升机","Helicopter","source","zh","100","phrase","keep","low","vehicle","manual",""
+"火车","Train","source","zh","100","phrase","keep","low","vehicle","manual",""
+"轮船","Ship","source","zh","100","phrase","keep","low","vehicle","manual",""
+"机器人","Robot","source","zh","100","phrase","keep","low","source","manual",""
+"机器","Machine","source","zh","100","phrase","keep","low","machine","manual",""
+"风扇","Fan","source","zh","100","phrase","keep","low","machine","manual",""
+"空调","Air Conditioner","source","zh","100","phrase","keep","low","machine","manual",""
+"电机","Motor","source","zh","100","phrase","keep","low","machine","manual",""
+"发电机","Generator","source","zh","100","phrase","keep","low","machine","manual",""
+"武器","Weapon","source","zh","100","phrase","keep","low","weapon","manual",""
+"手枪","Pistol","source","zh","100","phrase","keep","low","weapon","manual",""
+"步枪","Rifle","source","zh","100","phrase","keep","low","weapon","manual",""
+"霰弹枪","Shotgun","source","zh","100","phrase","keep","low","weapon","manual",""
+"大炮","Cannon","source","zh","100","phrase","keep","low","weapon","manual",""
+"弓箭","Bow And Arrow","source","zh","100","phrase","keep","low","weapon","manual",""
+"生物","Creature","source","zh","100","phrase","keep","low","creature","manual",""
+"怪物","Monster","source","zh","100","phrase","keep","low","creature","manual",""
+"狗","Dog","source","zh","100","stable_single","keep","low","animal","manual",""
+"狼","Wolf","source","zh","100","stable_single","keep","low","animal","manual",""
+"鸟","Bird","source","zh","100","stable_single","keep","low","animal","manual",""
+"人群","Crowd","source","zh","100","phrase","keep","low","crowd","manual",""
+"人类","Human","source","zh","100","phrase","keep","low","human","manual",""
+"无人机","Drone","source","zh","100","phrase","keep","low","vehicle","manual",""
+"飞船","Spaceship","source","zh","100","phrase","keep","low","vehicle","manual",""
+"电脑","Computer","source","zh","100","phrase","keep","low","machine","manual",""
+"撞","Impact","action","zh","80","stable_single","keep","medium","impact","manual","声音语境默认撞击"
+"撞击","Impact","action","zh","100","phrase","keep","low","impact","manual",""
+"碰撞","Impact","action","zh","95","phrase","keep","low","impact","manual",""
+"砸","Impact","action","zh","75","stable_single","keep","medium","impact","manual","默认高力度 Impact"
+"重击","Heavy Impact","action","zh","100","phrase","keep","low","impact/heavy","manual",""
+"敲","Knock","action","zh","65","stable_single_low_confidence","keep","medium","knock/tap","manual","可能需要 Tap/Knock 区分"
+"敲击","Knock","action","zh","100","phrase","keep","low","knock","manual",""
+"轻敲","Tap","action","zh","100","phrase","keep","low","tap","manual",""
+"拍打","Slap","action","zh","100","phrase","keep","low","slap","manual",""
+"刮","Scrape","action","zh","90","stable_single","keep","low","scrape","manual","稳定单字"
+"刮擦","Scrape","action","zh","100","phrase","keep","low","scrape","manual","大面积粗糙刮擦"
+"摩擦","Friction","action","zh","100","phrase","keep","low","friction","manual","默认物理摩擦状态"
+"拖","Drag","action","zh","100","stable_single","keep","low","drag","manual",""
+"拖动","Drag","action","zh","100","phrase","keep","low","drag","manual",""
+"滑动","Slide","action","zh","100","phrase","keep","low","slide","manual",""
+"滑开","Slide Open","action","zh","100","phrase","keep","low","open","manual",""
+"推开","Push Open","action","zh","100","phrase","keep","low","open","manual",""
+"拉开","Pull Open","action","zh","100","phrase","keep","low","open","manual",""
+"关闭","Close","action","zh","100","phrase","keep","low","close","manual",""
+"关门","Door Close","action","zh","100","phrase","keep","low","door","manual",""
+"开门","Door Open","action","zh","100","phrase","keep","low","door","manual",""
+"掉落","Drop","action","zh","100","phrase","keep","low","drop","manual",""
+"落下","Drop","action","zh","90","phrase","keep","low","drop","manual",""
+"摔落","Drop","action","zh","100","phrase","keep","low","drop","manual",""
+"滚动","Roll","action","zh","100","phrase","keep","low","roll","manual",""
+"旋转","Spin","action","zh","100","phrase","keep","low","spin","manual",""
+"摇晃","Shake","action","zh","100","phrase","keep","low","shake","manual",""
+"震动","Vibration","action","zh","100","phrase","keep","low","vibration","manual",""
+"破裂","Break","action","zh","100","phrase","keep","low","break","manual",""
+"破碎","Break","action","zh","100","phrase","keep","low","break","manual",""
+"碎裂","Shatter","action","zh","100","phrase","keep","low","shatter","manual",""
+"撕裂","Tear","action","zh","100","phrase","keep","low","tear","manual",""
+"撕开","Tear Open","action","zh","100","phrase","keep","low","tear","manual",""
+"切割","Cut","action","zh","100","phrase","keep","low","cut","manual",""
+"刺穿","Pierce","action","zh","100","phrase","keep","low","pierce","manual",""
+"挤压","Squeeze","action","zh","100","phrase","keep","low","squeeze","manual",""
+"按下","Press","action","zh","100","phrase","keep","low","press","manual",""
+"点击","Click","action","zh","100","phrase","keep","low","click","manual",""
+"弹开","Pop Open","action","zh","100","phrase","keep","low","open","manual",""
+"锁定","Lock","action","zh","100","phrase","keep","low","lock","manual",""
+"解锁","Unlock","action","zh","100","phrase","keep","low","lock","manual",""
+"启动","Start","action","zh","100","phrase","keep","low","start","manual",""
+"停止","Stop","action","zh","100","phrase","keep","low","stop","manual",""
+"加速","Accelerate","action","zh","100","phrase","keep","low","vehicle","manual",""
+"减速","Decelerate","action","zh","100","phrase","keep","low","vehicle","manual",""
+"怠速","Idle","action","zh","100","phrase","keep","low","vehicle","manual",""
+"爆炸","Explosion","action","zh","100","phrase","keep","low","explosion","manual",""
+"发射","Launch","action","zh","100","phrase","keep","low","launch","manual",""
+"开火","Fire","action","zh","100","phrase","keep","low","weapon","manual",""
+"射击","Shot","action","zh","100","phrase","keep","low","weapon","manual",""
+"装填","Reload","action","zh","100","phrase","keep","low","weapon","manual",""
+"脚步","Footstep","action","zh","100","phrase","keep","low","footstep","manual",""
+"脚步声","Footstep","action","zh","100","phrase","keep","low","footstep","manual",""
+"走路","Walk","action","zh","100","phrase","keep","low","footstep","manual",""
+"跑步","Run","action","zh","100","phrase","keep","low","footstep","manual",""
+"跳跃","Jump","action","zh","100","phrase","keep","low","movement","manual",""
+"落地","Land","action","zh","100","phrase","keep","low","movement","manual",""
+"折断","Snap","action","zh","100","phrase","keep","low","break","manual",""
+"弯曲","Bend","action","zh","100","phrase","keep","low","bend","manual",""
+"燃烧","Burn","action","zh","100","phrase","keep","low","fire","manual",""
+"点燃","Ignite","action","zh","100","phrase","keep","low","fire","manual",""
+"喷射","Spray","action","zh","100","phrase","keep","low","spray","manual",""
+"甩动","Swipe","motion","zh","90","phrase","keep","low","swipe","manual",""
+"嗖","Whoosh","motion","zh","100","stable_single","keep","low","whoosh","manual",""
+"呼啸","Whoosh","motion","zh","100","phrase","keep","low","whoosh","manual",""
+"挥动","Whoosh","motion","zh","95","phrase","keep","low","whoosh","manual",""
+"掠过","Flyby","motion","zh","100","phrase","keep","low","flyby","manual",""
+"飞过","Flyby","motion","zh","100","phrase","keep","low","flyby","manual",""
+"驶过","Driveby","motion","zh","100","phrase","keep","low","driveby","manual",""
+"摆动","Swing","motion","zh","100","phrase","keep","low","movement","manual",""
+"扫过","Sweep","motion","zh","100","phrase","keep","low","movement","manual",""
+"快速移动","Fast Movement","motion","zh","100","phrase","keep","low","movement","manual",""
+"缓慢移动","Slow Movement","motion","zh","100","phrase","keep","low","movement","manual",""
+"移动","Movement","motion","zh","100","phrase","keep","low","movement","manual",""
+"上升","Rise","motion","zh","100","phrase","keep","low","movement","manual",""
+"下降","Fall","motion","zh","100","phrase","keep","low","movement","manual",""
+"接近","Approach","motion","zh","100","phrase","keep","low","movement","manual",""
+"远离","Recede","motion","zh","100","phrase","keep","low","movement","manual",""
+"环绕","Orbit","motion","zh","100","phrase","keep","low","movement","manual",""
+"回旋","Swirl","motion","zh","100","phrase","keep","low","movement","manual",""
+"穿过","Pass Through","motion","zh","100","phrase","keep","low","movement","manual",""
+"划过","","motion","zh","0","ambiguous_phrase","review","high","swipe/passby/slide","manual","需上下文"
+"飞越","Flyover","motion","zh","100","phrase","keep","low","flyby","manual",""
+"冲过","Rushby","motion","zh","100","phrase","keep","low","movement","manual",""
+"长尾","Long Tail","detail","zh","100","phrase","keep","low","tail","manual",""
+"尾音长","Long Tail","detail","zh","100","phrase","keep","low","tail","manual",""
+"短促","Short","detail","zh","100","phrase","keep","low","length","manual",""
+"硬","Hard","detail","zh","80","stable_single","keep","low","texture","manual",""
+"柔软","Soft","detail","zh","80","phrase","keep","low","texture","manual",""
+"重","Heavy","detail","zh","85","stable_single","keep","low","weight","manual",""
+"轻","Light","detail","zh","85","stable_single","keep","low","weight","manual",""
+"快速","Fast","detail","zh","90","phrase","keep","low","speed","manual",""
+"缓慢","Slow","detail","zh","90","phrase","keep","low","speed","manual",""
+"单次","Single","detail","zh","100","phrase","keep","low","count","manual",""
+"连续","Continuous","detail","zh","100","phrase","keep","low","count","manual",""
+"双重","Double","detail","zh","100","phrase","keep","low","count","manual",""
+"多次","Multiple","detail","zh","100","phrase","keep","low","count","manual",""
+"干脆","Crisp","detail","zh","100","phrase","keep","low","texture","manual",""
+"沉闷","Dull","detail","zh","100","phrase","keep","low","texture","manual",""
+"明亮","Bright","detail","zh","100","phrase","keep","low","tone","manual",""
+"尖锐","Sharp","detail","zh","100","phrase","keep","low","tone","manual",""
+"低沉","Deep","detail","zh","100","phrase","keep","low","tone","manual",""
+"高频","High Frequency","detail","zh","100","phrase","keep","low","frequency","manual",""
+"低频","Low Frequency","detail","zh","100","phrase","keep","low","frequency","manual",""
+"厚重","Heavy","detail","zh","100","phrase","keep","low","weight","manual",""
+"微小","Tiny","detail","zh","100","phrase","keep","low","size","manual",""
+"巨大","Huge","detail","zh","100","phrase","keep","low","size","manual",""
+"短尾","Short Tail","detail","zh","100","phrase","keep","low","tail","manual",""
+"长混响","Long Reverb","detail","zh","100","phrase","keep","low","reverb","manual",""
+"短混响","Short Reverb","detail","zh","100","phrase","keep","low","reverb","manual",""
+"干声","Dry","detail","zh","100","phrase","keep","low","reverb","manual",""
+"湿声","Wet","detail","zh","100","phrase","keep","low","reverb","manual",""
+"细小","Small","detail","zh","100","phrase","keep","low","size","manual",""
+"强烈","Intense","detail","zh","100","phrase","keep","low","intensity","manual",""
+"室内","Interior","modifier","zh","100","phrase","keep","low","perspective","manual",""
+"室外","Exterior","modifier","zh","100","phrase","keep","low","perspective","manual",""
+"远处","Distant","modifier","zh","100","phrase","keep","low","perspective","manual",""
+"近处","Close","modifier","zh","100","phrase","keep","low","perspective","manual",""
+"水下","Underwater","modifier","zh","100","phrase","keep","low","perspective","manual",""
+"空旷","Open","modifier","zh","100","phrase","keep","low","space","manual",""
+"封闭","Enclosed","modifier","zh","100","phrase","keep","low","space","manual",""
+"空房间","Empty Room","modifier","zh","100","phrase","keep","low","space","manual",""
+"大空间","Large Space","modifier","zh","100","phrase","keep","low","space","manual",""
+"小空间","Small Space","modifier","zh","100","phrase","keep","low","space","manual",""
+"地下室","Basement","modifier","zh","100","phrase","keep","low","space","manual",""
+"户外","Outdoor","modifier","zh","100","phrase","keep","low","perspective","manual",""
+"外部","Exterior","modifier","zh","100","phrase","keep","low","perspective","manual",""
+"内部","Interior","modifier","zh","100","phrase","keep","low","perspective","manual",""
+"左侧","Left","modifier","zh","100","phrase","keep","low","direction","manual",""
+"右侧","Right","modifier","zh","100","phrase","keep","low","direction","manual",""
+"前方","Front","modifier","zh","100","phrase","keep","low","direction","manual",""
+"后方","Rear","modifier","zh","100","phrase","keep","low","direction","manual",""
+"上方","Above","modifier","zh","100","phrase","keep","low","direction","manual",""
+"下方","Below","modifier","zh","100","phrase","keep","low","direction","manual",""
+"中心","Center","modifier","zh","100","phrase","keep","low","direction","manual",""
+"环绕声","Surround","modifier","zh","100","phrase","keep","low","perspective","manual",""
+"混响","Reverberant","modifier","zh","100","phrase","keep","low","reverb","manual",""
+"无混响","Dry","modifier","zh","100","phrase","keep","low","reverb","manual",""
+"远景","Distant","modifier","zh","100","phrase","keep","low","perspective","manual",""
+"近景","Close","modifier","zh","100","phrase","keep","low","perspective","manual",""
+"头顶","Overhead","modifier","zh","100","phrase","keep","low","direction","manual",""
+"背后","Behind","modifier","zh","100","phrase","keep","low","direction","manual",""
+"开阔","Open","modifier","zh","100","phrase","keep","low","space","manual",""
+"密闭","Enclosed","modifier","zh","100","phrase","keep","low","space","manual",""
+"刮过","Scrape Across","action","zh","85","phrase","keep","medium","scrape","manual","强调横穿表面"
+"来回摩擦","Rub","action","zh","90","phrase","keep","low","rub","manual","具体来回动作"
+"蹭","Rub","action","zh","70","stable_single_low_confidence","keep","medium","rub/scuff","manual","可能也可 Scuff"
+"剐蹭","Scuff","action","zh","85","phrase","keep","medium","scuff","manual","轻微碰擦"
+"划","Scratch","action","zh","75","stable_single_low_confidence","keep","medium","scratch/slash","manual","默认表面划痕"
+"打","","action","zh","0","ambiguous_single","review","high","hit/knock/fire/play","manual","太宽"
+"击","","action","zh","0","suffix_only","review","high","hit/impact/strike","manual","通常是组合词后缀"
+"碰","","action","zh","0","ambiguous_single","review","high","touch/bump/impact/clink","manual","力度不明"
+"响","","unknown","zh","0","weak_token","review","high","ring/sound/resonance","manual","结果词不是动作"
+"动","","unknown","zh","0","weak_token","review","high","move/motion","manual","信息量太低"
+"甩","","motion","zh","0","ambiguous_single","review","high","swing/flick/whip/flap","manual","对象决定英文"
+"打门","Door Knock","action","zh","95","phrase","keep","low","door","manual",""
+"砸门","Door Bang","action","zh","90","phrase","keep","medium","door","manual",""
+"敲门","Door Knock","action","zh","100","phrase","keep","low","door","manual",""
+"打鼓","Drum Hit","action","zh","95","phrase","keep","low","drum","manual",""
+"打枪","Gun Fire","action","zh","95","phrase","keep","low","gun","manual",""
+"碰杯","Glass Clink","action","zh","100","phrase","keep","low","glass","manual",""
+"轻碰","Bump","action","zh","80","phrase","keep","medium","bump","manual",""
+"甩衣服","Cloth Flap","motion","zh","90","phrase","keep","medium","cloth","manual",""
+"甩鞭","Whip Crack","motion","zh","95","phrase","keep","low","whip","manual",""
+"铃响","Ring","action","zh","90","phrase","keep","low","ring","manual",""
+"金属响","Metal Resonance","detail","zh","80","phrase","keep","medium","metal/resonance","manual",

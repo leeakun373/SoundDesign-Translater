@@ -22,6 +22,11 @@ glossary/boom_style_index.sqlite
 # BOOM 训练元数据 Excel（体积大，仅本地保留）
 docs/训练数据/
 
+# BOOM metadata corpus/mining 生成物（可由 tools 重新生成）
+data/boomone/
+exports/boomone_by_ucs/
+exports/boomone_mining/
+
 # Release 打包临时目录
 release_assets/
 

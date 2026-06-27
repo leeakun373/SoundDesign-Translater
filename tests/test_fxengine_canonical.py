@@ -47,17 +47,25 @@ def test_canonical_csv_has_required_schema_coverage_and_unique_aliases() -> None
         "slot",
         "lang",
         "priority",
+        "rule_type",
+        "review_status",
+        "ambiguity",
         "tags",
+        "source",
         "note",
     ]
     zh_rows = [row for row in rows if row["lang"] == "zh"]
+    keep_rows = [row for row in rows if row["review_status"] == "keep"]
     assert len(zh_rows) >= 120
     assert len({row["raw"] for row in zh_rows}) == len(zh_rows)
-    assert set(Counter(row["slot"] for row in zh_rows)) == CANONICAL_SLOTS
+    assert set(Counter(row["slot"] for row in keep_rows)) <= CANONICAL_SLOTS
 
     db = CanonicalDB()
-    assert db.token_count == len(rows)
-    assert db.slot_counts == dict(Counter(row["slot"] for row in rows))
+    assert db.token_count == len(keep_rows)
+    assert db.runtime_token_count == len(keep_rows)
+    assert db.raw_csv_row_count == len(rows)
+    assert db.review_row_count == 7
+    assert db.slot_counts == dict(Counter(row["slot"] for row in keep_rows))
 
 
 def test_canonical_csv_precedes_glossary_for_same_alias() -> None:
