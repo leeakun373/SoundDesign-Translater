@@ -2071,7 +2071,7 @@ def write_reports(
         _write_field_coverage_report(conn, field_coverage_md, summary)
 
     md_lines = [
-        "# BOOM FXName Style Corpus 0.2 Full Import Report",
+        "# BOOM FXName Style Corpus 0.2.1 Full Import Report",
         "",
         f"- generated_at: {_now()}",
         f"- database: `{db_path.as_posix()}`",

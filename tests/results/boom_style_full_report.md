@@ -1,4 +1,4 @@
-# BOOM FXName Style Corpus 0.2 Full Import Report
+# BOOM FXName Style Corpus 0.2.1 Full Import Report
 
 - generated_at: 2026-06-27 17:23:11
 - database: `glossary/boom_style_index.sqlite`
