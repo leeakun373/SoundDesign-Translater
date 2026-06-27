@@ -5,7 +5,13 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 
-from glossary.fx_quality import find_bad_phrases
+from glossary.fx_quality import (
+    ABSOLUTE_BAD_PHRASES,
+    PRONOUN_WORDS,
+    RISK_AUX_WORDS,
+    RISK_BAD_PHRASES,
+    find_bad_phrases,
+)
 
 
 ARTICLE_RE = re.compile(r"^(?:the|a|an)\s+", re.IGNORECASE)
@@ -77,6 +83,47 @@ def sanitize_fx_fragment(text: str) -> str:
         out = re.sub(pattern, replacement, out, flags=re.IGNORECASE)
     words = WORD_RE.findall(out)
     return " ".join(_title_fx_word(w) for w in words)
+
+
+def strip_unsafe_fx_phrases(text: str) -> tuple[str, list[str]]:
+    """Remove chat/sentence fragments while preserving remaining FX tokens."""
+    words = WORD_RE.findall(text)
+    if not words:
+        return "", []
+
+    lowered = [word.lower() for word in words]
+    blocked = []
+    for phrase in (*ABSOLUTE_BAD_PHRASES, *RISK_BAD_PHRASES):
+        phrase_words = [word.lower() for word in WORD_RE.findall(phrase)]
+        if phrase_words:
+            blocked.append((phrase, phrase_words))
+    blocked.sort(key=lambda item: len(item[1]), reverse=True)
+
+    removed: set[int] = set()
+    rejected: list[str] = []
+    for phrase, phrase_words in blocked:
+        width = len(phrase_words)
+        for start in range(0, len(words) - width + 1):
+            if lowered[start : start + width] != phrase_words:
+                continue
+            removed.update(range(start, start + width))
+            if phrase not in rejected:
+                rejected.append(phrase)
+
+    unsafe_singletons = PRONOUN_WORDS | RISK_AUX_WORDS
+    for index, word in enumerate(lowered):
+        if word in unsafe_singletons:
+            removed.add(index)
+            if word not in rejected:
+                rejected.append(word)
+
+    if lowered and lowered[0] in {"the", "a", "an"}:
+        removed.add(0)
+        if lowered[0] not in rejected:
+            rejected.append(lowered[0])
+
+    kept = [word for index, word in enumerate(words) if index not in removed]
+    return " ".join(_title_fx_word(word) for word in kept), rejected
 
 
 def accept_nllb_fx_candidate(text: str) -> NllbCandidateResult:

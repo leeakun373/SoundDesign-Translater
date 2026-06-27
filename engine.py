@@ -27,9 +27,9 @@ import transformers
 from glossary.filename_parser import looks_like_filename, translate_filename
 
 from glossary.boom_style import BoomStyleIndex
-from glossary.fx_name import accept_nllb_fx_candidate, sanitize_fx_fragment, validate_fx_name
+from glossary.fx_name import strip_unsafe_fx_phrases, validate_fx_name
 from glossary.fx_quality import evaluate_fx_output, find_bad_phrases, normalize_fx_issues
-from glossary.fx_slots import SlotTerm, assemble_fx_name, infer_slot, split_slot_terms
+from glossary.fx_slots import assemble_fx_name
 from glossary.matcher import GlossaryMatcher, GlossaryNotFoundError
 
 from glossary.polish import polish_text
@@ -172,8 +172,10 @@ def detect_lang_pair_fxname(text: str) -> tuple[str, str]:
     """FXName mode: any CJK + ASCII mix → zh→en naming pipeline."""
     cjk_count = len(re.findall(r"[\u4e00-\u9fff\u3400-\u4dbf]", text))
     latin_count = len(re.findall(r"[A-Za-z]", text))
-    if cjk_count > 0 and latin_count > 0:
+    if cjk_count > 0:
         return ZH_LANG, EN_LANG
+    if latin_count > 0:
+        return EN_LANG, EN_LANG
     return detect_lang_pair(text)
 
 
@@ -332,56 +334,21 @@ class NllbTranslator:
         return self._boom_style
 
     def _style_zh_fx_name(
-        self, text: str, preserve_order: bool = False
+        self, text: str, preserve_order: bool = True
     ) -> tuple[str, dict[str, Any]]:
         styled = self._boom_style_index().style_fx_name(
             text, preserve_order=preserve_order
         )
+        confidence_denominator = max(1, len(styled.selected_terms) - 1)
         return styled.text, {
             "boom_index_used": styled.boom_index_used,
             "boom_phrase_hits": styled.boom_phrase_hits,
+            "boom_confidence": round(
+                min(1.0, len(styled.boom_phrase_hits) / confidence_denominator), 4
+            ),
+            "boom_suggestion": styled.suggested_text,
             "selected_terms": styled.selected_terms,
         }
-
-    def _hybrid_zh_fx_name(
-        self, unknown_zh: list[str]
-    ) -> tuple[list[SlotTerm], list[str], list[dict[str, str]]]:
-        terms: list[SlotTerm] = []
-        seen: set[str] = set()
-        candidate_fragments: list[str] = []
-        rejected_candidates: list[dict[str, str]] = []
-        for chunk in unknown_zh:
-            if not chunk.strip():
-                continue
-            translated = self._nllb_translate(chunk, ZH_LANG, EN_LANG)
-            polished = polish_text(translated, tgt_is_zh=False)
-            accepted = accept_nllb_fx_candidate(polished)
-            if accepted.reject_reason:
-                rejected_candidates.append(
-                    {
-                        "zh": chunk,
-                        "raw": polished,
-                        "sanitized": accepted.sanitized,
-                        "reason": accepted.reject_reason,
-                    }
-                )
-                continue
-            fragment = accepted.fragment or ""
-            fragment, _boom_debug = self._style_zh_fx_name(fragment)
-            if fragment:
-                candidate_fragments.append(fragment)
-            for token in fragment.split():
-                key = token.lower()
-                if key not in seen:
-                    terms.extend(
-                        split_slot_terms(
-                            token,
-                            infer_slot(token),
-                            source="fallback",
-                        )
-                    )
-                    seen.add(key)
-        return terms, candidate_fragments, rejected_candidates
 
     @staticmethod
     def _should_use_fxname_pipeline(
@@ -389,11 +356,12 @@ class NllbTranslator:
         task_mode: TaskMode,
         mode: TranslateMode,
         src_lang: str,
+        tgt_lang: str,
         pro_mode: bool,
         glossary_ready: bool,
         resolved_mode: TranslateMode,
     ) -> bool:
-        if not (pro_mode and glossary_ready and src_lang == ZH_LANG):
+        if not (pro_mode and glossary_ready and tgt_lang == EN_LANG):
             return False
         if task_mode == TaskMode.FXNAME:
             return resolved_mode in (TranslateMode.SENTENCE, TranslateMode.FXNAME, TranslateMode.AUTO)
@@ -416,6 +384,7 @@ class NllbTranslator:
         hybrid_used: bool,
         candidate_fragments: list[str],
         rejected_candidates: list[dict[str, str]],
+        rejected_unsafe_fragments: list[str],
         boom_debug: dict[str, Any],
         assembly: Any,
     ) -> TranslationResult:
@@ -428,7 +397,12 @@ class NllbTranslator:
             "hybrid_fallback": hybrid_used,
             "candidate_fragments": candidate_fragments,
             "rejected_candidates": rejected_candidates,
+            "rejected_unsafe_fragments": rejected_unsafe_fragments,
             "normalized_input": normalized,
+            "normalization_mode": "normalize",
+            "preserve_order": True,
+            "unknown_policy": "review",
+            "nllb_fallback_used": False,
             "task_mode": TaskMode.FXNAME.value,
             **boom_debug,
             "slots": assembly.slots,
@@ -441,6 +415,8 @@ class NllbTranslator:
         issues = list(fx_eval.issues)
         if rejected_candidates and "nllb_candidate_rejected" not in issues:
             issues.append("nllb_candidate_rejected")
+        if rejected_unsafe_fragments and "unsafe_fragment_rejected" not in issues:
+            issues.append("unsafe_fragment_rejected")
         issues = normalize_fx_issues(issues)
         abs_in_output, _ = find_bad_phrases(translated)
         if abs_in_output:
@@ -487,24 +463,9 @@ class NllbTranslator:
         rejected_candidates: list[dict[str, str]] = []
         slot_terms = list(compose_debug.slots)
 
-        if glossary_hits >= 1:
-            coverage_ok = compose_debug.coverage >= 0.75
-            unknown_ok = not compose_debug.unknown_zh
-            if not (coverage_ok and unknown_ok):
-                fallback_terms, candidate_fragments, rejected_candidates = (
-                    self._hybrid_zh_fx_name(compose_debug.unknown_zh)
-                )
-                slot_terms.extend(fallback_terms)
-                hybrid_used = True
-        elif compose_debug.unknown_zh:
-            fallback_terms, candidate_fragments, rejected_candidates = (
-                self._hybrid_zh_fx_name(compose_debug.unknown_zh)
-            )
-            slot_terms.extend(fallback_terms)
-            hybrid_used = True
-
-        assembly = assemble_fx_name(slot_terms)
+        assembly = assemble_fx_name(slot_terms, preserve_order=True)
         translated = polish_text(assembly.text, tgt_is_zh=False)
+        translated, rejected_unsafe_fragments = strip_unsafe_fx_phrases(translated)
         translated, boom_debug = self._style_zh_fx_name(
             translated, preserve_order=True
         )
@@ -522,6 +483,7 @@ class NllbTranslator:
             hybrid_used=hybrid_used,
             candidate_fragments=candidate_fragments,
             rejected_candidates=rejected_candidates,
+            rejected_unsafe_fragments=rejected_unsafe_fragments,
             boom_debug=boom_debug,
             assembly=assembly,
         )
@@ -705,6 +667,14 @@ class NllbTranslator:
 
 
 
+            fx_normalize_requested = (
+                task_mode == TaskMode.FXNAME or mode == TranslateMode.FXNAME
+            ) and tgt_lang == EN_LANG
+            if fx_normalize_requested and (not pro_mode or not self._glossary):
+                raise TranslationError(
+                    "FXName Normalize requires professional mode and a loaded glossary"
+                )
+
             if not pro_mode or not self._glossary:
 
                 translated = self._nllb_translate(text, src_lang, tgt_lang)
@@ -735,6 +705,7 @@ class NllbTranslator:
                 task_mode=task_mode,
                 mode=mode,
                 src_lang=src_lang,
+                tgt_lang=tgt_lang,
                 pro_mode=pro_mode,
                 glossary_ready=self._glossary is not None,
                 resolved_mode=resolved,

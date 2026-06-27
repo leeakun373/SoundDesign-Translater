@@ -41,12 +41,17 @@ def main() -> int:
         style = BoomStyleIndex(index_path)
 
         styled = style.style_fx_name("Howl Wolf Rocket")
-        if styled.text != "Wolf Howl Rocket":
-            failures.append(f"expected Wolf Howl Rocket, got {styled.text!r}")
+        if styled.text != "Howl Wolf Rocket":
+            failures.append(f"expected preserved order, got {styled.text!r}")
+        if styled.suggested_text != "Wolf Howl Rocket":
+            failures.append(f"expected optional Wolf Howl Rocket suggestion, got {styled}")
         if "Wolf Howl" not in styled.boom_phrase_hits:
             failures.append(f"expected Wolf Howl phrase hit, got {styled.boom_phrase_hits}")
         if styled.phrase_hits != styled.boom_phrase_hits:
             failures.append("phrase_hits alias did not return boom_phrase_hits")
+        generated = style.style_fx_name("Howl Wolf Rocket", preserve_order=False)
+        if generated.text != "Wolf Howl Rocket":
+            failures.append(f"explicit BOOM generation failed: {generated.text!r}")
 
         missing = BoomStyleIndex(Path(tmp) / "missing.sqlite").style_fx_name(
             "Howl Wolf Rocket"
@@ -60,11 +65,13 @@ def main() -> int:
             failures.append(f"full glossary compose should preserve order: {direct.text!r}")
 
         hybrid = translator.translate_fxname("木门 神秘呼喊")
-        if "神秘呼喊" not in translator.calls:
-            failures.append("unknown zh did not call NLLB fallback")
-        for token in ("Wood", "Door", "Wolf", "Howl"):
+        if translator.calls:
+            failures.append(f"normalize mode called NLLB for unknown zh: {translator.calls}")
+        for token in ("Wood", "Door"):
             if token.lower() not in hybrid.text.lower():
                 failures.append(f"hybrid output missed {token}: {hybrid.text!r}")
+        if "unknown_zh" not in hybrid.debug.get("issues", []):
+            failures.append(f"unknown zh was not marked for review: {hybrid.debug}")
         if not hybrid.debug.get("boom_index_used"):
             failures.append(f"boom index was not marked as used: {hybrid.debug}")
         if "Front" in hybrid.text:
@@ -88,6 +95,8 @@ def test_phrase_hits_alias() -> None:
         assert result.boom_index_used is True
         assert result.boom_phrase_hits
         assert result.phrase_hits == result.boom_phrase_hits
+        assert result.text == "Howl Wolf Rocket"
+        assert result.suggested_text == "Wolf Howl Rocket"
 
 
 def _write_test_index(path: Path) -> None:

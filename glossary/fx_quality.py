@@ -70,6 +70,7 @@ CANONICAL_FX_ISSUES: frozenset[str] = frozenset(
         "spacing_suspect",
         "duplicate_token",
         "nllb_candidate_rejected",
+        "unsafe_fragment_rejected",
     }
 )
 
