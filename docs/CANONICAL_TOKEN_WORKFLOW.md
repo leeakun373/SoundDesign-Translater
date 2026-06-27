@@ -39,7 +39,32 @@ python tools/mine_boomone_tokens.py
 The miner deterministically counts English tokens, bigrams, and trigrams in FXName,
 description, and keyword fields. It writes ranked counts and source-record examples
 under `exports/boomone_mining/`. These files are evidence for review; they never
-modify candidates or the canonical table.
+modify the canonical table. The default mining run also leaves candidates untouched;
+candidate writing requires the explicit option below.
+
+Mining filters pure numbers, audio file extensions, take/index/version markers,
+common metadata boilerplate, and microphone model tokens such as `MKH8040`,
+`CO100K`, and `416`. The original microphone value remains in token/phrase/example
+exports as metadata; it is only excluded from frequency and candidate terms.
+
+Candidate generation v0.1 is explicit and conservative:
+
+```powershell
+python tools/mine_boomone_tokens.py `
+  --candidates fxengine/data/canonical_token_candidates.csv `
+  --candidate-min-count 2
+```
+
+- The output filename must be `canonical_token_candidates.csv`; the tool refuses a
+  `canonical_tokens.csv` target.
+- Single-token candidates must belong to the small built-in action vocabulary.
+- Phrase candidates are filtered 2-grams/3-grams containing exactly one known action
+  as the final word.
+- Evidence must meet the requested occurrence threshold. Count and record count are
+  recorded in `note` for human review.
+- Every generated row uses `slot=action`, `source=boom_mined`,
+  `review_status=review`, `priority=0`, and `ambiguity=medium|high`.
+- Candidate generation never calls promotion and never edits the runtime table.
 
 ## 3. Review candidates
 

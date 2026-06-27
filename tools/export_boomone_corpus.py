@@ -12,7 +12,7 @@ import zipfile
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable, Iterator, Sequence
+from typing import Iterator, Sequence
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -231,9 +231,8 @@ def _map_table(
     skipped = 0
     for source_row in rows[header_index + 1 :]:
         record = {column: "" for column in RECORD_COLUMNS}
-        for target, column_index in mapping.items():
-            if column_index < len(source_row):
-                record[target] = str(source_row[column_index]).strip()
+        for target, column_indexes in mapping.items():
+            record[target] = _first_populated_value(source_row, column_indexes)
         record["library"] = record["library"] or default_library
         record["category_full"] = record["category_full"] or _category_full(record)
         record["source_file"] = source_name
@@ -258,15 +257,26 @@ def _find_header_row(rows: list[list[str]]) -> int:
     return best_index
 
 
-def _map_headers(headers: list[str]) -> dict[str, int]:
-    mapped: dict[str, int] = {}
+def _map_headers(headers: list[str]) -> dict[str, list[int]]:
+    """Map every recognized alias so sparse duplicate columns can be coalesced."""
+    mapped: dict[str, list[int]] = defaultdict(list)
     for index, header in enumerate(headers):
         normalized = _normalize_header(str(header))
         for target, aliases in NORMALIZED_ALIASES.items():
-            if target not in mapped and normalized in aliases:
-                mapped[target] = index
+            if normalized in aliases:
+                mapped[target].append(index)
                 break
-    return mapped
+    return dict(mapped)
+
+
+def _first_populated_value(row: list[str], indexes: list[int]) -> str:
+    for index in indexes:
+        if index >= len(row):
+            continue
+        value = str(row[index]).strip()
+        if value:
+            return value
+    return ""
 
 
 def _category_full(record: dict[str, str]) -> str:

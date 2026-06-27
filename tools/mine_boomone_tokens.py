@@ -7,6 +7,7 @@ import argparse
 import csv
 import re
 import sqlite3
+import sys
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 from pathlib import Path
@@ -14,10 +15,22 @@ from typing import Sequence
 
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from fxengine.canonical_db import CANONICAL_COLUMNS  # noqa: E402
+
+
 DEFAULT_DB = ROOT / "data" / "boomone" / "boomone_records.sqlite"
 DEFAULT_OUTPUT_DIR = ROOT / "exports" / "boomone_mining"
 TEXT_FIELDS = ("fx_name", "description", "keywords")
-TOKEN_RE = re.compile(r"[A-Za-z][A-Za-z0-9]*(?:['-][A-Za-z0-9]+)*")
+TOKEN_RE = re.compile(r"[A-Za-z0-9]+(?:['-][A-Za-z0-9]+)*")
+FILE_EXTENSION_TOKENS = {"wav", "wave", "mp3", "aif", "aiff", "flac"}
+TAKE_INDEX_RE = re.compile(r"^(?:take|tk|index|idx|version|ver|v)[-_]?\d*$")
+MIC_MODEL_RE = re.compile(
+    r"^(?:mkh|mk|co|ntg|sm|km|md|at|dpa|schoeps|neumann|sennheiser)"
+    r"[-_]?\d+[a-z0-9-]*$"
+)
 STOP_WORDS = {
     "a",
     "an",
@@ -39,7 +52,45 @@ STOP_WORDS = {
     "the",
     "to",
     "with",
+    "audio",
+    "file",
+    "files",
+    "mono",
+    "recorded",
+    "recording",
+    "sample",
+    "samples",
+    "sfx",
+    "sound",
+    "sounds",
+    "stereo",
 }
+ACTION_TERMS = {
+    "bang",
+    "blast",
+    "break",
+    "clink",
+    "crack",
+    "crash",
+    "creak",
+    "drop",
+    "flap",
+    "friction",
+    "hit",
+    "impact",
+    "knock",
+    "rattle",
+    "ring",
+    "roll",
+    "scrape",
+    "scratch",
+    "slam",
+    "splash",
+    "squeak",
+    "tap",
+    "whoosh",
+}
+HIGH_AMBIGUITY_ACTIONS = {"bang", "break", "crack", "drop", "hit", "ring", "roll"}
 EXAMPLE_FIELDS = (
     "record_id",
     "filename",
@@ -48,6 +99,7 @@ EXAMPLE_FIELDS = (
     "cat_id",
     "category",
     "subcategory",
+    "microphone",
     "source_file",
 )
 
@@ -58,6 +110,11 @@ class MiningSummary:
     token_count: int
     phrase_count: int
     output_dir: str
+    filtered_token_count: int
+    filtered_tokens: tuple[str, ...]
+    filtered_reasons: dict[str, int]
+    candidate_count: int = 0
+    candidate_path: str | None = None
 
 
 def mine_corpus(
@@ -67,20 +124,26 @@ def mine_corpus(
     limit: int = 500,
     min_count: int = 1,
     examples_per_item: int = 3,
+    candidate_path: Path | None = None,
+    candidate_min_count: int = 2,
 ) -> MiningSummary:
-    """Write frequency/evidence exports; never writes candidates or canonical data."""
+    """Write evidence exports and optionally inert review-only candidates."""
     db_path = Path(db_path)
     output_dir = Path(output_dir)
     if not db_path.is_file():
         raise FileNotFoundError(f"BOOM corpus database not found: {db_path}")
-    if limit < 1 or min_count < 1 or examples_per_item < 1:
-        raise ValueError("limit, min_count, and examples_per_item must be positive")
+    if limit < 1 or min_count < 1 or examples_per_item < 1 or candidate_min_count < 1:
+        raise ValueError(
+            "limit, min_count, examples_per_item, and candidate_min_count must be positive"
+        )
 
     records = _read_records(db_path)
     token_occurrences: Counter[str] = Counter()
     token_documents: Counter[str] = Counter()
     phrase_occurrences: Counter[str] = Counter()
     phrase_documents: Counter[str] = Counter()
+    filtered_tokens: Counter[str] = Counter()
+    filtered_reasons: Counter[str] = Counter()
     token_examples: dict[str, list[dict[str, object]]] = defaultdict(list)
     phrase_examples: dict[str, list[dict[str, object]]] = defaultdict(list)
 
@@ -88,7 +151,10 @@ def mine_corpus(
         record_tokens: set[str] = set()
         record_phrases: set[str] = set()
         for field_name in TEXT_FIELDS:
-            tokens = _tokenize(str(record[field_name]))
+            tokens, filtered = _partition_tokens(str(record[field_name]))
+            for token, reason in filtered:
+                filtered_tokens[token] += 1
+                filtered_reasons[reason] += 1
             token_occurrences.update(tokens)
             record_tokens.update(tokens)
             for size in (2, 3):
@@ -125,11 +191,30 @@ def mine_corpus(
         phrase_examples,
     )
     _write_description_examples(output_dir / "description_examples.csv", records)
+    candidate_count = 0
+    normalized_candidate_path: Path | None = None
+    if candidate_path is not None:
+        normalized_candidate_path = Path(candidate_path)
+        candidate_count = _write_candidates(
+            normalized_candidate_path,
+            top_tokens,
+            top_phrases,
+            token_documents,
+            phrase_documents,
+            min_count=candidate_min_count,
+        )
     return MiningSummary(
         record_count=len(records),
         token_count=len(top_tokens),
         phrase_count=len(top_phrases),
         output_dir=str(output_dir),
+        filtered_token_count=sum(filtered_tokens.values()),
+        filtered_tokens=tuple(sorted(filtered_tokens)),
+        filtered_reasons=dict(sorted(filtered_reasons.items())),
+        candidate_count=candidate_count,
+        candidate_path=(
+            str(normalized_candidate_path) if normalized_candidate_path else None
+        ),
     )
 
 
@@ -145,7 +230,7 @@ def _read_records(db_path: Path) -> list[dict[str, object]]:
         rows = connection.execute(
             """
             SELECT record_id, filename, fx_name, description, cat_id, category,
-                   subcategory, keywords, source_file
+                   subcategory, keywords, microphone, source_file
             FROM boomone_records
             ORDER BY record_id
             """
@@ -156,11 +241,35 @@ def _read_records(db_path: Path) -> list[dict[str, object]]:
 
 
 def _tokenize(text: str) -> list[str]:
-    return [
-        match.group(0).casefold()
-        for match in TOKEN_RE.finditer(text)
-        if match.group(0).casefold() not in STOP_WORDS
-    ]
+    tokens, _filtered = _partition_tokens(text)
+    return tokens
+
+
+def _partition_tokens(text: str) -> tuple[list[str], list[tuple[str, str]]]:
+    kept: list[str] = []
+    filtered: list[tuple[str, str]] = []
+    for match in TOKEN_RE.finditer(text):
+        token = match.group(0).casefold()
+        reason = _filter_reason(token)
+        if reason:
+            filtered.append((token, reason))
+        else:
+            kept.append(token)
+    return kept, filtered
+
+
+def _filter_reason(token: str) -> str | None:
+    if token.isdigit():
+        return "pure_numeric"
+    if token in FILE_EXTENSION_TOKENS:
+        return "file_extension"
+    if TAKE_INDEX_RE.fullmatch(token):
+        return "take_or_index"
+    if MIC_MODEL_RE.fullmatch(token):
+        return "microphone_model"
+    if token in STOP_WORDS:
+        return "stop_or_metadata"
+    return None
 
 
 def _rank_items(
@@ -246,6 +355,90 @@ def _write_description_examples(
         )
 
 
+def _write_candidates(
+    path: Path,
+    top_tokens: list[tuple[str, int]],
+    top_phrases: list[tuple[str, int]],
+    token_documents: Counter[str],
+    phrase_documents: Counter[str],
+    *,
+    min_count: int,
+) -> int:
+    """Write conservative review-only action candidates after an explicit request."""
+    if path.name != "canonical_token_candidates.csv":
+        raise ValueError(
+            "BOOM candidates may only be written to canonical_token_candidates.csv"
+        )
+
+    candidates: list[dict[str, str | int]] = []
+    for token, count in top_tokens:
+        if count < min_count or token not in ACTION_TERMS:
+            continue
+        candidates.append(
+            _candidate_row(
+                token,
+                count,
+                token_documents[token],
+                action=token,
+                is_phrase=False,
+            )
+        )
+    for phrase, count in top_phrases:
+        parts = phrase.split()
+        actions = [part for part in parts if part in ACTION_TERMS]
+        if (
+            count < min_count
+            or len(parts) not in {2, 3}
+            or len(actions) != 1
+            or parts[-1] != actions[0]
+        ):
+            continue
+        candidates.append(
+            _candidate_row(
+                phrase,
+                count,
+                phrase_documents[phrase],
+                action=actions[0],
+                is_phrase=True,
+            )
+        )
+
+    candidates.sort(key=lambda row: (str(row["raw"]).count(" "), str(row["raw"])))
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=CANONICAL_COLUMNS)
+        writer.writeheader()
+        writer.writerows(candidates)
+    return len(candidates)
+
+
+def _candidate_row(
+    raw: str,
+    count: int,
+    record_count: int,
+    *,
+    action: str,
+    is_phrase: bool,
+) -> dict[str, str | int]:
+    ambiguity = "high" if action in HIGH_AMBIGUITY_ACTIONS else "medium"
+    return {
+        "raw": raw,
+        "canonical": " ".join(word.capitalize() for word in raw.split()),
+        "slot": "action",
+        "lang": "en",
+        "priority": 0,
+        "rule_type": "phrase_low_confidence" if is_phrase else "ambiguous_single",
+        "review_status": "review",
+        "ambiguity": ambiguity,
+        "tags": "boom/action",
+        "source": "boom_mined",
+        "note": (
+            f"mined_count={count}; record_count={record_count}; "
+            "requires human review"
+        ),
+    }
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--db", type=Path, default=DEFAULT_DB)
@@ -253,6 +446,15 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--limit", type=int, default=500)
     parser.add_argument("--min-count", type=int, default=1)
     parser.add_argument("--examples", type=int, default=3)
+    parser.add_argument(
+        "--candidates",
+        type=Path,
+        help=(
+            "Explicitly write inert review rows; filename must be "
+            "canonical_token_candidates.csv"
+        ),
+    )
+    parser.add_argument("--candidate-min-count", type=int, default=2)
     args = parser.parse_args(argv)
     try:
         summary = mine_corpus(
@@ -261,12 +463,15 @@ def main(argv: Sequence[str] | None = None) -> int:
             limit=args.limit,
             min_count=args.min_count,
             examples_per_item=args.examples,
+            candidate_path=args.candidates,
+            candidate_min_count=args.candidate_min_count,
         )
     except (FileNotFoundError, ValueError, sqlite3.DatabaseError) as exc:
         parser.error(str(exc))
     print(
         f"records={summary.record_count} tokens={summary.token_count} "
-        f"phrases={summary.phrase_count} output={summary.output_dir}"
+        f"phrases={summary.phrase_count} filtered={summary.filtered_token_count} "
+        f"candidates={summary.candidate_count} output={summary.output_dir}"
     )
     return 0
 
