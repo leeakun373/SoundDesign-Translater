@@ -58,7 +58,7 @@ class FXNameNormalizer:
             if raw_token.kind == "distance":
                 tokens.append(self._distance_token(raw_token, prefs, metadata_candidates))
             elif raw_token.kind == "ascii":
-                tokens.append(self._resolve_ascii(raw_token))
+                tokens.append(self._resolve_ascii(raw_token, prefs))
             else:
                 tokens.extend(self._resolve_chinese(raw_token))
 
@@ -73,12 +73,15 @@ class FXNameNormalizer:
         issues: list[str] = []
         unknowns: list[str] = []
         for token in tokens:
-            if token.status != "ignored":
-                for issue in token.issues:
-                    label = f"{issue}:{token.raw}" if issue.startswith("unknown_") else issue
-                    if label not in issues:
-                        issues.append(label)
-            if token.status == "unknown":
+            for issue in token.issues:
+                label = (
+                    f"{issue}:{token.raw}"
+                    if issue.startswith("unknown_") or issue == "distance_excluded"
+                    else issue
+                )
+                if label not in issues:
+                    issues.append(label)
+            if any(issue.startswith("unknown_") for issue in token.issues):
                 unknowns.append(token.raw)
         if rejected_fragments:
             issues.append("unsafe_fragment_rejected")
@@ -111,12 +114,16 @@ class FXNameNormalizer:
                     "allow_distance_in_fxname": prefs.allow_distance_in_fxname,
                     "boom_can_reorder": prefs.boom_can_reorder,
                     "boom_suggestion_only": prefs.boom_suggestion_only,
+                    "strict_review": prefs.strict_review,
+                    "keep_unknown_ascii": prefs.keep_unknown_ascii,
                 },
                 "metadata_candidates": metadata_candidates,
                 "rejected_unsafe_fragments": rejected_fragments,
                 "unknown_zh": unknown_zh,
                 "unknown_ascii": unknown_ascii,
-                "unknown_policy": "review",
+                "unknown_policy": (
+                    "keep_raw_review" if prefs.keep_unknown_ascii else "review"
+                ),
                 "nllb_fallback_used": False,
                 "boom_index_used": boom.available,
                 "boom_phrase_hits": boom.phrase_hits,
@@ -124,7 +131,7 @@ class FXNameNormalizer:
                 "assembled_order": assembled.assembled_order,
                 "reorder_reason": assembled.reorder_reason,
                 "glossary_hits": sum(
-                    token.source in {"canonical_db", "canonical_override"}
+                    token.source in {"canonical_csv", "canonical_db"}
                     for token in tokens
                 ),
             },
@@ -154,18 +161,76 @@ class FXNameNormalizer:
             start = end
         return removed, rejected
 
-    def _resolve_ascii(self, raw_token: RawToken) -> FXToken:
+    def _resolve_ascii(self, raw_token: RawToken, prefs: FXPreferences) -> FXToken:
         personal = self.personal_dictionary.resolve_entry(raw_token.raw)
         if personal:
             return self._personal_token(raw_token.raw, personal)
         match = self.canonical_db.resolve_ascii(raw_token.raw)
+        if match.status == "unknown" and prefs.keep_unknown_ascii:
+            canonical = title_fx_text(raw_token.raw)
+            return FXToken(
+                raw=raw_token.raw,
+                text=canonical,
+                canonical=canonical,
+                slot="unknown",
+                source="preference_keep_raw",
+                confidence=0.25,
+                status="needs_review",
+                issues=["unknown_ascii"],
+            )
         return _match_to_token(match)
 
     def _resolve_chinese(self, raw_token: RawToken) -> list[FXToken]:
         personal = self.personal_dictionary.resolve_entry(raw_token.raw)
         if personal:
             return [self._personal_token(raw_token.raw, personal)]
-        return [_match_to_token(match) for match in self.canonical_db.segment_chinese(raw_token.raw)]
+
+        personal_entries = sorted(
+            (
+                entry
+                for entry in self.personal_dictionary.entries()
+                if entry.alias and any("\u4e00" <= char <= "\u9fff" for char in entry.alias)
+            ),
+            key=lambda entry: len(entry.alias),
+            reverse=True,
+        )
+        if not personal_entries:
+            return [
+                _match_to_token(match)
+                for match in self.canonical_db.segment_chinese(raw_token.raw)
+            ]
+
+        out: list[FXToken] = []
+        unmatched: list[str] = []
+
+        def flush_unmatched() -> None:
+            if not unmatched:
+                return
+            text = "".join(unmatched)
+            out.extend(
+                _match_to_token(match) for match in self.canonical_db.segment_chinese(text)
+            )
+            unmatched.clear()
+
+        position = 0
+        while position < len(raw_token.raw):
+            entry = next(
+                (
+                    candidate
+                    for candidate in personal_entries
+                    if raw_token.raw.startswith(candidate.alias, position)
+                ),
+                None,
+            )
+            if entry is None:
+                unmatched.append(raw_token.raw[position])
+                position += 1
+                continue
+            flush_unmatched()
+            out.append(self._personal_token(entry.alias, entry))
+            position += len(entry.alias)
+        flush_unmatched()
+        return out
 
     @staticmethod
     def _personal_token(raw: str, entry: PersonalEntry) -> FXToken:

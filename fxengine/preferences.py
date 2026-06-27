@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, fields
 from pathlib import Path
 
 
@@ -14,12 +14,32 @@ class FXPreferences:
     allow_distance_in_fxname: bool = True
     boom_can_reorder: bool = False
     boom_suggestion_only: bool = True
+    strict_review: bool = False
+    keep_unknown_ascii: bool = False
+
+
+BUILTIN_PROFILES = {
+    "Default": FXPreferences(),
+    "No Distance": FXPreferences(
+        name="No Distance",
+        allow_distance_in_fxname=False,
+    ),
+    "Strict Review": FXPreferences(
+        name="Strict Review",
+        strict_review=True,
+    ),
+    "Keep Raw Friendly": FXPreferences(
+        name="Keep Raw Friendly",
+        keep_unknown_ascii=True,
+    ),
+}
+BUILTIN_PROFILE_ORDER = tuple(BUILTIN_PROFILES)
 
 
 class PreferenceStore:
     def __init__(self, path: Path | None = None) -> None:
         self.path = path
-        self._profiles: dict[str, FXPreferences] = {"Default": FXPreferences()}
+        self._profiles: dict[str, FXPreferences] = dict(BUILTIN_PROFILES)
         if path and path.is_file():
             self.load()
 
@@ -31,15 +51,22 @@ class PreferenceStore:
         self.save()
 
     def names(self) -> list[str]:
-        return sorted(self._profiles)
+        custom = sorted(name for name in self._profiles if name not in BUILTIN_PROFILES)
+        return [*BUILTIN_PROFILE_ORDER, *custom]
 
     def load(self) -> None:
         if not self.path or not self.path.is_file():
             return
         data = json.loads(self.path.read_text(encoding="utf-8"))
         profiles = data.get("profiles", {}) if isinstance(data, dict) else {}
+        allowed = {field.name for field in fields(FXPreferences)} - {"name"}
         for name, values in profiles.items():
-            self._profiles[name] = FXPreferences(name=name, **{k: v for k, v in values.items() if k != "name"})
+            if not isinstance(values, dict):
+                continue
+            self._profiles[name] = FXPreferences(
+                name=name,
+                **{key: value for key, value in values.items() if key in allowed},
+            )
 
     def save(self) -> None:
         if not self.path:

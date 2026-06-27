@@ -20,8 +20,6 @@ APP_DATA_DIR = Path.home() / ".sounddesign_translater"
 class FXNameEngineApp:
     """Readable inspection surface for Normalize, review, and scaffold outputs."""
 
-    PRESET_NO_DISTANCE = "No Distance"
-
     def __init__(self, root: tk.Tk, data_dir: Path = APP_DATA_DIR) -> None:
         self.root = root
         self.personal_dictionary = PersonalDictionary(data_dir / "personal_dictionary.json")
@@ -59,9 +57,7 @@ class FXNameEngineApp:
             row=0, column=1, sticky="w", padx=(8, 18)
         )
         ttk.Label(controls, text="Preference Preset").grid(row=0, column=2, sticky="w")
-        presets = list(self.preference_store.names())
-        if self.PRESET_NO_DISTANCE not in presets:
-            presets.append(self.PRESET_NO_DISTANCE)
+        presets = self.preference_store.names()
         preset_box = ttk.Combobox(
             controls,
             textvariable=self.preset_var,
@@ -77,7 +73,10 @@ class FXNameEngineApp:
             variable=self.allow_distance_var,
         ).grid(row=0, column=4, sticky="w")
         ttk.Button(controls, text="Normalize", command=self.normalize).grid(
-            row=0, column=6, sticky="e"
+            row=0, column=6, sticky="e", padx=(0, 6)
+        )
+        ttk.Button(controls, text="Reload / Re-normalize", command=self.reload).grid(
+            row=0, column=7, sticky="e"
         )
 
         ttk.Label(main, text="Input").grid(row=1, column=0, sticky="w")
@@ -98,14 +97,24 @@ class FXNameEngineApp:
         review.grid(row=5, column=0, sticky="nsew", pady=(4, 10))
         review.columnconfigure(0, weight=1)
         review.rowconfigure(0, weight=1)
-        columns = ("raw", "canonical", "slot", "status", "source")
+        columns = (
+            "raw",
+            "canonical",
+            "slot",
+            "status",
+            "confidence",
+            "issues",
+            "source",
+        )
         self.token_tree = ttk.Treeview(review, columns=columns, show="headings", height=8)
         for column, heading, width in (
             ("raw", "Raw", 130),
             ("canonical", "Canonical", 180),
             ("slot", "Slot", 90),
             ("status", "Status", 110),
-            ("source", "Source", 150),
+            ("confidence", "Confidence", 90),
+            ("issues", "Issues", 160),
+            ("source", "Source", 135),
         ):
             self.token_tree.heading(column, text=heading)
             self.token_tree.column(column, width=width, anchor="w")
@@ -113,6 +122,8 @@ class FXNameEngineApp:
         scrollbar = ttk.Scrollbar(review, orient="vertical", command=self.token_tree.yview)
         scrollbar.grid(row=0, column=1, sticky="ns")
         self.token_tree.configure(yscrollcommand=scrollbar.set)
+        self.token_tree.tag_configure("unknown", foreground="#b00020")
+        self.token_tree.tag_configure("needs_review", foreground="#9a6700")
 
         actions = ttk.Frame(review)
         actions.grid(row=1, column=0, sticky="w", pady=(6, 0))
@@ -123,6 +134,11 @@ class FXNameEngineApp:
             side="left", padx=(0, 6)
         )
         ttk.Button(actions, text="Ignore", command=self._ignore_selected).pack(side="left")
+        ttk.Button(
+            actions,
+            text="Remove Selected Alias",
+            command=self._remove_selected_alias,
+        ).pack(side="left", padx=(6, 0))
 
         lower = ttk.Frame(main)
         lower.grid(row=6, column=0, sticky="nsew")
@@ -144,14 +160,7 @@ class FXNameEngineApp:
         return text
 
     def _selected_preferences(self) -> FXPreferences:
-        preset_name = self.preset_var.get()
-        if preset_name == self.PRESET_NO_DISTANCE:
-            profile = FXPreferences(
-                name=self.PRESET_NO_DISTANCE,
-                allow_distance_in_fxname=False,
-            )
-        else:
-            profile = self.preference_store.get(preset_name)
+        profile = self.preference_store.get(self.preset_var.get())
         return replace(
             profile,
             allow_distance_in_fxname=self.allow_distance_var.get(),
@@ -179,16 +188,29 @@ class FXNameEngineApp:
             suggestions = ["No suggestion/reference returned"]
         self._set_text(self.description_text, description)
         self._set_text(self.references_text, "\n".join(suggestions))
-        self._set_text(self.issues_text, "\n".join(result.issues) or "None")
+        self._set_text(
+            self.issues_text,
+            "\n".join(self._display_issue(issue) for issue in result.issues) or "None",
+        )
 
     def _show_tokens(self, tokens) -> None:
         for item in self.token_tree.get_children():
             self.token_tree.delete(item)
         for token in tokens:
+            tag = token.status if token.status in {"unknown", "needs_review"} else ""
             self.token_tree.insert(
                 "",
                 "end",
-                values=(token.raw, token.text, token.slot, token.status, token.source),
+                values=(
+                    token.raw,
+                    token.text,
+                    token.slot,
+                    token.status,
+                    f"{token.confidence:.2f}",
+                    ", ".join(token.issues),
+                    token.source,
+                ),
+                tags=(tag,) if tag else (),
             )
 
     def _selected_raw(self) -> str | None:
@@ -204,7 +226,10 @@ class FXNameEngineApp:
         if not raw:
             return
         canonical = simpledialog.askstring(
-            "Map token", f"Canonical FXName token(s) for {raw!r}:", parent=self.root
+            "Map token",
+            f"Canonical FXName token(s) for {raw!r}:",
+            initialvalue="",
+            parent=self.root,
         )
         if canonical and canonical.strip():
             self.personal_dictionary.add_alias(raw, canonical)
@@ -222,9 +247,27 @@ class FXNameEngineApp:
             self.personal_dictionary.ignore(raw)
             self.normalize()
 
+    def _remove_selected_alias(self) -> None:
+        raw = self._selected_raw()
+        if not raw:
+            return
+        if self.personal_dictionary.remove_alias(raw):
+            self.normalize()
+        else:
+            messagebox.showinfo("Token Review", f"No personal alias saved for {raw!r}.")
+
+    def reload(self) -> None:
+        self.personal_dictionary.load()
+        self.normalizer = FXNameNormalizer(
+            personal_dictionary=self.personal_dictionary,
+        )
+        self.normalize()
+
     def _on_preset_changed(self, _event=None) -> None:
-        no_distance = self.preset_var.get() == self.PRESET_NO_DISTANCE
-        self.allow_distance_var.set(not no_distance)
+        profile = self.preference_store.get(self.preset_var.get())
+        self.allow_distance_var.set(profile.allow_distance_in_fxname)
+        if self.input_text.get("1.0", "end").strip():
+            self.normalize()
 
     def _copy_fxname(self) -> None:
         self._copy(self.output_var.get())
@@ -242,6 +285,13 @@ class FXNameEngineApp:
         widget.delete("1.0", "end")
         widget.insert("1.0", value)
         widget.configure(state="disabled")
+
+    @staticmethod
+    def _display_issue(issue: str) -> str:
+        if ":" not in issue:
+            return issue
+        name, value = issue.split(":", 1)
+        return f"{name}: {value.strip()}"
 
 
 def main() -> None:

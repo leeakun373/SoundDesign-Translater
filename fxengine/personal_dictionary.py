@@ -39,6 +39,16 @@ class PersonalDictionary:
         self.save()
         return entry
 
+    def remove_alias(self, alias: str) -> bool:
+        removed = self._entries.pop(_key(alias), None)
+        if removed is None:
+            return False
+        self.save()
+        return True
+
+    def entries(self) -> list[PersonalEntry]:
+        return sorted(self._entries.values(), key=lambda entry: entry.alias.casefold())
+
     def resolve_entry(self, alias: str) -> PersonalEntry | None:
         return self._entries.get(_key(alias))
 
@@ -47,11 +57,11 @@ class PersonalDictionary:
         return entry.canonical if entry and entry.action != "ignore" else None
 
     def load(self) -> None:
+        self._entries = {}
         if not self.path or not self.path.is_file():
             return
         data = json.loads(self.path.read_text(encoding="utf-8"))
         entries = data.get("entries", {}) if isinstance(data, dict) else {}
-        self._entries = {}
         for key, value in entries.items():
             if isinstance(value, str):
                 entry = PersonalEntry(key, value, "map")

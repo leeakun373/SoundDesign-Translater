@@ -213,4 +213,6 @@ def _title_word(word: str) -> str:
     upper_words = {"fx", "sfx", "ucs", "bb", "ds"}
     if word.lower() in upper_words:
         return word.upper()
+    if word.isupper() and any(char.isdigit() for char in word):
+        return word
     return word[:1].upper() + word[1:].lower()

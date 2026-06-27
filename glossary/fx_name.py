@@ -344,4 +344,6 @@ def _title_fx_word(word: str) -> str:
     upper_words = {"FX", "SFX", "UCS"}
     if word.upper() in upper_words:
         return word.upper()
+    if word.isupper() and any(char.isdigit() for char in word):
+        return word
     return word[:1].upper() + word[1:].lower()
