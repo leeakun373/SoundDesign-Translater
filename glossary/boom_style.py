@@ -18,6 +18,11 @@ class BoomStyleResult:
     boom_phrase_hits: list[str] = field(default_factory=list)
     selected_terms: list[str] = field(default_factory=list)
 
+    @property
+    def phrase_hits(self) -> list[str]:
+        """Backward-compatible alias for callers using the shorter field name."""
+        return self.boom_phrase_hits
+
 
 class BoomStyleIndex:
     def __init__(self, db_path: Path | None = None) -> None:

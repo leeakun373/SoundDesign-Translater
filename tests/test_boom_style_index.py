@@ -45,6 +45,8 @@ def main() -> int:
             failures.append(f"expected Wolf Howl Rocket, got {styled.text!r}")
         if "Wolf Howl" not in styled.boom_phrase_hits:
             failures.append(f"expected Wolf Howl phrase hit, got {styled.boom_phrase_hits}")
+        if styled.phrase_hits != styled.boom_phrase_hits:
+            failures.append("phrase_hits alias did not return boom_phrase_hits")
 
         missing = BoomStyleIndex(Path(tmp) / "missing.sqlite").style_fx_name(
             "Howl Wolf Rocket"
@@ -75,6 +77,17 @@ def main() -> int:
         return 1
     print("Boom style index PASS")
     return 0
+
+
+def test_phrase_hits_alias() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        index_path = Path(tmp) / "boom.sqlite"
+        _write_test_index(index_path)
+        result = BoomStyleIndex(index_path).style_fx_name("Howl Wolf Rocket")
+
+        assert result.boom_index_used is True
+        assert result.boom_phrase_hits
+        assert result.phrase_hits == result.boom_phrase_hits
 
 
 def _write_test_index(path: Path) -> None:

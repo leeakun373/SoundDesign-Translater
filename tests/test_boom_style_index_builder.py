@@ -159,12 +159,14 @@ def test_review_token_is_not_filtered():
     assert quality["decision"] == "review"
     assert "low_vowel_ratio" in quality["reasons"]
     assert not _is_noise_token("BRRRT")
+    assert _extract_clean_tokens("BRRRT Impact") == ["impact"]
 
 
 def test_phrase_quality_review_and_filter():
     review = classify_phrase_quality("brrrt impact")
     assert review["decision"] == "review"
     assert "low_vowel_ratio" in review["reasons"]
+    assert not _is_clean_phrase("brrrt impact")
 
     filtered = classify_phrase_quality("mono sanken co100k")
     assert filtered["decision"] == "filter"
@@ -239,6 +241,110 @@ def test_review_items_written_to_noise_report():
         assert "brrrt" in noise_md.read_text(encoding="utf-8")
         assert report_csv.is_file()
         assert coverage_md.is_file()
+
+        conn = sqlite3.connect(db_path)
+        try:
+            assert not conn.execute(
+                "SELECT 1 FROM tokens WHERE token = 'brrrt'"
+            ).fetchone()
+            assert not conn.execute(
+                "SELECT 1 FROM phrases WHERE phrase LIKE '%brrrt%'"
+            ).fetchone()
+            assert conn.execute(
+                "SELECT 1 FROM noise_review_items WHERE item_type = 'token' AND item = 'brrrt'"
+            ).fetchone()
+        finally:
+            conn.close()
+
+
+def test_code_review_items_are_isolated_from_scorer_tables():
+    review_tokens = {
+        "cack",
+        "cfck",
+        "crwdbatl",
+        "ww2fc",
+        "mbck",
+        "ctck",
+        "guncano",
+        "gunmech",
+        "objcont",
+        "metlimpt",
+        "vehmech",
+        "metlfric",
+        "toolpowr",
+    }
+    style_tokens = {
+        "metal",
+        "wood",
+        "impact",
+        "whoosh",
+        "movement",
+        "car",
+        "gun",
+        "shot",
+        "magic",
+        "war",
+    }
+
+    with tempfile.TemporaryDirectory() as tmp:
+        db_path = Path(tmp) / "boom.sqlite"
+        conn = sqlite3.connect(db_path)
+        try:
+            create_schema(conn)
+            conn.execute(
+                """
+                INSERT INTO fx_records (
+                    source_file, sheet_name, row_number, filename, fx_name,
+                    description, category, subcategory, cat_id, keywords,
+                    library, microphone, raw_json
+                ) VALUES (?, 'Sheet1', 2, ?, ?, '', '', '', ?, ?, '', '', '{}')
+                """,
+                (
+                    "fixture.xlsx",
+                    "_".join(sorted(review_tokens)) + ".wav",
+                    "Metal Wood Impact Whoosh Movement Car Gun Shot Magic War",
+                    "GUNCano",
+                    " ".join(sorted(review_tokens)),
+                ),
+            )
+            rebuild_derived_tables(conn)
+
+            indexed_tokens = {row[0] for row in conn.execute("SELECT token FROM tokens")}
+            indexed_phrases = {row[0] for row in conn.execute("SELECT phrase FROM phrases")}
+            review_items = {
+                row[0]
+                for row in conn.execute(
+                    "SELECT item FROM noise_review_items WHERE item_type = 'token'"
+                )
+            }
+        finally:
+            conn.close()
+
+        assert review_tokens.isdisjoint(indexed_tokens)
+        assert review_tokens <= review_items
+        assert all(
+            review_tokens.isdisjoint(phrase.split()) for phrase in indexed_phrases
+        )
+        assert style_tokens <= indexed_tokens
+        assert "magic war" in indexed_phrases
+
+
+def test_code_quality_reasons_and_valid_style_tokens():
+    expected_reasons = {
+        "CACK": "pack_code_like",
+        "CWB": "pack_code_like",
+        "GUNCano": "code_prefix_like",
+        "GUNMech": "code_prefix_like",
+        "METLImpt": "code_prefix_like",
+        "WHSH": "low_vowel_ratio",
+    }
+    for token, reason in expected_reasons.items():
+        quality = classify_token_quality(token)
+        assert quality["decision"] == "review", (token, quality)
+        assert reason in quality["reasons"], (token, quality)
+
+    for token in ("metal", "wood", "impact", "whoosh", "movement", "car", "gun", "shot", "magic", "war"):
+        assert classify_token_quality(token)["decision"] == "keep", token
 
 
 def test_schema_compatible_with_boom_style_reader():
