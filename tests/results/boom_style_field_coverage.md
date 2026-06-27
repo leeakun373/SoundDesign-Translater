@@ -1,6 +1,6 @@
 # BOOM Style Field Coverage
 
-- generated_at: 2026-06-27 16:18:33
+- generated_at: 2026-06-27 17:23:11
 - fx_records: 81302
 
 ## Record field hit rate

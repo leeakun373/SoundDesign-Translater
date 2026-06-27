@@ -142,11 +142,15 @@ def main() -> int:
         failures.append(f"engine should not need fallback for full coverage: {direct.debug}")
 
     hybrid = translator.translate_fxname("木门 神秘滑开")
-    if not hybrid.debug.get("hybrid_fallback"):
-        failures.append(f"engine should use fallback with unknown zh: {hybrid.debug}")
-    for token in ("wood", "door", "slide", "mystery"):
+    if hybrid.debug.get("hybrid_fallback"):
+        failures.append(f"normalize mode should not generate unknown zh: {hybrid.debug}")
+    for token in ("wood", "door", "slide"):
         if token not in hybrid.text.lower():
             failures.append(f"engine hybrid missed {token}: {hybrid.text!r}")
+    if "mystery" in hybrid.text.lower():
+        failures.append(f"unknown zh should not use NLLB generation: {hybrid.text!r}")
+    if "unknown_zh" not in hybrid.debug.get("issues", []):
+        failures.append(f"unknown zh should require review: {hybrid.debug}")
 
     if failures:
         print("FX matrix failures:")

@@ -17,6 +17,12 @@ class BoomStyleResult:
     boom_index_used: bool
     boom_phrase_hits: list[str] = field(default_factory=list)
     selected_terms: list[str] = field(default_factory=list)
+    suggested_text: str | None = None
+
+    @property
+    def phrase_hits(self) -> list[str]:
+        """Backward-compatible alias for callers using the shorter field name."""
+        return self.boom_phrase_hits
 
 
 class BoomStyleIndex:
@@ -24,7 +30,7 @@ class BoomStyleIndex:
         self.db_path = db_path or DEFAULT_BOOM_INDEX
         self.available = self.db_path.is_file()
 
-    def style_fx_name(self, text: str, preserve_order: bool = False) -> BoomStyleResult:
+    def style_fx_name(self, text: str, preserve_order: bool = True) -> BoomStyleResult:
         terms = _extract_terms(text)
         if not terms:
             return BoomStyleResult("", self.available)
@@ -33,7 +39,16 @@ class BoomStyleIndex:
 
         phrase_hits = self._phrase_hits(terms)
         if preserve_order:
-            return BoomStyleResult(" ".join(terms), True, phrase_hits, terms)
+            best_terms = self._best_order(terms)
+            best_hits = self._phrase_hits(best_terms)
+            suggested_text = " ".join(best_terms) if best_terms != terms else None
+            return BoomStyleResult(
+                " ".join(terms),
+                True,
+                phrase_hits or best_hits,
+                terms,
+                suggested_text,
+            )
         best_terms = self._best_order(terms)
         best_hits = self._phrase_hits(best_terms)
         hits = best_hits or phrase_hits

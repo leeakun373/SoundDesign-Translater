@@ -155,7 +155,9 @@ def split_slot_terms(
     return terms
 
 
-def assemble_fx_name(terms: list[SlotTerm]) -> AssemblyResult:
+def assemble_fx_name(
+    terms: list[SlotTerm], preserve_order: bool = True
+) -> AssemblyResult:
     term_groups: list[list[SlotTerm]] = []
     grouped: dict[int, list[SlotTerm]] = {}
     for term in terms:
@@ -174,14 +176,17 @@ def assemble_fx_name(terms: list[SlotTerm]) -> AssemblyResult:
         deduped_groups.append(group)
         seen_groups.add(key)
 
-    ordered_groups = sorted(
-        enumerate(deduped_groups),
-        key=lambda item: (_group_rank(item[1]), item[0]),
-    )
+    if preserve_order:
+        ordered_groups = list(enumerate(deduped_groups))
+    else:
+        ordered_groups = sorted(
+            enumerate(deduped_groups),
+            key=lambda item: (_group_rank(item[1]), item[0]),
+        )
     ordered_terms = [term for _idx, group in ordered_groups for term in group]
     original = [term.token for group in deduped_groups for term in group]
     assembled = [term.token for term in ordered_terms]
-    reason = "slot_order" if assembled != original else "preserved"
+    reason = "slot_order" if not preserve_order and assembled != original else "preserved"
     return AssemblyResult(
         text=" ".join(assembled),
         slots=[

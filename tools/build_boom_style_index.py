@@ -181,18 +181,23 @@ NOISE_TOKENS = STOPWORD_TOKENS | TECHNICAL_TOKENS | LIBRARY_ABBREVIATION_TOKENS
 
 EXPLICIT_STYLE_TOKENS = {
     "animal",
+    "car",
     "click",
     "debris",
     "door",
     "glass",
+    "gun",
     "impact",
+    "magic",
     "metal",
     "movement",
     "noise",
     "room",
     "scrape",
+    "shot",
     "tone",
     "water",
+    "war",
     "white",
     "whoosh",
     "wood",
@@ -232,6 +237,23 @@ THREE_DS_RE = re.compile(r"^3ds\d{2}$", re.IGNORECASE)
 CATEGORY_CODE_RE = re.compile(r"^[a-z]{2,6}\d{1,4}[a-z]?$", re.IGNORECASE)
 NUMERIC_CODE_RE = re.compile(r"^[a-z]*\d[\da-z+\-]*$", re.IGNORECASE)
 PACK_SUFFIX_CODE_RE = re.compile(r"^[a-z]{2,6}(ck|ds)$", re.IGNORECASE)
+
+# Short library identifiers that cannot be distinguished safely by shape alone.
+# They are review items, not hard-filtered noise.
+PACK_CODE_TOKENS = frozenset({"cwb", "mui"})
+
+# Common compact CatID fragments embedded in BOOM filenames, e.g. GUNCano,
+# METLImpt, OBJCont, MACHAppl. Matching both halves avoids classifying normal
+# words such as "gunfire" or "vehicle" as codes.
+CODE_PREFIX_SUFFIXES: dict[str, frozenset[str]] = {
+    "feet": frozenset({"hmn"}),
+    "gun": frozenset({"auto", "cano", "mech", "pis", "rif", "shotg"}),
+    "mach": frozenset({"appl"}),
+    "metl": frozenset({"fric", "impt", "mvmt", "tonl"}),
+    "obj": frozenset({"coin", "cont", "hsehld", "key", "misc", "tape"}),
+    "tool": frozenset({"powr"}),
+    "veh": frozenset({"mech", "moto", "race"}),
+}
 
 TECHNICAL_PHRASES = frozenset(
     {
@@ -1239,12 +1261,12 @@ def _accumulate_quality_stats(
 
             if quality["decision"] == "filter":
                 _bump_filtered_token(stats, token, style_weight, field_name, quality["reasons"])
+            elif quality["decision"] == "review":
+                _bump_review_token(stats, token, style_weight, field_name, quality["reasons"])
             else:
                 stats.clean_token_counts[token] += style_weight
                 if field_name == "filename":
                     stats.clean_filename_token_counts[token] += style_weight
-                if quality["decision"] == "review":
-                    _bump_review_token(stats, token, style_weight, field_name, quality["reasons"])
 
         for phrase in _extract_phrases(raw_tokens):
             quality = classify_phrase_quality(phrase, phrase_distributions.get(phrase))
@@ -1255,12 +1277,12 @@ def _accumulate_quality_stats(
 
             if quality["decision"] == "filter":
                 _bump_filtered_phrase(stats, phrase, style_weight, field_name, quality["reasons"])
+            elif quality["decision"] == "review":
+                _bump_review_phrase(stats, phrase, style_weight, field_name, quality["reasons"])
             else:
                 stats.clean_phrase_counts[phrase] += style_weight
                 if field_name == "filename":
                     stats.clean_filename_phrase_counts[phrase] += style_weight
-                if quality["decision"] == "review":
-                    _bump_review_phrase(stats, phrase, style_weight, field_name, quality["reasons"])
 
 
 def _bump_field_stats(
@@ -1695,11 +1717,11 @@ def _extract_phrases(tokens: list[str]) -> Iterable[str]:
 
 
 def _is_clean_phrase(phrase: str) -> bool:
-    return classify_phrase_quality(phrase)["decision"] != "filter"
+    return classify_phrase_quality(phrase)["decision"] == "keep"
 
 
 def _is_style_token(token: str) -> bool:
-    return classify_token_quality(token)["decision"] != "filter"
+    return classify_token_quality(token)["decision"] == "keep"
 
 
 def _is_basic_noise_token(token: str) -> bool:
@@ -1732,12 +1754,19 @@ def classify_token_quality(
         and normalized not in COMMON_SUFFIX_WORDS
         and vowel_ratio <= 0.25
     )
-    low_vowel_ratio = len(normalized) >= 5 and vowel_ratio <= 0.15
+    short_field_pack_code = _is_short_field_pack_code(normalized, distribution)
+    pack_code_like = (
+        normalized in PACK_CODE_TOKENS or pack_suffix_like or short_field_pack_code
+    )
+    code_prefix_like = _is_code_prefix_token(normalized)
+    catid_like = catid_like or bool(distribution.get("cat_id") and code_prefix_like)
+    low_vowel_ratio = len(normalized) >= 4 and vowel_ratio <= 0.15
     id_like = (
         catid_like
         or numeric_code
         or library_code_like
-        or pack_suffix_like
+        or pack_code_like
+        or code_prefix_like
         or (uppercase_like and len(normalized) <= 6)
     )
 
@@ -1770,9 +1799,12 @@ def classify_token_quality(
     elif numeric_code:
         decision = "review"
         reasons.extend(["numeric_code", "id_like"])
-    elif pack_suffix_like:
+    elif pack_code_like:
         decision = "review"
-        reasons.append("id_like")
+        reasons.extend(["pack_code_like", "id_like"])
+    elif code_prefix_like:
+        decision = "review"
+        reasons.extend(["code_prefix_like", "id_like"])
     elif len(normalized) == 2 and normalized.isalpha() and vowel_ratio == 0:
         decision = "review"
         reasons.append("id_like")
@@ -1799,6 +1831,8 @@ def classify_token_quality(
         "has_digit": has_digit,
         "uppercase_like": uppercase_like,
         "catid_like": catid_like,
+        "pack_code_like": pack_code_like,
+        "code_prefix_like": code_prefix_like,
         "technical_like": technical_like,
         "field_distribution": distribution,
     }
@@ -1874,6 +1908,27 @@ def _is_library_code_token(token: str) -> bool:
     ratio = vowels / len(lower)
     if ratio <= 0.30 and lower.startswith(LIBRARY_CODE_PREFIXES):
         return True
+    return False
+
+
+def _is_short_field_pack_code(token: str, field_distribution: dict[str, int]) -> bool:
+    if not token.isalpha() or not 2 <= len(token) <= 4:
+        return False
+    return bool(
+        field_distribution.get("filename")
+        and field_distribution.get("keywords")
+        and not any(
+            field_distribution.get(field_name)
+            for field_name in ("fx_name", "description", "category", "subcategory")
+        )
+    )
+
+
+def _is_code_prefix_token(token: str) -> bool:
+    lower = token.lower()
+    for prefix, suffixes in CODE_PREFIX_SUFFIXES.items():
+        if lower.startswith(prefix) and lower[len(prefix) :] in suffixes:
+            return True
     return False
 
 
@@ -2016,13 +2071,13 @@ def write_reports(
         _write_field_coverage_report(conn, field_coverage_md, summary)
 
     md_lines = [
-        "# BOOM FXName Style Corpus 0.2 Full Import Report",
+        "# BOOM FXName Style Corpus 0.2.1 Full Import Report",
         "",
         f"- generated_at: {_now()}",
         f"- database: `{db_path.as_posix()}`",
         f"- selected_files_this_run: **{len(selected_files)}**",
         "- weighting: fx_name x3, filename x2, description/keywords/category/subcategory x1",
-        "- review policy: explicit noise is filtered; uncertain abbreviations/codes are review items",
+        "- review policy: explicit noise is filtered; review items are excluded from scorer tables",
         "",
         "## Summary",
         "",
@@ -2304,7 +2359,7 @@ def _write_noise_review_report(conn: sqlite3.Connection, path: Path) -> None:
         "# BOOM Style Noise Review",
         "",
         f"- generated_at: {_now()}",
-        "- policy: review items are not added to manual noise rules automatically",
+        "- policy: review items are excluded from scorer tables and not added to manual noise rules automatically",
         "",
         "## Top review tokens",
         "",

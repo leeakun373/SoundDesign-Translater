@@ -66,7 +66,7 @@ class TranslateApp:
 
     TASK_HINTS = {
 
-        TaskMode.FXNAME: "音效命名：适合声音素材名、FXName、Soundminer/UCS 命名；会过滤口语化 NLLB 输出。",
+        TaskMode.FXNAME: "FXName Normalize：保留输入顺序，中文查 canonical token，英文 Title Case；unknown 进入 review，BOOM 仅提供建议。",
 
         TaskMode.GENERAL: "普通翻译：适合句子、说明文本；保留术语分段 + NLLB 句子逻辑。",
 
