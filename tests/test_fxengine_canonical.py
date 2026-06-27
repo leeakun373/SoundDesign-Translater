@@ -8,7 +8,13 @@ from dataclasses import replace
 from pathlib import Path
 
 from fxengine.canonical_db import CANONICAL_SLOTS, CanonicalDB
-from fxengine.models import BoomScoreResult, FXToken
+from fxengine.models import (
+    TOKEN_DECISIONS,
+    TOKEN_REVIEW_SCHEMA_VERSION,
+    TOKEN_SOURCES,
+    BoomScoreResult,
+    FXToken,
+)
 from fxengine.normalizer import FXNameNormalizer
 from fxengine.personal_dictionary import PersonalDictionary
 from fxengine.preferences import PreferenceStore
@@ -70,12 +76,14 @@ def test_personal_dictionary_precedes_canonical_csv_inside_chinese_run(
     result = _normalizer(dictionary).normalize("金属门撞击")
 
     assert result.output_fxname == "Steel Alloy Door Impact"
-    assert result.tokens[0].source == "personal_map"
+    assert result.tokens[0].source == "personal_dictionary"
+    assert result.tokens[0].decision == "mapped_personal"
 
     dictionary.add_alias("木桌", "Hero Table")
     fallback_override = _normalizer(dictionary).normalize("木桌撞击")
     assert fallback_override.output_fxname == "Hero Table Impact"
-    assert fallback_override.tokens[0].source == "personal_map"
+    assert fallback_override.tokens[0].source == "personal_dictionary"
+    assert fallback_override.tokens[0].decision == "mapped_personal"
 
 
 def test_personal_alias_can_be_removed_and_reloaded(tmp_path: Path) -> None:
@@ -85,17 +93,23 @@ def test_personal_alias_can_be_removed_and_reloaded(tmp_path: Path) -> None:
     before = normalizer.normalize("kuang")
     assert before.output_fxname == ""
     assert before.quality == "needs_review"
+    assert before.tokens[0].decision == "unknown"
+    assert before.tokens[0].source == "unknown_review"
 
     dictionary.add_alias("kuang", "Metal Impact")
     mapped = normalizer.normalize("kuang")
     assert mapped.output_fxname == "Metal Impact"
-    assert mapped.tokens[0].source == "personal_map"
+    assert mapped.tokens[0].source == "personal_dictionary"
+    assert mapped.tokens[0].decision == "mapped_personal"
+    assert mapped.tokens[0].contributes_to_fxname is True
 
     assert dictionary.remove_alias("kuang") is True
     assert dictionary.remove_alias("kuang") is False
     after = normalizer.normalize("kuang")
     assert after.output_fxname == ""
     assert after.quality == "needs_review"
+    assert after.tokens[0].decision == "unknown"
+    assert after.tokens[0].source == "unknown_review"
 
     reloaded = PersonalDictionary(path)
     assert reloaded.resolve_entry("kuang") is None
@@ -163,13 +177,14 @@ def test_keep_raw_rules_distinguish_fx_onomatopoeia_and_technical_tokens() -> No
 
 def test_personal_dictionary_can_explicitly_map_technical_token(tmp_path: Path) -> None:
     dictionary = PersonalDictionary(tmp_path / "personal.json")
-    dictionary.add_alias("CO100K", "Recorder")
+    dictionary.add_alias("CO100K", "Super High Frequency Mic Test")
 
     result = _normalizer(dictionary).normalize("CO100K impact")
 
-    assert result.output_fxname == "Recorder Impact"
+    assert result.output_fxname == "Super High Frequency Mic Test Impact"
     assert result.debug["metadata_candidates"] == []
-    assert result.tokens[0].source == "personal_map"
+    assert result.tokens[0].source == "personal_dictionary"
+    assert result.tokens[0].decision == "mapped_personal"
 
 
 def test_boom_suggestion_cannot_replace_manual_case_final() -> None:
@@ -217,19 +232,53 @@ def test_issue_display_format_is_readable() -> None:
 
 
 def test_token_review_status_labels_show_mapping_source() -> None:
-    def token(source: str, status: str = "ok") -> FXToken:
-        return FXToken("raw", "Text", "Text", "action", source, 1.0, status, [])
+    def token(decision: str, source: str, status: str = "ok") -> FXToken:
+        return FXToken(
+            "raw",
+            "Text",
+            "Text",
+            "action",
+            source,
+            1.0,
+            status,
+            [],
+            decision,
+        )
 
-    assert FXNameEngineApp._review_status(token("canonical_csv")) == "mapped: canonical CSV"
-    assert FXNameEngineApp._review_status(token("canonical_db")) == "mapped: glossary fallback"
-    assert FXNameEngineApp._review_status(token("personal_map")) == (
-        "mapped: personal dictionary"
-    )
-    assert FXNameEngineApp._review_status(token("preference_keep_raw", "needs_review")) == (
-        "kept raw"
-    )
-    assert FXNameEngineApp._review_status(token("technical_metadata", "ignored")) == "ignored"
-    assert FXNameEngineApp._review_status(token("ascii", "unknown")) == "unknown"
+    expected = {
+        "mapped_personal": "personal_dictionary",
+        "mapped_canonical": "canonical_csv",
+        "mapped_glossary": "glossary_fallback",
+        "kept_raw": "keep_raw_rule",
+        "unknown": "unknown_review",
+        "ignored_pollution": "pollution_filter",
+        "metadata_candidate": "technical_token_rule",
+    }
+    for decision, source in expected.items():
+        review_token = token(decision, source)
+        assert FXNameEngineApp._review_status(review_token) == decision
+        assert review_token.source == source
+
+
+def test_review_tokens_have_structured_decisions_and_final_contribution() -> None:
+    result = _normalizer().normalize("金属 kuang CO100K oh my god 5m")
+    by_raw = {token.raw: token for token in result.tokens}
+
+    assert result.debug["token_review_schema_version"] == TOKEN_REVIEW_SCHEMA_VERSION
+    assert by_raw["金属"].decision == "mapped_canonical"
+    assert by_raw["金属"].source == "canonical_csv"
+    assert by_raw["金属"].contributes_to_fxname is True
+    assert by_raw["kuang"].decision == "unknown"
+    assert by_raw["kuang"].source == "unknown_review"
+    assert by_raw["kuang"].contributes_to_fxname is False
+    assert by_raw["CO100K"].decision == "metadata_candidate"
+    assert by_raw["CO100K"].source == "technical_token_rule"
+    assert by_raw["CO100K"].metadata_candidate is True
+    assert by_raw["oh"].decision == "ignored_pollution"
+    assert by_raw["oh"].source == "pollution_filter"
+    assert by_raw["5m"].decision == "kept_raw"
+    assert by_raw["5m"].source == "distance_rule"
+    assert by_raw["5m"].contributes_to_fxname is True
 
 
 def test_manual_fxname_cases() -> None:
@@ -253,6 +302,9 @@ def test_manual_fxname_cases() -> None:
         "preset",
         "pollution_fragments",
         "note",
+        "expected_decisions",
+        "expected_sources",
+        "expected_contributions",
     ]
     assert len(rows) >= 150
     failures: list[str] = []
@@ -267,17 +319,47 @@ def test_manual_fxname_cases() -> None:
         expected_unknown = _pipe_values(row["expected_unknown"])
         expected_metadata = _pipe_values(row["expected_metadata_candidate"])
         pollution_fragments = _pipe_values(row["pollution_fragments"])
+        expected_decisions = _pipe_values(row.get("expected_decisions") or "")
+        expected_sources = _pipe_values(row.get("expected_sources") or "")
+        expected_contributions = [
+            value == "true"
+            for value in _pipe_values(row.get("expected_contributions") or "")
+        ]
         checks = {
             "fxname": (result.output_fxname, row["expected_fxname"]),
             "unknown": (result.unknowns, expected_unknown),
             "metadata": (result.debug["metadata_candidates"], expected_metadata),
             "nllb": (result.debug["nllb_fallback_used"], False),
         }
+        if expected_decisions:
+            checks["decisions"] = (
+                [token.decision for token in result.tokens],
+                expected_decisions,
+            )
+        if expected_sources:
+            checks["sources"] = (
+                [token.source for token in result.tokens],
+                expected_sources,
+            )
+        if expected_contributions:
+            checks["contributions"] = (
+                [token.contributes_to_fxname for token in result.tokens],
+                expected_contributions,
+            )
         for label, (actual, expected) in checks.items():
             if actual != expected:
                 failures.append(
                     f"row {row_number} {row['input']!r} {label}: "
                     f"{actual!r} != {expected!r}"
+                )
+        for token in result.tokens:
+            if token.decision not in TOKEN_DECISIONS:
+                failures.append(
+                    f"row {row_number} {row['input']!r} invalid decision: {token.decision!r}"
+                )
+            if token.source not in TOKEN_SOURCES:
+                failures.append(
+                    f"row {row_number} {row['input']!r} invalid source: {token.source!r}"
                 )
         output_lower = result.output_fxname.casefold()
         for fragment in pollution_fragments:

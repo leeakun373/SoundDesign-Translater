@@ -66,7 +66,8 @@ def test_personal_dictionary_alias_persists(tmp_path: Path) -> None:
 
     assert after.output_fxname == "Metal Impact"
     assert after.quality == "pass"
-    assert after.tokens[0].source == "personal_map"
+    assert after.tokens[0].source == "personal_dictionary"
+    assert after.tokens[0].decision == "mapped_personal"
 
 
 def test_distance_preference_controls_fxname_and_metadata_candidate() -> None:

@@ -15,6 +15,7 @@ def test_current_canonical_csv_passes_audit() -> None:
     assert result.passed is True
     assert result.total_rows == 248
     assert result.valid_rows == 248
+    assert result.issue_count == 0
     assert result.issue_counts == {}
     assert result.path == str(DEFAULT_CANONICAL_PATH)
 
@@ -35,6 +36,7 @@ def test_audit_reports_all_required_quality_failures(tmp_path: Path) -> None:
     codes = {issue.code for issue in result.issues}
 
     assert result.passed is False
+    assert result.issue_count == len(result.issues)
     assert {
         "duplicate_raw",
         "conflicting_canonical",
@@ -59,4 +61,5 @@ def test_audit_cli_emits_structured_json(tmp_path: Path, capsys) -> None:
 
     assert exit_code == 1
     assert payload["passed"] is False
+    assert payload["issue_count"] == 1
     assert payload["issue_counts"] == {"file_not_found": 1}

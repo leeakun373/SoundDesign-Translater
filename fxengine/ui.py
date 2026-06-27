@@ -3,12 +3,14 @@
 from __future__ import annotations
 
 import tkinter as tk
+from collections import Counter
 from dataclasses import replace
 from pathlib import Path
 from tkinter import messagebox, simpledialog, ttk
 
 from fxengine.example_retrieval import ExampleRetriever
 from fxengine.metadata_writer import MetadataWriter
+from fxengine.models import FXToken
 from fxengine.normalizer import FXNameNormalizer
 from fxengine.personal_dictionary import PersonalDictionary
 from fxengine.preferences import FXPreferences, PreferenceStore
@@ -104,21 +106,23 @@ class FXNameEngineApp:
         columns = (
             "raw",
             "canonical",
-            "slot",
             "status",
+            "source",
+            "final",
             "confidence",
             "issues",
-            "source",
+            "slot",
         )
         self.token_tree = ttk.Treeview(review, columns=columns, show="headings", height=8)
         for column, heading, width in (
             ("raw", "Raw", 130),
-            ("canonical", "Canonical", 180),
-            ("slot", "Slot", 90),
-            ("status", "Status", 110),
-            ("confidence", "Confidence", 90),
+            ("canonical", "Output / Canonical", 175),
+            ("status", "Status", 135),
+            ("source", "Source", 145),
+            ("final", "In FXName", 75),
+            ("confidence", "Confidence", 85),
             ("issues", "Issues", 160),
-            ("source", "Source", 135),
+            ("slot", "Slot", 80),
         ):
             self.token_tree.heading(column, text=heading)
             self.token_tree.column(column, width=width, anchor="w")
@@ -127,8 +131,13 @@ class FXNameEngineApp:
         scrollbar.grid(row=0, column=1, sticky="ns")
         self.token_tree.configure(yscrollcommand=scrollbar.set)
         self.token_tree.tag_configure("unknown", foreground="#b00020")
-        self.token_tree.tag_configure("needs_review", foreground="#9a6700")
-        self.token_tree.tag_configure("ignored", foreground="#6b7280")
+        self.token_tree.tag_configure("kept_raw", foreground="#9a6700")
+        self.token_tree.tag_configure("ignored_pollution", foreground="#6b7280")
+        self.token_tree.tag_configure("ignored_personal", foreground="#6b7280")
+        self.token_tree.tag_configure("metadata_candidate", foreground="#6b4fa1")
+        self.token_tree.tag_configure("mapped_personal", foreground="#18794e")
+        self.token_tree.tag_configure("mapped_canonical", foreground="#155eef")
+        self.token_tree.tag_configure("mapped_glossary", foreground="#087e8b")
 
         actions = ttk.Frame(review)
         actions.grid(row=1, column=0, sticky="w", pady=(6, 0))
@@ -180,8 +189,13 @@ class FXNameEngineApp:
         self.last_result = result
         self.output_var.set(result.output_fxname)
         self._show_tokens(result.tokens)
+        decisions = Counter(token.decision for token in result.tokens)
+        decision_summary = ", ".join(
+            f"{decision}={count}" for decision, count in sorted(decisions.items())
+        )
         self.status_var.set(
-            f"Normalized: {result.quality} · {len(result.tokens)} token(s)"
+            f"Normalized: {result.quality} | {len(result.tokens)} token(s)"
+            + (f" | {decision_summary}" if decision_summary else "")
         )
 
         examples = self.example_retriever.retrieve(result.output_fxname)
@@ -205,20 +219,19 @@ class FXNameEngineApp:
         for item in self.token_tree.get_children():
             self.token_tree.delete(item)
         for token in tokens:
-            tag = token.status if token.status in {"unknown", "needs_review"} else ""
-            if token.status == "ignored":
-                tag = "ignored"
+            tag = token.decision
             self.token_tree.insert(
                 "",
                 "end",
                 values=(
                     token.raw,
                     token.text,
-                    token.slot,
                     self._review_status(token),
+                    token.source,
+                    "Yes" if token.contributes_to_fxname else "No",
                     f"{token.confidence:.2f}",
                     ", ".join(token.issues),
-                    token.source,
+                    token.slot,
                 ),
                 tags=(tag,) if tag else (),
             )
@@ -309,18 +322,8 @@ class FXNameEngineApp:
         return f"{name}: {value.strip()}"
 
     @staticmethod
-    def _review_status(token) -> str:
-        if token.source.startswith("personal_"):
-            return "mapped: personal dictionary"
-        if token.source == "canonical_csv":
-            return "mapped: canonical CSV"
-        if token.source == "canonical_db":
-            return "mapped: glossary fallback"
-        if token.source in {"preference_keep_raw", "common_fx_token"}:
-            return "kept raw"
-        if token.status == "ignored":
-            return "ignored"
-        return token.status
+    def _review_status(token: FXToken) -> str:
+        return token.decision or token.status
 
 
 def main() -> None:

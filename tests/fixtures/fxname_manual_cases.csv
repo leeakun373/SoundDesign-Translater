@@ -1,4 +1,4 @@
-input,expected_fxname,expected_unknown,allow_distance_in_fxname,expected_metadata_candidate,preset,pollution_fragments,note
+input,expected_fxname,expected_unknown,allow_distance_in_fxname,expected_metadata_candidate,preset,pollution_fragments,note,expected_decisions,expected_sources,expected_contributions
 金属门撞击,Metal Door Impact,,true,,default,,required Chinese basic
 木门滑开,Wood Door Slide Open,,true,,default,,required Chinese basic
 石头摩擦,Stone Friction,,true,,default,,required Chinese basic
@@ -188,3 +188,29 @@ how can i help you scrape,Scrape,,true,,default,how can i help you,pollution bef
 短混响木头刮擦,Short Reverb Wood Scrape,,true,,default,,short reverb wood
 干声脚步,Dry Footstep,,true,,default,,dry footstep
 湿声爆炸,Wet Explosion,,true,,default,,wet explosion
+金属,Metal,,true,,default,,review mapped canonical,mapped_canonical,canonical_csv,true
+门,Door,,true,,default,,review mapped canonical object,mapped_canonical,canonical_csv,true
+木桌,Wooden Table,,true,,default,,review glossary fallback,mapped_glossary,glossary_fallback,true
+kuang,,kuang,true,,default,,review unknown ASCII,unknown,unknown_review,false
+夔魍,,夔魍,true,,default,,review unknown Chinese,unknown,unknown_review,false
+customtag,Customtag,customtag,true,,keep_raw_friendly,,review kept raw,kept_raw,keep_raw_rule,true
+CO100K,,,true,CO100K,default,,review technical metadata,metadata_candidate,technical_token_rule,false
+MS,,,true,MS,default,,review stereo metadata,metadata_candidate,technical_token_rule,false
+oh my god,,,true,,default,oh my god,review pollution phrase,ignored_pollution|ignored_pollution|ignored_pollution,pollution_filter|pollution_filter|pollution_filter,false|false|false
+sound effect,,,true,,default,sound effect,review pollution words,ignored_pollution|ignored_pollution,pollution_filter|pollution_filter,false|false
+5m,5m,,true,,default,,review distance allowed,kept_raw,distance_rule,true
+5m,,,false,5m,default,,review distance blocked,metadata_candidate,distance_rule,false
+10cm,10cm,,true,,default,,review centimeter allowed,kept_raw,distance_rule,true
+10cm,,,false,10cm,default,,review centimeter blocked,metadata_candidate,distance_rule,false
+metal,Metal,,true,,default,,review English glossary,mapped_glossary,glossary_fallback,true
+far,Far,,true,,default,,review common FX raw,kept_raw,keep_raw_rule,true
+金属 kuang,Metal,kuang,true,,default,,review canonical plus unknown,mapped_canonical|unknown,canonical_csv|unknown_review,true|false
+impact CO100K,Impact,,true,CO100K,default,,review FX plus metadata,mapped_glossary|metadata_candidate,glossary_fallback|technical_token_rule,true|false
+oh my god 金属,Metal,,true,,default,oh my god,review pollution plus canonical,ignored_pollution|ignored_pollution|ignored_pollution|mapped_canonical,pollution_filter|pollution_filter|pollution_filter|canonical_csv,false|false|false|true
+门 5m,Door 5m,,true,,default,,review canonical plus distance,mapped_canonical|kept_raw,canonical_csv|distance_rule,true|true
+门 5m,Door,,false,5m,default,,review canonical plus blocked distance,mapped_canonical|metadata_candidate,canonical_csv|distance_rule,true|false
+customtag impact,Customtag Impact,customtag,true,,keep_raw_friendly,,review kept raw plus glossary,kept_raw|mapped_glossary,keep_raw_rule|glossary_fallback,true|true
+kacha,,kacha,true,,keep_raw_friendly,,review onomatopoeia remains unknown,unknown,unknown_review,false
+AB whoosh,Whoosh,,true,AB,default,,review technical plus FX,metadata_candidate|mapped_glossary,technical_token_rule|glossary_fallback,false|true
+make it boom style,,,true,,default,make it boom style,review command pollution,ignored_pollution|ignored_pollution|ignored_pollution|ignored_pollution,pollution_filter|pollution_filter|pollution_filter|pollution_filter,false|false|false|false
+room tone 10cm,Room Tone,,false,10cm,default,,review phrase plus blocked distance,mapped_glossary|mapped_glossary|metadata_candidate,glossary_fallback|glossary_fallback|distance_rule,true|true|false

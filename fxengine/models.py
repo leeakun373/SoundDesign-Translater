@@ -6,6 +6,33 @@ from dataclasses import dataclass, field
 from typing import Any
 
 
+TOKEN_REVIEW_SCHEMA_VERSION = 1
+TOKEN_DECISIONS = frozenset(
+    {
+        "mapped_personal",
+        "mapped_canonical",
+        "mapped_glossary",
+        "kept_raw",
+        "unknown",
+        "ignored_pollution",
+        "ignored_personal",
+        "metadata_candidate",
+    }
+)
+TOKEN_SOURCES = frozenset(
+    {
+        "personal_dictionary",
+        "canonical_csv",
+        "glossary_fallback",
+        "keep_raw_rule",
+        "technical_token_rule",
+        "pollution_filter",
+        "unknown_review",
+        "distance_rule",
+    }
+)
+
+
 @dataclass(frozen=True)
 class FXToken:
     raw: str
@@ -16,6 +43,9 @@ class FXToken:
     confidence: float
     status: str
     issues: list[str] = field(default_factory=list)
+    decision: str = ""
+    contributes_to_fxname: bool = False
+    metadata_candidate: bool = False
 
 
 @dataclass(frozen=True)

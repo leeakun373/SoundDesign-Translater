@@ -48,6 +48,10 @@ class CanonicalAuditResult:
         return not self.issues
 
     @property
+    def issue_count(self) -> int:
+        return len(self.issues)
+
+    @property
     def issue_counts(self) -> dict[str, int]:
         return dict(Counter(issue.code for issue in self.issues))
 
@@ -57,6 +61,7 @@ class CanonicalAuditResult:
             "passed": self.passed,
             "total_rows": self.total_rows,
             "valid_rows": self.valid_rows,
+            "issue_count": self.issue_count,
             "issue_counts": self.issue_counts,
             "issues": [asdict(issue) for issue in self.issues],
         }

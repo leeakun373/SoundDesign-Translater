@@ -3,13 +3,14 @@
 from __future__ import annotations
 
 import re
+from dataclasses import replace
 
 from glossary.fx_name import strip_unsafe_fx_phrases, unsafe_fx_word_indices
 from glossary.fx_slots import SlotTerm, assemble_fx_name, infer_slot, split_slot_terms
 from glossary.zh_normalize import normalize_fxname_input
 
 from fxengine.canonical_db import CanonicalDB, CanonicalMatch, title_fx_text
-from fxengine.models import FXNameResult, FXToken
+from fxengine.models import TOKEN_REVIEW_SCHEMA_VERSION, FXNameResult, FXToken
 from fxengine.personal_dictionary import PersonalDictionary, PersonalEntry
 from fxengine.preferences import FXPreferences
 from fxengine.scorer import BoomScorer
@@ -75,10 +76,11 @@ class FXNameNormalizer:
                         text="",
                         canonical=None,
                         slot="unknown",
-                        source="input_safety",
+                        source="pollution_filter",
                         confidence=1.0,
                         status="rejected",
                         issues=["unsafe_fragment_rejected"],
+                        decision="ignored_pollution",
                     )
                 )
                 continue
@@ -94,6 +96,7 @@ class FXNameNormalizer:
         output_tokens = [token for token in tokens if token.status in {"ok", "needs_review"} and token.text]
         assembled = self._assemble(output_tokens, prefs)
         output, output_rejected_fragments = strip_unsafe_fx_phrases(assembled.text)
+        tokens = _mark_final_contributions(tokens, output)
         rejected_fragments = list(input_rejected_fragments)
         for fragment in output_rejected_fragments:
             if fragment not in rejected_fragments:
@@ -136,6 +139,7 @@ class FXNameNormalizer:
             boom_confidence=boom.confidence,
             boom_suggestion=boom.suggestion,
             debug={
+                "token_review_schema_version": TOKEN_REVIEW_SCHEMA_VERSION,
                 "normalization_mode": "normalize",
                 "normalized_input": normalize_fxname_input(input_text),
                 "preserve_order": prefs.preserve_order,
@@ -161,7 +165,7 @@ class FXNameNormalizer:
                 "assembled_order": assembled.assembled_order,
                 "reorder_reason": assembled.reorder_reason,
                 "glossary_hits": sum(
-                    token.source in {"canonical_csv", "canonical_db"}
+                    token.source in {"canonical_csv", "glossary_fallback"}
                     for token in tokens
                 ),
             },
@@ -207,10 +211,12 @@ class FXNameNormalizer:
                 text="",
                 canonical=None,
                 slot="detail",
-                source="technical_metadata",
+                source="technical_token_rule",
                 confidence=1.0,
                 status="ignored",
                 issues=["technical_token_excluded"],
+                decision="metadata_candidate",
+                metadata_candidate=True,
             )
         match = self.canonical_db.resolve_ascii(raw_token.raw)
         if match.status == "unknown" and raw_token.raw.casefold() in COMMON_FX_TOKENS:
@@ -220,10 +226,11 @@ class FXNameNormalizer:
                 text=canonical,
                 canonical=canonical,
                 slot=infer_slot(canonical),
-                source="common_fx_token",
+                source="keep_raw_rule",
                 confidence=0.9,
                 status="ok",
                 issues=[],
+                decision="kept_raw",
             )
         if match.status == "unknown" and prefs.keep_unknown_ascii:
             if raw_token.raw.casefold() in ONOMATOPOEIA_TOKENS:
@@ -234,10 +241,11 @@ class FXNameNormalizer:
                 text=canonical,
                 canonical=canonical,
                 slot="unknown",
-                source="preference_keep_raw",
+                source="keep_raw_rule",
                 confidence=0.25,
                 status="needs_review",
                 issues=["unknown_ascii"],
+                decision="kept_raw",
             )
         return _match_to_token(match)
 
@@ -296,17 +304,28 @@ class FXNameNormalizer:
     @staticmethod
     def _personal_token(raw: str, entry: PersonalEntry) -> FXToken:
         if entry.action == "ignore":
-            return FXToken(raw, "", None, "ignored", "personal_dictionary", 1.0, "ignored", [])
+            return FXToken(
+                raw,
+                "",
+                None,
+                "ignored",
+                "personal_dictionary",
+                1.0,
+                "ignored",
+                [],
+                "ignored_personal",
+            )
         canonical = title_fx_text(entry.canonical or raw)
         return FXToken(
             raw=raw,
             text=canonical,
             canonical=canonical,
             slot=infer_slot(canonical),
-            source=f"personal_{entry.action}",
+            source="personal_dictionary",
             confidence=1.0,
             status="ok",
             issues=[],
+            decision=("kept_raw" if entry.action == "keep" else "mapped_personal"),
         )
 
     @staticmethod
@@ -321,10 +340,11 @@ class FXNameNormalizer:
                 raw_token.raw.lower(),
                 raw_token.raw.lower(),
                 "detail",
-                "distance",
+                "distance_rule",
                 1.0,
                 "ok",
                 [],
+                "kept_raw",
             )
         metadata_candidates.append(raw_token.raw.lower())
         return FXToken(
@@ -332,17 +352,20 @@ class FXNameNormalizer:
             "",
             None,
             "detail",
-            "preference",
+            "distance_rule",
             1.0,
             "ignored",
             ["distance_excluded"],
+            "metadata_candidate",
+            False,
+            True,
         )
 
     @staticmethod
     def _assemble(tokens: list[FXToken], prefs: FXPreferences):
         slot_terms: list[SlotTerm] = []
         for group, token in enumerate(tokens):
-            if token.source == "distance":
+            if token.source == "distance_rule":
                 slot_terms.append(SlotTerm(token.text, token.slot, token.source, group))
             else:
                 slot_terms.extend(
@@ -362,15 +385,28 @@ def normalize_fxname(
 
 
 def _match_to_token(match: CanonicalMatch) -> FXToken:
+    if match.status == "unknown":
+        source = "unknown_review"
+        decision = "unknown"
+    elif match.status == "ignored":
+        source = "pollution_filter"
+        decision = "ignored_pollution"
+    elif match.source == "canonical_csv":
+        source = "canonical_csv"
+        decision = "mapped_canonical"
+    else:
+        source = "glossary_fallback"
+        decision = "mapped_glossary"
     return FXToken(
         raw=match.raw,
         text=match.canonical or "",
         canonical=match.canonical,
         slot=match.slot,
-        source=match.source,
+        source=source,
         confidence=1.0 if match.status in {"ok", "ignored"} else 0.0,
         status=match.status,
         issues=list(match.issues),
+        decision=decision,
     )
 
 
@@ -378,3 +414,32 @@ def _is_technical_token(raw: str) -> bool:
     return raw.upper() in TECHNICAL_EXACT_TOKENS or bool(
         TECHNICAL_TOKEN_RE.fullmatch(raw)
     )
+
+
+def _mark_final_contributions(tokens: list[FXToken], output: str) -> list[FXToken]:
+    final_words = output.casefold().split()
+    seen_groups: set[tuple[str, ...]] = set()
+    marked: list[FXToken] = []
+    for token in tokens:
+        group = tuple(token.text.casefold().split())
+        eligible = token.decision in {
+            "mapped_personal",
+            "mapped_canonical",
+            "mapped_glossary",
+            "kept_raw",
+        }
+        contributes = bool(
+            eligible
+            and group
+            and group not in seen_groups
+            and _contains_word_sequence(final_words, group)
+        )
+        if contributes:
+            seen_groups.add(group)
+        marked.append(replace(token, contributes_to_fxname=contributes))
+    return marked
+
+
+def _contains_word_sequence(words: list[str], sequence: tuple[str, ...]) -> bool:
+    width = len(sequence)
+    return any(tuple(words[start : start + width]) == sequence for start in range(len(words)))

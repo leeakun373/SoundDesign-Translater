@@ -9,7 +9,7 @@ Schema:
 - `slot`: one of `material`, `object`, `source`, `action`, `motion`, `detail`, or `modifier`.
 - `lang`: input language (`zh` or `en`).
 - `priority`: tie-breaker for duplicate aliases; higher wins.
-- `tags`: slash-separated review/search labels.
+- `tags`: lowercase slash format (`impact/heavy`); each segment may contain lowercase letters, digits, `_`, or `-`.
 - `note`: optional maintenance note.
 
 Lookup precedence is Personal Dictionary, this CSV, then the existing glossary. Chinese matching is longest-alias first, with priority used as the tie-breaker. Keep aliases in this file rather than adding Python `if`/`else` mappings.
