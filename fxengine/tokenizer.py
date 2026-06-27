@@ -8,9 +8,10 @@ from dataclasses import dataclass
 from glossary.zh_normalize import normalize_fxname_input
 
 
-DISTANCE_RE = re.compile(r"^\d+(?:\.\d+)?m$", re.IGNORECASE)
+DISTANCE_RE = re.compile(r"^\d+(?:\.\d+)?(?:mm|cm|m)$", re.IGNORECASE)
 TOKEN_RE = re.compile(
-    r"\d+(?:\.\d+)?m\b|[A-Za-z][A-Za-z0-9+\-]*|[\u4e00-\u9fff]+",
+    r"\d+(?:\.\d+)?(?:mm|cm|m)\b|[A-Za-z][A-Za-z0-9+\-]*|"
+    r"\d+(?:\.\d+)?[A-Za-z]+|\d+|[\u4e00-\u9fff]+",
     re.IGNORECASE,
 )
 

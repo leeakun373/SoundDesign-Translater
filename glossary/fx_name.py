@@ -15,7 +15,10 @@ from glossary.fx_quality import (
 
 
 ARTICLE_RE = re.compile(r"^(?:the|a|an)\s+", re.IGNORECASE)
-WORD_RE = re.compile(r"\d+(?:\.\d+)?m\b|[A-Za-z][A-Za-z0-9+\-]*", re.IGNORECASE)
+WORD_RE = re.compile(
+    r"\d+(?:\.\d+)?(?:mm|cm|m)\b|[A-Za-z][A-Za-z0-9+\-]*",
+    re.IGNORECASE,
+)
 SENTENCE_VERBS = re.compile(
     r"\b(?:slipped|slides|sliding|opened|opens|pushed|pushes|pulled|pulls)\b",
     re.IGNORECASE,

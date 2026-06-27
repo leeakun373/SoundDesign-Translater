@@ -1,75 +1,190 @@
-input,expected,mode,notes
-金属 门 撞击,Metal Door Impact,default,door material impact
-木门滑开,Wood Door Slide Open,default,compound door
-金属门重击,Metal Door Heavy Impact,default,heavy door impact
-玻璃门关闭,Glass Door Close,default,glass door close
-车门推开,Car Door Push Open,default,car door open
-门轻敲,Door Tap,default,door tap
-木门刮擦,Wood Door Scrape,default,door scrape
-门掉落,Door Drop,default,door drop
-door 推开 wood,Door Push Open Wood,default,mixed order
-metal 门 impact,Metal Door Impact,default,mixed language
-玻璃瓶掉落,Glass Bottle Drop,default,glass object
-塑料 箱子 掉落,Plastic Box Drop,default,plastic object
-布袋摩擦,Cloth Bag Friction,default,cloth friction
-纸箱拖动,Cardboard Box Drag,default,box drag
-陶瓷杯子轻敲,Ceramic Cup Tap,default,ceramic tap
-橡胶轮胎滚动,Rubber Tire Roll,default,rubber roll
-石头撞击,Stone Impact,default,stone impact
-冰破裂,Ice Break,default,ice break
-水喷射,Water Spray,default,water spray
-皮革摩擦,Leather Friction,default,leather friction
-火箭发射,Rocket Launch,default,rocket launch
-火箭爆炸,Rocket Explosion,default,rocket explosion
-火箭发射爆炸,Rocket Launch Explosion,default,rocket sequence
-远处火箭爆炸,Distant Rocket Explosion,default,perspective
-室外巨大爆炸,Exterior Huge Explosion,default,exterior explosion
-爆炸长尾,Explosion Long Tail,default,long tail
-爆炸短尾,Explosion Short Tail,default,short tail
-explosion 长尾,Explosion Long Tail,default,mixed tail
-嗖,Whoosh,default,whoosh alias
-呼啸长尾,Whoosh Long Tail,default,whoosh tail
-挥动短促,Whoosh Short,default,short whoosh
-掠过快速,Flyby Fast,default,fast flyby
-远处飞过,Distant Flyby,default,distant flyby
-驶过呼啸,Driveby Whoosh,default,driveby whoosh
-房间底噪,Room Tone,default,room tone
-室内房间底噪,Interior Room Tone,default,interior room tone
-办公室房间底噪,Office Room Tone,default,office room tone
-室外房间底噪,Exterior Room Tone,default,exterior room tone
-走廊房间底噪,Hallway Room Tone,default,hallway room tone
-金属脚步,Metal Footstep,default,metal footstep
-木头脚步声,Wood Footstep,default,wood footstep
-室内脚步,Interior Footstep,default,interior footstep
-远处跑步,Distant Run,default,distant run
-近处走路,Close Walk,default,close walk
-重落地,Heavy Land,default,heavy landing
-金属刮擦,Metal Scrape,default,metal scrape
-木头拖动,Wood Drag,default,wood drag
-玻璃滑动,Glass Slide,default,glass slide
-箱子掉落,Box Drop,default,box drop
-布料摩擦,Cloth Friction,default,cloth friction
-链条拖动,Chain Drag,default,chain drag
-抽屉滑开,Drawer Slide Open,default,drawer open
-柜子拉开,Cabinet Pull Open,default,cabinet open
-塑料瓶挤压,Plastic Bottle Squeeze,default,bottle squeeze
-纸张撕裂,Paper Tear,default,paper tear
-wood 门 close,Wood Door Close,default,mixed close
-metal box 掉落,Metal Box Drop,default,mixed drop
-rocket 发射 explosion,Rocket Launch Explosion,default,mixed rocket
-car door 关闭,Car Door Close,default,mixed car door
-布 bag impact,Cloth Bag Impact,default,mixed cloth
-kuang,,default,unknown ascii excluded
-夔魍,,strict_review,unknown Chinese excluded
-kuang,Kuang,keep_raw_friendly,unknown ascii retained for review
-CO100K,CO100K,keep_raw_friendly,recorder shorthand retained
-MKH8040,MKH8040,keep_raw_friendly,microphone shorthand retained
-爆炸 5m,Explosion 5m,default,distance retained
-爆炸 5m,Explosion,no_distance,distance metadata candidate
-火箭 发射 爆炸 long tail 5m,Rocket Launch Explosion Long Tail 5m,default,full mixed example
-木门 oh my god 滑开,Wood Door Slide Open,default,chat pollution rejected
-door how can i help you impact,Door Impact,default,sentence pollution rejected
-kuang 爆炸,Kuang Explosion,keep_raw_friendly,unknown plus known token
-夔魍 爆炸,Explosion,strict_review,unknown Chinese plus known token
-爆炸 10m,Explosion,no_distance,distance excluded
-远处 whoosh 5m,Distant Whoosh 5m,default,mixed perspective distance
+input,expected_fxname,expected_unknown,allow_distance_in_fxname,expected_metadata_candidate,preset,pollution_fragments,note
+金属门撞击,Metal Door Impact,,true,,default,,required Chinese basic
+木门滑开,Wood Door Slide Open,,true,,default,,required Chinese basic
+石头摩擦,Stone Friction,,true,,default,,required Chinese basic
+玻璃破碎,Glass Break,,true,,default,,required Chinese basic
+火焰燃烧,Fire Burn,,true,,default,,required Chinese basic
+水滴落下,Water Drip,,true,,default,,required Chinese basic
+金属 门 撞击,Metal Door Impact,,true,,default,,spaced Chinese
+金属门重击,Metal Door Heavy Impact,,true,,default,,heavy door impact
+玻璃门关闭,Glass Door Close,,true,,default,,glass door close
+车门推开,Car Door Push Open,,true,,default,,car door open
+门轻敲,Door Tap,,true,,default,,door tap
+木门刮擦,Wood Door Scrape,,true,,default,,door scrape
+门掉落,Door Drop,,true,,default,,door drop
+玻璃瓶掉落,Glass Bottle Drop,,true,,default,,glass object
+塑料 箱子 掉落,Plastic Box Drop,,true,,default,,plastic object
+布袋摩擦,Cloth Bag Friction,,true,,default,,cloth friction
+纸箱拖动,Cardboard Box Drag,,true,,default,,box drag
+陶瓷杯子轻敲,Ceramic Cup Tap,,true,,default,,ceramic tap
+橡胶轮胎滚动,Rubber Tire Roll,,true,,default,,rubber roll
+石头撞击,Stone Impact,,true,,default,,stone impact
+冰破裂,Ice Break,,true,,default,,ice break
+水喷射,Water Spray,,true,,default,,water spray
+皮革摩擦,Leather Friction,,true,,default,,leather friction
+火箭发射,Rocket Launch,,true,,default,,rocket launch
+火箭爆炸,Rocket Explosion,,true,,default,,rocket explosion
+火箭发射爆炸,Rocket Launch Explosion,,true,,default,,rocket sequence
+远处火箭爆炸,Distant Rocket Explosion,,true,,default,,perspective
+室外巨大爆炸,Exterior Huge Explosion,,true,,default,,exterior explosion
+爆炸长尾,Explosion Long Tail,,true,,default,,long tail
+爆炸短尾,Explosion Short Tail,,true,,default,,short tail
+嗖,Whoosh,,true,,default,,whoosh alias
+呼啸长尾,Whoosh Long Tail,,true,,default,,whoosh tail
+挥动短促,Whoosh Short,,true,,default,,short whoosh
+掠过快速,Flyby Fast,,true,,default,,fast flyby
+远处飞过,Distant Flyby,,true,,default,,distant flyby
+驶过呼啸,Driveby Whoosh,,true,,default,,driveby whoosh
+房间底噪,Room Tone,,true,,default,,room tone
+室内房间底噪,Interior Room Tone,,true,,default,,interior room tone
+办公室房间底噪,Office Room Tone,,true,,default,,office room tone
+室外房间底噪,Exterior Room Tone,,true,,default,,exterior room tone
+走廊房间底噪,Hallway Room Tone,,true,,default,,hallway room tone
+金属脚步,Metal Footstep,,true,,default,,metal footstep
+木头脚步声,Wood Footstep,,true,,default,,wood footstep
+室内脚步,Interior Footstep,,true,,default,,interior footstep
+远处跑步,Distant Run,,true,,default,,distant run
+近处走路,Close Walk,,true,,default,,close walk
+重落地,Heavy Land,,true,,default,,heavy landing
+金属刮擦,Metal Scrape,,true,,default,,metal scrape
+木头拖动,Wood Drag,,true,,default,,wood drag
+玻璃滑动,Glass Slide,,true,,default,,glass slide
+箱子掉落,Box Drop,,true,,default,,box drop
+布料摩擦,Cloth Friction,,true,,default,,cloth friction
+链条拖动,Chain Drag,,true,,default,,chain drag
+抽屉滑开,Drawer Slide Open,,true,,default,,drawer open
+柜子拉开,Cabinet Pull Open,,true,,default,,cabinet open
+塑料瓶挤压,Plastic Bottle Squeeze,,true,,default,,bottle squeeze
+纸张撕裂,Paper Tear,,true,,default,,paper tear
+door 推开 wood,Door Push Open Wood,,true,,default,,required mixed order
+metal 门 impact,Metal Door Impact,,true,,default,,mixed language
+wood 门 close,Wood Door Close,,true,,default,,mixed close
+metal box 掉落,Metal Box Drop,,true,,default,,mixed drop
+rocket 发射 explosion,Rocket Launch Explosion,,true,,default,,mixed rocket
+car door 关闭,Car Door Close,,true,,default,,mixed car door
+布 bag impact,Cloth Bag Impact,,true,,default,,mixed cloth
+火箭 launch 爆炸 long tail 5m,Rocket Launch Explosion Long Tail 5m,,true,,default,,required mixed distance
+explosion 长尾,Explosion Long Tail,,true,,default,,mixed tail
+metal hit kuang,Metal Hit,kuang,true,,default,,required mixed unknown
+whoosh 快速经过,Whoosh Fast Pass By,,true,,default,,required mixed motion
+engine 启动 short,Engine Start Short,,true,,default,,required mixed engine
+door impact long tail,Door Impact Long Tail,,true,,default,,English FX tokens
+glass scrape short,Glass Scrape Short,,true,,default,,English FX tokens
+whoosh fast tail,Whoosh Fast Tail,,true,,default,,English FX tokens
+impact far,Impact Far,,true,,default,,English perspective
+close door creak,Close Door Creak,,true,,default,,English perspective
+kuang,,kuang,true,,default,,required onomatopoeia unknown
+duang,,duang,true,,default,,required onomatopoeia unknown
+zila,,zila,true,,default,,required onomatopoeia unknown
+kacha,,kacha,true,,default,,required onomatopoeia unknown
+peng,,peng,true,,default,,required onomatopoeia unknown
+kuang duang,,kuang|duang,true,,default,,multiple unknown
+metal kuang impact,Metal Impact,kuang,true,,default,,unknown between valid tokens
+duang explosion,Explosion,duang,true,,strict_review,,strict review unknown
+zila whoosh,Whoosh,zila,true,,strict_review,,strict review mixed
+kacha door,Door,kacha,true,,keep_raw_friendly,,onomatopoeia stays unknown
+customtag impact,Customtag Impact,customtag,true,,keep_raw_friendly,,friendly user shorthand
+CO100K,,,true,CO100K,default,,recorder token metadata
+MKH8040,,,true,MKH8040,default,,microphone token metadata
+416,,,true,416,default,,microphone model metadata
+MS,,,true,MS,default,,stereo technique metadata
+AB,,,true,AB,default,,stereo technique metadata
+192k,,,true,192k,default,,sample rate metadata
+CO100K MKH8040,,,true,CO100K|MKH8040,keep_raw_friendly,,technical tokens stay out
+impact CO100K,Impact,,true,CO100K,default,,FX plus recorder metadata
+MS room tone,Room Tone,,true,MS,default,,stereo technique plus FX
+192k explosion,Explosion,,true,192k,default,,sample rate plus FX
+AB whoosh,Whoosh,,true,AB,keep_raw_friendly,,technical token ignored in friendly
+416 impact,Impact,,true,416,keep_raw_friendly,,model token ignored in friendly
+MKH8040 scrape,Scrape,,true,MKH8040,default,,microphone plus FX
+CO100K room tone,Room Tone,,true,CO100K,default,,recorder plus room tone
+爆炸 5m,Explosion 5m,,true,,default,,distance retained
+爆炸 5m,Explosion,,false,5m,default,,distance excluded
+爆炸 10cm,Explosion 10cm,,true,,default,,centimeter distance retained
+爆炸 10cm,Explosion,,false,10cm,default,,centimeter distance excluded
+whoosh 5m,Whoosh 5m,,true,,default,,whoosh distance retained
+whoosh 5m,Whoosh,,false,5m,default,,whoosh distance excluded
+room tone 10cm,Room Tone 10cm,,true,,default,,room tone distance
+room tone 10cm,Room Tone,,false,10cm,default,,room tone metadata distance
+close explosion,Close Explosion,,true,,default,,close perspective
+far explosion,Far Explosion,,true,,default,,far perspective
+explosion long tail,Explosion Long Tail,,true,,default,,English long tail
+explosion short tail,Explosion Short Tail,,true,,default,,English short tail
+火箭爆炸 5m,Rocket Explosion 5m,,true,,default,,Chinese distance
+火箭爆炸 5m,Rocket Explosion,,false,5m,default,,Chinese distance excluded
+远处 whoosh 5m,Distant Whoosh 5m,,true,,default,,mixed perspective distance
+远处 whoosh 5m,Distant Whoosh,,false,5m,default,,mixed distance excluded
+木门 oh my god 滑开,Wood Door Slide Open,,true,,default,oh my god,chat pollution
+door how can i help you impact,Door Impact,,true,,default,how can i help you,chat pollution
+sound effect 金属门撞击,Metal Door Impact,,true,,default,sound effect,English pollution phrase
+make it boom style explosion,Explosion,,true,,default,make it boom style,style command pollution
+请帮我翻译 金属门撞击,Metal Door Impact,翻译,true,,default,请帮我翻译,Chinese instruction pollution
+这个声音是 木门滑开,Wood Door Slide Open,这个|是,true,,default,这个声音是,Chinese sentence pollution
+this is metal impact,Metal Impact,,true,,default,this is,English sentence pollution
+the sound of glass break,Glass Break,,true,,default,the sound of,English sentence pollution
+sound effect whoosh,Whoosh,,true,,default,sound effect,pollution before whoosh
+make it boom style room tone,Room Tone,,true,,default,make it boom style,pollution before room tone
+oh my god explosion,Explosion,,true,,default,oh my god,pollution before explosion
+how can i help you scrape,Scrape,,true,,default,how can i help you,pollution before scrape
+这个声音是 爆炸长尾,Explosion Long Tail,这个|是,true,,default,这个声音是,Chinese pollution with tail
+请帮我翻译 房间底噪,Room Tone,翻译,true,,default,请帮我翻译,Chinese pollution with room tone
+金属箱掉落,Metal Box Drop,,true,,default,,metal box drop
+木箱拖动,Wood Box Drag,,true,,default,,wood box drag
+玻璃瓶破碎,Glass Bottle Break,,true,,default,,glass bottle break
+塑料瓶挤压,Plastic Bottle Squeeze,,true,,default,,plastic bottle squeeze
+纸箱撞击,Cardboard Box Impact,,true,,default,,cardboard impact
+布袋拍打,Cloth Bag Slap,,true,,default,,cloth slap
+陶瓷杯子掉落,Ceramic Cup Drop,,true,,default,,ceramic drop
+橡胶轮胎摩擦,Rubber Tire Rub,,true,,default,,rubber friction
+链条摇晃,Chain Shake,,true,,default,,chain shake
+钥匙掉落,Key Drop,,true,,default,,key drop
+按钮点击,Button Click,,true,,default,,button click
+开关按下,Switch Press,,true,,default,,switch press
+抽屉关闭,Drawer Close,,true,,default,,drawer close
+柜子开门,Cabinet Door Open,,true,,default,,cabinet open
+窗户破碎,Window Break,,true,,default,,window break
+地板脚步,Floor Footstep,,true,,default,,floor footstep
+桌子轻敲,Table Tap,,true,,default,,table tap
+椅子拖动,Chair Drag,,true,,default,,chair drag
+绳子甩动,Rope Swipe,,true,,default,,rope swipe
+管道敲击,Pipe Knock,,true,,default,,pipe knock
+汽车启动,Car Start,,true,,default,,car start
+卡车加速,Truck Accelerate,,true,,default,,truck accelerate
+摩托车驶过,Motorcycle Driveby,,true,,default,,motorcycle driveby
+自行车停止,Bicycle Stop,,true,,default,,bicycle stop
+飞机飞过,Aircraft Flyby,,true,,default,,aircraft flyby
+直升机启动,Helicopter Start,,true,,default,,helicopter start
+火车停止,Train Stop,,true,,default,,train stop
+轮船驶过,Ship Driveby,,true,,default,,ship driveby
+无人机飞过,Drone Flyby,,true,,default,,drone flyby
+飞船发射,Spaceship Launch,,true,,default,,spaceship launch
+机器人移动,Robot Movement,,true,,default,,robot movement
+机器震动,Machine Vibration,,true,,default,,machine vibration
+风扇启动,Fan Start,,true,,default,,fan start
+空调停止,Air Conditioner Stop,,true,,default,,air conditioner stop
+电机怠速,Motor Idle,,true,,default,,motor idle
+发电机启动,Generator Start,,true,,default,,generator start
+手枪射击,Pistol Shot,,true,,default,,pistol shot
+步枪装填,Rifle Reload,,true,,default,,rifle reload
+霰弹枪开火,Shotgun Fire,,true,,default,,shotgun fire
+大炮爆炸,Cannon Explosion,,true,,default,,cannon explosion
+狗跑步,Dog Run,,true,,default,,dog run
+狼呼啸,Wolf Whoosh,,true,,default,,wolf whoosh
+鸟飞过,Bird Flyby,,true,,default,,bird flyby
+人群脚步,Crowd Footstep,,true,,default,,crowd footstep
+人类走路,Human Walk,,true,,default,,human walk
+室内玻璃破碎,Interior Glass Break,,true,,default,,interior glass
+室外金属撞击,Exterior Metal Impact,,true,,default,,exterior metal
+远处火箭发射,Distant Rocket Launch,,true,,default,,distant rocket
+近处木门关闭,Close Wood Door,,true,,default,,deduplicated close wood door
+水下爆炸长尾,Underwater Explosion Long Tail,,true,,default,,underwater explosion
+空旷房间底噪,Open Room Tone,,true,,default,,open room tone
+封闭房间底噪,Enclosed Room Tone,,true,,default,,enclosed room tone
+左侧 whoosh,Left Whoosh,,true,,default,,left whoosh
+右侧爆炸,Right Explosion,,true,,default,,right explosion
+头顶飞过,Overhead Flyby,,true,,default,,overhead flyby
+背后脚步,Behind Footstep,,true,,default,,behind footstep
+长混响金属撞击,Long Reverb Metal Impact,,true,,default,,reverberant metal
+短混响木头刮擦,Short Reverb Wood Scrape,,true,,default,,short reverb wood
+干声脚步,Dry Footstep,,true,,default,,dry footstep
+湿声爆炸,Wet Explosion,,true,,default,,wet explosion

@@ -5,7 +5,10 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 
-WORD_RE = re.compile(r"\d+(?:\.\d+)?m\b|[A-Za-z][A-Za-z0-9+\-]*", re.IGNORECASE)
+WORD_RE = re.compile(
+    r"\d+(?:\.\d+)?(?:mm|cm|m)\b|[A-Za-z][A-Za-z0-9+\-]*",
+    re.IGNORECASE,
+)
 ZH_CHAR_RE = re.compile(r"[\u4e00-\u9fff]")
 ARTICLE_RE = re.compile(r"^(?:the|a|an)\s+", re.IGNORECASE)
 
@@ -32,6 +35,8 @@ ABSOLUTE_BAD_PHRASES: tuple[str, ...] = (
     "she is",
     "they are",
     "on my way",
+    "sound effect",
+    "make it boom style",
 )
 
 # Sentence-like risk phrases — contribute to fail / needs_review

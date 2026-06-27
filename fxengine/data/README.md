@@ -13,3 +13,11 @@ Schema:
 - `note`: optional maintenance note.
 
 Lookup precedence is Personal Dictionary, this CSV, then the existing glossary. Chinese matching is longest-alias first, with priority used as the tie-breaker. Keep aliases in this file rather than adding Python `if`/`else` mappings.
+
+Run the read-only quality audit after editing:
+
+```powershell
+python -m fxengine.canonical_audit
+```
+
+The command prints structured JSON and exits non-zero when it finds duplicate aliases, conflicting mappings, invalid fields, malformed tags, or duplicate rows. It never edits the CSV.

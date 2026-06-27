@@ -32,6 +32,7 @@ class FXNameEngineApp:
         self.output_var = tk.StringVar()
         self.preset_var = tk.StringVar(value="Default")
         self.allow_distance_var = tk.BooleanVar(value=True)
+        self.status_var = tk.StringVar(value="Ready")
 
         self._setup_window()
         self._build_ui()
@@ -77,6 +78,9 @@ class FXNameEngineApp:
         )
         ttk.Button(controls, text="Reload / Re-normalize", command=self.reload).grid(
             row=0, column=7, sticky="e"
+        )
+        ttk.Label(controls, textvariable=self.status_var).grid(
+            row=1, column=0, columnspan=8, sticky="w", pady=(6, 0)
         )
 
         ttk.Label(main, text="Input").grid(row=1, column=0, sticky="w")
@@ -124,6 +128,7 @@ class FXNameEngineApp:
         self.token_tree.configure(yscrollcommand=scrollbar.set)
         self.token_tree.tag_configure("unknown", foreground="#b00020")
         self.token_tree.tag_configure("needs_review", foreground="#9a6700")
+        self.token_tree.tag_configure("ignored", foreground="#6b7280")
 
         actions = ttk.Frame(review)
         actions.grid(row=1, column=0, sticky="w", pady=(6, 0))
@@ -175,6 +180,9 @@ class FXNameEngineApp:
         self.last_result = result
         self.output_var.set(result.output_fxname)
         self._show_tokens(result.tokens)
+        self.status_var.set(
+            f"Normalized: {result.quality} · {len(result.tokens)} token(s)"
+        )
 
         examples = self.example_retriever.retrieve(result.output_fxname)
         metadata = self.metadata_writer.write(
@@ -198,6 +206,8 @@ class FXNameEngineApp:
             self.token_tree.delete(item)
         for token in tokens:
             tag = token.status if token.status in {"unknown", "needs_review"} else ""
+            if token.status == "ignored":
+                tag = "ignored"
             self.token_tree.insert(
                 "",
                 "end",
@@ -205,7 +215,7 @@ class FXNameEngineApp:
                     token.raw,
                     token.text,
                     token.slot,
-                    token.status,
+                    self._review_status(token),
                     f"{token.confidence:.2f}",
                     ", ".join(token.issues),
                     token.source,
@@ -262,6 +272,11 @@ class FXNameEngineApp:
             personal_dictionary=self.personal_dictionary,
         )
         self.normalize()
+        if self.last_result is not None:
+            self.status_var.set(
+                "Reloaded canonical CSV and personal dictionary; "
+                f"result: {self.last_result.quality}"
+            )
 
     def _on_preset_changed(self, _event=None) -> None:
         profile = self.preference_store.get(self.preset_var.get())
@@ -292,6 +307,20 @@ class FXNameEngineApp:
             return issue
         name, value = issue.split(":", 1)
         return f"{name}: {value.strip()}"
+
+    @staticmethod
+    def _review_status(token) -> str:
+        if token.source.startswith("personal_"):
+            return "mapped: personal dictionary"
+        if token.source == "canonical_csv":
+            return "mapped: canonical CSV"
+        if token.source == "canonical_db":
+            return "mapped: glossary fallback"
+        if token.source in {"preference_keep_raw", "common_fx_token"}:
+            return "kept raw"
+        if token.status == "ignored":
+            return "ignored"
+        return token.status
 
 
 def main() -> None:

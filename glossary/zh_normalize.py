@@ -5,7 +5,7 @@ from __future__ import annotations
 import re
 
 ASCII_TOKEN = re.compile(
-    r"(?:[A-Za-z][A-Za-z0-9+\-]*|\d+(?:\.\d+)?m)\b",
+    r"(?:[A-Za-z][A-Za-z0-9+\-]*|\d+(?:\.\d+)?[A-Za-z]+|\d+)\b",
     re.IGNORECASE,
 )
 ZH_CHAR = re.compile(r"[\u4e00-\u9fff]")
