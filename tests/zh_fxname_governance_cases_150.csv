@@ -1,0 +1,151 @@
+id,input,governance_class,ucs_domain,designer_intent,test_kind,expected_canonical,expected_fxname,expected_review_status,expected_source,confidence_band,must_not_contain,note
+001,木门滑开,stable,DOOR,拟音师录门轨时常用短句,both,Slide Open,Wood Door Slide Open,mapped_phrase,phrase_rule,high,Front,稳定短语；Slide Open 组合
+002,金属门撞击,stable,DOOR,商业库 DOORMetl 风格命名,both,Impact,Metal Door Impact,mapped_phrase,phrase_rule,high,,Material + Door + Impact
+003,抽屉拉开又关上,composite,DRWR,柜体开关连续动作,both,Open Close,Drawer Open Close,mapped_phrase,composite_phrase,high,Pull,复合动作非单一稳定 token
+004,保险箱拨轮转动,phrase_rule,MECH,保险柜机制细节,both,Dial Turn,Safe Dial Turn,mapped_phrase,phrase_rule,high,Rotate|Movement,稳定点在拨轮上下文非泛化转动
+005,刮擦铁板,stable,FOLEY,大面积粗糙接触,both,Scrape,Metal Plate Scrape,mapped_phrase,phrase_rule,high,,Scrape 组稳定短语
+006,摩擦皮革,low_confidence,FOLEY,材质摩擦状态,both,Leather Friction,Leather Friction,mapped_phrase,phrase_rule,low,Rub,摩擦默认 Friction；皮革更可能 Rub
+007,冰块刮擦冰砖,stable,ICE,录音师自命名 ICEFric 风格,both,Ice Scrape,Ice Scrape Ice Brick,mapped_phrase,phrase_rule,high,,ICEFric 风格
+008,锯木,stable,TOOL,工具+材质短输入,both,Saw Wood,Saw Wood,mapped_phrase,phrase_rule,high,,工具+材质短句
+009,塑料盒掉落,stable,PLAS,slot 顺序：材质+物体+动作,both,Drop,Plastic Box Drop,mapped_phrase,phrase_rule,high,Drop Box,slot：Plastic Box Drop
+010,倒水入玻璃杯,stable,LIQ,液体拟音高频句,both,Pour Water,Pour Water Into Glass,mapped_phrase,phrase_rule,high,,液体拟音高频句
+011,轮胎摩擦,low_confidence,VEH,车辆 Foley 常用,both,Friction|Tire Friction,Tire Friction,mapped_phrase,phrase_rule,low,Screech|Squeal,Friction/Skid/Screech 边界；不进 A
+012,拖动,stable,FOLEY,单字稳定但无对象,both,Drag,Drag,mapped_canonical,stable_single,high,Door|Wood|Metal,只应输出 Drag；不得臆造完整 FXName
+013,敲木门,low_confidence,DOOR,轻敲 vs 重敲边界,both,Knock,Wood Door Knock,mapped_phrase,phrase_rule,medium,Tap,Knock/TAP 待区分
+014,晃链条,low_confidence,METL,悬挂物 vs 锁链,both,Rattle,Chain Rattle,mapped_phrase,phrase_rule,medium,Shake,Chain Rattle 优先非 Chain Shake
+015,剐蹭车漆,low_confidence,VEH,轻微碰擦默认 Scuff,both,Scuff,Car Paint Scuff,mapped_phrase,phrase_rule,medium,Rub|Scrape,Vehicle Paint Scuff 亦可
+016,来回蹭地毯,low_confidence,FOLEY,来回接触默认 Rub,both,Rub,Carpet Rub,mapped_phrase,phrase_rule,medium,Friction,phrase_low_confidence
+017,划金属表面,low_confidence,METL,Scratch vs Scrape 边界,both,Scratch,Metal Scratch,mapped_phrase,phrase_rule,medium,Scrape,Metal Scratch 非 Scrape
+018,砸地,low_confidence,FOLEY,Impact 力度未指明,both,Impact,Impact Ground,mapped_phrase,phrase_rule,medium,Drop,高力度 Impact 默认
+019,撞桌角,low_confidence,FOLEY,Bump vs Impact 边界,both,Bump,Table Corner Bump,mapped_phrase,phrase_rule,medium,Impact,Bump/Impact 边界
+020,抖布料,low_confidence,CLOTH,Shake vs Flap 边界,both,Cloth Shake|Cloth Flap,Cloth Shake,mapped_phrase,phrase_rule,low,,Cloth Shake/Flap 低置信
+021,滚钢珠,stable,METL,钢珠滚动较稳定,both,Roll,Steel Ball Roll,mapped_phrase,phrase_rule,high,,接近 A；Steel Ball Roll
+022,转旋钮,low_confidence,MECH,Turn vs Twist vs Click,both,Knob Turn|Knob Twist,Knob Turn,mapped_phrase,phrase_rule,low,Click,Knob Turn/Twist 低置信
+023,开抽屉,low_confidence,DRWR,Open vs Slide vs Pull,both,Open|Slide|Pull,Drawer Open,mapped_phrase,phrase_rule,low,,动作歧义
+024,关保险柜,low_confidence,MECH,Close vs Latch vs Lock,both,Close|Latch|Lock,Safe Close,mapped_phrase,phrase_rule,low,,动作歧义
+025,打,review,ACTION,设计师只输入一个动词,governance,,,review_required,ambiguity_rule,,Hit|Knock|Fire|Play,ambiguous_single
+026,击,review,ACTION,常作组合词后缀,governance,,,review_required,ambiguity_rule,,,suffix_only；需等短语
+027,碰,review,FOLEY,Touch/Bump/Impact/Clink,governance,,,review_required,ambiguity_rule,,,ambiguous_single
+028,响,review,RESULT,结果词不是动作,governance,,,weak_token,weak_token_rule,,,weak_token；不进动作主表
+029,动,review,GENERIC,信息量过低,governance,,,weak_token,weak_token_rule,,,weak_token
+030,甩,review,MOTION,Swing/Flick/Whip/Flap,governance,,,review_required,ambiguity_rule,,,ambiguous_single；靠对象消歧
+031,摔,review,FOLEY,Drop/Impact/Crash 取决于对象,governance,,,review_required,ambiguity_rule,,Drop,ambiguous_single
+032,震,review,MOTION,Shake/Rumble/Tremor 取决于源,governance,,,review_required,ambiguity_rule,,,ambiguous_single
+033,抖,review,MOTION,Shake/Tremble/Rattle,governance,,,review_required,ambiguity_rule,,,ambiguous_single
+034,破,review,DESTR,Break/Burst/Rip 取决于材质,governance,,,review_required,ambiguity_rule,,,ambiguous_single
+035,裂,review,DESTR,Crack/Split/Tear,governance,,,review_required,ambiguity_rule,,,ambiguous_single
+036,碎,review,DESTR,Shatter/Break/Crumble,governance,,,review_required,ambiguity_rule,,,ambiguous_single
+037,打门,phrase_rule,DOOR,歧义单字「打」的短语解,both,Door Knock,Door Knock,mapped_phrase,phrase_rule,high,Hit,打 + 门 = Knock 非 Hit
+038,砸门,phrase_rule,DOOR,重力度关门/撞门,both,Door Bang,Door Bang,mapped_phrase,phrase_rule,high,Drop,phrase：Door Bang
+039,打鼓,phrase_rule,MUSC,打击乐语境,both,Drum Hit,Drum Hit,mapped_phrase,phrase_rule,high,Fire,打 + 鼓 = Hit 非 Fire
+040,打枪,phrase_rule,GUN,枪械发射,both,Fire,Gun Fire,mapped_phrase,phrase_rule,high,Hit,打枪不能翻成 Gun Hit
+041,碰杯,phrase_rule,GLASS,社交场景碰杯,both,Glass Clink,Glass Clink,mapped_phrase,phrase_rule,high,Bump|Impact,固定短语
+042,轻碰桌边,phrase_rule,FOLEY,轻微接触,both,Bump,Table Bump,mapped_phrase,phrase_rule,high,Impact,轻撞非 Impact
+043,甩衣服,phrase_rule,CLOTH,衣物甩动,both,Cloth Flap,Cloth Flap,mapped_phrase,phrase_rule,high,Whip,布料 Flap
+044,甩鞭,phrase_rule,FOLEY,鞭子 crack,both,Whip Crack,Whip Crack,mapped_phrase,phrase_rule,high,,鞭子特化
+045,金属响,phrase_rule,METL,金属共鸣/余响,both,Metal Resonance,Metal Resonance,mapped_phrase,phrase_rule,high,Ring,材质共振非泛 Ring
+046,铃响,phrase_rule,BELL,铃声结果,both,Ring,Bell Ring,mapped_phrase,phrase_rule,high,,object 决定 Ring
+047,划过水面,phrase_rule,WATER,Swipe/Pass By 待 phrase review,governance,,,review_required,ambiguity_rule,low,Scrape|Scratch,ambiguous_phrase
+048,来回摩擦毛毯,phrase_rule,CLOTH,修饰语改变 Rub/Friction,both,Rub,Carpet Rub,mapped_phrase,phrase_rule,high,Friction,来回→Rub 非 Friction
+049,轻蹭墙皮,phrase_rule,FOLEY,轻微 Scuff,both,Scuff,Wall Scuff,mapped_phrase,phrase_rule,high,Rub|Scrape,轻蹭→Scuff
+050,敲黑板,phrase_rule,FOLEY,教室场景明确 Knock,both,Knock,Chalkboard Knock,mapped_phrase,phrase_rule,high,Tap,phrase：Knock
+051,打火机,phrase_rule,PROP,打火机点火机构,both,Lighter Click,Lighter Click,mapped_phrase,phrase_rule,high,Hit,打火机不是 Hit
+052,打雷,phrase_rule,WEATHER,自然天气雷声,both,Thunder Rumble,Thunder Rumble,mapped_phrase,phrase_rule,high,Hit,打雷不是 Hit
+053,打字,phrase_rule,TECH,键盘输入动作,both,Keyboard Typing,Keyboard Typing,mapped_phrase,phrase_rule,high,Hit,打字不是 Hit
+054,打水漂,phrase_rule,WATER,石头水面跳跃,both,Stone Skip Water,Stone Skip Water,mapped_phrase,phrase_rule,medium,Hit,习语短语
+055,打蛋,phrase_rule,FOOD,厨房搅打,both,Egg Whisk,Egg Whisk,mapped_phrase,phrase_rule,medium,Hit,烹饪动作
+056,打喷嚏,phrase_rule,HUMAN,人体声音,both,Sneeze,Sneeze,mapped_phrase,phrase_rule,high,Hit,人体生理声
+057,打电话,review,PHONE,口语泛动词,governance,,,review_required,ambiguity_rule,low,Hit,不是音效动作本身
+058,打包,review,GENERIC,非声音动作泛词,governance,,,review_required,ambiguity_rule,low,Hit,可能是整理文件也可能是包装
+059,打磨金属,phrase_rule,METL,金属表面处理,both,Metal Grind,Metal Grind,mapped_phrase,phrase_rule,high,Hit,打磨不是 Hit
+060,打滑轮胎,phrase_rule,VEH,车辆轮胎失控,both,Tire Skid,Tire Skid,mapped_phrase,phrase_rule,high,Slide,车辆语境用 Skid
+061,碰到麦架,result,REC,录音事故类,both,Mic Stand Bump,Mic Stand Bump,mapped_phrase,phrase_rule,medium,Clink,录音事故 Bump
+062,碰倒玻璃杯,composite,GLASS,碰撞导致倒下,both,Glass Cup Knock Over,Glass Cup Knock Over,mapped_phrase,composite_phrase,medium,Clink,复合动作不是单纯碰杯
+063,石头互碰,phrase_rule,ROCK,石头相互撞击,both,Rock Clack,Rock Clack,mapped_phrase,phrase_rule,medium,Glass,材质决定 Clack
+064,塑料盒互碰,phrase_rule,PLAS,塑料容器碰撞,both,Plastic Box Clack,Plastic Box Clack,mapped_phrase,phrase_rule,medium,Glass,塑料短促 Clack
+065,金属杆相碰,phrase_rule,METL,金属杆互击,both,Metal Rod Clank,Metal Rod Clank,mapped_phrase,phrase_rule,medium,Glass,金属重碰 Clank
+066,轻碰麦克风,result,REC,录音误触,both,Mic Bump,Mic Bump,mapped_phrase,phrase_rule,medium,Impact,轻碰用 Bump
+067,碰撞测试,review,VEH,测试语境不明,governance,,,review_required,ambiguity_rule,low,,测试词可能污染
+068,身体碰墙,phrase_rule,HUMAN,人体撞墙,both,Body Bump Wall,Body Bump Wall,mapped_phrase,phrase_rule,medium,Clink,人体轻撞
+069,头撞门,phrase_rule,HUMAN,人体撞击门,both,Head Impact Door,Head Impact Door,mapped_phrase,phrase_rule,medium,Knock,人体撞击不是敲门
+070,膝盖碰桌子,phrase_rule,HUMAN,人体轻碰桌子,both,Knee Bump Table,Knee Bump Table,mapped_phrase,phrase_rule,medium,Impact,轻碰 Bump
+071,门响,review,DOOR,门声结果词,governance,,,review_required,ambiguity_rule,low,Ring,可能 Creak 或 Rattle
+072,链条响,phrase_rule,METL,链条松动声,both,Chain Rattle,Chain Rattle,mapped_phrase,phrase_rule,high,Ring,链条不是 Ring
+073,风扇响,phrase_rule,MACH,电器转动声,both,Fan Whir,Fan Whir,mapped_phrase,phrase_rule,medium,Ring,风扇用 Whir
+074,水管响,review,PIPE,管道声源不明,governance,,,review_required,ambiguity_rule,low,Ring,可能 Knock 或 Rattle
+075,木板响,review,WOOD,木质结果声,governance,,,review_required,ambiguity_rule,low,Ring,可能 Creak
+076,肚子响,phrase_rule,HUMAN,人体腹鸣,both,Stomach Growl,Stomach Growl,mapped_phrase,phrase_rule,high,Ring,人体声特化
+077,机器响,review,MACH,机器结果词,governance,,,review_required,ambiguity_rule,low,Ring,可能 Hum 或 Rattle
+078,警报响,phrase_rule,ALRM,警报声,both,Alarm Ring,Alarm Ring,mapped_phrase,phrase_rule,medium,Rattle,报警器 Ring
+079,金属片响,phrase_rule,METL,薄金属振动,both,Metal Sheet Rattle,Metal Sheet Rattle,mapped_phrase,phrase_rule,medium,Ring,薄片更像 Rattle
+080,硬币响,phrase_rule,METL,硬币碰撞,both,Coin Jingle,Coin Jingle,mapped_phrase,phrase_rule,medium,Ring,硬币 Jingle
+081,甩毛巾,phrase_rule,CLOTH,毛巾甩动,both,Towel Flap,Towel Flap,mapped_phrase,phrase_rule,medium,Whip,布料优先 Flap
+082,甩水,phrase_rule,WATER,液体被甩出,both,Water Flick,Water Flick,mapped_phrase,phrase_rule,medium,Swing,液体不是 Swing
+083,甩尾巴,phrase_rule,ANML,动物尾巴动作,both,Tail Swing,Tail Swing,mapped_phrase,phrase_rule,medium,Cloth,动物部位动作
+084,甩刀,phrase_rule,WEAP,刀快速挥动,both,Knife Whoosh,Knife Whoosh,mapped_phrase,phrase_rule,medium,Flap,武器空气感
+085,甩棍,phrase_rule,WEAP,棍棒挥动,both,Stick Whoosh,Stick Whoosh,mapped_phrase,phrase_rule,medium,Flap,道具空气感
+086,甩手,phrase_rule,HUMAN,手臂甩动,both,Hand Whoosh,Hand Whoosh,mapped_phrase,phrase_rule,medium,Whip,人体动作空气感
+087,甩门,phrase_rule,DOOR,猛关门,both,Door Slam,Door Slam,mapped_phrase,phrase_rule,high,Swing,门语境 Slam
+088,甩出去,review,MOTION,动作方向缺对象,governance,,,review_required,ambiguity_rule,low,Swing,需要对象决定 Throw 或 Toss
+089,甩绳子,phrase_rule,FOLEY,绳子甩动,both,Rope Swing,Rope Swing,mapped_phrase,phrase_rule,medium,Cloth,绳子 Swing
+090,甩鞭尾音,phrase_rule,FOLEY,鞭子余音,both,Whip Tail,Whip Tail,mapped_phrase,phrase_rule,medium,Cloth,鞭子语境
+091,划火柴,phrase_rule,FIRE,火柴点燃,both,Match Strike,Match Strike,mapped_phrase,phrase_rule,high,Scratch,划火柴不是 Scratch
+092,划船,phrase_rule,WATER,划桨行船,both,Boat Row,Boat Row,mapped_phrase,phrase_rule,high,Scratch,划船不是 Scratch
+093,划玻璃,phrase_rule,GLASS,尖锐划痕,both,Glass Scratch,Glass Scratch,mapped_phrase,phrase_rule,high,Scrape,玻璃细划 Scratch
+094,划过空气,phrase_rule,AIR,空气挥过,both,Air Whoosh,Air Whoosh,mapped_phrase,phrase_rule,medium,Scratch,空气不是 Scratch
+095,划破布料,phrase_rule,CLOTH,布料被割开,both,Cloth Tear,Cloth Tear,mapped_phrase,phrase_rule,medium,Scratch,结果是 Tear
+096,划开纸箱,phrase_rule,PAPR,纸箱被刀割开,both,Cardboard Cut Open,Cardboard Cut Open,mapped_phrase,phrase_rule,medium,Scratch,开口动作
+097,划水面,review,WATER,水面动作模糊,governance,,,review_required,ambiguity_rule,low,Scratch|Scrape,可能 Swipe 或 Splash
+098,划痕,review,RESULT,结果名词不完整,governance,,,review_required,ambiguity_rule,low,,需要对象
+099,划线,review,GENERIC,非声音动作泛词,governance,,,review_required,ambiguity_rule,low,Scratch,可能书写
+100,刀划木头,phrase_rule,WOOD,刀尖划木,both,Knife Scratch Wood,Knife Scratch Wood,mapped_phrase,phrase_rule,high,Scrape,细尖划 Scratch
+101,刮风,phrase_rule,WEATHER,天气风声,both,Wind Gust,Wind Gust,mapped_phrase,phrase_rule,high,Scrape,刮风不是 Scrape
+102,刮胡子,phrase_rule,HUMAN,剃须动作,both,Razor Shave,Razor Shave,mapped_phrase,phrase_rule,medium,Scrape,语义特化 Shave
+103,刮彩票,phrase_rule,PAPR,刮奖卡,both,Scratch Card Scratch,Scratch Card Scratch,mapped_phrase,phrase_rule,medium,Scrape,刮卡是 Scratch
+104,刮墙皮,phrase_rule,FOLEY,墙皮粗糙刮,both,Wall Scrape,Wall Scrape,mapped_phrase,phrase_rule,high,Scratch,墙面粗刮 Scrape
+105,刮锅底,phrase_rule,FOOD,厨具刮擦,both,Pan Scrape,Pan Scrape,mapped_phrase,phrase_rule,high,Scratch,锅底 Scrape
+106,刮金属管,phrase_rule,METL,金属表面粗刮,both,Metal Pipe Scrape,Metal Pipe Scrape,mapped_phrase,phrase_rule,high,Scratch,粗糙拖刮
+107,剐蹭护栏,phrase_rule,VEH,车辆轻微剐蹭,both,Guardrail Scuff,Guardrail Scuff,mapped_phrase,phrase_rule,medium,Rub,剐蹭 Scuff
+108,蹭墙,phrase_rule,FOLEY,轻蹭墙面,both,Wall Scuff,Wall Scuff,mapped_phrase,phrase_rule,medium,Rub,轻蹭 Scuff
+109,蹭衣服,phrase_rule,CLOTH,衣物摩擦,both,Cloth Rub,Cloth Rub,mapped_phrase,phrase_rule,high,Scuff,布料来回 Rub
+110,蹭地板,phrase_rule,FOLEY,物体轻蹭地面,both,Floor Scuff,Floor Scuff,mapped_phrase,phrase_rule,medium,Rub,地面轻蹭 Scuff
+111,脚底打滑,phrase_rule,HUMAN,脚步滑倒前动作,both,Foot Slip,Foot Slip,mapped_phrase,phrase_rule,high,Slide,人体失足 Slip
+112,车轮打滑,phrase_rule,VEH,轮胎失控,both,Tire Skid,Tire Skid,mapped_phrase,phrase_rule,high,Slide,车轮用 Skid
+113,抽屉滑出,phrase_rule,DRWR,抽屉滑轨,both,Drawer Slide Out,Drawer Slide Out,mapped_phrase,phrase_rule,high,Slip,滑出 Slide Out
+114,木门滑开,phrase_rule,DOOR,门轨滑动,both,Wood Door Slide Open,Wood Door Slide Open,mapped_phrase,phrase_rule,high,Slip,门滑开 Slide Open
+115,金属片滑落,phrase_rule,METL,金属片向下滑,both,Metal Sheet Slide Down,Metal Sheet Slide Down,mapped_phrase,phrase_rule,high,Slip,物体贴面滑落
+116,冰块滑过地面,phrase_rule,ICE,冰块贴地滑,both,Ice Slide Across Floor,Ice Slide Across Floor,mapped_phrase,phrase_rule,high,Slip,贴面滑过
+117,鼠标滑动,phrase_rule,TECH,鼠标物理移动,both,Mouse Slide,Mouse Slide,mapped_phrase,phrase_rule,medium,Slip,设备移动
+118,滑板滑行,phrase_rule,VEH,滑板滚行,both,Skateboard Roll,Skateboard Roll,mapped_phrase,phrase_rule,medium,Slip,滑板主要 Roll
+119,雪地滑行,phrase_rule,SNOW,雪地移动,both,Snow Glide,Snow Glide,mapped_phrase,phrase_rule,medium,Skid,顺滑 Glide
+120,布料滑过皮肤,low_confidence,CLOTH,布料贴皮肤滑,both,Cloth Slide Skin,Cloth Slide Skin,mapped_phrase,phrase_rule,low,Scratch,Slide 与 Rub 边界
+121,玻璃杯摔碎,composite,GLASS,掉落导致破碎,both,Glass Cup Shatter,Glass Cup Shatter,mapped_phrase,composite_phrase,high,Drop,结果 Shatter 优先
+122,手机摔地,composite,FOLEY,手机掉地撞击,both,Phone Drop Impact,Phone Drop Impact,mapped_phrase,composite_phrase,medium,Slam,物体 Drop Impact
+123,人摔倒,phrase_rule,HUMAN,人体跌倒,both,Body Fall,Body Fall,mapped_phrase,phrase_rule,high,Drop,人不是 Object Drop
+124,摔门,phrase_rule,DOOR,猛关门,both,Door Slam,Door Slam,mapped_phrase,phrase_rule,high,Drop,摔门 Slam
+125,摔书,phrase_rule,PAPR,书掉落,both,Book Drop,Book Drop,mapped_phrase,phrase_rule,medium,Slam,物体 Drop
+126,石头砸地,phrase_rule,ROCK,石头重击地面,both,Rock Impact Ground,Rock Impact Ground,mapped_phrase,phrase_rule,high,Drop,砸是 Impact
+127,锤子砸铁板,phrase_rule,TOOL,工具击打金属,both,Hammer Hit Metal Plate,Hammer Hit Metal Plate,mapped_phrase,phrase_rule,high,Drop,施力物明确 Hit
+128,重物砸木箱,phrase_rule,WOOD,重物撞击木箱,both,Heavy Object Impact Wood Box,Heavy Object Impact Wood Box,mapped_phrase,phrase_rule,high,Hit,重物 Impact
+129,砸碎玻璃,composite,GLASS,撞击导致碎裂,both,Glass Smash,Glass Smash,mapped_phrase,composite_phrase,high,Drop,结果 Smash
+130,苹果掉地上,phrase_rule,FOOD,水果掉落,both,Apple Drop Floor,Apple Drop Floor,mapped_phrase,phrase_rule,medium,Slam,掉落 Drop
+131,玻璃碎裂,phrase_rule,GLASS,玻璃破碎,both,Glass Shatter,Glass Shatter,mapped_phrase,phrase_rule,high,Break,玻璃优先 Shatter
+132,木头裂开,phrase_rule,WOOD,木材开裂,both,Wood Crack,Wood Crack,mapped_phrase,phrase_rule,high,Tear,木头 Crack
+133,冰面裂开,phrase_rule,ICE,冰层裂纹,both,Ice Crack,Ice Crack,mapped_phrase,phrase_rule,high,Tear,冰 Crack
+134,布料撕裂,phrase_rule,CLOTH,布料被撕,both,Cloth Tear,Cloth Tear,mapped_phrase,phrase_rule,high,Break,布料 Tear
+135,纸张撕裂,phrase_rule,PAPR,纸被撕开,both,Paper Tear,Paper Tear,mapped_phrase,phrase_rule,high,Break,纸 Tear
+136,骨头断裂,phrase_rule,BONE,骨头断裂声,both,Bone Crack,Bone Crack,mapped_phrase,phrase_rule,high,Tear,骨头 Crack
+137,墙皮脱落,phrase_rule,FOLEY,墙皮碎落,both,Plaster Crumble,Plaster Crumble,mapped_phrase,phrase_rule,medium,Break,墙皮 Crumble
+138,石头碎裂,phrase_rule,ROCK,石头破裂,both,Rock Crack,Rock Crack,mapped_phrase,phrase_rule,medium,Shatter,石头 Crack
+139,陶瓷破碎,phrase_rule,CERM,陶瓷碎裂,both,Ceramic Shatter,Ceramic Shatter,mapped_phrase,phrase_rule,high,Tear,陶瓷 Shatter
+140,金属断裂,phrase_rule,METL,金属断开,both,Metal Snap,Metal Snap,mapped_phrase,phrase_rule,medium,Tear,金属 Snap
+141,抽屉拉开又关上,composite,DRWR,开合连续动作,both,Drawer Open Close,Drawer Open Close,mapped_phrase,composite_phrase,high,OnlyOpen,不能只输出 Open
+142,门打开后撞到墙,composite,DOOR,门开后撞击墙,both,Door Open Impact Wall,Door Open Impact Wall,mapped_phrase,composite_phrase,high,OnlyOpen,动作链
+143,拿起杯子放下,composite,GLASS,拿放杯子,both,Cup Pick Up Put Down,Cup Pick Up Put Down,mapped_phrase,composite_phrase,medium,OnlyPick,复合 Foley
+144,金属盒打开合上,composite,METL,盒子开合,both,Metal Box Open Close,Metal Box Open Close,mapped_phrase,composite_phrase,high,OnlyOpen,开合保留
+145,拉链拉开再拉上,composite,CLOTH,拉链往返,both,Zipper Open Close,Zipper Open Close,mapped_phrase,composite_phrase,high,OnlyOpen,双向动作
+146,锁扣打开关闭,composite,MECH,锁扣机制,both,Latch Open Close,Latch Open Close,mapped_phrase,composite_phrase,high,OnlyOpen,机制开合
+147,纸张揉皱展开,composite,PAPR,纸张处理,both,Paper Crumple Unfold,Paper Crumple Unfold,mapped_phrase,composite_phrase,high,OnlyCrumple,保留展开
+148,布料甩动落地,composite,CLOTH,布料甩后掉落,both,Cloth Flap Drop,Cloth Flap Drop,mapped_phrase,composite_phrase,medium,OnlyFlap,复合动作
+149,石头滚动后撞击,composite,ROCK,滚动加撞击,both,Rock Roll Impact,Rock Roll Impact,mapped_phrase,composite_phrase,high,OnlyRoll,动作链
+150,水倒入杯中溅出,composite,LIQ,倒水并溅出,both,Water Pour Splash,Water Pour Splash,mapped_phrase,composite_phrase,high,OnlyPour,液体复合动作
