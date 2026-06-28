@@ -35,10 +35,13 @@ DEFAULT_ALIAS_EXPANSION_PACK = (
     / "reviewed_alias_expansion"
     / "alias_prompt_items.jsonl"
 )
-DEFAULT_OUTPUT_CSV = ROOT / "exports" / "ai_alias_prompt_pack" / "ai_alias_candidates_review.csv"
-DEFAULT_REPORT = ROOT / "reports" / "ai_alias_candidates_review_report.md"
+DEFAULT_OUTPUT_CSV = (
+    ROOT / "exports" / "ai_alias_prompt_pack" / "ai_alias_candidates_review_real.csv"
+)
+DEFAULT_REPORT = ROOT / "reports" / "ai_alias_candidates_review_real_report.md"
 
 PACK_MODES = ("new_candidate", "alias_expansion")
+REQUIRED_IMPORT_COLUMNS = {"raw", "canonical", "slot"}
 FORBIDDEN_RAW_BY_CANONICAL = {
     "Hit": ("命中",),
     "Crack": ("裂纹",),
@@ -48,8 +51,8 @@ FORBIDDEN_SHOT_MARKERS = (
     "shotgun mic",
     "霰弹麦",
     "散弹麦",
+    "枪式麦",
     "麦克风",
-    "mic",
 )
 MIN_ALIASES_PER_CANONICAL = 3
 MAX_ALIASES_PER_CANONICAL = 5
@@ -82,6 +85,7 @@ DRY_RUN_MOCK_ALIASES: dict[str, dict[str, list[str]]] = {
 
 @dataclass(frozen=True)
 class ImportSummary:
+    input_count: int
     candidate_count: int
     canonical_count: int
     counts_by_canonical: dict[str, int]
@@ -124,49 +128,42 @@ def import_ai_alias_candidates(
     for path in (new_candidate_pack, alias_expansion_pack, canonical_path):
         if not path.is_file():
             raise FileNotFoundError(f"Required input not found: {path}")
+    _require_reviewed_prompt_pack(new_candidate_pack, "reviewed_new_candidate")
+    _require_reviewed_prompt_pack(alias_expansion_pack, "reviewed_alias_expansion")
 
     canonical_before = _sha256(canonical_path)
     existing_raws = _existing_raw_keys(canonical_path)
     generator = generator or dry_run_mock_alias_generator
 
     pack_specs = (
-        ("new_candidate", new_candidate_pack),
-        ("alias_expansion", alias_expansion_pack),
+        ("new_candidate", new_candidate_pack, _load_prompt_items(new_candidate_pack)),
+        ("alias_expansion", alias_expansion_pack, _load_prompt_items(alias_expansion_pack)),
     )
-    imported_rows = _read_import_rows(import_csv) if import_csv else []
-    accepted: list[dict[str, str]] = []
-    rejection_counts: Counter[str] = Counter()
-    seen_keys: set[tuple[str, str, str]] = set()
-
-    for pack_mode, pack_path in pack_specs:
-        for item in _load_prompt_items(pack_path):
-            canonical = str(item["canonical"])
-            if pack_mode == "new_candidate" and canonical.casefold() == "gun":
-                rejection_counts["gun_not_allowed_new_candidate"] += 1
-                continue
-
-            proposals = _proposals_for_item(
-                item,
-                pack_mode,
-                imported_rows,
-                generator,
-            )
-            item_rows, rejections = _normalize_and_filter_rows(
-                proposals,
-                item=item,
-                pack_mode=pack_mode,
-                existing_raws=existing_raws,
-                seen_keys=seen_keys,
-            )
-            accepted.extend(item_rows)
-            rejection_counts.update(rejections)
+    if import_csv:
+        imported_rows = _read_import_rows(import_csv)
+        input_count = len(imported_rows)
+        accepted, rejection_counts = _import_real_rows(
+            imported_rows,
+            pack_specs=pack_specs,
+            existing_raws=existing_raws,
+        )
+    else:
+        input_count, accepted, rejection_counts = _generate_dry_run_rows(
+            pack_specs=pack_specs,
+            generator=generator,
+            existing_raws=existing_raws,
+        )
 
     output_csv.parent.mkdir(parents=True, exist_ok=True)
     report_path.parent.mkdir(parents=True, exist_ok=True)
     _write_csv(output_csv, accepted)
     counts_by_canonical = dict(sorted(Counter(row["canonical"] for row in accepted).items()))
     counts_by_pack = dict(sorted(Counter(_pack_from_note(row["note"]) for row in accepted).items()))
+    if import_csv and len(accepted) + sum(rejection_counts.values()) != input_count:
+        raise RuntimeError("real import accounting mismatch")
+    canonical_after = _sha256(canonical_path)
     summary = ImportSummary(
+        input_count=input_count,
         candidate_count=len(accepted),
         canonical_count=len(counts_by_canonical),
         counts_by_canonical=counts_by_canonical,
@@ -176,20 +173,20 @@ def import_ai_alias_candidates(
         rejected_count=sum(rejection_counts.values()),
         rejection_reason_counts=dict(sorted(rejection_counts.items())),
         canonical_tokens_sha256_before=canonical_before,
-        canonical_tokens_sha256_after=_sha256(canonical_path),
-        canonical_tokens_changed=False,
+        canonical_tokens_sha256_after=canonical_after,
+        canonical_tokens_changed=canonical_after != canonical_before,
         has_keep=any(row["review_status"] == "keep" for row in accepted),
         all_source_ai_candidate=all(row["source"] == "ai_candidate" for row in accepted),
         all_priority_zero=all(row["priority"] == "0" for row in accepted),
         gun_only_alias_expansion=_gun_only_alias_expansion(accepted),
-        dry_run=dry_run,
+        dry_run=import_csv is None,
     )
     if summary.canonical_tokens_sha256_after != canonical_before:
         raise RuntimeError("canonical_tokens.csv changed while importing AI alias candidates")
     _write_report(
         report_path,
         summary=summary,
-        pack_specs=pack_specs,
+        pack_specs=tuple((mode, path) for mode, path, _items in pack_specs),
         import_csv=import_csv,
     )
     return summary
@@ -198,7 +195,6 @@ def import_ai_alias_candidates(
 def dry_run_mock_alias_generator(item: dict[str, object], pack_mode: str) -> list[dict[str, str]]:
     canonical = str(item["canonical"])
     slot = str(item.get("slot") or "unknown")
-    candidate_type = str(item.get("candidate_type") or "token")
     templates = DRY_RUN_MOCK_ALIASES.get(pack_mode, {}).get(canonical, [])
     rows: list[dict[str, str]] = []
     for raw in templates[:MAX_ALIASES_PER_CANONICAL]:
@@ -209,7 +205,7 @@ def dry_run_mock_alias_generator(item: dict[str, object], pack_mode: str) -> lis
                 "slot": slot,
                 "lang": "zh",
                 "priority": "0",
-                "rule_type": _infer_rule_type(raw, candidate_type),
+                "rule_type": "alias",
                 "review_status": "review",
                 "ambiguity": _default_ambiguity(canonical),
                 "tags": _default_tags(canonical, slot),
@@ -220,24 +216,128 @@ def dry_run_mock_alias_generator(item: dict[str, object], pack_mode: str) -> lis
     return rows
 
 
-def _proposals_for_item(
-    item: dict[str, object],
-    pack_mode: str,
-    imported_rows: list[dict[str, str]],
+def _generate_dry_run_rows(
+    *,
+    pack_specs: tuple[tuple[str, Path, list[dict[str, object]]], ...],
     generator: AliasGenerator,
-) -> list[dict[str, str]]:
-    canonical = str(item["canonical"])
-    slot = str(item.get("slot") or "unknown")
-    matched = [
-        row
-        for row in imported_rows
-        if row.get("canonical") == canonical
-        and row.get("slot") == slot
-        and _pack_from_note(row.get("note", "")) in {"", pack_mode}
+    existing_raws: set[str],
+) -> tuple[int, list[dict[str, str]], Counter[str]]:
+    input_count = 0
+    accepted: list[dict[str, str]] = []
+    rejection_counts: Counter[str] = Counter()
+    seen_keys: set[tuple[str, str, str]] = set()
+
+    for pack_mode, _pack_path, items in pack_specs:
+        for item in items:
+            canonical = str(item["canonical"])
+            if pack_mode == "new_candidate" and canonical.casefold() == "gun":
+                rejection_counts["gun_not_allowed_new_candidate"] += 1
+                continue
+            proposals = generator(item, pack_mode)
+            input_count += len(proposals)
+            item_rows, rejections = _normalize_and_filter_rows(
+                proposals,
+                item=item,
+                pack_mode=pack_mode,
+                existing_raws=existing_raws,
+                seen_keys=seen_keys,
+            )
+            accepted.extend(item_rows)
+            rejection_counts.update(rejections)
+    return input_count, accepted, rejection_counts
+
+
+def _import_real_rows(
+    imported_rows: list[dict[str, str]],
+    *,
+    pack_specs: tuple[tuple[str, Path, list[dict[str, object]]], ...],
+    existing_raws: set[str],
+) -> tuple[list[dict[str, str]], Counter[str]]:
+    reviewed_items: dict[str, dict[tuple[str, str], dict[str, object]]] = {
+        mode: {
+            (str(item.get("canonical", "")).casefold(), str(item.get("slot", "")).casefold()): item
+            for item in items
+        }
+        for mode, _path, items in pack_specs
+    }
+    accepted: list[dict[str, str]] = []
+    rejection_counts: Counter[str] = Counter()
+    seen_keys: set[tuple[str, str, str]] = set()
+
+    for proposal in imported_rows:
+        resolved, reason = _resolve_reviewed_item(proposal, reviewed_items)
+        if reason:
+            rejection_counts[reason] += 1
+            continue
+        assert resolved is not None
+        pack_mode, item = resolved
+        row = _normalize_row(
+            proposal,
+            canonical=str(item["canonical"]),
+            slot=str(item.get("slot") or "unknown"),
+            pack_mode=pack_mode,
+            real_import=True,
+        )
+        reason = _reject_reason(
+            row,
+            candidate_type=str(item.get("candidate_type") or "token"),
+            pack_mode=pack_mode,
+            source_context=proposal.get("source_note", ""),
+        )
+        if reason:
+            rejection_counts[reason] += 1
+            continue
+        dedupe_key = (row["raw"].casefold(), row["canonical"].casefold(), row["slot"])
+        if dedupe_key in seen_keys:
+            rejection_counts["duplicate_raw_canonical_slot"] += 1
+            continue
+        if row["raw"].casefold() in existing_raws:
+            rejection_counts["duplicate_existing_canonical_raw"] += 1
+            continue
+        seen_keys.add(dedupe_key)
+        accepted.append(row)
+
+    return accepted, rejection_counts
+
+
+def _resolve_reviewed_item(
+    proposal: Mapping[str, str],
+    reviewed_items: Mapping[str, Mapping[tuple[str, str], dict[str, object]]],
+) -> tuple[tuple[str, dict[str, object]] | None, str | None]:
+    raw = (proposal.get("raw") or "").strip()
+    canonical = (proposal.get("canonical") or "").strip()
+    slot = (proposal.get("slot") or "").strip().casefold()
+    source_note = proposal.get("source_note", "") or ""
+    if not raw:
+        return None, "missing_raw"
+    if not canonical:
+        return None, "missing_canonical"
+    if not slot:
+        return None, "missing_slot"
+
+    pack_hints = {mode for mode in PACK_MODES if mode in source_note.casefold()}
+    if len(pack_hints) > 1:
+        return None, "multiple_prompt_pack_sources"
+    if canonical.casefold() == "gun" and "new_candidate" in pack_hints:
+        return None, "gun_not_allowed_new_candidate"
+
+    key = (canonical.casefold(), slot)
+    available = [
+        (mode, items[key])
+        for mode, items in reviewed_items.items()
+        if key in items
     ]
-    if matched:
-        return matched
-    return generator(item, pack_mode)
+    if pack_hints:
+        hinted_mode = next(iter(pack_hints))
+        for mode, item in available:
+            if mode == hinted_mode:
+                return (mode, item), None
+        return None, "candidate_not_in_reviewed_prompt_pack"
+    if len(available) == 1:
+        return available[0], None
+    if len(available) > 1:
+        return None, "ambiguous_prompt_pack_source"
+    return None, "candidate_not_in_reviewed_prompt_pack"
 
 
 def _normalize_and_filter_rows(
@@ -245,7 +345,7 @@ def _normalize_and_filter_rows(
     *,
     item: dict[str, object],
     pack_mode: str,
-    existing_raws: set[tuple[str, str]],
+    existing_raws: set[str],
     seen_keys: set[tuple[str, str, str]],
 ) -> tuple[list[dict[str, str]], Counter[str]]:
     canonical = str(item["canonical"])
@@ -264,7 +364,7 @@ def _normalize_and_filter_rows(
         if dedupe_key in seen_keys:
             rejections["duplicate_raw_canonical_slot"] += 1
             continue
-        if (row["raw"].casefold(), row["slot"]) in existing_raws:
+        if row["raw"].casefold() in existing_raws:
             rejections["duplicate_existing_canonical_raw"] += 1
             continue
         seen_keys.add(dedupe_key)
@@ -283,22 +383,25 @@ def _normalize_row(
     canonical: str,
     slot: str,
     pack_mode: str,
+    real_import: bool = False,
 ) -> dict[str, str]:
     raw = (proposal.get("raw") or "").strip()
-    note = (proposal.get("note") or "").strip()
-    if not note:
-        note = f"import_v0.1;pack={pack_mode}"
+    source_note = (proposal.get("source_note") or proposal.get("note") or "").strip()
+    note_prefix = "real_import_v0.1" if real_import else "dry_run_v0.1"
+    note = f"{note_prefix};pack={pack_mode}"
+    if source_note:
+        note += f";source_note={source_note}"
     return {
         "raw": raw,
-        "canonical": (proposal.get("canonical") or canonical).strip(),
-        "slot": (proposal.get("slot") or slot).strip(),
-        "lang": (proposal.get("lang") or "zh").strip().lower(),
-        "priority": str(proposal.get("priority") or "0").strip(),
-        "rule_type": (proposal.get("rule_type") or _infer_rule_type(raw, "token")).strip().lower(),
-        "review_status": (proposal.get("review_status") or "review").strip().lower(),
-        "ambiguity": (proposal.get("ambiguity") or _default_ambiguity(canonical)).strip().lower(),
-        "tags": (proposal.get("tags") or _default_tags(canonical, slot)).strip(),
-        "source": (proposal.get("source") or "ai_candidate").strip().lower(),
+        "canonical": canonical,
+        "slot": slot,
+        "lang": "zh",
+        "priority": "0",
+        "rule_type": "alias",
+        "review_status": "review",
+        "ambiguity": _default_ambiguity(canonical),
+        "tags": _default_tags(canonical, slot),
+        "source": "ai_candidate",
         "note": note,
     }
 
@@ -308,19 +411,14 @@ def _reject_reason(
     *,
     candidate_type: str,
     pack_mode: str,
+    source_context: str = "",
 ) -> str | None:
     if not row["raw"]:
         return "missing_raw"
-    if row["review_status"] == "keep":
-        return "review_status_keep_forbidden"
-    if row["review_status"] != "review":
-        return "review_status_not_review"
-    if row["source"] != "ai_candidate":
-        return "source_not_ai_candidate"
-    if row["priority"] != "0":
-        return "priority_not_zero"
-    if row["lang"] != "zh":
-        return "lang_not_zh"
+    if not row["canonical"]:
+        return "missing_canonical"
+    if _is_english_duplicate(row["raw"], row["canonical"]):
+        return "raw_equals_canonical_english"
     if row["canonical"].casefold() == "gun" and pack_mode == "new_candidate":
         return "gun_not_allowed_new_candidate"
     if candidate_type == "phrase" and row["canonical"] in {"Single", "Shot"}:
@@ -329,8 +427,8 @@ def _reject_reason(
         if forbidden in row["raw"]:
             return f"forbidden_raw_{forbidden}"
     if row["canonical"] == "Shot":
-        lowered = row["raw"].casefold()
-        if any(marker in lowered for marker in FORBIDDEN_SHOT_MARKERS):
+        lowered = f"{row['raw']} {source_context}".casefold()
+        if _has_shot_microphone_context(lowered):
             return "forbidden_shot_microphone_context"
     if row["slot"] not in {
         "action",
@@ -346,12 +444,18 @@ def _reject_reason(
     return None
 
 
-def _infer_rule_type(raw: str, candidate_type: str) -> str:
-    if candidate_type == "phrase" or len(raw) >= 3:
-        return "phrase"
-    if len(raw) == 1:
-        return "stable_single"
-    return "ambiguous_single" if len(raw) == 2 else "phrase"
+def _is_english_duplicate(raw: str, canonical: str) -> bool:
+    english = re.compile(r"[A-Za-z]+(?:[\s_-]+[A-Za-z]+)*")
+    if not english.fullmatch(raw) or not english.fullmatch(canonical):
+        return False
+    normalize = lambda value: re.sub(r"[\s_-]+", " ", value.strip().casefold())
+    return normalize(raw) == normalize(canonical)
+
+
+def _has_shot_microphone_context(context: str) -> bool:
+    if any(marker in context for marker in FORBIDDEN_SHOT_MARKERS):
+        return True
+    return re.search(r"\b(?:shotgun\s+)?mics?(?:rophones?)?\b", context) is not None
 
 
 def _default_ambiguity(canonical: str) -> str:
@@ -380,11 +484,8 @@ def _default_tags(canonical: str, slot: str) -> str:
     return tags.get(canonical, slot)
 
 
-def _existing_raw_keys(path: Path) -> set[tuple[str, str]]:
-    return {
-        (token.raw.casefold(), token.slot)
-        for token in load_canonical_rows(path)
-    }
+def _existing_raw_keys(path: Path) -> set[str]:
+    return {token.raw.casefold() for token in load_canonical_rows(path)}
 
 
 def _load_prompt_items(path: Path) -> list[dict[str, object]]:
@@ -395,12 +496,33 @@ def _load_prompt_items(path: Path) -> list[dict[str, object]]:
     return items
 
 
+def _require_reviewed_prompt_pack(path: Path, expected_directory: str) -> None:
+    if path.parent.name != expected_directory:
+        raise ValueError(
+            f"Only the reviewed prompt pack is allowed: expected parent directory "
+            f"{expected_directory}, got {path.parent.name}"
+        )
+
+
 def _read_import_rows(path: Path) -> list[dict[str, str]]:
     with path.open("r", encoding="utf-8-sig", newline="") as handle:
         reader = csv.DictReader(handle)
-        if not reader.fieldnames or not set(CANONICAL_COLUMNS) <= set(reader.fieldnames):
-            raise ValueError(f"{path} is missing required canonical token columns")
-        return [{key: (value or "").strip() for key, value in row.items()} for row in reader]
+        fieldnames = {field.strip() for field in (reader.fieldnames or []) if field}
+        missing = REQUIRED_IMPORT_COLUMNS - fieldnames
+        if missing:
+            raise ValueError(f"{path} is missing required import columns: {', '.join(sorted(missing))}")
+        if "source_note" not in fieldnames and "note" not in fieldnames:
+            raise ValueError(f"{path} is missing required import column: source_note")
+        rows: list[dict[str, str]] = []
+        for source_row in reader:
+            row = {
+                str(key).strip(): (value or "").strip()
+                for key, value in source_row.items()
+                if key is not None
+            }
+            row["source_note"] = row.get("source_note") or row.get("note", "")
+            rows.append(row)
+        return rows
 
 
 def _write_csv(path: Path, rows: list[dict[str, str]]) -> None:
@@ -420,19 +542,27 @@ def _write_report(
     lines = [
         "# AI Alias Candidates Review Report",
         "",
-        "Dry-run import only. No AI runtime promotion and no canonical overwrite.",
+        (
+            "Dry-run generation only. No AI runtime promotion and no canonical overwrite."
+            if summary.dry_run
+            else "Real AI output review import only. No AI runtime promotion and no canonical overwrite."
+        ),
         "",
+        f"- input_count: `{summary.input_count}`",
+        f"- output_count: `{summary.candidate_count}`",
+        f"- filtered_count: `{summary.rejected_count}`",
         f"- candidate_count: `{summary.candidate_count}`",
         f"- canonical_count: `{summary.canonical_count}`",
         f"- rejected_count: `{summary.rejected_count}`",
         f"- dry_run: `{str(summary.dry_run).lower()}`",
         f"- AI invoked: `no`",
         f"- promote: `no`",
+        f"- keep appears: `{'yes' if summary.has_keep else 'no'}`",
         f"- has_keep: `{str(summary.has_keep).lower()}`",
         f"- all_source_ai_candidate: `{str(summary.all_source_ai_candidate).lower()}`",
         f"- all_priority_zero: `{str(summary.all_priority_zero).lower()}`",
         f"- gun_only_alias_expansion: `{str(summary.gun_only_alias_expansion).lower()}`",
-        f"- canonical_tokens.csv changed: `no`",
+        f"- canonical_tokens.csv changed: `{'yes' if summary.canonical_tokens_changed else 'no'}`",
         f"- CSV: `{summary.csv_path}`",
         "",
         "## Counts by canonical",
@@ -520,8 +650,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     except (FileNotFoundError, ValueError, RuntimeError) as exc:
         parser.error(str(exc))
     print(
-        f"candidates={summary.candidate_count} canonicals={summary.canonical_count} "
-        f"rejected={summary.rejected_count} dry_run={str(summary.dry_run).lower()} "
+        f"input={summary.input_count} candidates={summary.candidate_count} "
+        f"canonicals={summary.canonical_count} rejected={summary.rejected_count} "
+        f"dry_run={str(summary.dry_run).lower()} "
         f"ai_invoked=no promote=no keep={str(summary.has_keep).lower()} "
         f"canonical_changed={str(summary.canonical_tokens_changed).lower()}"
     )

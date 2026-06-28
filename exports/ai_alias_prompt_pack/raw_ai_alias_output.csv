@@ -1,0 +1,55 @@
+raw,canonical,slot,source_note
+重击声,Hit,action,reviewed_new_candidate;conservative impact alias
+击打声,Hit,action,reviewed_new_candidate;common sound-design search term
+碰击声,Hit,action,reviewed_new_candidate;physical hit sound
+拳击声,Hit,action,reviewed_new_candidate;fight impact context
+命中,Hit,action,reviewed_new_candidate;literal model suggestion requiring filter
+Hit,Hit,action,reviewed_new_candidate;English duplicate requiring filter
+吱吱声,Squeak,action,reviewed_new_candidate;repeated squeak sound
+尖锐吱响,Squeak,action,reviewed_new_candidate;sharp squeak
+挤压吱响,Squeak,action,reviewed_new_candidate;squeezed object squeak
+金属吱响,Squeak,action,reviewed_new_candidate;metal squeak
+挤压吱响,Squeak,action,reviewed_new_candidate;duplicate model suggestion
+脆裂声,Crack,action,reviewed_new_candidate;sharp crack sound
+爆裂脆响,Crack,action,reviewed_new_candidate;brief explosive crack
+劈裂声,Crack,action,reviewed_new_candidate;splitting crack
+断裂脆响,Crack,action,reviewed_new_candidate;fracture transient
+裂纹,Crack,action,reviewed_new_candidate;literal model suggestion requiring filter
+单发,Single Shot,action,reviewed_new_candidate;atomic weapon phrase
+单发射击,Single Shot,action,reviewed_new_candidate;atomic weapon phrase
+单次开火,Single Shot,action,reviewed_new_candidate;atomic weapon phrase
+单发枪声,Single Shot,action,reviewed_new_candidate;atomic weapon phrase
+冲击声,Impact,action,reviewed_alias_expansion;general impact sound
+重物撞击声,Impact,action,reviewed_alias_expansion;heavy object impact
+碰击声,Impact,action,reviewed_alias_expansion;contact impact
+砸击声,Impact,action,reviewed_alias_expansion;smashing impact
+摩擦声,Friction,action,reviewed_alias_expansion;general friction sound
+擦蹭声,Friction,action,reviewed_alias_expansion;surface rubbing
+磨蹭声,Friction,action,reviewed_alias_expansion;slow rubbing
+表面摩擦音,Friction,action,reviewed_alias_expansion;surface friction audio
+枪械,Gun,object,reviewed_alias_expansion;generic firearm object
+枪支,Gun,object,reviewed_alias_expansion;common firearm object
+火器,Gun,object,reviewed_alias_expansion;firearm class
+枪炮,Gun,object,reviewed_alias_expansion;gun and cannon class
+枪声,Shot,action,reviewed_alias_expansion;gunshot sound
+炮击声,Shot,action,reviewed_alias_expansion;cannon shot sound
+开火声,Shot,action,reviewed_alias_expansion;weapon firing sound
+发射声,Shot,action,reviewed_alias_expansion;projectile firing sound
+收音枪,Shot,action,reviewed_alias_expansion;shotgun microphone context requiring filter
+Shot,Shot,action,reviewed_alias_expansion;English duplicate requiring filter
+铁链,Chain,object,reviewed_alias_expansion;iron chain object
+锁链,Chain,object,reviewed_alias_expansion;locking chain object
+链条声,Chain,object,reviewed_alias_expansion;chain movement sound
+铁链晃动声,Chain,object,reviewed_alias_expansion;moving chain sound
+开门声,Door,object,reviewed_alias_expansion;door opening sound
+关门声,Door,object,reviewed_alias_expansion;door closing sound
+门板响,Door,object,reviewed_alias_expansion;door panel sound
+门轴吱响,Door,object,reviewed_alias_expansion;door hinge squeak
+坠落声,Drop,action,reviewed_alias_expansion;falling sound
+落地声,Drop,action,reviewed_alias_expansion;landing sound
+坠地声,Drop,action,reviewed_alias_expansion;object hitting ground
+跌落声,Drop,action,reviewed_alias_expansion;object drop sound
+振铃声,Ring,action,reviewed_alias_expansion;ringing tone
+余响,Ring,action,reviewed_alias_expansion;ringing decay
+回响声,Ring,action,reviewed_alias_expansion;resonant ring
+金属回荡,Ring,action,reviewed_alias_expansion;metallic ringing tail

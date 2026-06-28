@@ -1,0 +1,49 @@
+raw,canonical,slot,lang,priority,rule_type,review_status,ambiguity,tags,source,note
+重击声,Hit,action,zh,0,alias,review,high,impact/hit,ai_candidate,real_import_v0.1;pack=new_candidate;source_note=reviewed_new_candidate;conservative impact alias
+击打声,Hit,action,zh,0,alias,review,high,impact/hit,ai_candidate,real_import_v0.1;pack=new_candidate;source_note=reviewed_new_candidate;common sound-design search term
+碰击声,Hit,action,zh,0,alias,review,high,impact/hit,ai_candidate,real_import_v0.1;pack=new_candidate;source_note=reviewed_new_candidate;physical hit sound
+拳击声,Hit,action,zh,0,alias,review,high,impact/hit,ai_candidate,real_import_v0.1;pack=new_candidate;source_note=reviewed_new_candidate;fight impact context
+吱吱声,Squeak,action,zh,0,alias,review,high,friction/squeak,ai_candidate,real_import_v0.1;pack=new_candidate;source_note=reviewed_new_candidate;repeated squeak sound
+尖锐吱响,Squeak,action,zh,0,alias,review,high,friction/squeak,ai_candidate,real_import_v0.1;pack=new_candidate;source_note=reviewed_new_candidate;sharp squeak
+挤压吱响,Squeak,action,zh,0,alias,review,high,friction/squeak,ai_candidate,real_import_v0.1;pack=new_candidate;source_note=reviewed_new_candidate;squeezed object squeak
+金属吱响,Squeak,action,zh,0,alias,review,high,friction/squeak,ai_candidate,real_import_v0.1;pack=new_candidate;source_note=reviewed_new_candidate;metal squeak
+脆裂声,Crack,action,zh,0,alias,review,high,break/crack,ai_candidate,real_import_v0.1;pack=new_candidate;source_note=reviewed_new_candidate;sharp crack sound
+爆裂脆响,Crack,action,zh,0,alias,review,high,break/crack,ai_candidate,real_import_v0.1;pack=new_candidate;source_note=reviewed_new_candidate;brief explosive crack
+劈裂声,Crack,action,zh,0,alias,review,high,break/crack,ai_candidate,real_import_v0.1;pack=new_candidate;source_note=reviewed_new_candidate;splitting crack
+断裂脆响,Crack,action,zh,0,alias,review,high,break/crack,ai_candidate,real_import_v0.1;pack=new_candidate;source_note=reviewed_new_candidate;fracture transient
+单发,Single Shot,action,zh,0,alias,review,high,weapon/phrase,ai_candidate,real_import_v0.1;pack=new_candidate;source_note=reviewed_new_candidate;atomic weapon phrase
+单发射击,Single Shot,action,zh,0,alias,review,high,weapon/phrase,ai_candidate,real_import_v0.1;pack=new_candidate;source_note=reviewed_new_candidate;atomic weapon phrase
+单次开火,Single Shot,action,zh,0,alias,review,high,weapon/phrase,ai_candidate,real_import_v0.1;pack=new_candidate;source_note=reviewed_new_candidate;atomic weapon phrase
+单发枪声,Single Shot,action,zh,0,alias,review,high,weapon/phrase,ai_candidate,real_import_v0.1;pack=new_candidate;source_note=reviewed_new_candidate;atomic weapon phrase
+冲击声,Impact,action,zh,0,alias,review,medium,impact,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;general impact sound
+重物撞击声,Impact,action,zh,0,alias,review,medium,impact,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;heavy object impact
+碰击声,Impact,action,zh,0,alias,review,medium,impact,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;contact impact
+砸击声,Impact,action,zh,0,alias,review,medium,impact,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;smashing impact
+摩擦声,Friction,action,zh,0,alias,review,low,friction,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;general friction sound
+擦蹭声,Friction,action,zh,0,alias,review,low,friction,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;surface rubbing
+磨蹭声,Friction,action,zh,0,alias,review,low,friction,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;slow rubbing
+表面摩擦音,Friction,action,zh,0,alias,review,low,friction,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;surface friction audio
+枪械,Gun,object,zh,0,alias,review,high,weapon/gun,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;generic firearm object
+枪支,Gun,object,zh,0,alias,review,high,weapon/gun,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;common firearm object
+火器,Gun,object,zh,0,alias,review,high,weapon/gun,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;firearm class
+枪炮,Gun,object,zh,0,alias,review,high,weapon/gun,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;gun and cannon class
+枪声,Shot,action,zh,0,alias,review,high,weapon/shot,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;gunshot sound
+炮击声,Shot,action,zh,0,alias,review,high,weapon/shot,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;cannon shot sound
+开火声,Shot,action,zh,0,alias,review,high,weapon/shot,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;weapon firing sound
+发射声,Shot,action,zh,0,alias,review,high,weapon/shot,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;projectile firing sound
+铁链,Chain,object,zh,0,alias,review,low,object/chain,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;iron chain object
+锁链,Chain,object,zh,0,alias,review,low,object/chain,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;locking chain object
+链条声,Chain,object,zh,0,alias,review,low,object/chain,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;chain movement sound
+铁链晃动声,Chain,object,zh,0,alias,review,low,object/chain,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;moving chain sound
+开门声,Door,object,zh,0,alias,review,medium,object/door,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;door opening sound
+关门声,Door,object,zh,0,alias,review,medium,object/door,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;door closing sound
+门板响,Door,object,zh,0,alias,review,medium,object/door,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;door panel sound
+门轴吱响,Door,object,zh,0,alias,review,medium,object/door,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;door hinge squeak
+坠落声,Drop,action,zh,0,alias,review,medium,drop,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;falling sound
+落地声,Drop,action,zh,0,alias,review,medium,drop,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;landing sound
+坠地声,Drop,action,zh,0,alias,review,medium,drop,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;object hitting ground
+跌落声,Drop,action,zh,0,alias,review,medium,drop,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;object drop sound
+振铃声,Ring,action,zh,0,alias,review,medium,ring/tonal,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;ringing tone
+余响,Ring,action,zh,0,alias,review,medium,ring/tonal,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;ringing decay
+回响声,Ring,action,zh,0,alias,review,medium,ring/tonal,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;resonant ring
+金属回荡,Ring,action,zh,0,alias,review,medium,ring/tonal,ai_candidate,real_import_v0.1;pack=alias_expansion;source_note=reviewed_alias_expansion;metallic ringing tail
