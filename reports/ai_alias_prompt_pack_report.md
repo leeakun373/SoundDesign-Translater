@@ -1,6 +1,10 @@
 # AI Alias Prompt Pack Report
 
-- prompt pack item count: `31`
+- input_candidate_count: `31`
+- approved_for_ai_count: `1`
+- skipped_count: `30`
+- skip_reason_counts: `{"ambience_ring": 1, "category_mismatch": 6, "duplicate_examples": 9, "existing_conflict": 8, "generic_description_hit": 2, "not_approved_for_ai": 1, "shotgun_microphone": 2, "tool_gun_context": 1}`
+- prompt_pack_item_count: `1`
 - JSONL: `E:\WorkSpace\SoundDesign Translater\exports\ai_alias_prompt_pack\alias_prompt_items.jsonl`
 - preview: `E:\WorkSpace\SoundDesign Translater\exports\ai_alias_prompt_pack\alias_prompt_preview.md`
 - AI invoked: `no`
@@ -9,6 +13,17 @@
 - required priority: `0`
 - automatic promotion: `no`
 - canonical_tokens.csv changed: `no`
+
+## Skip reason counts
+
+- ambience_ring: `1`
+- category_mismatch: `6`
+- duplicate_examples: `9`
+- existing_conflict: `8`
+- generic_description_hit: `2`
+- not_approved_for_ai: `1`
+- shotgun_microphone: `2`
+- tool_gun_context: `1`
 
 ## Inputs
 

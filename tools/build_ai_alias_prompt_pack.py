@@ -7,6 +7,7 @@ import argparse
 import csv
 import hashlib
 import json
+from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Sequence
@@ -40,6 +41,10 @@ EXPECTED_COLUMNS = (
 @dataclass(frozen=True)
 class PromptPackSummary:
     item_count: int
+    input_candidate_count: int
+    approved_for_ai_count: int
+    skipped_count: int
+    skip_reason_counts: dict[str, int]
     jsonl_path: str
     preview_path: str
     report_path: str
@@ -77,16 +82,29 @@ def build_alias_prompt_pack(
     canonical_before = _sha256(canonical_path)
     ranked: list[tuple[tuple[int, int, str, str], dict[str, object]]] = []
     seen: set[tuple[str, str]] = set()
+    input_candidate_count = 0
+    approved_for_ai_count = 0
+    skipped_count = 0
+    skip_reason_counts: Counter[str] = Counter()
     for path, default_slot in input_specs:
         for row in _read_candidates(path):
-            if row.get("decision") not in {"candidate", "review"}:
+            input_candidate_count += 1
+            if (
+                row.get("approved_for_ai") != "yes"
+                or row.get("decision") not in {"candidate", "review"}
+            ):
+                skipped_count += 1
+                skip_reason_counts[_skip_reason(row)] += 1
                 continue
+            approved_for_ai_count += 1
             canonical = (row.get("canonical_guess") or "").strip()
             slot = (row.get("slot_guess") or default_slot).strip() or default_slot
             if not canonical:
                 continue
             key = (canonical.casefold(), slot)
             if key in seen:
+                skipped_count += 1
+                skip_reason_counts["duplicate_approved_candidate"] += 1
                 continue
             seen.add(key)
             item = {
@@ -121,6 +139,10 @@ def build_alias_prompt_pack(
         raise RuntimeError("canonical_tokens.csv changed while building prompt pack")
     summary = PromptPackSummary(
         item_count=len(items),
+        input_candidate_count=input_candidate_count,
+        approved_for_ai_count=approved_for_ai_count,
+        skipped_count=skipped_count,
+        skip_reason_counts=dict(sorted(skip_reason_counts.items())),
         jsonl_path=str(jsonl_path),
         preview_path=str(preview_path),
         report_path=str(report_path),
@@ -142,6 +164,8 @@ def _read_candidates(path: Path) -> list[dict[str, str]]:
             "record_count",
             "score",
             "decision",
+            "approved_for_ai",
+            "qa_flags",
             "example_1",
             "example_2",
             "example_3",
@@ -149,6 +173,29 @@ def _read_candidates(path: Path) -> list[dict[str, str]]:
         if not reader.fieldnames or not required <= set(reader.fieldnames):
             raise ValueError(f"{path} is missing required candidate evidence columns")
         return [{key: value or "" for key, value in row.items()} for row in reader]
+
+
+def _skip_reason(row: dict[str, str]) -> str:
+    if row.get("decision") not in {"candidate", "review"}:
+        return "not_candidate_or_review"
+    flags = [flag for flag in row.get("qa_flags", "").split(";") if flag]
+    priorities = (
+        "shotgun_microphone",
+        "tool_gun_context",
+        "generic_description_hit",
+        "ambience_ring",
+        "detail_modifier",
+        "rejected_evidence",
+        "existing_conflict",
+        "category_mismatch",
+        "category_unknown",
+        "description_only",
+        "filename_only",
+        "duplicate_examples",
+        "insufficient_unique_examples",
+        "ambiguous_token",
+    )
+    return next((reason for reason in priorities if reason in flags), "not_approved_for_ai")
 
 
 def _parse_examples(row: dict[str, str]) -> list[dict[str, str]]:
@@ -230,7 +277,13 @@ def _write_report(
     lines = [
         "# AI Alias Prompt Pack Report",
         "",
-        f"- prompt pack item count: `{summary.item_count}`",
+        f"- input_candidate_count: `{summary.input_candidate_count}`",
+        f"- approved_for_ai_count: `{summary.approved_for_ai_count}`",
+        f"- skipped_count: `{summary.skipped_count}`",
+        "- skip_reason_counts: `"
+        + json.dumps(summary.skip_reason_counts, sort_keys=True)
+        + "`",
+        f"- prompt_pack_item_count: `{summary.item_count}`",
         f"- JSONL: `{summary.jsonl_path}`",
         f"- preview: `{summary.preview_path}`",
         "- AI invoked: `no`",
@@ -239,6 +292,13 @@ def _write_report(
         "- required priority: `0`",
         "- automatic promotion: `no`",
         "- canonical_tokens.csv changed: `no`",
+        "",
+        "## Skip reason counts",
+        "",
+        *(
+            f"- {reason}: `{count}`"
+            for reason, count in summary.skip_reason_counts.items()
+        ),
         "",
         "## Inputs",
         "",
@@ -298,7 +358,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     except (FileNotFoundError, ValueError, RuntimeError) as exc:
         parser.error(str(exc))
     print(
-        f"items={summary.item_count} ai_invoked=no "
+        f"items={summary.item_count} approved={summary.approved_for_ai_count} "
+        f"skipped={summary.skipped_count} ai_invoked=no "
         f"canonical_changed={str(summary.canonical_tokens_changed).lower()}"
     )
     return 0

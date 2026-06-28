@@ -28,6 +28,7 @@ DEFAULT_MINING_DIR = ROOT / "exports" / "boomone_mining"
 DEFAULT_DB = ROOT / "data" / "boomone" / "boomone_records.sqlite"
 DEFAULT_OUTPUT_DIR = ROOT / "exports" / "boomone_candidates"
 DEFAULT_REPORT = ROOT / "reports" / "boomone_candidate_evidence_report.md"
+DEFAULT_QA_REPORT = ROOT / "reports" / "boom_evidence_qa_report.md"
 
 EVIDENCE_COLUMNS = (
     "raw",
@@ -47,6 +48,16 @@ EVIDENCE_COLUMNS = (
     "catid_samples",
     "category_samples",
     "source_files",
+    "fx_name_hits",
+    "description_hits",
+    "keywords_hits",
+    "filename_hits",
+    "field_quality",
+    "example_quality",
+    "category_alignment",
+    "existing_canonical_status",
+    "approved_for_ai",
+    "qa_flags",
 )
 
 ACTION_TERMS = {
@@ -167,6 +178,45 @@ LIBRARY_CONTEXT_TERMS = {"wwii", "war"}
 UNNATURAL_LEADS = {"away", "near", "far", "inside", "outside"}
 GENERIC_COUNT_TERMS = {"single", "group", "multiple", "shots"}
 HIGH_AMBIGUITY_ACTIONS = {"bang", "break", "crack", "drop", "hit", "ring", "roll"}
+HIGH_RISK_TOKENS = {
+    "hit",
+    "shot",
+    "ring",
+    "drop",
+    "break",
+    "crack",
+    "roll",
+    "fire",
+    "gun",
+    "body",
+    "hard",
+    "soft",
+    "low",
+    "high",
+    "single",
+    "short",
+    "long",
+    "movement",
+    "tonal",
+}
+CATEGORY_ALIGNMENT_TERMS = {
+    "hit": {"hit", "impact", "fight", "punch", "weapon"},
+    "shot": {"shot", "gun", "weapon", "bullet", "firearm", "cannon", "artillery"},
+    "ring": {"ring", "bell", "metal", "percussion"},
+    "drop": {"drop", "impact", "foley", "chain", "metal"},
+    "break": {"break", "destruction", "glass", "wood", "impact"},
+    "crack": {"crack", "impact", "explosion", "wood"},
+    "roll": {"roll", "wheel", "vehicle", "foley"},
+    "fire": {"fire", "flame", "burn", "gun", "weapon"},
+    "gun": {"gun", "weapon", "firearm", "rifle", "pistol", "cannon"},
+    "body": {"body", "foley", "fight", "human"},
+}
+EXAMPLE_SOURCE_PRIORITY = {
+    "fx_name": 0,
+    "keywords": 1,
+    "description": 2,
+    "filename": 3,
+}
 
 
 @dataclass(frozen=True)
@@ -181,6 +231,10 @@ class EvidenceSummary:
     rejected_noise_count: int
     output_dir: str
     report_path: str
+    qa_report_path: str
+    total_evidence_count: int
+    approved_for_ai_count: int
+    blocked_for_ai_count: int
     written_candidate_count: int
     candidate_path: str | None
     canonical_tokens_sha256_before: str
@@ -195,6 +249,8 @@ class CorpusEvidence:
     categories: dict[str, Counter[str]]
     source_files: dict[str, Counter[str]]
     aligned_records: Counter[str]
+    qa_aligned_records: Counter[str]
+    categorized_records: Counter[str]
 
 
 def build_candidate_evidence(
@@ -206,6 +262,7 @@ def build_candidate_evidence(
     canonical_path: Path = DEFAULT_CANONICAL_PATH,
     output_dir: Path = DEFAULT_OUTPUT_DIR,
     report_path: Path = DEFAULT_REPORT,
+    qa_report_path: Path | None = None,
     *,
     write_candidates: Path | None = None,
     candidate_threshold: int = 70,
@@ -229,6 +286,11 @@ def build_candidate_evidence(
         raise ValueError("candidate_threshold must be between 0 and 100")
 
     canonical_path = Path(canonical_path)
+    qa_report_path = (
+        Path(qa_report_path)
+        if qa_report_path is not None
+        else Path(report_path).with_name(DEFAULT_QA_REPORT.name)
+    )
     canonical_before = _sha256(canonical_path)
     token_frequency = _read_frequency_rows(Path(top_tokens_path), "token")
     phrase_frequency = _read_frequency_rows(Path(top_phrases_path), "phrase")
@@ -236,7 +298,7 @@ def build_candidate_evidence(
     phrase_examples = _read_example_rows(Path(phrase_examples_path), "phrase")
     all_items = set(token_frequency) | set(phrase_frequency)
     corpus = _scan_corpus(Path(db_path), all_items)
-    governed_alias_counts = _read_governed_alias_counts(canonical_path)
+    governed_rows = _read_governed_rows(canonical_path)
 
     rows: list[dict[str, object]] = []
     for kind, frequencies, examples in (
@@ -251,7 +313,7 @@ def build_candidate_evidence(
                     frequency,
                     examples.get(raw, []),
                     corpus,
-                    governed_alias_counts,
+                    governed_rows,
                 )
             )
 
@@ -308,6 +370,10 @@ def build_candidate_evidence(
         rejected_noise_count=len(rejected_rows),
         output_dir=str(output_dir),
         report_path=str(report_path),
+        qa_report_path=str(qa_report_path),
+        total_evidence_count=len(rows),
+        approved_for_ai_count=sum(row["approved_for_ai"] == "yes" for row in rows),
+        blocked_for_ai_count=sum(row["approved_for_ai"] == "no" for row in rows),
         written_candidate_count=candidate_count,
         candidate_path=str(candidate_path) if candidate_path else None,
         canonical_tokens_sha256_before=canonical_before,
@@ -315,6 +381,7 @@ def build_candidate_evidence(
         canonical_tokens_changed=False,
     )
     _write_report(Path(report_path), summary, rows)
+    _write_qa_report(Path(qa_report_path), summary, rows)
     return summary
 
 
@@ -360,6 +427,8 @@ def _scan_corpus(db_path: Path, wanted_items: set[str]) -> CorpusEvidence:
     categories: dict[str, Counter[str]] = defaultdict(Counter)
     source_files: dict[str, Counter[str]] = defaultdict(Counter)
     aligned_records: Counter[str] = Counter()
+    qa_aligned_records: Counter[str] = Counter()
+    categorized_records: Counter[str] = Counter()
 
     connection = sqlite3.connect(db_path)
     connection.row_factory = sqlite3.Row
@@ -408,10 +477,14 @@ def _scan_corpus(db_path: Path, wanted_items: set[str]) -> CorpusEvidence:
                     catids[raw][cat_id] += 1
                 if category_sample:
                     categories[raw][category_sample] += 1
+                if category_sample or cat_id:
+                    categorized_records[raw] += 1
                 if source_file:
                     source_files[raw][source_file] += 1
                 if _normalized_words(raw) & category_terms:
                     aligned_records[raw] += 1
+                if _record_category_aligned(raw, category, subcategory, cat_id):
+                    qa_aligned_records[raw] += 1
     finally:
         connection.close()
     return CorpusEvidence(
@@ -420,20 +493,25 @@ def _scan_corpus(db_path: Path, wanted_items: set[str]) -> CorpusEvidence:
         categories=dict(categories),
         source_files=dict(source_files),
         aligned_records=aligned_records,
+        qa_aligned_records=qa_aligned_records,
+        categorized_records=categorized_records,
     )
 
 
-def _read_governed_alias_counts(path: Path) -> Counter[str]:
-    counts: Counter[str] = Counter()
+def _read_governed_rows(path: Path) -> dict[str, list[dict[str, str]]]:
+    grouped: dict[str, list[dict[str, str]]] = defaultdict(list)
     with path.open("r", encoding="utf-8-sig", newline="") as handle:
         reader = csv.DictReader(handle)
-        if not reader.fieldnames or "canonical" not in reader.fieldnames:
-            raise ValueError(f"{path} is missing required column: canonical")
+        required = {"canonical", "slot", "review_status"}
+        if not reader.fieldnames or not required <= set(reader.fieldnames):
+            raise ValueError(f"{path} is missing canonical governance columns")
         for row in reader:
             canonical = (row.get("canonical") or "").strip().casefold()
             if canonical:
-                counts[canonical] += 1
-    return counts
+                grouped[canonical].append(
+                    {key: value or "" for key, value in row.items()}
+                )
+    return dict(grouped)
 
 
 def _build_evidence_row(
@@ -442,7 +520,7 @@ def _build_evidence_row(
     frequency: dict[str, int],
     examples: list[dict[str, str]],
     corpus: CorpusEvidence,
-    governed_alias_counts: Counter[str],
+    governed_rows: dict[str, list[dict[str, str]]],
 ) -> dict[str, object]:
     slot, policy, penalties = _classify(raw, kind)
     record_count = frequency["record_count"]
@@ -461,15 +539,36 @@ def _build_evidence_row(
     )
     decision = _decision(score, policy)
     canonical_guess = _title_case(raw)
-    alias_count = governed_alias_counts[canonical_guess.casefold()]
+    canonical_matches = governed_rows.get(canonical_guess.casefold(), [])
+    canonical_status = _existing_canonical_status(canonical_matches, slot)
+    alias_count = len(canonical_matches)
     reason_parts = components or ["no positive scoring signal"]
     if policy:
         reason_parts.append(f"policy={policy}")
     if alias_count:
         reason_parts.append(f"governed_aliases={alias_count}")
     reason = "; ".join(reason_parts)
-    formatted_examples = [_format_example(row) for row in examples[:3]]
+    selected_examples, duplicate_count = _select_examples(examples)
+    formatted_examples = [_format_example(row) for row in selected_examples]
     formatted_examples.extend([""] * (3 - len(formatted_examples)))
+    category_alignment = _category_alignment(raw, corpus)
+    field_quality = _field_quality(field_counts, selected_examples, category_alignment)
+    example_quality = _example_quality(
+        selected_examples, len(examples), duplicate_count, category_alignment
+    )
+    approved_for_ai, qa_flags = _qa_decision(
+        raw,
+        kind,
+        slot,
+        decision,
+        field_counts,
+        selected_examples,
+        field_quality,
+        example_quality,
+        category_alignment,
+        canonical_status,
+        duplicate_count,
+    )
     return {
         "raw": raw,
         "canonical_guess": canonical_guess,
@@ -492,7 +591,259 @@ def _build_evidence_row(
         "source_files": _counter_samples(
             corpus.source_files.get(raw, Counter())
         ),
+        "fx_name_hits": field_counts.get("fx_name", 0),
+        "description_hits": field_counts.get("description", 0),
+        "keywords_hits": field_counts.get("keywords", 0),
+        "filename_hits": field_counts.get("filename", 0),
+        "field_quality": field_quality,
+        "example_quality": example_quality,
+        "category_alignment": category_alignment,
+        "existing_canonical_status": canonical_status,
+        "approved_for_ai": approved_for_ai,
+        "qa_flags": ";".join(qa_flags),
     }
+
+
+def _select_examples(
+    examples: list[dict[str, str]], limit: int = 3
+) -> tuple[list[dict[str, str]], int]:
+    """Prefer strong evidence fields and return distinct rendered examples."""
+    ordered = sorted(
+        examples,
+        key=lambda row: (
+            EXAMPLE_SOURCE_PRIORITY.get(row.get("field_source", ""), 99),
+            _safe_int(row.get("example_rank"), 9999),
+        ),
+    )
+    unique: list[dict[str, str]] = []
+    seen_payloads: set[str] = set()
+    for row in ordered:
+        payload = _format_example(row)
+        if payload in seen_payloads:
+            continue
+        seen_payloads.add(payload)
+        unique.append(row)
+
+    selected: list[dict[str, str]] = []
+    remaining = list(unique)
+    while remaining and len(selected) < limit:
+        chosen = min(
+            remaining,
+            key=lambda row: (
+                EXAMPLE_SOURCE_PRIORITY.get(row.get("field_source", ""), 99),
+                -_example_diversity(row, selected),
+                _safe_int(row.get("example_rank"), 9999),
+            ),
+        )
+        selected.append(chosen)
+        remaining.remove(chosen)
+    return selected, len(examples) - len(unique)
+
+
+def _example_diversity(
+    candidate: dict[str, str], selected: list[dict[str, str]]
+) -> int:
+    if not selected:
+        return 0
+    fields = ("source_file", "category", "subcategory", "fx_name")
+    return sum(
+        all(
+            (candidate.get(field) or "").casefold()
+            != (existing.get(field) or "").casefold()
+            for existing in selected
+        )
+        for field in fields
+    )
+
+
+def _existing_canonical_status(
+    matches: list[dict[str, str]], candidate_slot: str
+) -> str:
+    if not matches:
+        return "existing_unknown"
+    statuses = {row.get("review_status", "") for row in matches}
+    slots = {row.get("slot", "") for row in matches if row.get("slot")}
+    if (
+        len(slots) > 1
+        or (candidate_slot != "unknown" and slots and candidate_slot not in slots)
+        or "reject" in statuses
+    ):
+        return "existing_conflict"
+    if "keep" in statuses:
+        return "existing_keep"
+    if "review" in statuses:
+        return "existing_review"
+    return "existing_unknown"
+
+
+def _record_category_aligned(
+    raw: str, category: str, subcategory: str, cat_id: str
+) -> bool:
+    raw_parts = set(raw.split())
+    targets = set(raw_parts)
+    for part in raw_parts:
+        targets.update(CATEGORY_ALIGNMENT_TERMS.get(part, set()))
+    category_text = f"{category} {subcategory} {cat_id}".casefold()
+    category_words = _normalized_words(category_text)
+    compact = re.sub(r"[^a-z0-9]+", "", category_text)
+    return bool(targets & category_words) or any(
+        len(target) >= 3 and target in compact for target in targets
+    )
+
+
+def _category_alignment(raw: str, corpus: CorpusEvidence) -> str:
+    categorized = corpus.categorized_records[raw]
+    aligned = corpus.qa_aligned_records[raw]
+    if categorized == 0:
+        return "unknown"
+    ratio = aligned / categorized
+    if ratio >= 0.6:
+        return "aligned"
+    if aligned:
+        return "mixed"
+    return "weak"
+
+
+def _field_quality(
+    counts: Counter[str],
+    examples: list[dict[str, str]],
+    category_alignment: str,
+) -> str:
+    trusted_hits = counts.get("fx_name", 0) + counts.get("keywords", 0)
+    weak_hits = counts.get("description", 0) + counts.get("filename", 0)
+    trusted_examples = sum(
+        row.get("field_source") in {"fx_name", "keywords"} for row in examples
+    )
+    if (
+        counts.get("fx_name", 0) > 0
+        and trusted_hits >= weak_hits
+        and trusted_examples >= max(1, (len(examples) + 1) // 2)
+        and category_alignment == "aligned"
+    ):
+        return "high"
+    if trusted_hits > 0:
+        return "medium"
+    return "low"
+
+
+def _example_quality(
+    examples: list[dict[str, str]],
+    original_count: int,
+    duplicate_count: int,
+    category_alignment: str,
+) -> str:
+    if not examples:
+        return "low"
+    trusted = sum(
+        row.get("field_source") in {"fx_name", "keywords"} for row in examples
+    )
+    if (duplicate_count >= 2 and len(examples) == 1) or trusted == 0:
+        return "low"
+    if (
+        len(examples) >= 2
+        and trusted >= (len(examples) + 1) // 2
+        and category_alignment == "aligned"
+    ):
+        return "high"
+    if trusted or (original_count >= 2 and len(examples) >= 2):
+        return "medium"
+    return "low"
+
+
+def _qa_decision(
+    raw: str,
+    kind: str,
+    slot: str,
+    decision: str,
+    field_counts: Counter[str],
+    examples: list[dict[str, str]],
+    field_quality: str,
+    example_quality: str,
+    category_alignment: str,
+    canonical_status: str,
+    duplicate_count: int,
+) -> tuple[str, list[str]]:
+    parts = set(raw.split())
+    risk_terms = sorted(parts & HIGH_RISK_TOKENS)
+    flags: list[str] = []
+    trusted_hits = field_counts.get("fx_name", 0) + field_counts.get("keywords", 0)
+    if risk_terms:
+        flags.append("ambiguous_token")
+    if trusted_hits == 0 and field_counts.get("description", 0):
+        flags.append("description_only")
+    if trusted_hits == 0 and not field_counts.get("description", 0) and field_counts.get("filename", 0):
+        flags.append("filename_only")
+    if category_alignment == "weak":
+        flags.append("category_mismatch")
+    elif category_alignment == "mixed":
+        flags.append("category_mixed")
+    elif category_alignment == "unknown":
+        flags.append("category_unknown")
+    if duplicate_count:
+        flags.append("duplicate_examples")
+    if len(examples) < 2:
+        flags.append("insufficient_unique_examples")
+    if slot in {"detail", "modifier"}:
+        flags.append("detail_modifier")
+    if decision == "reject" or slot == "unknown":
+        flags.append("rejected_evidence")
+    if canonical_status == "existing_conflict":
+        flags.append("existing_conflict")
+
+    contextual_blocks: list[str] = []
+    if "gun" in parts and any(_is_tool_gun_example(row) for row in examples):
+        contextual_blocks.append("tool_gun_context")
+    if "shot" in parts and any(_is_shotgun_microphone_example(row) for row in examples):
+        contextual_blocks.append("shotgun_microphone")
+    if "ring" in parts and any(_is_ambience_description(row) for row in examples):
+        contextual_blocks.append("ambience_ring")
+    if (
+        "hit" in parts
+        and field_counts.get("description", 0) > trusted_hits
+        and sum(row.get("field_source") == "description" for row in examples)
+        >= max(1, (len(examples) + 1) // 2)
+    ):
+        contextual_blocks.append("generic_description_hit")
+    flags.extend(contextual_blocks)
+
+    approved = (
+        decision in {"candidate", "review"}
+        and slot not in {"detail", "modifier", "unknown"}
+        and field_quality in {"high", "medium"}
+        and example_quality in {"high", "medium"}
+        and category_alignment in {"aligned", "mixed"}
+        and canonical_status != "existing_conflict"
+        and not contextual_blocks
+    )
+    if risk_terms:
+        approved = approved and field_quality == "high" and category_alignment == "aligned"
+    return ("yes" if approved else "no"), list(dict.fromkeys(flags))
+
+
+def _is_tool_gun_example(row: dict[str, str]) -> bool:
+    text = " ".join(
+        row.get(field, "")
+        for field in ("field_value", "fx_name", "description", "keywords", "filename")
+    ).casefold()
+    tool_context = any(phrase in text for phrase in ("tape gun", "glue gun", "tool gun"))
+    return tool_context and not _weapon_category(row)
+
+
+def _is_shotgun_microphone_example(row: dict[str, str]) -> bool:
+    text = " ".join(str(value or "") for value in row.values()).casefold()
+    return "shotgun microphone" in text or "shotgun mic" in text
+
+
+def _is_ambience_description(row: dict[str, str]) -> bool:
+    category = (row.get("category") or "").casefold()
+    return row.get("field_source") == "description" and category.startswith("ambience")
+
+
+def _weapon_category(row: dict[str, str]) -> bool:
+    text = " ".join(
+        row.get(field, "") for field in ("category", "subcategory", "cat_id")
+    ).casefold()
+    return any(term in text for term in ("gun", "weapon", "rifle", "pistol", "firearm"))
 
 
 def _classify(raw: str, kind: str) -> tuple[str, str, set[str]]:
@@ -768,6 +1119,103 @@ def _write_report(
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
+def _write_qa_report(
+    path: Path, summary: EvidenceSummary, rows: list[dict[str, object]]
+) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    field_quality = Counter(str(row["field_quality"]) for row in rows)
+    example_quality = Counter(str(row["example_quality"]) for row in rows)
+    category_alignment = Counter(str(row["category_alignment"]) for row in rows)
+    lines = [
+        "# BOOM Evidence QA Report",
+        "",
+        f"- total evidence rows: `{summary.total_evidence_count}`",
+        f"- approved_for_ai count: `{summary.approved_for_ai_count}`",
+        f"- rejected_for_ai count: `{summary.blocked_for_ai_count}`",
+        "- canonical_tokens.csv changed: `no`",
+        "",
+        "## Field quality distribution",
+        "",
+        *_distribution_lines(field_quality, ("high", "medium", "low")),
+        "",
+        "## Example quality distribution",
+        "",
+        *_distribution_lines(example_quality, ("high", "medium", "low")),
+        "",
+        "## Category alignment distribution",
+        "",
+        *_distribution_lines(
+            category_alignment, ("aligned", "mixed", "weak", "unknown")
+        ),
+        "",
+        "## High-risk token decisions",
+        "",
+    ]
+    indexed = {(str(row["raw"]), str(row["kind"])): row for row in rows}
+    for raw in ("hit", "shot", "gun", "ring"):
+        row = indexed.get((raw, "token"))
+        if row is None:
+            lines.append(f"- {raw}: approved_for_ai=no; reason=not present in evidence")
+            continue
+        reason = str(row["qa_flags"] or "quality gates passed")
+        lines.append(
+            f"- {raw}: approved_for_ai={row['approved_for_ai']}; reason={reason}; "
+            f"field_quality={row['field_quality']}; "
+            f"category_alignment={row['category_alignment']}"
+        )
+    lines.extend(
+        [
+            "",
+            "## Top approved examples",
+            "",
+            *_qa_example_lines(rows, approved="yes"),
+            "",
+            "## Top blocked examples",
+            "",
+            *_qa_example_lines(rows, approved="no"),
+            "",
+            "## Canonical token guard",
+            "",
+            (
+                "- canonical_tokens_sha256_before: "
+                f"`{summary.canonical_tokens_sha256_before}`"
+            ),
+            (
+                "- canonical_tokens_sha256_after: "
+                f"`{summary.canonical_tokens_sha256_after}`"
+            ),
+            "- canonical_tokens.csv changed: `no`",
+            "- AI invoked: `no`",
+            "- automatic promotion: `no`",
+        ]
+    )
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def _distribution_lines(counts: Counter[str], values: tuple[str, ...]) -> list[str]:
+    return [f"- {value}: `{counts[value]}`" for value in values]
+
+
+def _qa_example_lines(
+    rows: list[dict[str, object]], *, approved: str
+) -> list[str]:
+    selected = sorted(
+        (row for row in rows if row["approved_for_ai"] == approved),
+        key=lambda row: (-int(row["score"]), -int(row["record_count"]), row["raw"]),
+    )[:10]
+    if not selected:
+        return ["- none"]
+    return [
+        (
+            f"- `{row['raw']}`: field={row['field_quality']}, "
+            f"example={row['example_quality']}, "
+            f"category={row['category_alignment']}, "
+            f"flags={row['qa_flags'] or 'none'}"
+        )
+        for row in selected
+    ]
+
+
 def _report_rows(rows: list[dict[str, object]], decision: str) -> list[str]:
     selected = sorted(
         (row for row in rows if row["decision"] == decision),
@@ -862,6 +1310,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--canonical", type=Path, default=DEFAULT_CANONICAL_PATH)
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
+    parser.add_argument("--qa-report", type=Path, default=DEFAULT_QA_REPORT)
     parser.add_argument("--write-candidates", type=Path)
     parser.add_argument("--candidate-threshold", type=int, default=70)
     args = parser.parse_args(argv)
@@ -875,6 +1324,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             args.canonical,
             args.output_dir,
             args.report,
+            args.qa_report,
             write_candidates=args.write_candidates,
             candidate_threshold=args.candidate_threshold,
         )
@@ -885,6 +1335,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         f"actions={summary.action_candidate_count} objects={summary.object_candidate_count} "
         f"materials={summary.material_candidate_count} phrase_candidates={summary.phrase_candidate_count} "
         f"rejected={summary.rejected_noise_count} "
+        f"approved_for_ai={summary.approved_for_ai_count} "
         f"canonical_changed={str(summary.canonical_tokens_changed).lower()}"
     )
     return 0

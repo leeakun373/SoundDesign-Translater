@@ -16,7 +16,14 @@ from tools.build_boom_candidate_evidence import EVIDENCE_COLUMNS
 
 
 def _evidence_row(
-    raw: str, canonical: str, kind: str, slot: str, score: int
+    raw: str,
+    canonical: str,
+    kind: str,
+    slot: str,
+    score: int,
+    *,
+    approved_for_ai: str = "yes",
+    qa_flags: str = "",
 ) -> dict[str, object]:
     example = json.dumps(
         {
@@ -45,6 +52,16 @@ def _evidence_row(
         "catid_samples": "TESTImpt",
         "category_samples": "TEST/IMPACT",
         "source_files": "synthetic.csv",
+        "fx_name_hits": 100,
+        "description_hits": 10,
+        "keywords_hits": 80,
+        "filename_hits": 20,
+        "field_quality": "high",
+        "example_quality": "high",
+        "category_alignment": "aligned",
+        "existing_canonical_status": "existing_unknown",
+        "approved_for_ai": approved_for_ai,
+        "qa_flags": qa_flags,
     }
 
 
@@ -86,6 +103,9 @@ def test_prompt_pack_writes_jsonl_without_invoking_ai(tmp_path: Path) -> None:
     lines = Path(summary.jsonl_path).read_text(encoding="utf-8").splitlines()
     items = [json.loads(line) for line in lines]
     assert summary.item_count == len(items) == 3
+    assert summary.input_candidate_count == 3
+    assert summary.approved_for_ai_count == 3
+    assert summary.skipped_count == 0
     assert summary.ai_invoked is False
     assert canonical_path.read_bytes() == canonical_before
     assert {item["canonical"] for item in items} == {"Knock", "Metal Door Slam", "Door"}
@@ -130,3 +150,60 @@ def test_prompt_preview_requires_review_ai_candidate_rows(tmp_path: Path) -> Non
     assert "AI invoked: `no`" in report
     assert "canonical_tokens.csv changed: `no`" in report
 
+
+def test_prompt_pack_skips_unapproved_and_detail_rows(tmp_path: Path) -> None:
+    candidate_dir = tmp_path / "candidates"
+    _write_candidates(
+        candidate_dir / "action_candidates.csv",
+        [
+            _evidence_row("knock", "Knock", "token", "action", 75),
+            _evidence_row(
+                "hit",
+                "Hit",
+                "token",
+                "action",
+                75,
+                approved_for_ai="no",
+                qa_flags="ambiguous_token;generic_description_hit",
+            ),
+            _evidence_row(
+                "short",
+                "Short",
+                "token",
+                "modifier",
+                60,
+                approved_for_ai="no",
+                qa_flags="ambiguous_token;detail_modifier",
+            ),
+        ],
+    )
+    _write_candidates(candidate_dir / "phrase_candidates.csv", [])
+    _write_candidates(candidate_dir / "object_candidates.csv", [])
+    canonical_path = tmp_path / "canonical_tokens.csv"
+    canonical_path.write_bytes(DEFAULT_CANONICAL_PATH.read_bytes())
+
+    summary = build_alias_prompt_pack(
+        candidate_dir / "action_candidates.csv",
+        candidate_dir / "phrase_candidates.csv",
+        candidate_dir / "object_candidates.csv",
+        tmp_path / "prompt_pack",
+        tmp_path / "prompt_report.md",
+        canonical_path,
+    )
+    items = [
+        json.loads(line)
+        for line in Path(summary.jsonl_path).read_text(encoding="utf-8").splitlines()
+    ]
+
+    assert [item["canonical"] for item in items] == ["Knock"]
+    assert summary.input_candidate_count == 3
+    assert summary.approved_for_ai_count == 1
+    assert summary.skipped_count == 2
+    assert summary.skip_reason_counts == {
+        "detail_modifier": 1,
+        "generic_description_hit": 1,
+    }
+    report = Path(summary.report_path).read_text(encoding="utf-8")
+    assert "skipped_count: `2`" in report
+    assert "skip_reason_counts:" in report
+    assert "generic_description_hit: `1`" in report
