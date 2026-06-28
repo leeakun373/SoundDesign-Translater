@@ -16,7 +16,7 @@ ORAL_CSV = Path(__file__).resolve().parent / "zh_oral_aliases.csv"
 FX_PATTERN_CSV = Path(__file__).resolve().parent / "packs" / "zh_fx_patterns.csv"
 
 # 跳过虚词/量词/口语连接（不参与输出）
-FILLER_CHARS = frozenset("的了下着在与和及或就还把被让给跟从向以很更最里来去到")
+FILLER_CHARS = frozenset("的了下着在与和及或就还又把被让给跟从向以很更最里来去到")
 FILLER_PHRASES = (
     "一下",
     "几声",

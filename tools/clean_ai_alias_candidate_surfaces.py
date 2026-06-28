@@ -179,6 +179,15 @@ def _classify_surface(
     canonical = row["canonical"]
     slot = row["slot"]
 
+    if raw.casefold() in existing_raws:
+        return _surface(
+            raw,
+            raw,
+            "reject_surface",
+            "existing_canonical_raw_conflict",
+            "high",
+        )
+
     if raw in DOOR_EVENT_RAWS and slot == "object":
         return _surface(
             raw,

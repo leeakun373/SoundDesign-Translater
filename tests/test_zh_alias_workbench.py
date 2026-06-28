@@ -80,7 +80,7 @@ def test_build_workbench_outputs_review_rows_and_preserves_canonical(tmp_path: P
             },
             {
                 "id": "existing_ai",
-                "input": "擦蹭",
+                "input": "新擦蹭",
                 "expected_canonical": "Friction",
                 "expected_fxname": "Friction",
                 "expected_source": "stable_single",
@@ -121,14 +121,14 @@ def test_build_workbench_outputs_review_rows_and_preserves_canonical(tmp_path: P
         ),
         [
             {
-                "raw": "擦蹭",
-                "original_raw": "擦蹭声",
+                "raw": "新擦蹭",
+                "original_raw": "新擦蹭声",
                 "canonical": "Friction",
                 "slot": "action",
                 "decision_recommendation": "accept_candidate",
                 "conflict_group": "",
                 "surface_action": "replace_raw",
-                "cleaned_raw": "擦蹭",
+                "cleaned_raw": "新擦蹭",
             }
         ],
     )
@@ -164,7 +164,7 @@ def test_build_workbench_outputs_review_rows_and_preserves_canonical(tmp_path: P
         for row in rows
         if row["case_id"] == "existing_ai" and row["source"] == "existing_ai_candidate"
     )
-    assert ai_row["suggested_raw"] == "擦蹭"
+    assert ai_row["suggested_raw"] == "新擦蹭"
     assert ai_row["next_action"] == "review_existing_candidate"
 
     suffix_rows = [row for row in rows if row["case_id"] == "suffix"]

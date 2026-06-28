@@ -35,7 +35,7 @@ Promote 硬规则（与 [AI_ALIAS_REVIEW_RULES.md](AI_ALIAS_REVIEW_RULES.md) 一
 | 版本 | 输入 | 输出 | planned_count（当前） |
 |------|------|------|----------------------|
 | v1 | `ai_alias_candidates_decision_recommendations.csv` | `promote_plan_batch0.csv` | 6 |
-| v2 | `ai_alias_candidates_decision_recommendations_v2.csv` | `promote_plan_batch0_v2.csv` | 4 |
+| v2 | `ai_alias_candidates_decision_recommendations_v2.csv` | `promote_plan_batch0_v2.csv` | 0（历史 4 条已由 Batch Repair v0.1 手工写入） |
 
 ### Batch 0 v1 问题（已发现）
 
@@ -49,7 +49,7 @@ v1 曾 plan 6 条带「声 / 音」尾缀的 raw（如 `摩擦声`、`擦蹭声`
 2. `tools/recommend_ai_alias_candidate_decisions.py`（输入 surface_cleaned，输出 v2 decisions）
 3. `tools/plan_ai_alias_promotions.py`（输入 v2 decisions，输出 v2 plan）
 
-v2 当前 plan 4 条：`擦蹭`、`磨蹭`、`铁链`、`锁链`。
+v2 历史 plan 4 条：`擦蹭`、`磨蹭`、`铁链`、`锁链`。这 4 条已在用户授权的 Batch Repair v0.1 中以 `source=manual` 写入主表；没有把 AI review 行自动升格，`promote=no`。当前 planner 必须把它们识别为 canonical raw 冲突并输出 planned_count=0。
 
 | 项 | 说明 |
 |----|------|
@@ -65,7 +65,7 @@ v2 当前 plan 4 条：`擦蹭`、`磨蹭`、`铁链`、`锁链`。
 
 **前提：** 必须通过 Batch 0 v2 surface cleanup，不得使用 v1 带尾缀 raw。
 
-v2 当前首选（4 条）：
+v2 历史首选（4 条，已由 Batch Repair v0.1 手工处理）：
 
 | raw | canonical | slot |
 |-----|-----------|------|

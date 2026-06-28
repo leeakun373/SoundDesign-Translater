@@ -212,21 +212,22 @@ python tools/plan_ai_alias_promotions.py `
 
 ---
 
-## 9. v0.1 accept_candidate 清单（6 条，已被 surface 问题阻断）
+## 9. v0.1 accept_candidate 历史清单与 Batch Repair 状态
 
 以下行在当前 decision 输出中为 `accept_candidate`，是未来 Batch 1 的首选：
 
 | raw | canonical | surface cleanup 后状态 |
 |-----|-----------|-------------------------|
 | 摩擦声 | Friction | `reject_surface`（主表已有 `摩擦`） |
-| 擦蹭声 | Friction | `擦蹭` / replace_raw |
-| 磨蹭声 | Friction | `磨蹭` / replace_raw |
+| 擦蹭声 | Friction | `擦蹭` / Batch Repair v0.1 已手工写入 runtime |
+| 磨蹭声 | Friction | `磨蹭` / Batch Repair v0.1 已手工写入 runtime |
 | 表面摩擦音 | Friction | `表面摩擦` / needs_review（太描述化） |
-| 铁链 | Chain | keep_raw |
-| 锁链 | Chain | keep_raw |
+| 铁链 | Chain | Batch Repair v0.1 已手工写入 runtime |
+| 锁链 | Chain | Batch Repair v0.1 已手工写入 runtime |
 
 **Batch 0 v1**（未清洗）曾 plan 6 条；因 raw surface suffix 问题，**不得直接 promote**。  
-**Batch 0 v2**（surface cleanup 后）当前 plan **4 条**：擦蹭、磨蹭、铁链、锁链。
+**Batch 0 v2**（surface cleanup 后）历史 plan 为 **4 条**：擦蹭、磨蹭、铁链、锁链。
+在用户授权的 **Batch Repair v0.1** 中，这 4 条以 `source=manual` 的手工规则写入主表；未把 AI review 行自动改成 keep，`promote=no`。当前重新规划时应因 `existing_canonical_raw_conflict` 全部跳过，planned_count 为 **0**。
 
 ---
 

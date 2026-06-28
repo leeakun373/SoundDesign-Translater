@@ -15,7 +15,7 @@ from tools.clean_ai_alias_candidate_surfaces import (
     clean_ai_alias_candidate_surfaces,
     effective_raw,
 )
-from tools.plan_ai_alias_promotions import BATCH0_V2_ID, plan_ai_alias_promotions
+from tools.plan_ai_alias_promotions import plan_ai_alias_promotions
 from tools.recommend_ai_alias_candidate_decisions import (
     DECISION_SURFACE_COLUMNS,
     recommend_ai_alias_candidate_decisions,
@@ -102,11 +102,11 @@ def _row_by_raw(rows: list[dict[str, str]], raw: str) -> dict[str, str]:
 
 
 @pytest.mark.parametrize(
-    ("raw", "expected_cleaned", "expected_action"),
-    [
-        ("摩擦声", "摩擦", "reject_surface"),
-        ("擦蹭声", "擦蹭", "replace_raw"),
-        ("磨蹭声", "磨蹭", "replace_raw"),
+        ("raw", "expected_cleaned", "expected_action"),
+        [
+            ("摩擦声", "摩擦", "reject_surface"),
+            ("擦蹭声", "擦蹭", "reject_surface"),
+            ("磨蹭声", "磨蹭", "reject_surface"),
     ],
 )
 def test_friction_suffix_cleanup(
@@ -234,7 +234,7 @@ def test_surface_needs_review_blocks_accept_in_decision_v2(tmp_path: Path) -> No
     assert "surface_too_descriptive" in row["decision_reason"]
 
 
-def test_v2_pipeline_plans_cleaner_batch0_rows(tmp_path: Path) -> None:
+def test_v2_pipeline_skips_rows_already_added_by_manual_batch_repair(tmp_path: Path) -> None:
     _, surface_csv, _, canonical_path, _ = _run_cleanup(
         tmp_path,
         [
@@ -263,15 +263,9 @@ def test_v2_pipeline_plans_cleaner_batch0_rows(tmp_path: Path) -> None:
         canonical_path,
     )
     planned_rows = _read_surface_rows(plan_csv)
-    assert plan_summary.planned_count == 4
-    assert [(row["raw"], row["canonical"]) for row in planned_rows] == [
-        ("擦蹭", "Friction"),
-        ("磨蹭", "Friction"),
-        ("铁链", "Chain"),
-        ("锁链", "Chain"),
-    ]
-    assert all(row["batch_id"] == BATCH0_V2_ID for row in planned_rows)
-    assert all(row["review_status"] == "proposed_keep" for row in planned_rows)
+    assert plan_summary.planned_count == 0
+    assert planned_rows == []
+    assert plan_summary.skip_reason_counts == {"not_accept_candidate": 6}
     assert "promote: `no`" in plan_report.read_text(encoding="utf-8")
 
 

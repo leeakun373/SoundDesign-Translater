@@ -135,7 +135,7 @@ how can i help you scrape,Scrape,,true,,default,how can i help you,pollution bef
 纸箱撞击,Cardboard Box Impact,,true,,default,,cardboard impact
 布袋拍打,Cloth Bag Slap,,true,,default,,cloth slap
 陶瓷杯子掉落,Ceramic Cup Drop,,true,,default,,ceramic drop
-橡胶轮胎摩擦,Rubber Tire Rub,,true,,default,,rubber friction
+橡胶轮胎摩擦,Rubber Tire Friction,,true,,default,,governed tire friction phrase
 链条摇晃,Chain Shake,,true,,default,,chain shake
 钥匙掉落,Key Drop,,true,,default,,key drop
 按钮点击,Button Click,,true,,default,,button click
