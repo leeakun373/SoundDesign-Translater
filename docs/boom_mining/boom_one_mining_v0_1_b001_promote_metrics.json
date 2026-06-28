@@ -1,0 +1,64 @@
+{
+  "batch": "boom_one_mining_v0.1_b001",
+  "source": "boom_mined",
+  "note": "boom_one_mining_v0.1_b001",
+  "canonical_sha256_before": "b05f489338144b42f5cc937a8eec34d6e8a2ed8948191ac75542e8c2ca4da0b9",
+  "canonical_sha256_after": "9b22c33787ef416cd8f059054e96ff247ebf176e7c476a179b06bb8812d5091f",
+  "canonical_changed": true,
+  "rolled_back": false,
+  "promoted_count": 21,
+  "selected_count": 21,
+  "rejected_count": 13,
+  "proper_noun_count": 8,
+  "slot_distribution": {
+    "action": 8,
+    "detail": 2,
+    "modifier": 1,
+    "object": 2,
+    "source": 8
+  },
+  "before": {
+    "total": 1000,
+    "pass": 20,
+    "partial": 0,
+    "needs_review": 239,
+    "unknown": 947,
+    "safety_fail": 0,
+    "conflict": 110
+  },
+  "after": {
+    "total": 1000,
+    "pass": 41,
+    "partial": 0,
+    "needs_review": 293,
+    "unknown": 898,
+    "safety_fail": 0,
+    "conflict": 110
+  },
+  "delta": {
+    "pass": 21,
+    "partial": 0,
+    "needs_review": 54,
+    "unknown": -49,
+    "safety_fail": 0,
+    "conflict": 0
+  },
+  "gate_passed": true,
+  "gate_checks": {
+    "safety_fail_zero": true,
+    "runtime_conflict_zero": true,
+    "pass_improved": true,
+    "unknown_or_needs_review_dropped": true
+  },
+  "audit_conflict_count": 0,
+  "audit_error_count": 0,
+  "promotion_conflicts": 0,
+  "forbidden_broad_check": {
+    "passed": true
+  },
+  "single_char_keep_check": {
+    "passed": true
+  },
+  "ai_invoked": false,
+  "promote": true
+}

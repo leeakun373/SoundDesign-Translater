@@ -1,0 +1,147 @@
+{
+  "batch": "boom_one_mining_v0.1_b001",
+  "range": {
+    "first_row": 2,
+    "last_row": 1001,
+    "limit": 1000
+  },
+  "pair_count": 1000,
+  "alignment": {
+    "zh": {
+      "sheet_title": " BOOM ONE 发布包",
+      "header_rows_skipped": 1,
+      "first_row": 2,
+      "last_row": 1001
+    },
+    "en": {
+      "sheet_title": "BOOM ONE Release Pack",
+      "header_rows_skipped": 1,
+      "first_row": 2,
+      "last_row": 1001
+    },
+    "empty_pair_skipped": 0,
+    "pair_count": 1000
+  },
+  "before": {
+    "total": 1000,
+    "pass": 41,
+    "partial": 0,
+    "needs_review": 293,
+    "unknown": 898,
+    "safety_fail": 0,
+    "conflict": 110
+  },
+  "top_unknowns": [
+    {
+      "unknown": "遥控无人机",
+      "count": 50
+    },
+    {
+      "unknown": "C",
+      "count": 13
+    },
+    {
+      "unknown": "侧卫",
+      "count": 10
+    },
+    {
+      "unknown": "涡轮全功率直接",
+      "count": 9
+    },
+    {
+      "unknown": "飞机拟音驾驶舱翻转开关",
+      "count": 9
+    },
+    {
+      "unknown": "涡轮稳定远距离",
+      "count": 7
+    },
+    {
+      "unknown": "单飞远",
+      "count": 7
+    },
+    {
+      "unknown": "中队飞越慢",
+      "count": 7
+    },
+    {
+      "unknown": "空袭",
+      "count": 6
+    },
+    {
+      "unknown": "塑料瓶开口",
+      "count": 6
+    },
+    {
+      "unknown": "空中客车",
+      "count": 5
+    },
+    {
+      "unknown": "涡轮怠速直接",
+      "count": 5
+    },
+    {
+      "unknown": "短裤",
+      "count": 5
+    },
+    {
+      "unknown": "遥控",
+      "count": 5
+    },
+    {
+      "unknown": "起飞陆地序列",
+      "count": 5
+    },
+    {
+      "unknown": "炸弹蝇秋季",
+      "count": 5
+    },
+    {
+      "unknown": "响",
+      "count": 5
+    },
+    {
+      "unknown": "宇宙",
+      "count": 5
+    },
+    {
+      "unknown": "外部飞越序列中号",
+      "count": 4
+    },
+    {
+      "unknown": "涡轮空转直接",
+      "count": 4
+    }
+  ],
+  "candidate_count": 1477,
+  "promote_ready_candidate_count": 20,
+  "skip_reason_counts": {
+    "already_covered": 617,
+    "existing_canonical_conflict": 110,
+    "forbidden_broad_token": 6,
+    "single_char_zh": 231,
+    "target_not_supporting": 493
+  },
+  "slot_distribution": {
+    "unknown": 20
+  },
+  "safety_fail_count": 0,
+  "conflict_count": 110,
+  "existing_canonical_conflict_count": 110,
+  "in_batch_conflict_count": 0,
+  "forbidden_broad_check": {
+    "passed": true,
+    "tokens": []
+  },
+  "single_char_keep_check": {
+    "passed": true,
+    "tokens": []
+  },
+  "canonical_sha256_before": "9b22c33787ef416cd8f059054e96ff247ebf176e7c476a179b06bb8812d5091f",
+  "canonical_sha256_after": "9b22c33787ef416cd8f059054e96ff247ebf176e7c476a179b06bb8812d5091f",
+  "canonical_changed": false,
+  "source": "boom_mined",
+  "note": "boom_one_mining_v0.1_b001",
+  "ai_invoked": false,
+  "promote": false
+}

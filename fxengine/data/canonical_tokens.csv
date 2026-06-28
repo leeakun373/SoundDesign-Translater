@@ -696,3 +696,24 @@ rebound,Rebound,action,mixed,100,phrase,keep,low,sprint/action,ai_reviewed_batch
 砰,,action,zh,0,ambiguous_single,review,high,bang/impact/onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
 啪,,action,zh,0,ambiguous_single,review,high,slap/clap/snap/onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
 叮,,action,zh,0,ambiguous_single,review,high,jingle/chime/onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+涡轮,Turbine,object,zh,95,phrase,keep,low,boom/object,boom_mined,boom_one_mining_v0.1_b001
+稳定,Steady,modifier,zh,92,phrase,keep,low,boom/modifier,boom_mined,boom_one_mining_v0.1_b001
+序列,Sequence,detail,zh,92,phrase,keep,low,boom/detail,boom_mined,boom_one_mining_v0.1_b001
+波音,Boeing,source,zh,75,phrase,keep,medium,boom/proper_noun/aircraft,boom_mined,boom_one_mining_v0.1_b001
+奥古斯塔,Augusta,source,zh,75,phrase,keep,medium,boom/proper_noun/aircraft,boom_mined,boom_one_mining_v0.1_b001
+Augusta,Augusta,source,en,75,phrase,keep,medium,boom/proper_noun/aircraft,boom_mined,boom_one_mining_v0.1_b001
+起飞,Take Off,action,zh,90,phrase,keep,medium,boom/action,boom_mined,boom_one_mining_v0.1_b001
+飞行,Fly,action,zh,90,phrase,keep,medium,boom/action,boom_mined,boom_one_mining_v0.1_b001
+Globemaster,Globemaster,source,en,75,phrase,keep,medium,boom/proper_noun/aircraft,boom_mined,boom_one_mining_v0.1_b001
+Lancer,Lancer,source,en,75,phrase,keep,medium,boom/proper_noun/aircraft,boom_mined,boom_one_mining_v0.1_b001
+Stratofortress,Stratofortress,source,en,75,phrase,keep,medium,boom/proper_noun/aircraft,boom_mined,boom_one_mining_v0.1_b001
+开关关闭,Switch Off,action,zh,90,phrase,keep,medium,boom/action,boom_mined,boom_one_mining_v0.1_b001
+开关关闭序列,Switch Off Sequence,action,zh,90,phrase,keep,medium,boom/action,boom_mined,boom_one_mining_v0.1_b001
+涡轮增压,Turbine Rev Up,action,zh,90,phrase,keep,medium,boom/action,boom_mined,boom_one_mining_v0.1_b001
+近距,Close,detail,zh,92,phrase,keep,low,boom/detail,boom_mined,boom_one_mining_v0.1_b001
+飞走,Fly Away,action,zh,90,phrase,keep,medium,boom/action,boom_mined,boom_one_mining_v0.1_b001
+Flanker,Flanker,source,en,75,phrase,keep,medium,boom/proper_noun/aircraft,boom_mined,boom_one_mining_v0.1_b001
+Maverick,Maverick,source,en,75,phrase,keep,medium,boom/proper_noun/aircraft,boom_mined,boom_one_mining_v0.1_b001
+着陆,Land,action,zh,90,phrase,keep,medium,boom/action,boom_mined,boom_one_mining_v0.1_b001
+吱吱声,Creak,action,zh,90,phrase,keep,medium,boom/action,boom_mined,boom_one_mining_v0.1_b001
+猪群,Pigs Herd,object,zh,95,phrase,keep,low,boom/object,boom_mined,boom_one_mining_v0.1_b001

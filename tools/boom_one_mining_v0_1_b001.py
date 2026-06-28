@@ -49,6 +49,8 @@ BEFORE_MD = OUTPUT_DIR / f"{BATCH_ID}_before.md"
 CANDIDATES_CSV = OUTPUT_DIR / f"{BATCH_ID}_candidates.csv"
 METRICS_JSON = OUTPUT_DIR / f"{BATCH_ID}_metrics.json"
 SAMPLES_CSV = OUTPUT_DIR / f"{BATCH_ID}_samples.csv"
+AFTER_METRICS_JSON = OUTPUT_DIR / f"{BATCH_ID}_after_metrics.json"
+AFTER_SAMPLES_CSV = OUTPUT_DIR / f"{BATCH_ID}_after_samples.csv"
 
 FXNAME_COLUMN = 10
 DEFAULT_LIMIT = 1000
@@ -1106,11 +1108,18 @@ def run(args: argparse.Namespace) -> int:
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     metrics = _metrics(analyses, candidates, alignment, canonical_before, canonical_after, args.limit)
-    write_candidates(args.candidates_csv, candidates)
-    write_report(args.before_md, analyses, candidates, metrics, alignment)
-    write_metrics(args.metrics_json, metrics)
-    if args.dump_samples:
-        write_samples(args.samples_csv, analyses)
+    if args.after:
+        # After mode never rewrites the before-state artifacts (before.md,
+        # candidates.csv, before metrics); it only records current-state metrics.
+        write_metrics(args.after_metrics_json, metrics)
+        if args.dump_samples:
+            write_samples(args.after_samples_csv, analyses)
+    else:
+        write_candidates(args.candidates_csv, candidates)
+        write_report(args.before_md, analyses, candidates, metrics, alignment)
+        write_metrics(args.metrics_json, metrics)
+        if args.dump_samples:
+            write_samples(args.samples_csv, analyses)
 
     before = metrics["before"]
     assert isinstance(before, dict)
@@ -1118,6 +1127,7 @@ def run(args: argparse.Namespace) -> int:
         " ".join(
             [
                 f"batch={BATCH}",
+                f"mode={'after' if args.after else 'before'}",
                 f"pairs={len(pairs)}",
                 f"rows={alignment.first_row}-{alignment.last_row}",
                 f"pass={before['pass']}",
@@ -1128,9 +1138,9 @@ def run(args: argparse.Namespace) -> int:
                 f"conflict={before['conflict']}",
                 f"candidates={len(candidates)}",
                 f"promote_ready={metrics['promote_ready_candidate_count']}",
-                "canonical_changed=false",
+                f"canonical_changed={'true' if metrics['canonical_changed'] else 'false'}",
                 "ai_invoked=no",
-                "promote=no",
+                f"promote={'recorded' if args.after else 'no'}",
             ]
         )
     )
@@ -1147,6 +1157,13 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--metrics-json", type=Path, default=METRICS_JSON)
     parser.add_argument("--samples-csv", type=Path, default=SAMPLES_CSV)
     parser.add_argument("--dump-samples", action="store_true")
+    parser.add_argument(
+        "--after",
+        action="store_true",
+        help="After mode: record current-state metrics without touching before artifacts.",
+    )
+    parser.add_argument("--after-metrics-json", type=Path, default=AFTER_METRICS_JSON)
+    parser.add_argument("--after-samples-csv", type=Path, default=AFTER_SAMPLES_CSV)
     return parser.parse_args(argv)
 
 
