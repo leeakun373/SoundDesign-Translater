@@ -18,6 +18,7 @@ DEFAULT_CANDIDATE_DIR = ROOT / "exports" / "boomone_candidates"
 DEFAULT_OUTPUT_DIR = ROOT / "exports" / "ai_alias_prompt_pack"
 DEFAULT_REPORT = ROOT / "reports" / "ai_alias_prompt_pack_report.md"
 DEFAULT_CANONICAL = ROOT / "fxengine" / "data" / "canonical_tokens.csv"
+PROMPT_MODES = {"new_candidate", "alias_expansion"}
 AI_INSTRUCTION = (
     "Generate conservative Chinese aliases for a sound-design FXName token. "
     "Do not translate freely. Return only aliases that a Chinese sound designer "
@@ -51,6 +52,10 @@ class PromptPackSummary:
     canonical_tokens_sha256_before: str
     canonical_tokens_sha256_after: str
     canonical_tokens_changed: bool
+    mode: str = "new_candidate"
+    existing_keep_count: int = 0
+    existing_unknown_count: int = 0
+    existing_conflict_blocked_count: int = 0
     ai_invoked: bool = False
 
 
@@ -63,8 +68,12 @@ def build_alias_prompt_pack(
     canonical_path: Path = DEFAULT_CANONICAL,
     *,
     preview_limit: int = 20,
+    mode: str = "new_candidate",
 ) -> PromptPackSummary:
     """Write JSONL/Markdown inputs only; this function never invokes a model."""
+    if mode not in PROMPT_MODES:
+        raise ValueError(f"mode must be one of: {', '.join(sorted(PROMPT_MODES))}")
+
     input_specs = (
         (Path(action_candidates_path), "action"),
         (Path(phrase_candidates_path), "action"),
@@ -86,20 +95,33 @@ def build_alias_prompt_pack(
     approved_for_ai_count = 0
     skipped_count = 0
     skip_reason_counts: Counter[str] = Counter()
+    existing_keep_count = 0
+    existing_unknown_count = 0
+    existing_conflict_blocked_count = 0
+
     for path, default_slot in input_specs:
         for row in _read_candidates(path):
             input_candidate_count += 1
-            if (
-                row.get("approved_for_ai") != "yes"
-                or row.get("decision") not in {"candidate", "review"}
-            ):
+            canonical_status = row.get("existing_canonical_status", "")
+            if canonical_status == "existing_keep":
+                existing_keep_count += 1
+            elif canonical_status == "existing_unknown":
+                existing_unknown_count += 1
+            elif canonical_status == "existing_conflict":
+                existing_conflict_blocked_count += 1
+
+            skip_reason = _prompt_skip_reason(row, mode)
+            if skip_reason:
                 skipped_count += 1
-                skip_reason_counts[_skip_reason(row)] += 1
+                skip_reason_counts[skip_reason] += 1
                 continue
+
             approved_for_ai_count += 1
             canonical = (row.get("canonical_guess") or "").strip()
             slot = (row.get("slot_guess") or default_slot).strip() or default_slot
             if not canonical:
+                skipped_count += 1
+                skip_reason_counts["missing_canonical"] += 1
                 continue
             key = (canonical.casefold(), slot)
             if key in seen:
@@ -132,7 +154,7 @@ def build_alias_prompt_pack(
     with jsonl_path.open("w", encoding="utf-8", newline="\n") as handle:
         for item in items:
             handle.write(json.dumps(item, ensure_ascii=False, sort_keys=True) + "\n")
-    _write_preview(preview_path, items[:preview_limit])
+    _write_preview(preview_path, items[:preview_limit], mode=mode)
 
     canonical_after = _sha256(canonical_path)
     if canonical_after != canonical_before:
@@ -149,6 +171,10 @@ def build_alias_prompt_pack(
         canonical_tokens_sha256_before=canonical_before,
         canonical_tokens_sha256_after=canonical_after,
         canonical_tokens_changed=False,
+        mode=mode,
+        existing_keep_count=existing_keep_count,
+        existing_unknown_count=existing_unknown_count,
+        existing_conflict_blocked_count=existing_conflict_blocked_count,
     )
     _write_report(Path(report_path), summary, input_specs)
     return summary
@@ -166,6 +192,8 @@ def _read_candidates(path: Path) -> list[dict[str, str]]:
             "decision",
             "approved_for_ai",
             "qa_flags",
+            "example_quality",
+            "existing_canonical_status",
             "example_1",
             "example_2",
             "example_3",
@@ -175,27 +203,51 @@ def _read_candidates(path: Path) -> list[dict[str, str]]:
         return [{key: value or "" for key, value in row.items()} for row in reader]
 
 
+def _prompt_skip_reason(row: dict[str, str], mode: str) -> str | None:
+    """Return a prompt-pack skip reason, or None when a row may be emitted."""
+    base_reason = _skip_reason(row)
+    if base_reason != "approved_candidate":
+        return base_reason
+
+    if row.get("example_quality") == "low":
+        return "low_example_quality"
+
+    canonical_status = row.get("existing_canonical_status", "")
+    if canonical_status == "existing_conflict":
+        return "existing_conflict"
+
+    if mode == "new_candidate":
+        if canonical_status == "existing_keep":
+            return "existing_keep_not_alias_expansion"
+        if canonical_status and canonical_status != "existing_unknown":
+            return "not_existing_unknown"
+
+    return None
+
+
 def _skip_reason(row: dict[str, str]) -> str:
     if row.get("decision") not in {"candidate", "review"}:
         return "not_candidate_or_review"
     flags = [flag for flag in row.get("qa_flags", "").split(";") if flag]
-    priorities = (
-        "shotgun_microphone",
-        "tool_gun_context",
-        "generic_description_hit",
-        "ambience_ring",
-        "detail_modifier",
-        "rejected_evidence",
-        "existing_conflict",
-        "category_mismatch",
-        "category_unknown",
-        "description_only",
-        "filename_only",
-        "duplicate_examples",
-        "insufficient_unique_examples",
-        "ambiguous_token",
-    )
-    return next((reason for reason in priorities if reason in flags), "not_approved_for_ai")
+    if row.get("approved_for_ai") != "yes":
+        priorities = (
+            "shotgun_microphone",
+            "tool_gun_context",
+            "generic_description_hit",
+            "ambience_ring",
+            "detail_modifier",
+            "rejected_evidence",
+            "existing_conflict",
+            "category_mismatch",
+            "category_unknown",
+            "description_only",
+            "filename_only",
+            "duplicate_examples",
+            "insufficient_unique_examples",
+            "ambiguous_token",
+        )
+        return next((reason for reason in priorities if reason in flags), "not_approved_for_ai")
+    return "approved_candidate"
 
 
 def _parse_examples(row: dict[str, str]) -> list[dict[str, str]]:
@@ -221,11 +273,13 @@ def _parse_examples(row: dict[str, str]) -> list[dict[str, str]]:
     return examples
 
 
-def _write_preview(path: Path, items: list[dict[str, object]]) -> None:
+def _write_preview(path: Path, items: list[dict[str, object]], *, mode: str) -> None:
     lines = [
         "# AI Alias Prompt Preview",
         "",
         "This file is a local input preview. No AI service was called.",
+        "",
+        f"- mode: `{mode}`",
         "",
         "## Required output format",
         "",
@@ -277,6 +331,7 @@ def _write_report(
     lines = [
         "# AI Alias Prompt Pack Report",
         "",
+        f"- mode: `{summary.mode}`",
         f"- input_candidate_count: `{summary.input_candidate_count}`",
         f"- approved_for_ai_count: `{summary.approved_for_ai_count}`",
         f"- skipped_count: `{summary.skipped_count}`",
@@ -284,6 +339,12 @@ def _write_report(
         + json.dumps(summary.skip_reason_counts, sort_keys=True)
         + "`",
         f"- prompt_pack_item_count: `{summary.item_count}`",
+        f"- existing_keep_count: `{summary.existing_keep_count}`",
+        f"- existing_unknown_count: `{summary.existing_unknown_count}`",
+        (
+            "- existing_conflict_blocked_count: "
+            f"`{summary.existing_conflict_blocked_count}`"
+        ),
         f"- JSONL: `{summary.jsonl_path}`",
         f"- preview: `{summary.preview_path}`",
         "- AI invoked: `no`",
@@ -344,6 +405,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
     parser.add_argument("--canonical", type=Path, default=DEFAULT_CANONICAL)
     parser.add_argument("--preview-limit", type=int, default=20)
+    parser.add_argument("--mode", choices=sorted(PROMPT_MODES), default="new_candidate")
     args = parser.parse_args(argv)
     try:
         summary = build_alias_prompt_pack(
@@ -354,11 +416,13 @@ def main(argv: Sequence[str] | None = None) -> int:
             args.report,
             args.canonical,
             preview_limit=args.preview_limit,
+            mode=args.mode,
         )
     except (FileNotFoundError, ValueError, RuntimeError) as exc:
         parser.error(str(exc))
     print(
-        f"items={summary.item_count} approved={summary.approved_for_ai_count} "
+        f"mode={summary.mode} items={summary.item_count} "
+        f"approved={summary.approved_for_ai_count} "
         f"skipped={summary.skipped_count} ai_invoked=no "
         f"canonical_changed={str(summary.canonical_tokens_changed).lower()}"
     )
