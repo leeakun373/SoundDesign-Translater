@@ -12,6 +12,7 @@ from fxengine.canonical_db import DEFAULT_CANONICAL_PATH
 from tools.build_ai_alias_prompt_pack import (
     AI_INSTRUCTION,
     EXPECTED_COLUMNS,
+    REVIEW_CSV_COLUMNS,
     build_alias_prompt_pack,
 )
 from tools.build_boom_candidate_evidence import EVIDENCE_COLUMNS
@@ -75,6 +76,221 @@ def _write_candidates(path: Path, rows: list[dict[str, object]]) -> None:
         writer = csv.DictWriter(handle, fieldnames=EVIDENCE_COLUMNS)
         writer.writeheader()
         writer.writerows(rows)
+
+
+def _write_review_csv(path: Path, rows: list[dict[str, str]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=REVIEW_CSV_COLUMNS)
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def _review_row(
+    mode: str,
+    raw: str,
+    canonical: str,
+    kind: str,
+    slot: str,
+    recommendation: str,
+) -> dict[str, str]:
+    return {
+        "mode": mode,
+        "raw": raw,
+        "canonical": canonical,
+        "kind": kind,
+        "slot": slot,
+        "existing_canonical_status": "existing_unknown",
+        "approved_for_ai": "yes",
+        "field_quality": "high",
+        "example_quality": "high",
+        "category_alignment": "aligned",
+        "qa_flags": "",
+        "review_risk": "medium",
+        "recommendation": recommendation,
+        "reason": "test review",
+        "example_summary": canonical,
+    }
+
+
+def _candidate_fixture(tmp_path: Path) -> tuple[Path, Path, Path, Path, Path]:
+    candidate_dir = tmp_path / "candidates"
+    _write_candidates(
+        candidate_dir / "action_candidates.csv",
+        [
+            _evidence_row("hit", "Hit", "token", "action", 75),
+            _evidence_row("crack", "Crack", "token", "action", 75),
+            _evidence_row(
+                "impact",
+                "Impact",
+                "token",
+                "action",
+                90,
+                existing_canonical_status="existing_keep",
+            ),
+            _evidence_row(
+                "short",
+                "Short",
+                "token",
+                "modifier",
+                60,
+                approved_for_ai="no",
+                qa_flags="detail_modifier",
+            ),
+        ],
+    )
+    _write_candidates(
+        candidate_dir / "phrase_candidates.csv",
+        [_evidence_row("single shot", "Single Shot", "phrase", "action", 75)],
+    )
+    _write_candidates(
+        candidate_dir / "object_candidates.csv",
+        [_evidence_row("gun", "Gun", "token", "object", 75)],
+    )
+    canonical_path = tmp_path / "canonical_tokens.csv"
+    canonical_path.write_bytes(DEFAULT_CANONICAL_PATH.read_bytes())
+    return (
+        candidate_dir / "action_candidates.csv",
+        candidate_dir / "phrase_candidates.csv",
+        candidate_dir / "object_candidates.csv",
+        canonical_path,
+        tmp_path,
+    )
+
+
+def test_new_candidate_review_csv_excludes_gun_and_keeps_allow_prompt_only(tmp_path: Path) -> None:
+    action_path, phrase_path, object_path, canonical_path, root = _candidate_fixture(tmp_path)
+    review_csv = root / "reviewed.csv"
+    _write_review_csv(
+        review_csv,
+        [
+            _review_row("new_candidate", "gun", "Gun", "token", "object", "alias_only"),
+            _review_row("new_candidate", "hit", "Hit", "token", "action", "allow_prompt"),
+            _review_row("new_candidate", "crack", "Crack", "token", "action", "allow_prompt"),
+            _review_row(
+                "new_candidate",
+                "single shot",
+                "Single Shot",
+                "phrase",
+                "action",
+                "allow_prompt",
+            ),
+        ],
+    )
+
+    summary = build_alias_prompt_pack(
+        action_path,
+        phrase_path,
+        object_path,
+        root / "reviewed_new_candidate",
+        root / "reviewed_new_candidate_report.md",
+        canonical_path,
+        review_csv=review_csv,
+        review_recommendation="allow_prompt",
+    )
+    items = [
+        json.loads(line)
+        for line in Path(summary.jsonl_path).read_text(encoding="utf-8").splitlines()
+    ]
+
+    assert summary.review_csv_path == str(review_csv)
+    assert summary.promote is False
+    assert summary.ai_invoked is False
+    assert {item["canonical"] for item in items} == {"Hit", "Crack", "Single Shot"}
+    assert "Gun" not in {item["canonical"] for item in items}
+    assert summary.skip_reason_counts.get("review_alias_only") == 1
+
+
+def test_alias_expansion_review_csv_keeps_alias_only_and_excludes_block(tmp_path: Path) -> None:
+    action_path, phrase_path, object_path, canonical_path, root = _candidate_fixture(tmp_path)
+    review_csv = root / "reviewed.csv"
+    _write_review_csv(
+        review_csv,
+        [
+            _review_row("alias_expansion", "impact", "Impact", "token", "action", "alias_only"),
+            _review_row("alias_expansion", "hit", "Hit", "token", "action", "allow_prompt"),
+            _review_row("alias_expansion", "gun", "Gun", "token", "object", "alias_only"),
+            _review_row("alias_expansion", "crack", "Crack", "token", "action", "block"),
+            _review_row(
+                "alias_expansion",
+                "single shot",
+                "Single Shot",
+                "phrase",
+                "action",
+                "allow_prompt",
+            ),
+        ],
+    )
+
+    summary = build_alias_prompt_pack(
+        action_path,
+        phrase_path,
+        object_path,
+        root / "reviewed_alias_expansion",
+        root / "reviewed_alias_expansion_report.md",
+        canonical_path,
+        mode="alias_expansion",
+        review_csv=review_csv,
+    )
+    items = [
+        json.loads(line)
+        for line in Path(summary.jsonl_path).read_text(encoding="utf-8").splitlines()
+    ]
+
+    assert {item["canonical"] for item in items} == {"Impact", "Hit", "Gun", "Single Shot"}
+    assert "Crack" not in {item["canonical"] for item in items}
+    assert summary.skip_reason_counts.get("review_block") == 1
+
+
+def test_review_csv_absent_preserves_legacy_behavior(tmp_path: Path) -> None:
+    candidate_dir = tmp_path / "candidates"
+    _write_candidates(
+        candidate_dir / "action_candidates.csv",
+        [_evidence_row("knock", "Knock", "token", "action", 75)],
+    )
+    _write_candidates(candidate_dir / "phrase_candidates.csv", [])
+    _write_candidates(candidate_dir / "object_candidates.csv", [])
+    canonical_path = tmp_path / "canonical_tokens.csv"
+    canonical_path.write_bytes(DEFAULT_CANONICAL_PATH.read_bytes())
+
+    summary = build_alias_prompt_pack(
+        candidate_dir / "action_candidates.csv",
+        candidate_dir / "phrase_candidates.csv",
+        candidate_dir / "object_candidates.csv",
+        tmp_path / "prompt_pack",
+        tmp_path / "prompt_report.md",
+        canonical_path,
+    )
+
+    assert summary.review_csv_path is None
+    assert summary.item_count == 1
+    assert summary.skip_reason_counts == {}
+
+
+def test_review_csv_does_not_change_canonical_tokens_hash(tmp_path: Path) -> None:
+    action_path, phrase_path, object_path, canonical_path, root = _candidate_fixture(tmp_path)
+    review_csv = root / "reviewed.csv"
+    _write_review_csv(
+        review_csv,
+        [_review_row("new_candidate", "hit", "Hit", "token", "action", "allow_prompt")],
+    )
+    before = canonical_path.read_bytes()
+
+    summary = build_alias_prompt_pack(
+        action_path,
+        phrase_path,
+        object_path,
+        root / "reviewed_new_candidate",
+        root / "reviewed_new_candidate_report.md",
+        canonical_path,
+        review_csv=review_csv,
+    )
+
+    assert canonical_path.read_bytes() == before
+    assert summary.canonical_tokens_changed is False
+    report = Path(summary.report_path).read_text(encoding="utf-8")
+    assert "AI invoked: `no`" in report
+    assert "promote: `no`" in report
 
 
 def test_prompt_pack_writes_jsonl_without_invoking_ai(tmp_path: Path) -> None:

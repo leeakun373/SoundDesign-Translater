@@ -18,7 +18,26 @@ DEFAULT_CANDIDATE_DIR = ROOT / "exports" / "boomone_candidates"
 DEFAULT_OUTPUT_DIR = ROOT / "exports" / "ai_alias_prompt_pack"
 DEFAULT_REPORT = ROOT / "reports" / "ai_alias_prompt_pack_report.md"
 DEFAULT_CANONICAL = ROOT / "fxengine" / "data" / "canonical_tokens.csv"
+DEFAULT_REVIEW_CSV = ROOT / "exports" / "ai_alias_prompt_pack" / "reviewed_prompt_candidates.csv"
 PROMPT_MODES = {"new_candidate", "alias_expansion"}
+REVIEW_RECOMMENDATIONS = {"allow_prompt", "alias_only", "block"}
+REVIEW_CSV_COLUMNS = (
+    "mode",
+    "raw",
+    "canonical",
+    "kind",
+    "slot",
+    "existing_canonical_status",
+    "approved_for_ai",
+    "field_quality",
+    "example_quality",
+    "category_alignment",
+    "qa_flags",
+    "review_risk",
+    "recommendation",
+    "reason",
+    "example_summary",
+)
 AI_INSTRUCTION = (
     "Generate conservative Chinese aliases for a sound-design FXName token. "
     "Do not translate freely. Return only aliases that a Chinese sound designer "
@@ -57,6 +76,9 @@ class PromptPackSummary:
     existing_keep_count: int = 0
     existing_unknown_count: int = 0
     existing_conflict_blocked_count: int = 0
+    review_csv_path: str | None = None
+    review_recommendation: str | None = None
+    promote: bool = False
 
 
 def build_alias_prompt_pack(
@@ -69,6 +91,8 @@ def build_alias_prompt_pack(
     *,
     preview_limit: int = 20,
     mode: str = "new_candidate",
+    review_csv: Path | None = None,
+    review_recommendation: str = "allow_prompt",
 ) -> PromptPackSummary:
     """Write JSONL/Markdown inputs only; this function never invokes a model."""
     if mode not in PROMPT_MODES:
@@ -87,6 +111,15 @@ def build_alias_prompt_pack(
         raise FileNotFoundError(f"Required input not found: {missing[0]}")
     if preview_limit < 1:
         raise ValueError("preview_limit must be positive")
+    if review_recommendation not in REVIEW_RECOMMENDATIONS:
+        raise ValueError(
+            f"review_recommendation must be one of: {', '.join(sorted(REVIEW_RECOMMENDATIONS))}"
+        )
+
+    review_csv = Path(review_csv) if review_csv else None
+    if review_csv and not review_csv.is_file():
+        raise FileNotFoundError(f"Review CSV not found: {review_csv}")
+    review_index = _load_review_index(review_csv) if review_csv else {}
 
     canonical_before = _sha256(canonical_path)
     ranked: list[tuple[tuple[int, int, str, str], dict[str, object]]] = []
@@ -119,9 +152,22 @@ def build_alias_prompt_pack(
             approved_for_ai_count += 1
             canonical = (row.get("canonical_guess") or "").strip()
             slot = (row.get("slot_guess") or default_slot).strip() or default_slot
+            kind = (row.get("kind") or "token").strip()
             if not canonical:
                 skipped_count += 1
                 skip_reason_counts["missing_canonical"] += 1
+                continue
+            review_skip_reason = _review_skip_reason(
+                mode,
+                canonical,
+                kind,
+                slot,
+                review_index,
+                review_recommendation,
+            )
+            if review_skip_reason:
+                skipped_count += 1
+                skip_reason_counts[review_skip_reason] += 1
                 continue
             key = (canonical.casefold(), slot)
             if key in seen:
@@ -132,7 +178,7 @@ def build_alias_prompt_pack(
             item = {
                 "canonical": canonical,
                 "slot": slot,
-                "candidate_type": (row.get("kind") or "token").strip(),
+                "candidate_type": kind,
                 "record_count": _safe_int(row.get("record_count")),
                 "examples": _parse_examples(row),
                 "instruction": AI_INSTRUCTION,
@@ -175,8 +221,10 @@ def build_alias_prompt_pack(
         existing_keep_count=existing_keep_count,
         existing_unknown_count=existing_unknown_count,
         existing_conflict_blocked_count=existing_conflict_blocked_count,
+        review_csv_path=str(review_csv) if review_csv else None,
+        review_recommendation=review_recommendation if review_csv else None,
     )
-    _write_report(Path(report_path), summary, input_specs)
+    _write_report(Path(report_path), summary, input_specs, review_csv=review_csv)
     return summary
 
 
@@ -324,10 +372,88 @@ def _write_preview(path: Path, items: list[dict[str, object]], *, mode: str) -> 
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
+def _load_review_index(path: Path) -> dict[tuple[str, str, str, str], str]:
+    with path.open("r", encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        if not reader.fieldnames or not {"mode", "canonical", "kind", "slot", "recommendation"} <= set(
+            reader.fieldnames
+        ):
+            raise ValueError(f"{path} is missing required review CSV columns")
+        index: dict[tuple[str, str, str, str], str] = {}
+        for row in reader:
+            recommendation = (row.get("recommendation") or "").strip()
+            if recommendation not in REVIEW_RECOMMENDATIONS:
+                raise ValueError(f"{path} has invalid recommendation: {recommendation!r}")
+            key = (
+                (row.get("mode") or "").strip(),
+                (row.get("canonical") or "").strip().casefold(),
+                (row.get("kind") or "token").strip(),
+                (row.get("slot") or "").strip(),
+            )
+            index[key] = recommendation
+        return index
+
+
+def _lookup_review_recommendation(
+    review_index: dict[tuple[str, str, str, str], str],
+    mode: str,
+    canonical: str,
+    kind: str,
+    slot: str,
+) -> str | None:
+    canonical_key = canonical.casefold()
+    exact = (mode, canonical_key, kind, slot)
+    if exact in review_index:
+        return review_index[exact]
+    matches = [
+        recommendation
+        for key, recommendation in review_index.items()
+        if key[0] == mode and key[1] == canonical_key
+    ]
+    if len(matches) == 1:
+        return matches[0]
+    if len(matches) > 1:
+        for key, recommendation in review_index.items():
+            if key == (mode, canonical_key, kind, slot):
+                return recommendation
+        for key, recommendation in review_index.items():
+            if key[0] == mode and key[1] == canonical_key and key[2] == kind:
+                return recommendation
+    return None
+
+
+def _review_skip_reason(
+    mode: str,
+    canonical: str,
+    kind: str,
+    slot: str,
+    review_index: dict[tuple[str, str, str, str], str],
+    review_recommendation: str,
+) -> str | None:
+    if not review_index:
+        return None
+
+    recommendation = _lookup_review_recommendation(
+        review_index, mode, canonical, kind, slot
+    )
+    if recommendation is None:
+        return "review_not_listed"
+    if recommendation == "block":
+        return "review_block"
+    if mode == "new_candidate":
+        if recommendation != review_recommendation:
+            return f"review_{recommendation}"
+    elif recommendation not in {"allow_prompt", "alias_only"}:
+        return f"review_{recommendation}"
+    return None
+
+
 def _write_report(
     path: Path,
     summary: PromptPackSummary,
     input_specs: tuple[tuple[Path, str], ...],
+    *,
+    review_csv: Path | None = None,
 ) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     lines = [
@@ -354,7 +480,13 @@ def _write_report(
         "- required source: `ai_candidate`",
         "- required priority: `0`",
         "- automatic promotion: `no`",
+        "- promote: `no`",
         "- canonical_tokens.csv changed: `no`",
+        "",
+        "## Review filter",
+        "",
+        f"- review_csv: `{summary.review_csv_path or 'none'}`",
+        f"- review_recommendation: `{summary.review_recommendation or 'none'}`",
         "",
         "## Skip reason counts",
         "",
@@ -366,6 +498,7 @@ def _write_report(
         "## Inputs",
         "",
         *(f"- `{path}`" for path, _slot in input_specs),
+        *([f"- `{review_csv}`"] if review_csv else []),
         "",
         "## Canonical token guard",
         "",
@@ -408,6 +541,18 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--canonical", type=Path, default=DEFAULT_CANONICAL)
     parser.add_argument("--preview-limit", type=int, default=20)
     parser.add_argument("--mode", choices=sorted(PROMPT_MODES), default="new_candidate")
+    parser.add_argument(
+        "--review-csv",
+        type=Path,
+        default=None,
+        help="Optional reviewed prompt candidate CSV used to finalize prompt packs.",
+    )
+    parser.add_argument(
+        "--review-recommendation",
+        choices=sorted(REVIEW_RECOMMENDATIONS),
+        default="allow_prompt",
+        help="Required recommendation for new_candidate mode when --review-csv is set.",
+    )
     args = parser.parse_args(argv)
     try:
         summary = build_alias_prompt_pack(
@@ -419,13 +564,15 @@ def main(argv: Sequence[str] | None = None) -> int:
             args.canonical,
             preview_limit=args.preview_limit,
             mode=args.mode,
+            review_csv=args.review_csv,
+            review_recommendation=args.review_recommendation,
         )
     except (FileNotFoundError, ValueError, RuntimeError) as exc:
         parser.error(str(exc))
     print(
         f"mode={summary.mode} items={summary.item_count} "
         f"approved={summary.approved_for_ai_count} "
-        f"skipped={summary.skipped_count} ai_invoked=no "
+        f"skipped={summary.skipped_count} ai_invoked=no promote=no "
         f"canonical_changed={str(summary.canonical_tokens_changed).lower()}"
     )
     return 0
