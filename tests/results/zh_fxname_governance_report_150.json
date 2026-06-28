@@ -1,6 +1,6 @@
 {
   "csv_path": "E:\\WorkSpace\\SoundDesign Translater\\tests\\zh_fxname_governance_cases_150.csv",
-  "generated_at": "2026-06-28T10:21:55.621413+00:00",
+  "generated_at": "2026-06-28T12:04:23.878791+00:00",
   "total": 150,
   "pass": 105,
   "fail": 45,
@@ -4427,16 +4427,14 @@
       "input": "人摔倒",
       "test_kind": "both",
       "status": "fail",
-      "output_fxname": "",
+      "output_fxname": "Fall",
       "derived_review_status": "review_required",
       "derived_source": "ambiguity_rule",
       "reasons": [
-        "fxname mismatch: expected one of [Body Fall] got []",
+        "fxname mismatch: expected one of [Body Fall] got [Fall]",
         "review_status mismatch: expected [mapped_phrase] derived [review_required]"
       ],
-      "pending": [
-        "source pending: engine taxonomy differs (expected phrase_rule, derived ambiguity_rule)"
-      ],
+      "pending": [],
       "expected": {
         "expected_fxname": "Body Fall",
         "expected_review_status": "mapped_phrase",
@@ -4444,7 +4442,7 @@
         "must_not_contain": "Drop"
       },
       "actual": {
-        "output_fxname": "",
+        "output_fxname": "Fall",
         "derived_review_status": "review_required",
         "derived_source": "ambiguity_rule",
         "token_summary": [
@@ -4456,18 +4454,11 @@
             "status": "unknown"
           },
           {
-            "raw": "摔",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "倒",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
+            "raw": "摔倒",
+            "text": "Fall",
+            "decision": "mapped_canonical",
+            "source": "canonical_csv",
+            "status": "ok"
           }
         ]
       }
