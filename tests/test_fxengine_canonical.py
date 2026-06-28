@@ -64,7 +64,7 @@ def test_canonical_csv_has_required_schema_coverage_and_unique_aliases() -> None
     assert db.token_count == len(keep_rows)
     assert db.runtime_token_count == len(keep_rows)
     assert db.raw_csv_row_count == len(rows)
-    assert db.review_row_count == 8
+    assert db.review_row_count == 21
     assert db.slot_counts == dict(Counter(row["slot"] for row in keep_rows))
 
 

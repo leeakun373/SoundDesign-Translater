@@ -29,7 +29,7 @@ input,expected_fxname,expected_unknown,allow_distance_in_fxname,expected_metadat
 室外巨大爆炸,Exterior Huge Explosion,,true,,default,,exterior explosion
 爆炸长尾,Explosion Long Tail,,true,,default,,long tail
 爆炸短尾,Explosion Short Tail,,true,,default,,short tail
-嗖,Whoosh,,true,,default,,whoosh alias
+嗖,,嗖,true,,default,,whoosh single now review guard
 呼啸长尾,Whoosh Long Tail,,true,,default,,whoosh tail
 挥动短促,Whoosh Short,,true,,default,,short whoosh
 掠过快速,Flyby Fast,,true,,default,,fast flyby
