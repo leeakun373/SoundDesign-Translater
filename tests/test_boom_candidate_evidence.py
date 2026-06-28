@@ -11,8 +11,11 @@ import pytest
 from fxengine.canonical_db import CANONICAL_COLUMNS, DEFAULT_CANONICAL_PATH
 from tools.build_boom_candidate_evidence import (
     EVIDENCE_COLUMNS,
+    EXPANDED_EXAMPLE_COLUMNS,
     _select_examples,
     build_candidate_evidence,
+    score_example_quality,
+    select_best_examples,
 )
 
 
@@ -230,6 +233,11 @@ def test_known_vocabulary_and_phrase_are_routed_to_review_files(tmp_path: Path) 
     assert summary.total_evidence_count == len(evidence)
     assert summary.approved_for_ai_count + summary.blocked_for_ai_count == len(evidence)
     assert Path(summary.qa_report_path).is_file()
+    expanded = _read_csv(output_dir / "expanded_examples.csv")
+    assert expanded
+    assert tuple(expanded[0]) == EXPANDED_EXAMPLE_COLUMNS
+    assert summary.expanded_evidence_count == len(expanded)
+    assert Path(summary.expanded_examples_path) == output_dir / "expanded_examples.csv"
 
 
 @pytest.mark.parametrize(
@@ -448,6 +456,26 @@ def test_duplicate_examples_are_deduplicated_and_fx_name_wins() -> None:
     assert len(selected) == 1
     assert selected[0]["field_source"] == "fx_name"
     assert duplicate_count == 2
+
+
+def test_expanded_example_selection_deduplicates_and_scores_trusted_rows() -> None:
+    examples = [
+        {
+            "match_field": "fx_name",
+            "match_quality": "high",
+            "fx_name": f"Metal Knock {index}",
+            "filename": f"knock-{index}.wav",
+            "source_file": f"source-{index}.csv",
+            "flags": "",
+        }
+        for index in range(3)
+    ]
+    examples.append(dict(examples[0]))
+
+    selected = select_best_examples(examples)
+
+    assert len(selected) == 3
+    assert score_example_quality(examples) == "high"
 
 
 def test_description_only_hit_is_not_approved_for_ai(tmp_path: Path) -> None:

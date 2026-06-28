@@ -59,6 +59,31 @@ EVIDENCE_COLUMNS = (
     "approved_for_ai",
     "qa_flags",
 )
+EXPANDED_EXAMPLE_COLUMNS = (
+    "raw",
+    "canonical_guess",
+    "example_rank",
+    "match_field",
+    "match_quality",
+    "fx_name",
+    "description",
+    "keywords",
+    "filename",
+    "cat_id",
+    "category",
+    "subcategory",
+    "source_file",
+    "flags",
+)
+EXPANSION_SEARCH_FIELDS = (
+    "fx_name",
+    "keywords",
+    "description",
+    "filename",
+    "category",
+    "subcategory",
+    "cat_id",
+)
 
 ACTION_TERMS = {
     "bang",
@@ -240,6 +265,9 @@ class EvidenceSummary:
     canonical_tokens_sha256_before: str
     canonical_tokens_sha256_after: str
     canonical_tokens_changed: bool
+    expanded_examples_path: str = ""
+    expanded_evidence_count: int = 0
+    approved_for_ai_before_expansion_count: int = 0
 
 
 @dataclass
@@ -266,6 +294,7 @@ def build_candidate_evidence(
     *,
     write_candidates: Path | None = None,
     candidate_threshold: int = 70,
+    max_examples_per_candidate: int = 20,
 ) -> EvidenceSummary:
     """Create evidence CSVs and optionally write inert review-only candidates."""
     paths = tuple(
@@ -284,6 +313,8 @@ def build_candidate_evidence(
         raise FileNotFoundError(f"Required input not found: {missing[0]}")
     if not 0 <= candidate_threshold <= 100:
         raise ValueError("candidate_threshold must be between 0 and 100")
+    if max_examples_per_candidate < 1:
+        raise ValueError("max_examples_per_candidate must be positive")
 
     canonical_path = Path(canonical_path)
     qa_report_path = (
@@ -324,8 +355,16 @@ def build_candidate_evidence(
             str(row["raw"]),
         )
     )
+    approved_before_expansion = sum(
+        row["approved_for_ai"] == "yes" for row in rows
+    )
+    rows, expanded_examples = _expand_evidence_rows(
+        Path(db_path), rows, max_examples_per_candidate=max_examples_per_candidate
+    )
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
+    expanded_examples_path = output_dir / "expanded_examples.csv"
+    _write_expanded_examples_csv(expanded_examples_path, expanded_examples)
     _write_csv(output_dir / "candidate_evidence.csv", rows)
 
     action_rows = _accepted_rows(rows, slots={"action"}, kinds={"token"})
@@ -379,6 +418,9 @@ def build_candidate_evidence(
         canonical_tokens_sha256_before=canonical_before,
         canonical_tokens_sha256_after=canonical_after,
         canonical_tokens_changed=False,
+        expanded_examples_path=str(expanded_examples_path),
+        expanded_evidence_count=len(expanded_examples),
+        approved_for_ai_before_expansion_count=approved_before_expansion,
     )
     _write_report(Path(report_path), summary, rows)
     _write_qa_report(Path(qa_report_path), summary, rows)
@@ -495,6 +537,344 @@ def _scan_corpus(db_path: Path, wanted_items: set[str]) -> CorpusEvidence:
         aligned_records=aligned_records,
         qa_aligned_records=qa_aligned_records,
         categorized_records=categorized_records,
+    )
+
+
+def expand_examples_for_candidate(
+    connection: sqlite3.Connection,
+    raw: str,
+    canonical_guess: str,
+    *,
+    max_examples: int = 20,
+) -> list[dict[str, str]]:
+    """Return ranked, field-aware SQLite evidence for one mined candidate."""
+    if max_examples < 1:
+        raise ValueError("max_examples must be positive")
+    raw = raw.strip().casefold()
+    if not raw:
+        return []
+    escaped = raw.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
+    query = f"%{escaped}%"
+    records = connection.execute(
+        """
+        SELECT record_id, filename, fx_name, description, keywords, cat_id,
+               category, subcategory, source_file
+        FROM boomone_records
+        WHERE fx_name LIKE ? ESCAPE '\\' COLLATE NOCASE
+           OR keywords LIKE ? ESCAPE '\\' COLLATE NOCASE
+           OR description LIKE ? ESCAPE '\\' COLLATE NOCASE
+           OR filename LIKE ? ESCAPE '\\' COLLATE NOCASE
+           OR category LIKE ? ESCAPE '\\' COLLATE NOCASE
+           OR subcategory LIKE ? ESCAPE '\\' COLLATE NOCASE
+           OR cat_id LIKE ? ESCAPE '\\' COLLATE NOCASE
+        ORDER BY record_id
+        """,
+        [query] * len(EXPANSION_SEARCH_FIELDS),
+    ).fetchall()
+    examples: list[dict[str, str]] = []
+    for record in records:
+        match_field = _best_expanded_match_field(raw, record)
+        if match_field:
+            examples.append(
+                _expanded_example_row(raw, canonical_guess, record, match_field)
+            )
+    examples.sort(key=_expanded_example_sort_key)
+    selected = examples[:max_examples]
+    for index, row in enumerate(selected, start=1):
+        row["example_rank"] = str(index)
+    return selected
+
+
+def select_best_examples(
+    examples: list[dict[str, str]], *, limit: int = 3
+) -> list[dict[str, str]]:
+    """Select distinct, high-signal expanded examples for rendered evidence."""
+    if limit < 1:
+        raise ValueError("limit must be positive")
+    unique, _duplicate_count = _unique_expanded_examples(examples)
+    return sorted(unique, key=_expanded_example_sort_key)[:limit]
+
+
+def score_example_quality(examples: list[dict[str, str]]) -> str:
+    """Score expanded examples conservatively without invoking an AI service."""
+    selected = select_best_examples(examples)
+    trusted = sum(
+        _example_source_field(row) in {"fx_name", "keywords"} for row in selected
+    )
+    if not selected or any(_expanded_has_major_noise(row) for row in selected):
+        return "low"
+    if len(selected) >= 3 and trusted >= (len(selected) + 1) // 2:
+        return "high"
+    if len(selected) >= 2 and trusted:
+        return "medium"
+    return "low"
+
+
+def rescore_candidate_with_expanded_examples(
+    row: dict[str, object], examples: list[dict[str, str]]
+) -> dict[str, object]:
+    """Recalculate evidence QA fields from expanded examples."""
+    selected = select_best_examples(examples)
+    _unique, duplicate_count = _unique_expanded_examples(examples)
+    formatted = [_format_example(example) for example in selected]
+    formatted.extend([""] * (3 - len(formatted)))
+    field_counts = Counter(example["match_field"] for example in examples)
+    raw = str(row["raw"])
+    category_alignment = _expanded_category_alignment(raw, examples)
+    field_quality = _field_quality(field_counts, selected, category_alignment)
+    example_quality = score_example_quality(examples)
+    approved_for_ai, qa_flags = _qa_decision(
+        raw,
+        str(row["kind"]),
+        str(row["slot_guess"]),
+        str(row["decision"]),
+        field_counts,
+        selected,
+        field_quality,
+        example_quality,
+        category_alignment,
+        str(row["existing_canonical_status"]),
+        duplicate_count,
+    )
+    updated = dict(row)
+    updated.update(
+        {
+            "source_fields": _format_field_counts(field_counts),
+            "example_1": formatted[0],
+            "example_2": formatted[1],
+            "example_3": formatted[2],
+            "catid_samples": _expanded_samples(
+                example["cat_id"] for example in examples
+            ),
+            "category_samples": _expanded_samples(
+                "/".join(
+                    value
+                    for value in (example["category"], example["subcategory"])
+                    if value
+                )
+                for example in examples
+            ),
+            "source_files": _expanded_samples(
+                example["source_file"] for example in examples
+            ),
+            "fx_name_hits": field_counts.get("fx_name", 0),
+            "description_hits": field_counts.get("description", 0),
+            "keywords_hits": field_counts.get("keywords", 0),
+            "filename_hits": field_counts.get("filename", 0),
+            "field_quality": field_quality,
+            "example_quality": example_quality,
+            "category_alignment": category_alignment,
+            "approved_for_ai": approved_for_ai,
+            "qa_flags": ";".join(qa_flags),
+        }
+    )
+    return {column: updated.get(column, "") for column in EVIDENCE_COLUMNS}
+
+
+def _expand_evidence_rows(
+    db_path: Path,
+    rows: list[dict[str, object]],
+    *,
+    max_examples_per_candidate: int,
+) -> tuple[list[dict[str, object]], list[dict[str, str]]]:
+    expanded_rows: list[dict[str, str]] = []
+    rescored_rows: list[dict[str, object]] = []
+    connection = sqlite3.connect(db_path)
+    connection.row_factory = sqlite3.Row
+    try:
+        _assert_boomone_records_table(connection)
+        for row in rows:
+            examples = expand_examples_for_candidate(
+                connection,
+                str(row["raw"]),
+                str(row["canonical_guess"]),
+                max_examples=max_examples_per_candidate,
+            )
+            expanded_rows.extend(examples)
+            rescored_rows.append(
+                rescore_candidate_with_expanded_examples(row, examples)
+            )
+    finally:
+        connection.close()
+    return rescored_rows, expanded_rows
+
+
+def _assert_boomone_records_table(connection: sqlite3.Connection) -> None:
+    exists = connection.execute(
+        "SELECT 1 FROM sqlite_master WHERE type='table' AND name='boomone_records'"
+    ).fetchone()
+    if exists is None:
+        raise ValueError("boomone_records table is missing")
+
+
+def _expanded_example_row(
+    raw: str, canonical_guess: str, record: sqlite3.Row, match_field: str
+) -> dict[str, str]:
+    row = {
+        "raw": raw,
+        "canonical_guess": canonical_guess,
+        "example_rank": "0",
+        "match_field": match_field,
+        "match_quality": "low",
+        "fx_name": str(record["fx_name"] or ""),
+        "description": str(record["description"] or ""),
+        "keywords": str(record["keywords"] or ""),
+        "filename": str(record["filename"] or ""),
+        "cat_id": str(record["cat_id"] or ""),
+        "category": str(record["category"] or ""),
+        "subcategory": str(record["subcategory"] or ""),
+        "source_file": str(record["source_file"] or ""),
+        "flags": "",
+    }
+    flags = _expanded_example_flags(raw, row, match_field)
+    row["flags"] = ";".join(flags)
+    row["match_quality"] = _expanded_match_quality(
+        raw, row, match_field, flags
+    )
+    return row
+
+
+def _expanded_example_flags(
+    raw: str, row: dict[str, str], match_field: str
+) -> list[str]:
+    flags: list[str] = []
+    if match_field == "description":
+        flags.append("description_only")
+    if match_field == "filename":
+        flags.append("filename_only")
+    if not _record_category_aligned(
+        raw, row["category"], row["subcategory"], row["cat_id"]
+    ):
+        flags.append("category_mismatch")
+    text = " ".join(
+        row[field]
+        for field in ("fx_name", "description", "keywords", "filename")
+    ).casefold()
+    if "shotgun microphone" in text or "shotgun mic" in text:
+        flags.append("shotgun_microphone")
+    if (
+        any(term in text for term in ("tape gun", "glue gun", "tool gun"))
+        and not _weapon_category(row)
+    ):
+        flags.append("tool_gun_context")
+    if row["category"].casefold().startswith("ambience") and match_field == "description":
+        flags.append("ambience_context")
+    if any(term in text for term in ("microphone", "frequency response")):
+        flags.append("metadata_context")
+    return list(dict.fromkeys(flags))
+
+
+def _expanded_match_quality(
+    raw: str,
+    row: dict[str, str],
+    match_field: str,
+    flags: list[str],
+) -> str:
+    if _expanded_has_major_noise({"flags": ";".join(flags)}):
+        return "low"
+    if match_field == "fx_name":
+        return "high"
+    if match_field == "keywords" and _record_category_aligned(
+        raw, row["category"], row["subcategory"], row["cat_id"]
+    ):
+        return "high"
+    if match_field == "description" and "category_mismatch" not in flags:
+        return "medium"
+    return "low"
+
+
+def _best_expanded_match_field(raw: str, record: sqlite3.Row) -> str:
+    for field in EXPANSION_SEARCH_FIELDS:
+        if _contains_candidate(raw, str(record[field] or "")):
+            return field
+    return ""
+
+
+def _contains_candidate(raw: str, text: str) -> bool:
+    return bool(
+        re.search(
+            r"(?<![a-z0-9])" + re.escape(raw.casefold()) + r"(?![a-z0-9])",
+            text.casefold(),
+        )
+    )
+
+
+def _expanded_example_sort_key(
+    row: dict[str, str],
+) -> tuple[int, int, int, str, str, str]:
+    quality = {"high": 0, "medium": 1, "low": 2}
+    return (
+        EXAMPLE_SOURCE_PRIORITY.get(row.get("match_field", ""), 99),
+        quality.get(row.get("match_quality", ""), 99),
+        len([flag for flag in row.get("flags", "").split(";") if flag]),
+        row.get("source_file", ""),
+        row.get("fx_name", ""),
+        row.get("filename", ""),
+    )
+
+
+def _unique_expanded_examples(
+    examples: list[dict[str, str]],
+) -> tuple[list[dict[str, str]], int]:
+    unique: list[dict[str, str]] = []
+    seen_payloads: set[str] = set()
+    seen_fx_names: set[str] = set()
+    for row in sorted(examples, key=_expanded_example_sort_key):
+        payload = "|".join(
+            row.get(field, "").casefold()
+            for field in ("fx_name", "filename", "source_file")
+        )
+        fx_name = row.get("fx_name", "").casefold()
+        if payload in seen_payloads or (fx_name and fx_name in seen_fx_names):
+            continue
+        unique.append(row)
+        seen_payloads.add(payload)
+        if fx_name:
+            seen_fx_names.add(fx_name)
+    return unique, len(examples) - len(unique)
+
+
+def _expanded_has_major_noise(row: dict[str, str]) -> bool:
+    flags = {flag for flag in row.get("flags", "").split(";") if flag}
+    return bool(
+        flags
+        & {
+            "shotgun_microphone",
+            "tool_gun_context",
+            "ambience_context",
+            "metadata_context",
+        }
+    )
+
+
+def _expanded_category_alignment(
+    raw: str, examples: list[dict[str, str]]
+) -> str:
+    categorized = [
+        row
+        for row in examples
+        if row["category"] or row["subcategory"] or row["cat_id"]
+    ]
+    if not categorized:
+        return "unknown"
+    aligned = [
+        row
+        for row in categorized
+        if _record_category_aligned(
+            raw, row["category"], row["subcategory"], row["cat_id"]
+        )
+    ]
+    ratio = len(aligned) / len(categorized)
+    if ratio >= 0.6:
+        return "aligned"
+    if aligned:
+        return "mixed"
+    return "weak"
+
+
+def _expanded_samples(values: Iterable[str], limit: int = 5) -> str:
+    return "; ".join(
+        value for value, _count in Counter(value for value in values if value).most_common(limit)
     )
 
 
@@ -712,7 +1092,7 @@ def _field_quality(
     trusted_hits = counts.get("fx_name", 0) + counts.get("keywords", 0)
     weak_hits = counts.get("description", 0) + counts.get("filename", 0)
     trusted_examples = sum(
-        row.get("field_source") in {"fx_name", "keywords"} for row in examples
+        _example_source_field(row) in {"fx_name", "keywords"} for row in examples
     )
     if (
         counts.get("fx_name", 0) > 0
@@ -735,7 +1115,7 @@ def _example_quality(
     if not examples:
         return "low"
     trusted = sum(
-        row.get("field_source") in {"fx_name", "keywords"} for row in examples
+        _example_source_field(row) in {"fx_name", "keywords"} for row in examples
     )
     if (duplicate_count >= 2 and len(examples) == 1) or trusted == 0:
         return "low"
@@ -800,7 +1180,7 @@ def _qa_decision(
     if (
         "hit" in parts
         and field_counts.get("description", 0) > trusted_hits
-        and sum(row.get("field_source") == "description" for row in examples)
+        and sum(_example_source_field(row) == "description" for row in examples)
         >= max(1, (len(examples) + 1) // 2)
     ):
         contextual_blocks.append("generic_description_hit")
@@ -836,7 +1216,11 @@ def _is_shotgun_microphone_example(row: dict[str, str]) -> bool:
 
 def _is_ambience_description(row: dict[str, str]) -> bool:
     category = (row.get("category") or "").casefold()
-    return row.get("field_source") == "description" and category.startswith("ambience")
+    return _example_source_field(row) == "description" and category.startswith("ambience")
+
+
+def _example_source_field(row: dict[str, str]) -> str:
+    return row.get("field_source") or row.get("match_field", "")
 
 
 def _weapon_category(row: dict[str, str]) -> bool:
@@ -1009,6 +1393,16 @@ def _write_csv(path: Path, rows: Iterable[dict[str, object]]) -> None:
         writer.writerows(rows)
 
 
+def _write_expanded_examples_csv(
+    path: Path, rows: Iterable[dict[str, str]]
+) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=EXPANDED_EXAMPLE_COLUMNS)
+        writer.writeheader()
+        writer.writerows(rows)
+
+
 def _write_review_candidates(
     path: Path, rows: list[dict[str, object]], threshold: int
 ) -> int:
@@ -1076,6 +1470,13 @@ def _write_report(
         ),
         f"- phrase candidate count: `{summary.phrase_candidate_count}`",
         f"- rejected noise count: `{summary.rejected_noise_count}`",
+        f"- expanded evidence rows: `{summary.expanded_evidence_count}`",
+        f"- expanded examples: `{summary.expanded_examples_path}`",
+        (
+            "- approved_for_ai before expansion: "
+            f"`{summary.approved_for_ai_before_expansion_count}`"
+        ),
+        f"- approved_for_ai after expansion: `{summary.approved_for_ai_count}`",
         f"- review-only candidates written: `{summary.written_candidate_count}`",
         "",
         "## Top accepted examples",
@@ -1130,6 +1531,11 @@ def _write_qa_report(
         "# BOOM Evidence QA Report",
         "",
         f"- total evidence rows: `{summary.total_evidence_count}`",
+        f"- expanded evidence rows: `{summary.expanded_evidence_count}`",
+        (
+            "- approved_for_ai before expansion: "
+            f"`{summary.approved_for_ai_before_expansion_count}`"
+        ),
         f"- approved_for_ai count: `{summary.approved_for_ai_count}`",
         f"- rejected_for_ai count: `{summary.blocked_for_ai_count}`",
         "- canonical_tokens.csv changed: `no`",
@@ -1152,7 +1558,7 @@ def _write_qa_report(
         "",
     ]
     indexed = {(str(row["raw"]), str(row["kind"])): row for row in rows}
-    for raw in ("hit", "shot", "gun", "ring"):
+    for raw in ("hit", "shot", "gun", "ring", "whoosh"):
         row = indexed.get((raw, "token"))
         if row is None:
             lines.append(f"- {raw}: approved_for_ai=no; reason=not present in evidence")
@@ -1313,6 +1719,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--qa-report", type=Path, default=DEFAULT_QA_REPORT)
     parser.add_argument("--write-candidates", type=Path)
     parser.add_argument("--candidate-threshold", type=int, default=70)
+    parser.add_argument("--max-examples", type=int, default=20)
     args = parser.parse_args(argv)
     try:
         summary = build_candidate_evidence(
@@ -1327,6 +1734,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             args.qa_report,
             write_candidates=args.write_candidates,
             candidate_threshold=args.candidate_threshold,
+            max_examples_per_candidate=args.max_examples,
         )
     except (FileNotFoundError, ValueError, RuntimeError, sqlite3.DatabaseError) as exc:
         parser.error(str(exc))

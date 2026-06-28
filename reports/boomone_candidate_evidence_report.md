@@ -8,6 +8,10 @@
 - detail/modifier candidate count: `15`
 - phrase candidate count: `4`
 - rejected noise count: `943`
+- expanded evidence rows: `13617`
+- expanded examples: `E:\WorkSpace\SoundDesign Translater\exports\boomone_candidates\expanded_examples.csv`
+- approved_for_ai before expansion: `7`
+- approved_for_ai after expansion: `20`
 - review-only candidates written: `0`
 
 ## Top accepted examples

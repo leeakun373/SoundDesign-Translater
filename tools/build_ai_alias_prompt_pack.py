@@ -52,11 +52,11 @@ class PromptPackSummary:
     canonical_tokens_sha256_before: str
     canonical_tokens_sha256_after: str
     canonical_tokens_changed: bool
+    ai_invoked: bool = False
     mode: str = "new_candidate"
     existing_keep_count: int = 0
     existing_unknown_count: int = 0
     existing_conflict_blocked_count: int = 0
-    ai_invoked: bool = False
 
 
 def build_alias_prompt_pack(
@@ -219,8 +219,10 @@ def _prompt_skip_reason(row: dict[str, str], mode: str) -> str | None:
     if mode == "new_candidate":
         if canonical_status == "existing_keep":
             return "existing_keep_not_alias_expansion"
-        if canonical_status and canonical_status != "existing_unknown":
+        if canonical_status != "existing_unknown":
             return "not_existing_unknown"
+    elif canonical_status not in {"existing_unknown", "existing_keep"}:
+        return "unsupported_existing_canonical_status"
 
     return None
 

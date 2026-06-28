@@ -6,6 +6,8 @@ import csv
 import json
 from pathlib import Path
 
+import pytest
+
 from fxengine.canonical_db import DEFAULT_CANONICAL_PATH
 from tools.build_ai_alias_prompt_pack import (
     AI_INSTRUCTION,
@@ -305,3 +307,46 @@ def test_existing_conflict_and_low_examples_never_enter_prompt_pack(tmp_path: Pa
         "existing_conflict": 1,
         "low_example_quality": 1,
     }
+
+
+@pytest.mark.parametrize("mode", ["new_candidate", "alias_expansion"])
+@pytest.mark.parametrize("canonical_status", ["", "existing_review", "unexpected"])
+def test_prompt_modes_reject_missing_or_unsupported_canonical_status(
+    tmp_path: Path, mode: str, canonical_status: str
+) -> None:
+    candidate_dir = tmp_path / "candidates"
+    _write_candidates(
+        candidate_dir / "action_candidates.csv",
+        [
+            _evidence_row(
+                "knock",
+                "Knock",
+                "token",
+                "action",
+                90,
+                existing_canonical_status=canonical_status,
+            )
+        ],
+    )
+    _write_candidates(candidate_dir / "phrase_candidates.csv", [])
+    _write_candidates(candidate_dir / "object_candidates.csv", [])
+    canonical_path = tmp_path / "canonical_tokens.csv"
+    canonical_path.write_bytes(DEFAULT_CANONICAL_PATH.read_bytes())
+
+    summary = build_alias_prompt_pack(
+        candidate_dir / "action_candidates.csv",
+        candidate_dir / "phrase_candidates.csv",
+        candidate_dir / "object_candidates.csv",
+        tmp_path / "prompt_pack",
+        tmp_path / "prompt_report.md",
+        canonical_path,
+        mode=mode,
+    )
+
+    assert summary.item_count == 0
+    expected_reason = (
+        "not_existing_unknown"
+        if mode == "new_candidate"
+        else "unsupported_existing_canonical_status"
+    )
+    assert summary.skip_reason_counts == {expected_reason: 1}
