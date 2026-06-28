@@ -23,13 +23,23 @@ from fxengine.canonical_db import CANONICAL_COLUMNS, DEFAULT_CANONICAL_PATH  # n
 DEFAULT_INPUT_CSV = (
     ROOT / "exports" / "ai_alias_prompt_pack" / "ai_alias_candidates_review_intake.csv"
 )
+DEFAULT_INPUT_SURFACE_CSV = (
+    ROOT / "exports" / "ai_alias_prompt_pack" / "ai_alias_candidates_surface_cleaned.csv"
+)
 DEFAULT_OUTPUT_CSV = (
     ROOT
     / "exports"
     / "ai_alias_prompt_pack"
     / "ai_alias_candidates_decision_recommendations.csv"
 )
+DEFAULT_OUTPUT_V2_CSV = (
+    ROOT
+    / "exports"
+    / "ai_alias_prompt_pack"
+    / "ai_alias_candidates_decision_recommendations_v2.csv"
+)
 DEFAULT_REPORT = ROOT / "reports" / "ai_alias_candidates_decision_recommendations_report.md"
+DEFAULT_REPORT_V2 = ROOT / "reports" / "ai_alias_candidates_decision_recommendations_v2_report.md"
 
 INTAKE_COLUMNS = (
     *CANONICAL_COLUMNS,
@@ -38,8 +48,22 @@ INTAKE_COLUMNS = (
     "review_action",
     "review_reason",
 )
+SURFACE_EXTRA_COLUMNS = (
+    "cleaned_raw",
+    "surface_action",
+    "surface_reason",
+    "surface_risk",
+)
+SURFACE_INPUT_COLUMNS = (*INTAKE_COLUMNS, *SURFACE_EXTRA_COLUMNS)
 DECISION_COLUMNS = (
     *INTAKE_COLUMNS,
+    "decision_recommendation",
+    "decision_reason",
+    "conflict_group",
+)
+DECISION_SURFACE_COLUMNS = (
+    *SURFACE_INPUT_COLUMNS,
+    "original_raw",
     "decision_recommendation",
     "decision_reason",
     "conflict_group",
@@ -86,16 +110,21 @@ def recommend_ai_alias_candidate_decisions(
     _require_distinct_output_paths(input_csv, output_csv, report_path, canonical_path)
 
     canonical_before = _sha256(canonical_path)
-    intake_rows = _read_intake_rows(input_csv)
+    intake_rows, surface_mode = _read_input_rows(input_csv)
     conflict_groups = _build_conflict_groups(intake_rows)
     decision_rows = [
-        _recommend_row(row, conflict_group=conflict_groups.get(_raw_key(row["raw"]), ""))
+        _recommend_row(
+            row,
+            conflict_group=conflict_groups.get(_effective_raw_key(row), ""),
+            surface_mode=surface_mode,
+        )
         for row in intake_rows
     ]
 
     output_csv.parent.mkdir(parents=True, exist_ok=True)
     report_path.parent.mkdir(parents=True, exist_ok=True)
-    _write_csv(output_csv, decision_rows)
+    output_columns = DECISION_SURFACE_COLUMNS if surface_mode else DECISION_COLUMNS
+    _write_csv(output_csv, decision_rows, fieldnames=output_columns)
 
     canonical_after = _sha256(canonical_path)
     counts_by_decision = Counter(row["decision_recommendation"] for row in decision_rows)
@@ -121,23 +150,35 @@ def recommend_ai_alias_candidate_decisions(
     return summary
 
 
-def _read_intake_rows(path: Path) -> list[dict[str, str]]:
+def _read_input_rows(path: Path) -> tuple[list[dict[str, str]], bool]:
     with path.open("r", encoding="utf-8-sig", newline="") as handle:
         reader = csv.DictReader(handle)
         fieldnames = set(reader.fieldnames or [])
-        missing = set(INTAKE_COLUMNS) - fieldnames
+        surface_mode = SURFACE_EXTRA_COLUMNS[0] in fieldnames
+        required = SURFACE_INPUT_COLUMNS if surface_mode else INTAKE_COLUMNS
+        missing = set(required) - fieldnames
         if missing:
-            raise ValueError(f"{path} is missing intake columns: {', '.join(sorted(missing))}")
+            raise ValueError(f"{path} is missing required columns: {', '.join(sorted(missing))}")
         rows = [
-            {column: (source_row.get(column) or "").strip() for column in INTAKE_COLUMNS}
+            {column: (source_row.get(column) or "").strip() for column in required}
             for source_row in reader
         ]
     for row_number, row in enumerate(rows, 2):
-        _validate_intake_row(row, row_number=row_number)
+        _validate_intake_row(row, row_number=row_number, surface_mode=surface_mode)
+    return rows, surface_mode
+
+
+def _read_intake_rows(path: Path) -> list[dict[str, str]]:
+    rows, _surface_mode = _read_input_rows(path)
     return rows
 
 
-def _validate_intake_row(row: Mapping[str, str], *, row_number: int) -> None:
+def _validate_intake_row(
+    row: Mapping[str, str],
+    *,
+    row_number: int,
+    surface_mode: bool = False,
+) -> None:
     if not row["raw"]:
         raise ValueError(f"row {row_number}: raw must not be empty")
     if not row["canonical"]:
@@ -154,12 +195,24 @@ def _validate_intake_row(row: Mapping[str, str], *, row_number: int) -> None:
         raise ValueError(f"row {row_number}: invalid review_batch")
     if row["review_risk"] not in {"low", "medium", "high"}:
         raise ValueError(f"row {row_number}: invalid review_risk")
+    if surface_mode:
+        if row["surface_action"] not in {
+            "keep_raw",
+            "replace_raw",
+            "needs_review",
+            "reject_surface",
+        }:
+            raise ValueError(f"row {row_number}: invalid surface_action")
+        if row["surface_risk"] not in {"low", "medium", "high"}:
+            raise ValueError(f"row {row_number}: invalid surface_risk")
+        if not row["cleaned_raw"]:
+            raise ValueError(f"row {row_number}: cleaned_raw must not be empty")
 
 
 def _build_conflict_groups(rows: list[dict[str, str]]) -> dict[str, str]:
     canonicals_by_raw: dict[str, set[str]] = defaultdict(set)
     for row in rows:
-        canonicals_by_raw[_raw_key(row["raw"])].add(row["canonical"].casefold())
+        canonicals_by_raw[_effective_raw_key(row)].add(row["canonical"].casefold())
     conflict_keys = sorted(
         raw_key for raw_key, canonicals in canonicals_by_raw.items() if len(canonicals) > 1
     )
@@ -169,10 +222,40 @@ def _build_conflict_groups(rows: list[dict[str, str]]) -> dict[str, str]:
     }
 
 
-def _recommend_row(row: Mapping[str, str], *, conflict_group: str) -> dict[str, str]:
+def _effective_raw(row: Mapping[str, str]) -> str:
+    action = row.get("surface_action", "")
+    cleaned = row.get("cleaned_raw", "")
+    if action == "replace_raw" and cleaned:
+        return cleaned
+    if action == "needs_review" and cleaned:
+        return cleaned
+    return row["raw"]
+
+
+def _effective_raw_key(row: Mapping[str, str]) -> str:
+    return _raw_key(_effective_raw(row))
+
+
+def _recommend_row(
+    row: Mapping[str, str],
+    *,
+    conflict_group: str,
+    surface_mode: bool = False,
+) -> dict[str, str]:
     recommendation, reasons = _default_recommendation(row)
-    raw = row["raw"]
+    raw = _effective_raw(row)
+    original_raw = row["raw"]
     canonical = row["canonical"]
+
+    if surface_mode:
+        if row["surface_action"] == "reject_surface":
+            recommendation = "reject_candidate"
+            reasons.append(row["surface_reason"])
+        elif row["surface_action"] == "needs_review":
+            recommendation = _require_review(recommendation)
+            reasons.append(row["surface_reason"])
+        elif row["surface_action"] == "replace_raw":
+            reasons.append("surface_replace_raw")
 
     if row["review_reason"]:
         reasons.append(row["review_reason"])
@@ -182,23 +265,33 @@ def _recommend_row(row: Mapping[str, str], *, conflict_group: str) -> dict[str, 
     if row["slot"] == "object" and _looks_like_sound_event(raw):
         recommendation = _require_review(recommendation)
         reasons.append("object_slot_sound_event")
-    if canonical == "Gun" and raw == "枪炮":
+    if canonical == "Gun" and original_raw == "枪炮":
         recommendation = _require_review(recommendation)
         reasons.append("broad_weapon_term")
-    if canonical == "Shot" and raw == "发射声":
+    if canonical == "Shot" and original_raw == "发射声":
         recommendation = _require_review(recommendation)
         reasons.append("too_broad_weapon_action")
-    if canonical == "Ring" and raw in RING_TAIL_RAWS:
+    if canonical == "Ring" and original_raw in RING_TAIL_RAWS:
         recommendation = _require_review(recommendation)
         reasons.append("tonal_tail_or_reverb_possible")
-    if canonical == "Hit" and "拳击声" in raw:
+    if canonical == "Hit" and "拳击声" in original_raw:
         reasons.append("fight_specific")
-    if canonical == "Hit" and "命中" in raw:
+    if canonical == "Hit" and "命中" in original_raw:
         recommendation = "reject_candidate"
         reasons.append("forbidden_hit_literal_match")
 
+    base_row = {column: row[column] for column in (SURFACE_INPUT_COLUMNS if surface_mode else INTAKE_COLUMNS)}
+    base_row["raw"] = raw
+    if surface_mode:
+        return {
+            **base_row,
+            "original_raw": original_raw,
+            "decision_recommendation": recommendation,
+            "decision_reason": ";".join(dict.fromkeys(reasons)),
+            "conflict_group": conflict_group,
+        }
     return {
-        **{column: row[column] for column in INTAKE_COLUMNS},
+        **base_row,
         "decision_recommendation": recommendation,
         "decision_reason": ";".join(dict.fromkeys(reasons)),
         "conflict_group": conflict_group,
@@ -265,9 +358,9 @@ def _require_distinct_output_paths(
         raise ValueError("output CSV and report must use different paths")
 
 
-def _write_csv(path: Path, rows: list[dict[str, str]]) -> None:
+def _write_csv(path: Path, rows: list[dict[str, str]], *, fieldnames: Sequence[str]) -> None:
     with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=DECISION_COLUMNS)
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(rows)
 

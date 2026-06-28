@@ -28,37 +28,58 @@ Promote 硬规则（与 [AI_ALIAS_REVIEW_RULES.md](AI_ALIAS_REVIEW_RULES.md) 一
 
 ---
 
-## Batch 0 — Dry-run Promote Planner（未来）
+## Batch 0 — Dry-run Promote Planner
 
 **目标：** 只规划，不写主表。
 
+| 版本 | 输入 | 输出 | planned_count（当前） |
+|------|------|------|----------------------|
+| v1 | `ai_alias_candidates_decision_recommendations.csv` | `promote_plan_batch0.csv` | 6 |
+| v2 | `ai_alias_candidates_decision_recommendations_v2.csv` | `promote_plan_batch0_v2.csv` | 4 |
+
+### Batch 0 v1 问题（已发现）
+
+v1 曾 plan 6 条带「声 / 音」尾缀的 raw（如 `摩擦声`、`擦蹭声`）。这些更像音效描述词，不像用户实际输入 token，**不能直接 promote**。
+
+### Batch 0 v2 路线（surface cleanup 后）
+
+在 promote planner 之前必须跑：
+
+1. `tools/clean_ai_alias_candidate_surfaces.py`
+2. `tools/recommend_ai_alias_candidate_decisions.py`（输入 surface_cleaned，输出 v2 decisions）
+3. `tools/plan_ai_alias_promotions.py`（输入 v2 decisions，输出 v2 plan）
+
+v2 当前 plan 4 条：`擦蹭`、`磨蹭`、`铁链`、`锁链`。
+
 | 项 | 说明 |
 |----|------|
-| 输入 | `ai_alias_candidates_decision_recommendations.csv` |
-| 过滤 | 仅 `accept_candidate` |
-| 输出 | `promote_plan.csv`（planned rows + batch id + hash snapshot） |
+| 过滤 | 仅 `accept_candidate` + `batch_safe` + 无 conflict + 非 weapon |
 | 主表 | **不改** `canonical_tokens.csv` |
-
-`promote_plan.csv` 建议列：
-
-- raw, canonical, slot, lang, priority, rule_type, review_status（目标 keep）, source, note, batch_id, decision_reason, canonical_sha256_before
+| batch_id | v1=`batch0_dry_run`，v2=`batch0_dry_run_v2` |
 
 ---
 
-## Batch 1 — 最安全 6 条（未来）
+## Batch 1 — 最安全候选（未来）
 
 **目标：** 首次真实 promote 的候选集（人工确认后）。
 
-仅包含当前 v0.1 `accept_candidate`：
+**前提：** 必须通过 Batch 0 v2 surface cleanup，不得使用 v1 带尾缀 raw。
+
+v2 当前首选（4 条）：
 
 | raw | canonical | slot |
 |-----|-----------|------|
-| 摩擦声 | Friction | action |
-| 擦蹭声 | Friction | action |
-| 磨蹭声 | Friction | action |
-| 表面摩擦音 | Friction | action |
+| 擦蹭 | Friction | action |
+| 磨蹭 | Friction | action |
 | 铁链 | Chain | object |
 | 锁链 | Chain | object |
+
+v1 曾考虑但已被 surface cleanup 阻断或降级：
+
+| 原 raw | 清洗后 | 状态 |
+|--------|--------|------|
+| 摩擦声 | 摩擦 | reject_surface（主表已有） |
+| 表面摩擦音 | 表面摩擦 | needs_review（太描述化） |
 
 升格后行属性建议：
 

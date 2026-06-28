@@ -160,18 +160,73 @@ forbidden 禁词            → reject_candidate
 
 ---
 
-## 7. v0.1 accept_candidate 清单（6 条）
+## 8. Chinese alias surface cleanup
+
+在 promote planner 之前，必须对 AI alias 做 **中文 surface 清洗**（`tools/clean_ai_alias_candidate_surfaces.py`）。
+
+### 为什么要清洗
+
+- 不建议把 `XXX声` / `XXX音` **直接 promote** 成 canonical raw
+- 「声 / 音 / 声音 / 音效 / 声效」常常是输入噪声或描述尾缀，不像用户实际会打的 token
+- 例：`摩擦声` 更适合 proposed raw `摩擦`，而不是带尾缀的 `摩擦声`
+
+### 不能无脑 strip
+
+以下可能是 **完整概念**，不能简单去掉尾缀：
+
+| raw | 原因 |
+|-----|------|
+| 枪声 | 更像 Shot action，不是 Gun object；不能变成「枪」 |
+| 脚步声 / 风声 | 可能是完整检索概念（本 batch 未出现） |
+| 开门声 / 关门声 | door event，不是 Door object |
+| 门轴吱响 | hinge squeak event，不要拆成「门轴」 |
+| 回响声 / 余响 | tonal tail，不要自动 promote |
+
+### surface_action 取值
+
+| 值 | 含义 |
+|----|------|
+| `keep_raw` | 保留原 raw |
+| `replace_raw` | decision / plan 使用 `cleaned_raw` |
+| `needs_review` | 不可 `accept_candidate` |
+| `reject_surface` | 与主表 raw 冲突等，不可 promote |
+
+### 与 canonical 主表冲突
+
+- 若 `cleaned_raw` 已存在于 `canonical_tokens.csv`（例如 `摩擦` 已是 keep 行）→ `reject_surface`
+- promote planner 之前必须跑 surface cleanup → decision v2 → batch0 plan v2
+
+工具链：
+
+```powershell
+python tools/clean_ai_alias_candidate_surfaces.py
+python tools/recommend_ai_alias_candidate_decisions.py `
+  --input-csv exports/ai_alias_prompt_pack/ai_alias_candidates_surface_cleaned.csv `
+  --output-csv exports/ai_alias_prompt_pack/ai_alias_candidates_decision_recommendations_v2.csv `
+  --report reports/ai_alias_candidates_decision_recommendations_v2_report.md
+python tools/plan_ai_alias_promotions.py `
+  --input-csv exports/ai_alias_prompt_pack/ai_alias_candidates_decision_recommendations_v2.csv `
+  --output-csv exports/ai_alias_prompt_pack/promote_plan_batch0_v2.csv `
+  --report reports/ai_alias_promote_plan_batch0_v2_report.md
+```
+
+---
+
+## 9. v0.1 accept_candidate 清单（6 条，已被 surface 问题阻断）
 
 以下行在当前 decision 输出中为 `accept_candidate`，是未来 Batch 1 的首选：
 
-| raw | canonical |
-|-----|-----------|
-| 摩擦声 | Friction |
-| 擦蹭声 | Friction |
-| 磨蹭声 | Friction |
-| 表面摩擦音 | Friction |
-| 铁链 | Chain |
-| 锁链 | Chain |
+| raw | canonical | surface cleanup 后状态 |
+|-----|-----------|-------------------------|
+| 摩擦声 | Friction | `reject_surface`（主表已有 `摩擦`） |
+| 擦蹭声 | Friction | `擦蹭` / replace_raw |
+| 磨蹭声 | Friction | `磨蹭` / replace_raw |
+| 表面摩擦音 | Friction | `表面摩擦` / needs_review（太描述化） |
+| 铁链 | Chain | keep_raw |
+| 锁链 | Chain | keep_raw |
+
+**Batch 0 v1**（未清洗）曾 plan 6 条；因 raw surface suffix 问题，**不得直接 promote**。  
+**Batch 0 v2**（surface cleanup 后）当前 plan **4 条**：擦蹭、磨蹭、铁链、锁链。
 
 ---
 
