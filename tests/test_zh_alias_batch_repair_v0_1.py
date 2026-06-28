@@ -95,8 +95,8 @@ def test_safe_natural_alias_repairs(
 def test_connector_you_is_ignored_in_compound_action(
     normalizer: FXNameNormalizer,
 ) -> None:
-    result = normalizer.normalize("抽屉拉开又关上")
-    assert result.output_fxname == "Drawer Pull Open Close"
+    result = normalizer.normalize("门打开又关闭")
+    assert result.output_fxname == "Door Open Close"
     assert "又" not in result.unknowns
 
 
