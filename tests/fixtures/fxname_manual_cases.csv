@@ -66,7 +66,7 @@ car door 关闭,Car Door Close,,true,,default,,mixed car door
 火箭 launch 爆炸 long tail 5m,Rocket Launch Explosion Long Tail 5m,,true,,default,,required mixed distance
 explosion 长尾,Explosion Long Tail,,true,,default,,mixed tail
 metal hit kuang,Metal Hit,kuang,true,,default,,required mixed unknown
-whoosh 快速经过,Whoosh,快速经过,true,,default,,explicit Chinese user token remains whole
+whoosh 快速经过,Whoosh Fast Pass By,,true,,default,,spaced user token splits into safe multi-char canonicals
 engine 启动 short,Engine Start Short,,true,,default,,required mixed engine
 door impact long tail,Door Impact Long Tail,,true,,default,,English FX tokens
 glass scrape short,Glass Scrape Short,,true,,default,,English FX tokens
@@ -110,23 +110,23 @@ close explosion,Close Explosion,,true,,default,,close perspective
 far explosion,Far Explosion,,true,,default,,far perspective
 explosion long tail,Explosion Long Tail,,true,,default,,English long tail
 explosion short tail,Explosion Short Tail,,true,,default,,English short tail
-火箭爆炸 5m,5m,火箭爆炸,true,,default,,spaced Chinese chunk requires exact lookup
-火箭爆炸 5m,,火箭爆炸,false,5m,default,,spaced Chinese chunk remains review-only
+火箭爆炸 5m,Rocket Explosion 5m,,true,,default,,spaced user token splits into safe multi-char canonicals
+火箭爆炸 5m,Rocket Explosion,,false,5m,default,,spaced user token splits safely with distance excluded
 远处 whoosh 5m,Distant Whoosh 5m,,true,,default,,mixed perspective distance
 远处 whoosh 5m,Distant Whoosh,,false,5m,default,,mixed distance excluded
 木门 oh my god 滑开,Wood Door Slide Open,,true,,default,oh my god,chat pollution
 door how can i help you impact,Door Impact,,true,,default,how can i help you,chat pollution
-sound effect 金属门撞击,,金属门撞击,true,,default,sound effect,English pollution plus protected Chinese user token
+sound effect 金属门撞击,Metal Door Impact,,true,,default,sound effect,English pollution plus safe multi-char user token split
 make it boom style explosion,Explosion,,true,,default,make it boom style,style command pollution
-请帮我翻译 金属门撞击,,金属门撞击,true,,default,请帮我翻译,Chinese instruction filler plus protected user token
-这个声音是 木门滑开,,木门滑开,true,,default,这个声音是,Chinese filler plus protected user token
+请帮我翻译 金属门撞击,Metal Door Impact,,true,,default,请帮我翻译,Chinese instruction filler plus safe multi-char user token split
+这个声音是 木门滑开,Wood Door Slide Open,,true,,default,这个声音是,Chinese filler plus safe multi-char user token split
 this is metal impact,Metal Impact,,true,,default,this is,English sentence pollution
 the sound of glass break,Glass Break,,true,,default,the sound of,English sentence pollution
 sound effect whoosh,Whoosh,,true,,default,sound effect,pollution before whoosh
 make it boom style room tone,Room Tone,,true,,default,make it boom style,pollution before room tone
 oh my god explosion,Explosion,,true,,default,oh my god,pollution before explosion
 how can i help you scrape,Scrape,,true,,default,how can i help you,pollution before scrape
-这个声音是 爆炸长尾,,爆炸长尾,true,,default,这个声音是,Chinese filler plus protected user token
+这个声音是 爆炸长尾,Explosion Long Tail,,true,,default,这个声音是,Chinese filler plus safe multi-char user token split
 请帮我翻译 房间底噪,Room Tone,,true,,default,请帮我翻译,Chinese instruction filler with exact user token
 金属箱掉落,Metal Box Drop,,true,,default,,metal box drop
 木箱拖动,Wood Box Drag,,true,,default,,wood box drag

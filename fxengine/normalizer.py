@@ -260,6 +260,13 @@ class FXNameNormalizer:
             personal = self.personal_dictionary.resolve_entry(cleaned) if cleaned else None
             if personal:
                 return [self._personal_token(cleaned, personal)]
+
+            safe_matches = self.canonical_db.safe_segment_chinese_user_token(
+                raw_token.raw
+            )
+            if safe_matches is not None:
+                return [_match_to_token(match) for match in safe_matches]
+
             return [
                 _match_to_token(
                     self.canonical_db.resolve_chinese_user_token(raw_token.raw)

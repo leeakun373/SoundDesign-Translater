@@ -71,6 +71,25 @@ ALLOWED_SOURCES = {
 # Backwards-compatible public name used by existing callers and tests.
 CANONICAL_SLOTS = ALLOWED_SLOTS
 
+# Broad / high-risk single Chinese characters that must never reach a final
+# FXName through zh_user safe internal segmentation. They are too generic to map
+# deterministically and would otherwise pull noisy tokens into the output.
+FORBIDDEN_BROAD_ZH_TOKENS = frozenset(
+    {
+        "打",
+        "碰",
+        "响",
+        "甩",
+        "摔",
+        "地",
+        "面",
+        "开",
+        "杯",
+        "管",
+        "箱",
+    }
+)
+
 USER_TOKEN_PREFIXES = (
     "请帮我做",
     "请帮我",
@@ -280,6 +299,64 @@ class CanonicalDB:
             status="unknown",
             issues=["unknown_zh"],
         )
+
+    def safe_segment_chinese_user_token(
+        self, raw: str
+    ) -> list[CanonicalMatch] | None:
+        """Allow a *safe* internal split of a zh_user token after an exact miss.
+
+        Returns a list of matches only when every produced token is safe to keep
+        (multi-char canonical / glossary, or ignorable filler). Returns ``None``
+        whenever the split is unsafe, so the caller can fall back to whole-token
+        unknown review instead of guessing a noisy character-level split.
+        """
+        cleaned = cleanup_chinese_user_token(raw)
+        if not cleaned:
+            # Pure filler / empty: defer to the existing whole-token handling.
+            return None
+
+        canonical_token = self._zh_exact.get(cleaned)
+        if canonical_token:
+            return [_token_to_match(canonical_token)]
+
+        # A reviewed (non-keep) alias must never be bypassed by segmentation.
+        if cleaned in self._non_runtime_zh_exact:
+            return None
+
+        glossary_entry = self._zh_glossary_exact.get(cleaned)
+        if glossary_entry is not None and len(cleaned) > 1:
+            canonical = title_fx_text(glossary_entry.en)
+            return [
+                CanonicalMatch(
+                    raw=cleaned,
+                    canonical=canonical,
+                    slot=infer_slot(canonical, glossary_entry.term_type),
+                    source="glossary_fallback",
+                    status="ok",
+                    issues=[],
+                )
+            ]
+
+        matches = self.segment_chinese(cleaned)
+        if not matches:
+            return None
+        for match in matches:
+            if "canonical_review_required" in match.issues:
+                return None
+            if match.status == "unknown":
+                return None
+            if match.raw in FORBIDDEN_BROAD_ZH_TOKENS:
+                return None
+            # Single-char keeps are intentionally rejected on this path so that
+            # tokens like 刺耳 never get re-split into 刺 / 耳.
+            if len(match.raw) == 1 and match.source != "filler":
+                return None
+            accepted = (match.status == "ok" and bool(match.canonical)) or (
+                match.status == "ignored" and match.source == "filler"
+            )
+            if not accepted:
+                return None
+        return matches
 
     def segment_chinese(self, text: str) -> list[CanonicalMatch]:
         out: list[CanonicalMatch] = []
