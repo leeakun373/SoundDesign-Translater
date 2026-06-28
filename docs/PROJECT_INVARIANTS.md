@@ -132,6 +132,21 @@ v0.1 AI alias pipeline 各阶段默认值：
 
 ---
 
+## 11. Translator 混合引擎边界（新增）
+
+`translator/` 是独立的**离线混合翻译模块**（NLLB 打底 + CC-CEDICT 兜底 + BOOM 风格吸附），
+与本文件第 1–10 节描述的受治理 canonical runtime **解耦**：
+
+- 该模块**允许** NLLB / CC-CEDICT 输出进入最终结果（用于 FXName 建议与通用翻译），
+  这是与第 4 节「unknown 不得靠 NLLB 进 final」**有意区分**的另一条路径。
+- 该模块**只读** `fxengine/data/canonical_tokens.csv`，**绝不写入、不 promote**；
+  其策展修正写在 `translator/data/fx_overrides.csv`，不污染 canonical 主表。
+- 受治理的 `fxengine` runtime 行为、第 1–10 节硬规则**保持不变**。
+
+详见 [TRANSLATOR_ARCHITECTURE.md](TRANSLATOR_ARCHITECTURE.md)。
+
+---
+
 ## 10. 相关文档
 
 - [AI_ALIAS_WORKFLOW.md](AI_ALIAS_WORKFLOW.md) — 完整批量流程

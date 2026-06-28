@@ -1,0 +1,6 @@
+# 生成产物（由 cedict/candidates/canonical 自动重建，体积大不入库）
+jieba_userdict.txt
+zh_en_alignment.csv
+
+# 手工策展层需要入库
+!fx_overrides.csv
