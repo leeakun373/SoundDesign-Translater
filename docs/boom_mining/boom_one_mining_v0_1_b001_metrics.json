@@ -1,0 +1,151 @@
+{
+  "batch": "boom_one_mining_v0.1_b001",
+  "range": {
+    "first_row": 2,
+    "last_row": 1001,
+    "limit": 1000
+  },
+  "pair_count": 1000,
+  "alignment": {
+    "zh": {
+      "sheet_title": " BOOM ONE 发布包",
+      "header_rows_skipped": 1,
+      "first_row": 2,
+      "last_row": 1001
+    },
+    "en": {
+      "sheet_title": "BOOM ONE Release Pack",
+      "header_rows_skipped": 1,
+      "first_row": 2,
+      "last_row": 1001
+    },
+    "empty_pair_skipped": 0,
+    "pair_count": 1000
+  },
+  "before": {
+    "total": 1000,
+    "pass": 20,
+    "partial": 0,
+    "needs_review": 239,
+    "unknown": 947,
+    "safety_fail": 0,
+    "conflict": 110
+  },
+  "top_unknowns": [
+    {
+      "unknown": "遥控无人机",
+      "count": 50
+    },
+    {
+      "unknown": "波音",
+      "count": 26
+    },
+    {
+      "unknown": "奥古斯塔",
+      "count": 21
+    },
+    {
+      "unknown": "Augusta",
+      "count": 16
+    },
+    {
+      "unknown": "C",
+      "count": 13
+    },
+    {
+      "unknown": "Globemaster",
+      "count": 12
+    },
+    {
+      "unknown": "侧卫",
+      "count": 10
+    },
+    {
+      "unknown": "涡轮全功率直接",
+      "count": 9
+    },
+    {
+      "unknown": "飞机拟音驾驶舱翻转开关",
+      "count": 9
+    },
+    {
+      "unknown": "Lancer",
+      "count": 9
+    },
+    {
+      "unknown": "Stratofortress",
+      "count": 9
+    },
+    {
+      "unknown": "涡轮稳定远距离",
+      "count": 7
+    },
+    {
+      "unknown": "单飞远",
+      "count": 7
+    },
+    {
+      "unknown": "中队飞越慢",
+      "count": 7
+    },
+    {
+      "unknown": "空袭",
+      "count": 6
+    },
+    {
+      "unknown": "塑料瓶开口",
+      "count": 6
+    },
+    {
+      "unknown": "内部飞行序列",
+      "count": 5
+    },
+    {
+      "unknown": "空中客车",
+      "count": 5
+    },
+    {
+      "unknown": "涡轮怠速直接",
+      "count": 5
+    },
+    {
+      "unknown": "短裤",
+      "count": 5
+    }
+  ],
+  "candidate_count": 1530,
+  "promote_ready_candidate_count": 503,
+  "skip_reason_counts": {
+    "already_covered": 185,
+    "existing_canonical_conflict": 110,
+    "forbidden_broad_token": 6,
+    "single_char_zh": 231,
+    "target_not_supporting": 495
+  },
+  "slot_distribution": {
+    "action": 32,
+    "detail": 82,
+    "modifier": 79,
+    "object": 241,
+    "unknown": 69
+  },
+  "safety_fail_count": 0,
+  "conflict_count": 110,
+  "existing_canonical_conflict_count": 110,
+  "in_batch_conflict_count": 0,
+  "forbidden_broad_check": {
+    "passed": true,
+    "tokens": []
+  },
+  "single_char_keep_check": {
+    "passed": true,
+    "tokens": []
+  },
+  "canonical_sha256_before": "b05f489338144b42f5cc937a8eec34d6e8a2ed8948191ac75542e8c2ca4da0b9",
+  "canonical_sha256_after": "b05f489338144b42f5cc937a8eec34d6e8a2ed8948191ac75542e8c2ca4da0b9",
+  "canonical_changed": false,
+  "source": "boom_mined",
+  "note": "boom_one_mining_v0.1_b001",
+  "ai_invoked": false,
+  "promote": false
+}
