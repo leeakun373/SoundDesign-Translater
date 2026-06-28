@@ -15,28 +15,43 @@ CANONICAL_PATH = (
     / "data"
     / "canonical_tokens.csv"
 )
-# translator 自有的小型策展覆盖层（优先级高于 canonical；修正 cedict 误义、统一 BOOM 写法）。
+# translator 自有的小型「手工」策展层（最高优先级；修正 cedict 误义/自动误判）。
 FX_OVERRIDES_PATH = Path(__file__).resolve().parent / "data" / "fx_overrides.csv"
+# 数据驱动「自动」策展层（由 tools/mine_overrides.py 从 BOOM 词频生成；低维护）。
+FX_OVERRIDES_AUTO_PATH = Path(__file__).resolve().parent / "data" / "fx_overrides_auto.csv"
+
+
+def _read_override_csv(path: Path) -> dict[str, dict[str, str]]:
+    table: dict[str, dict[str, str]] = {}
+    if not path.exists():
+        return table
+    with path.open(encoding="utf-8", newline="") as handle:
+        for row in csv.DictReader(handle):
+            raw = (row.get("raw") or "").strip()
+            canonical = (row.get("canonical") or "").strip()
+            if not raw or not canonical:
+                continue
+            table[raw] = {
+                "canonical": canonical,
+                "slot": (row.get("slot") or "").strip(),
+                "priority": "999",
+            }
+    return table
 
 
 @lru_cache(maxsize=1)
 def _load() -> dict[str, dict[str, str]]:
-    """raw(zh) -> {canonical, slot}。fx_overrides 优先，其次 canonical keep。"""
-    table = _load_canonical()
-    # fx_overrides 覆盖（最高优先级）
-    if FX_OVERRIDES_PATH.exists():
-        with FX_OVERRIDES_PATH.open(encoding="utf-8", newline="") as handle:
-            for row in csv.DictReader(handle):
-                raw = (row.get("raw") or "").strip()
-                canonical = (row.get("canonical") or "").strip()
-                if not raw or not canonical:
-                    continue
-                table[raw] = {
-                    "canonical": canonical,
-                    "slot": (row.get("slot") or "").strip(),
-                    "priority": "999",
-                }
+    """raw(zh) -> {canonical, slot}。优先级：手工 > canonical(keep) > 自动挖掘。"""
+    table = _read_override_csv(FX_OVERRIDES_AUTO_PATH)  # 最低
+    table.update(_load_canonical())                     # canonical 覆盖自动
+    table.update(_read_override_csv(FX_OVERRIDES_PATH))  # 手工最高
     return table
+
+
+@lru_cache(maxsize=1)
+def manual_keys() -> frozenset[str]:
+    """手工策展层覆盖的中文 token（供自动挖掘排除）。"""
+    return frozenset(_read_override_csv(FX_OVERRIDES_PATH))
 
 
 def _load_canonical() -> dict[str, dict[str, str]]:

@@ -16,6 +16,8 @@ from tkinter import messagebox, ttk
 
 from engine import (
 
+    EN_LANG,
+
     ModelNotFoundError,
 
     NllbTranslator,
@@ -28,9 +30,13 @@ from engine import (
 
     TranslationResult,
 
+    ZH_LANG,
+
 )
 
 from glossary.fx_quality import normalize_fx_issues
+
+from translator import api as translator_api
 
 
 
@@ -66,7 +72,7 @@ class TranslateApp:
 
     TASK_HINTS = {
 
-        TaskMode.FXNAME: "FXName Normalize：保留输入顺序，中文查 canonical token，英文 Title Case；unknown 进入 review，BOOM 仅提供建议。",
+        TaskMode.FXNAME: "FXName 混合引擎：jieba 分词 + 词典/CC-CEDICT + NLLB 兜底 + BOOM 风格吸附，输出 BOOM 风格关键词英文（喷火器→Flamethrower）。",
 
         TaskMode.GENERAL: "普通翻译：适合句子、说明文本；保留术语分段 + NLLB 句子逻辑。",
 
@@ -578,17 +584,41 @@ class TranslateApp:
 
             try:
 
-                result = self.translator.translate(
+                if task_mode == TaskMode.FXNAME:
 
-                    input_text,
+                    fx = translator_api.to_fxname(input_text)
 
-                    mode=mode,
+                    result = TranslationResult(
 
-                    pro_mode=pro_mode,
+                        text=fx.text,
 
-                    task_mode=task_mode,
+                        src_lang=ZH_LANG,
 
-                )
+                        tgt_lang=EN_LANG,
+
+                        mode="fxname",
+
+                        task_mode="fxname",
+
+                        pro_mode=pro_mode,
+
+                        debug={},
+
+                    )
+
+                else:
+
+                    result = self.translator.translate(
+
+                        input_text,
+
+                        mode=mode,
+
+                        pro_mode=pro_mode,
+
+                        task_mode=task_mode,
+
+                    )
 
                 self.root.after(0, lambda r=result: self._update_ui_success(r))
 

@@ -2,5 +2,9 @@
 jieba_userdict.txt
 zh_en_alignment.csv
 
-# 手工策展层需要入库
+# 回译测试集（长跑生成，规模大，不入库）
+boom_zh_testcases.csv
+
+# 手工策展层 + 数据驱动自动覆盖层需要入库（开箱即用 F1≈0.71）
 !fx_overrides.csv
+!fx_overrides_auto.csv
