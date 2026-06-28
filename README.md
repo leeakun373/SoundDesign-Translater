@@ -91,7 +91,20 @@ python tools/find_uncovered_terms.py --db %UCS_COMMERCIAL_DB%
 
 ## 文档
 
+### AI Alias 治理（给 Cursor / 本地 AI）
+
+- [AGENTS.md](AGENTS.md) — agent 入口
+- [docs/PROJECT_INVARIANTS.md](docs/PROJECT_INVARIANTS.md) — 项目不变量
+- [docs/AI_ALIAS_WORKFLOW.md](docs/AI_ALIAS_WORKFLOW.md) — Evidence → Decision 全流程
+- [docs/AI_ALIAS_REVIEW_RULES.md](docs/AI_ALIAS_REVIEW_RULES.md) — 审查与 batch 规则
+- [docs/LOCAL_AI_AGENT_PLAYBOOK.md](docs/LOCAL_AI_AGENT_PLAYBOOK.md) — 每轮操作清单
+- [docs/BATCH_PROMOTION_PLAN.md](docs/BATCH_PROMOTION_PLAN.md) — 未来 promote 路线（未启用）
+
+### 其它
+
 - [docs/开发历史.md](docs/开发历史.md) — **开发上下文压缩版（给后续会话用）**
 - [docs/模型与配置.md](docs/模型与配置.md)
+- [docs/CANONICAL_TOKEN_GOVERNANCE.md](docs/CANONICAL_TOKEN_GOVERNANCE.md)
+- [docs/CANONICAL_TOKEN_WORKFLOW.md](docs/CANONICAL_TOKEN_WORKFLOW.md)
 - [glossary/README.md](glossary/README.md)
 - [docs/补词批量验收指南.md](docs/补词批量验收指南.md)
