@@ -1,151 +1,151 @@
 ﻿id,组别,方向,来源参考,测试词/短句,结果,quality,unknowns,语义对照,AI建议（仅review）,安全验收,验收说明
-BOOM-001,BOOM参考中文,中→英,record_id=8753; AIR/SUCTION; Hoover Air Movement High Whistle,吸尘器 气流 高音 哨声,,needs_review,吸尘器;气流;高音;哨声,无final，待review,Hoover Air Movement High Whistle,通过,未知项保持完整并留在review
-BOOM-002,BOOM参考中文,中→英,record_id=8748; AIRCRAFT/JET; Plane By Deep Resonance Filtered,飞机 掠过 深沉 共振 滤波,Aircraft Flyby,needs_review,深沉;共振;滤波,结果与建议不同，待review,Plane By Deep Resonance Filtered,通过,未知项保持完整并留在review
-BOOM-003,BOOM参考中文,中→英,record_id=1; AMBIENCE/FARM; Countryside Cow Barn Night Belgium,乡村 牛棚 夜晚 比利时,,needs_review,乡村;牛棚;夜晚;比利时,无final，待review,Countryside Cow Barn Night Belgium,通过,未知项保持完整并留在review
-BOOM-004,BOOM参考中文,中→英,record_id=406; ANIMALS/AQUATIC; Harbor Seal Breath Airy,海豹 呼吸 轻柔,Breathe,needs_review,海豹;轻柔,结果与建议不同，待review,Harbor Seal Breath Airy,通过,未知项保持完整并留在review
-BOOM-005,BOOM参考中文,中→英,record_id=13838; BELLS/GONG; Gong Bow Bright,锣 弓击 明亮,Bright,needs_review,锣;弓击,部分命中,Gong Bow Bright,通过,未知项保持完整并留在review
-BOOM-006,BOOM参考中文,中→英,record_id=720; BIRDS/CROW; Crow Caw Hard,乌鸦 叫声 强烈,Crow Intense,needs_review,叫声,部分命中,Crow Caw Hard,通过,未知项保持完整并留在review
-BOOM-007,BOOM参考中文,中→英,record_id=13846; BULLETS/SHELL; Metal Cartridge Case Trickle Down,金属 弹壳 滚落,Metal Shell,needs_review,滚落,部分命中,Metal Cartridge Case Trickle Down,通过,未知项保持完整并留在review
-BOOM-008,BOOM参考中文,中→英,record_id=7032; CARTOON/IMPACT; Rubber Cup Hit Hand,橡胶 杯 手 拍击,Rubber,needs_review,杯;手;拍击,部分命中,Rubber Cup Hit Hand,通过,未知项保持完整并留在review
-BOOM-009,BOOM参考中文,中→英,record_id=8032; CHAINS/IMPACT; On Plate Clean,链条 铁板 清脆,Chain,needs_review,铁板;清脆,结果与建议不同，待review,On Plate Clean,通过,未知项保持完整并留在review
-BOOM-010,BOOM参考中文,中→英,record_id=6698; CLOTH/IMPACT; Backpack,背包 撞击,Impact,needs_review,背包,结果与建议不同，待review,Backpack,通过,未知项保持完整并留在review
-BOOM-011,BOOM参考中文,中→英,record_id=852; CREATURES/SOURCE; Aztec Death Whistle Air Burst,阿兹特克 死亡哨 气爆,,needs_review,阿兹特克;死亡哨;气爆,无final，待review,Aztec Death Whistle Air Burst,通过,未知项保持完整并留在review
-BOOM-012,BOOM参考中文,中→英,record_id=10118; CROWDS/BATTLE; Beg Calm Far,人群 乞求 平静 远处,Crowd Distant,needs_review,乞求;平静,结果与建议不同，待review,Beg Calm Far,通过,未知项保持完整并留在review
-BOOM-013,BOOM参考中文,中→英,record_id=1171; DESIGNED/IMPACT; Ascending Flutter,上升 飘动 冲击,Rise Punchy,needs_review,飘动,结果与建议不同，待review,Ascending Flutter,通过,未知项保持完整并留在review
+BOOM-001,BOOM参考中文,中→英,record_id=8753; AIR/SUCTION; Hoover Air Movement High Whistle,吸尘器 气流 高音 哨声,Vacuum Cleaner Air Movement High Whistle,pass,,部分命中,Hoover Air Movement High Whistle,通过,全部token安全映射
+BOOM-002,BOOM参考中文,中→英,record_id=8748; AIRCRAFT/JET; Plane By Deep Resonance Filtered,飞机 掠过 深沉 共振 滤波,Aircraft Flyby Deep Resonance Filtered,pass,,部分命中,Plane By Deep Resonance Filtered,通过,全部token安全映射
+BOOM-003,BOOM参考中文,中→英,record_id=1; AMBIENCE/FARM; Countryside Cow Barn Night Belgium,乡村 牛棚 夜晚 比利时,Countryside Cow Barn Night Belgium,pass,,命中建议,Countryside Cow Barn Night Belgium,通过,全部token安全映射
+BOOM-004,BOOM参考中文,中→英,record_id=406; ANIMALS/AQUATIC; Harbor Seal Breath Airy,海豹 呼吸 轻柔,Harbor Seal Breathe Airy,pass,,部分命中,Harbor Seal Breath Airy,通过,全部token安全映射
+BOOM-005,BOOM参考中文,中→英,record_id=13838; BELLS/GONG; Gong Bow Bright,锣 弓击 明亮,Bow Bright,needs_review,锣,部分命中,Gong Bow Bright,通过,未知项保持完整并留在review
+BOOM-006,BOOM参考中文,中→英,record_id=720; BIRDS/CROW; Crow Caw Hard,乌鸦 叫声 强烈,Crow Caw Intense,pass,,部分命中,Crow Caw Hard,通过,全部token安全映射
+BOOM-007,BOOM参考中文,中→英,record_id=13846; BULLETS/SHELL; Metal Cartridge Case Trickle Down,金属 弹壳 滚落,Metal Shell Trickle Down,pass,,部分命中,Metal Cartridge Case Trickle Down,通过,全部token安全映射
+BOOM-008,BOOM参考中文,中→英,record_id=7032; CARTOON/IMPACT; Rubber Cup Hit Hand,橡胶 杯 手 拍击,Rubber Hit,needs_review,杯;手,部分命中,Rubber Cup Hit Hand,通过,未知项保持完整并留在review
+BOOM-009,BOOM参考中文,中→英,record_id=8032; CHAINS/IMPACT; On Plate Clean,链条 铁板 清脆,Chain Metal Plate Crisp,pass,,部分命中,On Plate Clean,通过,全部token安全映射
+BOOM-010,BOOM参考中文,中→英,record_id=6698; CLOTH/IMPACT; Backpack,背包 撞击,Backpack Impact,pass,,部分命中,Backpack,通过,全部token安全映射
+BOOM-011,BOOM参考中文,中→英,record_id=852; CREATURES/SOURCE; Aztec Death Whistle Air Burst,阿兹特克 死亡哨 气爆,Aztec Death Whistle Air Burst,pass,,命中建议,Aztec Death Whistle Air Burst,通过,全部token安全映射
+BOOM-012,BOOM参考中文,中→英,record_id=10118; CROWDS/BATTLE; Beg Calm Far,人群 乞求 平静 远处,Crowd Beg Calm Distant,pass,,部分命中,Beg Calm Far,通过,全部token安全映射
+BOOM-013,BOOM参考中文,中→英,record_id=1171; DESIGNED/IMPACT; Ascending Flutter,上升 飘动 冲击,Rise Flutter Punchy,pass,,部分命中,Ascending Flutter,通过,全部token安全映射
 BOOM-014,BOOM参考中文,中→英,record_id=6703; DIRT & SAND/IMPACT; Sand Scratchy Debris,沙子 刮擦 碎屑,Sand Scrape Clay,pass,,部分命中,Sand Scratchy Debris,通过,全部token安全映射
-BOOM-015,BOOM参考中文,中→英,record_id=17093; DOORS/APPLIANCE; Microwave Door Clunk Close,微波炉 门 关闭 闷响,Door Close Thud,needs_review,微波炉,部分命中,Microwave Door Clunk Close,通过,未知项保持完整并留在review
-BOOM-016,BOOM参考中文,中→英,record_id=14019; ELECTRICITY/MISC; Spark Crumble Long,火花 碎裂 长尾,Shatter Long Tail,needs_review,火花,部分命中,Spark Crumble Long,通过,未知项保持完整并留在review
-BOOM-017,BOOM参考中文,中→英,record_id=18534; EQUIPMENT/MISC; Toolbox Plastic Close,塑料 工具箱 关闭,Plastic Close,needs_review,工具箱,部分命中,Toolbox Plastic Close,通过,未知项保持完整并留在review
+BOOM-015,BOOM参考中文,中→英,record_id=17093; DOORS/APPLIANCE; Microwave Door Clunk Close,微波炉 门 关闭 闷响,Microwave Door Close Thud,pass,,部分命中,Microwave Door Clunk Close,通过,全部token安全映射
+BOOM-016,BOOM参考中文,中→英,record_id=14019; ELECTRICITY/MISC; Spark Crumble Long,火花 碎裂 长尾,Spark Shatter Long Tail,pass,,部分命中,Spark Crumble Long,通过,全部token安全映射
+BOOM-017,BOOM参考中文,中→英,record_id=18534; EQUIPMENT/MISC; Toolbox Plastic Close,塑料 工具箱 关闭,Plastic Toolbox Close,pass,,部分命中,Toolbox Plastic Close,通过,全部token安全映射
 BOOM-018,BOOM参考中文,中→英,record_id=1655; EXPLOSIONS/DESIGNED; Cannon Shot,大炮 射击,Cannon Shot,pass,,命中建议,Cannon Shot,通过,全部token安全映射
-BOOM-019,BOOM参考中文,中→英,record_id=18779; FARTS/DESIGNED; Balloon Deflate Long,气球 放气 长,,needs_review,气球;放气;长,无final，待review,Balloon Deflate Long,通过,未知项保持完整并留在review
-BOOM-020,BOOM参考中文,中→英,record_id=1696; FIGHT/IMPACT; Basic Hit Old School,基础 打击 复古,Strike Retro,needs_review,基础,结果与建议不同，待review,Basic Hit Old School,通过,未知项保持完整并留在review
-BOOM-021,BOOM参考中文,中→英,record_id=13124; FIRE/BURST; Alcohol Deflagration Aluminum Can,酒精 爆燃 铝罐,Burst,needs_review,酒精;铝罐,结果与建议不同，待review,Alcohol Deflagration Aluminum Can,通过,未知项保持完整并留在review
-BOOM-022,BOOM参考中文,中→英,record_id=13213; FIREWORKS/RECREATIONAL; Firework Big Blast,烟花 大爆炸,Fireworks,needs_review,大爆炸,结果与建议不同，待review,Firework Big Blast,通过,未知项保持完整并留在review
-BOOM-023,BOOM参考中文,中→英,record_id=13197; FOOD & DRINK/COOKING; Hot Iron On Butter Long,热铁 黄油 长,,needs_review,热铁;黄油;长,无final，待review,Hot Iron On Butter Long,通过,未知项保持完整并留在review
-BOOM-024,BOOM参考中文,中→英,record_id=6743; GAMES/MISC; Drag And Turn On Table,卡片 拖动 转动 桌面,Drag Turn,needs_review,卡片;桌面,部分命中,Drag And Turn On Table,通过,未知项保持完整并留在review
-BOOM-025,BOOM参考中文,中→英,record_id=6782; GLASS/MOVEMENT; Glass Thick Ratchet,厚玻璃 棘轮,Ratchet,needs_review,厚玻璃,部分命中,Glass Thick Ratchet,通过,未知项保持完整并留在review
+BOOM-019,BOOM参考中文,中→英,record_id=18779; FARTS/DESIGNED; Balloon Deflate Long,气球 放气 长,Balloon Deflate,needs_review,长,部分命中,Balloon Deflate Long,通过,未知项保持完整并留在review
+BOOM-020,BOOM参考中文,中→英,record_id=1696; FIGHT/IMPACT; Basic Hit Old School,基础 打击 复古,Basic Strike Retro,pass,,部分命中,Basic Hit Old School,通过,全部token安全映射
+BOOM-021,BOOM参考中文,中→英,record_id=13124; FIRE/BURST; Alcohol Deflagration Aluminum Can,酒精 爆燃 铝罐,Alcohol Burst Aluminum Can,pass,,部分命中,Alcohol Deflagration Aluminum Can,通过,全部token安全映射
+BOOM-022,BOOM参考中文,中→英,record_id=13213; FIREWORKS/RECREATIONAL; Firework Big Blast,烟花 大爆炸,Fireworks Big Blast,pass,,部分命中,Firework Big Blast,通过,全部token安全映射
+BOOM-023,BOOM参考中文,中→英,record_id=13197; FOOD & DRINK/COOKING; Hot Iron On Butter Long,热铁 黄油 长,Hot Iron Butter,needs_review,长,部分命中,Hot Iron On Butter Long,通过,未知项保持完整并留在review
+BOOM-024,BOOM参考中文,中→英,record_id=6743; GAMES/MISC; Drag And Turn On Table,卡片 拖动 转动 桌面,Card Drag Turn On Table,pass,,部分命中,Drag And Turn On Table,通过,全部token安全映射
+BOOM-025,BOOM参考中文,中→英,record_id=6782; GLASS/MOVEMENT; Glass Thick Ratchet,厚玻璃 棘轮,Thick Glass Ratchet,pass,,部分命中,Glass Thick Ratchet,通过,全部token安全映射
 BOOM-026,BOOM参考中文,中→英,record_id=6791; GORE/BONE; Bones,骨头 摇晃,Bone Shake,pass,,结果与建议不同，待review,Bones,通过,全部token安全映射
 BOOM-027,BOOM参考中文,中→英,record_id=2132; GUNS/CANNON; Chain Big,大 链条,Chain,needs_review,大,部分命中,Chain Big,通过,未知项保持完整并留在review
-BOOM-028,BOOM参考中文,中→英,record_id=16818; HORNS/MISC; Call Of Tyr,提尔 号角,Horns,needs_review,提尔,结果与建议不同，待review,Call Of Tyr,通过,未知项保持完整并留在review
-BOOM-029,BOOM参考中文,中→英,record_id=1712; LASERS/MISC; Ascending Action Movement,上升 动作 移动,Rise Movement,needs_review,动作,部分命中,Ascending Action Movement,通过,未知项保持完整并留在review
-BOOM-030,BOOM参考中文,中→英,record_id=8327; LEATHER/IMPACT; Boxing Glove Couch Pillow Drop Hard,拳击手套 沙发 靠垫 重摔,,needs_review,拳击手套;沙发;靠垫;重摔,无final，待review,Boxing Glove Couch Pillow Drop Hard,通过,未知项保持完整并留在review
-BOOM-031,BOOM参考中文,中→英,record_id=6792; LIQUID & MUD/BUBBLES; Guts Mouth,内脏 嘴 气泡,Fizz,needs_review,内脏;嘴,结果与建议不同，待review,Guts Mouth,通过,未知项保持完整并留在review
+BOOM-028,BOOM参考中文,中→英,record_id=16818; HORNS/MISC; Call Of Tyr,提尔 号角,Tyr Horns,pass,,部分命中,Call Of Tyr,通过,全部token安全映射
+BOOM-029,BOOM参考中文,中→英,record_id=1712; LASERS/MISC; Ascending Action Movement,上升 动作 移动,Rise Action Movement,pass,,部分命中,Ascending Action Movement,通过,全部token安全映射
+BOOM-030,BOOM参考中文,中→英,record_id=8327; LEATHER/IMPACT; Boxing Glove Couch Pillow Drop Hard,拳击手套 沙发 靠垫 重摔,Boxing Glove Couch Pillow Drop Hard,pass,,命中建议,Boxing Glove Couch Pillow Drop Hard,通过,全部token安全映射
+BOOM-031,BOOM参考中文,中→英,record_id=6792; LIQUID & MUD/BUBBLES; Guts Mouth,内脏 嘴 气泡,Guts Fizz,needs_review,嘴,部分命中,Guts Mouth,通过,未知项保持完整并留在review
 BOOM-032,BOOM参考中文,中→英,record_id=17313; MACHINES/PUMP; Suction Device,抽吸 装置,Suction Spy,pass,,部分命中,Suction Device,通过,全部token安全映射
-BOOM-033,BOOM参考中文,中→英,record_id=1733; MAGIC/SHIMMER; Ascending Chimes Sparkle Freq Shift,上升 风铃 闪烁 频移,Rise Dong Twinkle,needs_review,频移,结果与建议不同，待review,Ascending Chimes Sparkle Freq Shift,通过,未知项保持完整并留在review
-BOOM-034,BOOM参考中文,中→英,record_id=17314; MECHANICAL/GEARS; Box Close Lock Medium,盒子 关闭 锁扣 中等,Box Close Medium,needs_review,锁扣,部分命中,Box Close Lock Medium,通过,未知项保持完整并留在review
-BOOM-035,BOOM参考中文,中→英,record_id=6851; METAL/HANDLE; Espresso Machine Assemble,咖啡机 组装,,needs_review,咖啡机;组装,无final，待review,Espresso Machine Assemble,通过,未知项保持完整并留在review
-BOOM-036,BOOM参考中文,中→英,record_id=17533; MOTORS/ELECTRIC; Airy Winding,空气感 绕卷,,needs_review,空气感;绕卷,无final，待review,Airy Winding,通过,未知项保持完整并留在review
-BOOM-037,BOOM参考中文,中→英,record_id=1736; MUSICAL/PERCUSSION TUNED; Xylophone Delay Sparkle Vibrato,木琴 延迟 闪烁 颤音,Twinkle Warble,needs_review,木琴;延迟,结果与建议不同，待review,Xylophone Delay Sparkle Vibrato,通过,未知项保持完整并留在review
-BOOM-038,BOOM参考中文,中→英,record_id=6877; OBJECTS/BOOK; Book Drop Low,书本 掉落 低沉,Drop Deep,needs_review,书本,部分命中,Book Drop Low,通过,未知项保持完整并留在review
-BOOM-039,BOOM参考中文,中→英,record_id=6932; PAPER/FRICTION; Several Layers Handling Close,多层 纸张 近距离 操作,Paper Operate,needs_review,多层;近距离,结果与建议不同，待review,Several Layers Handling Close,通过,未知项保持完整并留在review
-BOOM-040,BOOM参考中文,中→英,record_id=6957; PLASTIC/FRICTION; Shopping Bag Crunchy Hard,购物袋 脆响 用力,Hard,needs_review,购物袋;脆响,部分命中,Shopping Bag Crunchy Hard,通过,未知项保持完整并留在review
-BOOM-041,BOOM参考中文,中→英,record_id=233; RAIN/VEGETATION; Forest Drips,森林 滴水,Forests,needs_review,滴水,结果与建议不同，待review,Forest Drips,通过,未知项保持完整并留在review
-BOOM-042,BOOM参考中文,中→英,record_id=6964; ROCKS/BREAK; Crispbread Crack,脆饼 断裂,Apart,needs_review,脆饼,结果与建议不同，待review,Crispbread Crack,通过,未知项保持完整并留在review
-BOOM-043,BOOM参考中文,中→英,record_id=7837; RUBBER/FRICTION; Dog Toy Rub Groan Long,狗玩具 摩擦 呻吟 长,Friction,needs_review,狗玩具;呻吟;长,结果与建议不同，待review,Dog Toy Rub Groan Long,通过,未知项保持完整并留在review
-BOOM-044,BOOM参考中文,中→英,record_id=14656; SCIFI/ENERGY; Aggressive Short,科幻 能量 激烈 短,Sci-fi Energy,needs_review,激烈;短,结果与建议不同，待review,Aggressive Short,通过,未知项保持完整并留在review
-BOOM-045,BOOM参考中文,中→英,record_id=6995; SPORTS/SKATE; Roller Skate Old,老式 旱冰鞋 滚动,Ancient Roll,needs_review,旱冰鞋,结果与建议不同，待review,Roller Skate Old,通过,未知项保持完整并留在review
-BOOM-046,BOOM参考中文,中→英,record_id=2008; SWOOSHES/WHOOSH; All Aboard,呼啸 全员登船,Whoosh,needs_review,全员登船,结果与建议不同，待review,All Aboard,通过,未知项保持完整并留在review
-BOOM-047,BOOM参考中文,中→英,record_id=18612; TOOLS/HAND; Axe Chop Wood,斧头 劈 木头,Wood,needs_review,斧头;劈,部分命中,Axe Chop Wood,通过,未知项保持完整并留在review
-BOOM-048,BOOM参考中文,中→英,record_id=18834; TOYS/MISC; Moo Box Cow Long,牛叫盒 长,,needs_review,牛叫盒;长,无final，待review,Moo Box Cow Long,通过,未知项保持完整并留在review
-BOOM-049,BOOM参考中文,中→英,record_id=2093; USER INTERFACE/GLITCH; Denoise Deluxe,界面 故障 降噪,Glitch,needs_review,界面;降噪,结果与建议不同，待review,Denoise Deluxe,通过,未知项保持完整并留在review
-BOOM-050,BOOM参考中文,中→英,record_id=13589; VEGETATION/LEAVES; Squeezing Vegetables Constant,挤压 蔬菜 持续,Squeeze Continuous,needs_review,蔬菜,结果与建议不同，待review,Squeezing Vegetables Constant,通过,未知项保持完整并留在review
-REC-001,个人录音抽样,中→英,01_FoleyDiary\250327_VariousMarbles\CERMImpt_STEEL BALL Fall Tile Sharp Bright Clink_CUX-100K.wav,钢球 掉落 瓷砖 清脆 明亮 叮当,Drop Bright Jingle,needs_review,钢球;瓷砖;清脆,部分命中,Steel Ball Fall Tile Sharp Bright Clink,通过,未知项保持完整并留在review
-REC-002,个人录音抽样,中→英,01_FoleyDiary\250327_VariousMarbles\MECHMisc_MAGNET Interact DUMBBELL Heavy Clank_CUX-100K.wav,磁铁 碰撞 哑铃 沉重 叮当,Impact Heavy Jingle,needs_review,磁铁;哑铃,部分命中,Magnet Dumbbell Heavy Clank,通过,未知项保持完整并留在review
+BOOM-033,BOOM参考中文,中→英,record_id=1733; MAGIC/SHIMMER; Ascending Chimes Sparkle Freq Shift,上升 风铃 闪烁 频移,Rise Chime Twinkle Freq Shift,pass,,部分命中,Ascending Chimes Sparkle Freq Shift,通过,全部token安全映射
+BOOM-034,BOOM参考中文,中→英,record_id=17314; MECHANICAL/GEARS; Box Close Lock Medium,盒子 关闭 锁扣 中等,Box Close Lock Medium,pass,,命中建议,Box Close Lock Medium,通过,全部token安全映射
+BOOM-035,BOOM参考中文,中→英,record_id=6851; METAL/HANDLE; Espresso Machine Assemble,咖啡机 组装,Espresso Machine Assemble,pass,,命中建议,Espresso Machine Assemble,通过,全部token安全映射
+BOOM-036,BOOM参考中文,中→英,record_id=17533; MOTORS/ELECTRIC; Airy Winding,空气感 绕卷,Airy Winding,pass,,命中建议,Airy Winding,通过,全部token安全映射
+BOOM-037,BOOM参考中文,中→英,record_id=1736; MUSICAL/PERCUSSION TUNED; Xylophone Delay Sparkle Vibrato,木琴 延迟 闪烁 颤音,Xylophone Delay Twinkle Warble,pass,,部分命中,Xylophone Delay Sparkle Vibrato,通过,全部token安全映射
+BOOM-038,BOOM参考中文,中→英,record_id=6877; OBJECTS/BOOK; Book Drop Low,书本 掉落 低沉,Book Drop Deep,pass,,部分命中,Book Drop Low,通过,全部token安全映射
+BOOM-039,BOOM参考中文,中→英,record_id=6932; PAPER/FRICTION; Several Layers Handling Close,多层 纸张 近距离 操作,Several Layers Paper Close Operate,pass,,部分命中,Several Layers Handling Close,通过,全部token安全映射
+BOOM-040,BOOM参考中文,中→英,record_id=6957; PLASTIC/FRICTION; Shopping Bag Crunchy Hard,购物袋 脆响 用力,Shopping Bag Crunchy Hard,pass,,命中建议,Shopping Bag Crunchy Hard,通过,全部token安全映射
+BOOM-041,BOOM参考中文,中→英,record_id=233; RAIN/VEGETATION; Forest Drips,森林 滴水,Forests Drip,pass,,结果与建议不同，待review,Forest Drips,通过,全部token安全映射
+BOOM-042,BOOM参考中文,中→英,record_id=6964; ROCKS/BREAK; Crispbread Crack,脆饼 断裂,Crispbread Apart,pass,,部分命中,Crispbread Crack,通过,全部token安全映射
+BOOM-043,BOOM参考中文,中→英,record_id=7837; RUBBER/FRICTION; Dog Toy Rub Groan Long,狗玩具 摩擦 呻吟 长,Dog Toy Friction Groan,needs_review,长,部分命中,Dog Toy Rub Groan Long,通过,未知项保持完整并留在review
+BOOM-044,BOOM参考中文,中→英,record_id=14656; SCIFI/ENERGY; Aggressive Short,科幻 能量 激烈 短,Sci-fi Energy Aggressive,needs_review,短,部分命中,Aggressive Short,通过,未知项保持完整并留在review
+BOOM-045,BOOM参考中文,中→英,record_id=6995; SPORTS/SKATE; Roller Skate Old,老式 旱冰鞋 滚动,Ancient Roller Skate Roll,pass,,部分命中,Roller Skate Old,通过,全部token安全映射
+BOOM-046,BOOM参考中文,中→英,record_id=2008; SWOOSHES/WHOOSH; All Aboard,呼啸 全员登船,Whoosh All Aboard,pass,,部分命中,All Aboard,通过,全部token安全映射
+BOOM-047,BOOM参考中文,中→英,record_id=18612; TOOLS/HAND; Axe Chop Wood,斧头 劈 木头,Axe Wood,needs_review,劈,部分命中,Axe Chop Wood,通过,未知项保持完整并留在review
+BOOM-048,BOOM参考中文,中→英,record_id=18834; TOYS/MISC; Moo Box Cow Long,牛叫盒 长,Moo Box,needs_review,长,部分命中,Moo Box Cow Long,通过,未知项保持完整并留在review
+BOOM-049,BOOM参考中文,中→英,record_id=2093; USER INTERFACE/GLITCH; Denoise Deluxe,界面 故障 降噪,Interface Glitch Denoise,pass,,部分命中,Denoise Deluxe,通过,全部token安全映射
+BOOM-050,BOOM参考中文,中→英,record_id=13589; VEGETATION/LEAVES; Squeezing Vegetables Constant,挤压 蔬菜 持续,Squeeze Vegetables Continuous,pass,,部分命中,Squeezing Vegetables Constant,通过,全部token安全映射
+REC-001,个人录音抽样,中→英,01_FoleyDiary\250327_VariousMarbles\CERMImpt_STEEL BALL Fall Tile Sharp Bright Clink_CUX-100K.wav,钢球 掉落 瓷砖 清脆 明亮 叮当,Steel Ball Drop Tile Crisp Bright Jingle,pass,,部分命中,Steel Ball Fall Tile Sharp Bright Clink,通过,全部token安全映射
+REC-002,个人录音抽样,中→英,01_FoleyDiary\250327_VariousMarbles\MECHMisc_MAGNET Interact DUMBBELL Heavy Clank_CUX-100K.wav,磁铁 碰撞 哑铃 沉重 叮当,Magnet Impact Dumbbell Heavy Jingle,pass,,部分命中,Magnet Dumbbell Heavy Clank,通过,全部token安全映射
 REC-003,个人录音抽样,中→英,01_FoleyDiary\250327_VariousMarbles\METLMvmt_GEAR Rolling Wood Floor Muffled Rattle_MasterMix.wav,齿轮 滚动 木地板 闷响 摇晃,Gear Roll Parquet Thud Shake,pass,,部分命中,Gear Roll Wood Floor Muffled Rattle,通过,全部token安全映射
-REC-004,个人录音抽样,中→英,01_FoleyDiary\250412_VariousFruits\Cabbage_Knife_Stab_MasterMix_WithOutUcho.wav,卷心菜 刀 刺入,,needs_review,卷心菜;刀;刺入,无final，待review,Cabbage Knife Stab,通过,未知项保持完整并留在review
-REC-005,个人录音抽样,中→英,01_FoleyDiary\250412_VariousFruits\Watermelon_Cut_Axe_Basicucho_AB_Mode.wav,西瓜 斧头 切割,Cut,needs_review,西瓜;斧头,部分命中,Watermelon Axe Cut,通过,未知项保持完整并留在review
-REC-006,个人录音抽样,中→英,01_FoleyDiary\250412_VariousFruits\Watermelon_Stab_CUX100k.wav,西瓜 刺入,,needs_review,西瓜;刺入,无final，待review,Watermelon Stab,通过,未知项保持完整并留在review
+REC-004,个人录音抽样,中→英,01_FoleyDiary\250412_VariousFruits\Cabbage_Knife_Stab_MasterMix_WithOutUcho.wav,卷心菜 刀 刺入,Cabbage Stab,needs_review,刀,部分命中,Cabbage Knife Stab,通过,未知项保持完整并留在review
+REC-005,个人录音抽样,中→英,01_FoleyDiary\250412_VariousFruits\Watermelon_Cut_Axe_Basicucho_AB_Mode.wav,西瓜 斧头 切割,Watermelon Axe Cut,pass,,命中建议,Watermelon Axe Cut,通过,全部token安全映射
+REC-006,个人录音抽样,中→英,01_FoleyDiary\250412_VariousFruits\Watermelon_Stab_CUX100k.wav,西瓜 刺入,Watermelon Stab,pass,,命中建议,Watermelon Stab,通过,全部token安全映射
 REC-007,个人录音抽样,中→英,01_FoleyDiary\250412_VariousMetal\Pre412_Sword_Impact_Mid_MasterMix_WithOutUcho.wav,剑 撞击 中等,Impact Medium,needs_review,剑,部分命中,Sword Impact Medium,通过,未知项保持完整并留在review
-REC-008,个人录音抽样,中→英,01_FoleyDiary\250412_VariousMetal\Pre418_Swrod_Trowel_Scrape_Ringout_CS-3e1.wav,剑 泥刀 刮擦 余响,Scrape,needs_review,剑;泥刀;余响,部分命中,Sword Trowel Scrape Ringout,通过,未知项保持完整并留在review
-REC-009,个人录音抽样,中→英,01_FoleyDiary\250412_VariousMetal\Pre423_Sword_Iron_Bar_Friction_Long_MasterMix.wav,剑 铁杆 摩擦 长,Friction,needs_review,剑;铁杆;长,部分命中,Sword Iron Bar Friction Long,通过,未知项保持完整并留在review
+REC-008,个人录音抽样,中→英,01_FoleyDiary\250412_VariousMetal\Pre418_Swrod_Trowel_Scrape_Ringout_CS-3e1.wav,剑 泥刀 刮擦 余响,Trowel Scrape Ringout,needs_review,剑,部分命中,Sword Trowel Scrape Ringout,通过,未知项保持完整并留在review
+REC-009,个人录音抽样,中→英,01_FoleyDiary\250412_VariousMetal\Pre423_Sword_Iron_Bar_Friction_Long_MasterMix.wav,剑 铁杆 摩擦 长,Iron Bar Friction,needs_review,剑;长,部分命中,Sword Iron Bar Friction Long,通过,未知项保持完整并留在review
 REC-010,个人录音抽样,中→英,01_FoleyDiary\250412_VariousMetal\Pre425_Chain_Gear_Metal_Rubbing_Cortado_MKiii.wav,链条 齿轮 金属 摩擦,Chain Gear Metal Friction,pass,,命中建议,Chain Gear Metal Friction,通过,全部token安全映射
-REC-011,个人录音抽样,中→英,01_FoleyDiary\250430_TungstenCarbide\SFXMeta_TungstenCarbide_Drop_Concrete_LongPiece_02_CS-3e1.wav,碳化钨 掉落 混凝土 长条,Drop Concrete,needs_review,碳化钨;长条,部分命中,Tungsten Carbide Drop Concrete Long Piece,通过,未知项保持完整并留在review
-REC-012,个人录音抽样,中→英,01_FoleyDiary\250430_TungstenCarbide\SFXMeta_TungstenCarbide_Drop_Concrete_SmallPiece_04_Basicucho_AB_Mode.wav,碳化钨 掉落 混凝土 小块,Drop Concrete,needs_review,碳化钨;小块,部分命中,Tungsten Carbide Drop Concrete Small Piece,通过,未知项保持完整并留在review
-REC-013,个人录音抽样,中→英,01_FoleyDiary\250430_TungstenCarbide\SFXMeta_TungstenCarbide_Scrape_Concrete_Texture_02_CUX100k.wav,碳化钨 刮擦 混凝土 纹理,Scrape Concrete,needs_review,碳化钨;纹理,部分命中,Tungsten Carbide Scrape Concrete Texture,通过,未知项保持完整并留在review
-REC-014,个人录音抽样,中→英,01_FoleyDiary\250525_SewingMachine_Cymbal_iron_Balloon\CYMBAL_Drag_RubberRod_Small_Dry_Geofon.wav,镲片 拖动 橡胶棒 小 干,Cymbal Drag,needs_review,橡胶棒;小;干,部分命中,Cymbal Drag Rubber Rod Small Dry,通过,未知项保持完整并留在review
-REC-015,个人录音抽样,中→英,01_FoleyDiary\250525_SewingMachine_Cymbal_iron_Balloon\SEWING MACHINE_Turn_Handwheel_Left_Old_Medium_Tail_CO-100K.wav,缝纫机 转动 手轮 左 老旧 中等 尾音,Turn Medium,needs_review,缝纫机;手轮;左;老旧;尾音,部分命中,Sewing Machine Turn Handwheel Left Old Medium Tail,通过,未知项保持完整并留在review
-REC-016,个人录音抽样,中→英,01_FoleyDiary\250525_SewingMachine_Cymbal_iron_Balloon\SEWING MACHINE_Turn_Handwheel_Right_Old_Fast_Tail_Geofon.wav,缝纫机 转动 手轮 右 老旧 快速 尾音,Turn Fast,needs_review,缝纫机;手轮;右;老旧;尾音,部分命中,Sewing Machine Turn Handwheel Right Old Fast Tail,通过,未知项保持完整并留在review
-REC-017,个人录音抽样,中→英,01_FoleyDiary\250525_SewingMachine_Cymbal_iron_Balloon\SEWING MACHINE_Turn_Handwheel_Right_Old_Slow_Tail_MKH8040_L.wav,缝纫机 转动 手轮 右 老旧 缓慢 尾音,Turn Slow,needs_review,缝纫机;手轮;右;老旧;尾音,部分命中,Sewing Machine Turn Handwheel Right Old Slow Tail,通过,未知项保持完整并留在review
-REC-018,个人录音抽样,中→英,01_FoleyDiary\250601_MOGANSHAN\MECHClik_ArcadeStick_03_Geofon.wav,街机摇杆 点击,Click,needs_review,街机摇杆,部分命中,Arcade Stick Click,通过,未知项保持完整并留在review
-REC-019,个人录音抽样,中→英,01_FoleyDiary\250606_WindSinger\RUBRTonl_WINDSINGER_Rotate_Latex_Rubber_Backward_whoosh_02_Master.wav,风鸣器 旋转 乳胶 橡胶 向后 呼啸,Spin Rubber Whoosh,needs_review,风鸣器;乳胶;向后,部分命中,Wind Singer Rotate Latex Rubber Backward Whoosh,通过,未知项保持完整并留在review
-REC-020,个人录音抽样,中→英,01_FoleyDiary\250608_BubbleWrap\PLASMvmt_BubbleWarp_Rub_Crinkle_Crumple_Handle_MKH8040.wav,气泡膜 摩擦 褶皱 揉皱 操作,Friction Crumple Operate,needs_review,气泡膜;褶皱,部分命中,Bubble Wrap Rub Crinkle Crumple Handle,通过,未知项保持完整并留在review
-REC-021,个人录音抽样,中→英,01_FoleyDiary\250611_DryBoxDoor\DOORCreak_DRY BOX DOOR Medium Creak Layer Complex_02_CO-100K.wav,干燥箱门 中等 吱呀 复杂,Medium,needs_review,干燥箱门;吱呀;复杂,部分命中,Dry Box Door Medium Creak Complex,通过,未知项保持完整并留在review
-REC-022,个人录音抽样,中→英,01_FoleyDiary\250615_OLYMPUS830\MOTRSrvo_OLYMPUS CAMERA Zoom In Out Rocker Switch Motor_MMPro.wav,奥林巴斯相机 变焦 进出 摇杆 开关 马达,Switch Motors,needs_review,奥林巴斯相机;变焦;进出;摇杆,部分命中,Olympus Camera Zoom In Out Rocker Switch Motor,通过,未知项保持完整并留在review
-REC-023,个人录音抽样,中→英,01_FoleyDiary\250619_Material Test 1\CERMMvmt_STEEL BALL Roll Textured Tile Back Steady Scrape_MKH8040.wav,钢球 滚动 纹理瓷砖 返回 稳定 刮擦,Roll Steady Scrape,needs_review,钢球;纹理瓷砖;返回,部分命中,Steel Ball Roll Textured Tile Back Steady Scrape,通过,未知项保持完整并留在review
-REC-024,个人录音抽样,中→英,01_FoleyDiary\250627_Yunara Foley\CERMImpt_CERAMIC BOWL Stack Impact Brittle_CO-100K.wav,陶瓷碗 堆叠 撞击 易碎,Impact Brittle,needs_review,陶瓷碗;堆叠,部分命中,Ceramic Bowl Stack Impact Brittle,通过,未知项保持完整并留在review
-REC-025,个人录音抽样,中→英,01_FoleyDiary\250627_Yunara Foley\WOODImpt_BAMBOO CHOPSTICKS Empty Click Collision_MKH416.wav,竹筷 空心 点击 碰撞,Hollow Click Impact,needs_review,竹筷,部分命中,Bamboo Chopsticks Hollow Click Collision,通过,未知项保持完整并留在review
-REC-026,个人录音抽样,中→英,01_FoleyDiary\250628_HouTanPark\METLImpt_WOOD STICK Hit Steel Wall Poke_MasterMix.wav,木棍 击打 钢墙 戳,Blows,needs_review,木棍;钢墙;戳,结果与建议不同，待review,Wood Stick Hit Steel Wall Poke,通过,未知项保持完整并留在review
-REC-027,个人录音抽样,中→英,01_FoleyDiary\251120_BubbleTeaBear\AIRBlow_Thick Hollow Wood Tube Blow Air.wav,厚 空心 木管 吹气,Hollow Woodwind,needs_review,厚;吹气,部分命中,Thick Hollow Wood Tube Blow Air,通过,未知项保持完整并留在review
-REC-028,个人录音抽样,中→英,01_FoleyDiary\251120_BubbleTeaBear\WATRFlow_Water Balloon Drop Ground.wav,水气球 掉落 地面,Drop,needs_review,水气球;地面,部分命中,Water Balloon Drop Ground,通过,未知项保持完整并留在review
-REC-029,个人录音抽样,中→英,02_FieldRecording\2507_YinZhouClimbingPark\Raw_FirePart\Raw_Fire Torch Burn Drips - Cave_MKH416.wav,火炬 燃烧 滴落 洞穴,Torch Burn Drip,needs_review,洞穴,部分命中,Fire Torch Burn Drips Cave,通过,未知项保持完整并留在review
-REC-030,个人录音抽样,中→英,02_FieldRecording\2507_YinZhouClimbingPark\Raw_FirePart_DeReverb\Raw_Fire Gas Can Flame Burst - SHT - Cave Mouth_02_DeReverb_CO-100K.wav,汽油罐 火焰 爆发 短 洞口,Fire Airhose,needs_review,汽油罐;短;洞口,结果与建议不同，待review,Gas Can Flame Burst Short Cave Mouth,通过,未知项保持完整并留在review
-REC-031,个人录音抽样,中→英,02_FieldRecording\2507_YinZhouClimbingPark\Raw_RockPart\Raw_Rock Block Slide Rock - CLS - Cave Mouth_02_Geofon.wav,石块 滑过 岩石 洞口,Rock Slide Rocks,needs_review,洞口,部分命中,Rock Block Slide Rock Close Cave Mouth,通过,未知项保持完整并留在review
-REC-032,个人录音抽样,中→英,02_FieldRecording\2507_YinZhouClimbingPark\Raw_RockPart\Raw_Rock MED Roll on Pile Debris - MED - Cave_MKH8040.wav,中型石头 滚过 碎屑堆 洞穴,,needs_review,中型石头;滚过;碎屑堆;洞穴,无final，待review,Medium Rock Roll Debris Pile Cave,通过,未知项保持完整并留在review
-REC-033,个人录音抽样,中→英,02_FieldRecording\2507_YinZhouClimbingPark\Raw_RockPart_DeReverb\Raw_Rock MED Impact Pile - CLS - Cave_01_DeReverb_Mix.wav,中型石头 撞击 石堆 洞穴,Impact,needs_review,中型石头;石堆;洞穴,部分命中,Medium Rock Impact Pile Close Cave,通过,未知项保持完整并留在review
-REC-034,个人录音抽样,中→英,03_PropSet\250731_DryIce\MicLayer\Dry Ice - Baking Pan - Screech on Wood_01_CS-3e.wav,干冰 烤盘 木头 尖叫,Wood Scream,needs_review,干冰;烤盘,部分命中,Dry Ice Baking Pan Screech Wood,通过,未知项保持完整并留在review
-REC-035,个人录音抽样,中→英,03_PropSet\250731_DryIce\MicLayer\Dry Ice - Bowl - Screech Rattle Tremble_02_MKH8040.wav,干冰 碗 尖叫 摇晃 颤动,Scream Shake,needs_review,干冰;碗;颤动,结果与建议不同，待review,Dry Ice Bowl Screech Rattle Tremble,通过,未知项保持完整并留在review
-REC-036,个人录音抽样,中→英,03_PropSet\250731_DryIce\MicLayer\Dry Ice - Copper Lid - Press on Wood_CO-100K.wav,干冰 铜盖 按压 木头,Pressing Wood,needs_review,干冰;铜盖,部分命中,Dry Ice Copper Lid Press Wood,通过,未知项保持完整并留在review
-REC-037,个人录音抽样,中→英,03_PropSet\250731_DryIce\MicLayer\Dry Ice - Dumbbell - Press Screech_02_CO-100K.wav,干冰 哑铃 按压 尖叫,Pressing Scream,needs_review,干冰;哑铃,结果与建议不同，待review,Dry Ice Dumbbell Press Screech,通过,未知项保持完整并留在review
-REC-038,个人录音抽样,中→英,03_PropSet\250731_DryIce\MicLayer\Dry Ice - Fork - Screech Tremble on Wood_01_CO-100K.wav,干冰 叉子 尖叫 颤动 木头,Scream Wood,needs_review,干冰;叉子;颤动,部分命中,Dry Ice Fork Screech Tremble Wood,通过,未知项保持完整并留在review
-REC-039,个人录音抽样,中→英,03_PropSet\250731_DryIce\MicLayer\Dry Ice - Ladder Handrail Mid - Screech Dampened_01_CS-3e.wav,干冰 楼梯扶手 中等 尖叫 沉闷,Medium Scream Dull,needs_review,干冰;楼梯扶手,部分命中,Dry Ice Ladder Handrail Medium Screech Dampened,通过,未知项保持完整并留在review
-REC-040,个人录音抽样,中→英,03_PropSet\250731_DryIce\MicLayer\Dry Ice - Ladder Tread Mid - Screech Dampened_01_MKH8040.wav,干冰 楼梯踏板 中等 尖叫 沉闷,Medium Scream Dull,needs_review,干冰;楼梯踏板,部分命中,Dry Ice Ladder Tread Medium Screech Dampened,通过,未知项保持完整并留在review
-REC-041,个人录音抽样,中→英,03_PropSet\250731_DryIce\MicLayer\Dry Ice - Nut - Screech Rattle Tremble_02_tlm103.wav,干冰 螺母 尖叫 摇晃 颤动,Scream Shake,needs_review,干冰;螺母;颤动,结果与建议不同，待review,Dry Ice Nut Screech Rattle Tremble,通过,未知项保持完整并留在review
-REC-042,个人录音抽样,中→英,03_PropSet\250731_DryIce\MicLayer\Dry Ice - Spoon - Screech Tremble on Wood_02_MKH8040.wav,干冰 勺子 尖叫 颤动 木头,Scream Wood,needs_review,干冰;勺子;颤动,部分命中,Dry Ice Spoon Screech Tremble Wood,通过,未知项保持完整并留在review
-REC-043,个人录音抽样,中→英,03_PropSet\250731_DryIce\MicLayer\Dry Ice - Tuning Fork - Screech Rattle Tremble Press on Wood_tlm103.wav,干冰 音叉 尖叫 摇晃 颤动 按压 木头,Scream Shake Pressing Wood,needs_review,干冰;音叉;颤动,部分命中,Dry Ice Tuning Fork Screech Rattle Tremble Press Wood,通过,未知项保持完整并留在review
-REC-044,个人录音抽样,中→英,03_PropSet\250731_DryIce\Mix\Dry Ice - Copper Can - Friction Roll Granular on Wood_01_Mix.wav,干冰 铜罐 摩擦 滚动 颗粒 木头,Friction Roll Grain Particle Wood,needs_review,干冰;铜罐,部分命中,Dry Ice Copper Can Friction Roll Granular Wood,通过,未知项保持完整并留在review
-REC-045,个人录音抽样,中→英,03_PropSet\250731_DryIce\Mix\Dry Ice - Metal Skewer - Rattle Tremble on Wood_Mix.wav,干冰 金属签 摇晃 颤动 木头,Shake Wood,needs_review,干冰;金属签;颤动,部分命中,Dry Ice Metal Skewer Rattle Tremble Wood,通过,未知项保持完整并留在review
+REC-011,个人录音抽样,中→英,01_FoleyDiary\250430_TungstenCarbide\SFXMeta_TungstenCarbide_Drop_Concrete_LongPiece_02_CS-3e1.wav,碳化钨 掉落 混凝土 长条,Tungsten Carbide Drop Concrete Long Piece,pass,,命中建议,Tungsten Carbide Drop Concrete Long Piece,通过,全部token安全映射
+REC-012,个人录音抽样,中→英,01_FoleyDiary\250430_TungstenCarbide\SFXMeta_TungstenCarbide_Drop_Concrete_SmallPiece_04_Basicucho_AB_Mode.wav,碳化钨 掉落 混凝土 小块,Tungsten Carbide Drop Concrete Small Piece,pass,,命中建议,Tungsten Carbide Drop Concrete Small Piece,通过,全部token安全映射
+REC-013,个人录音抽样,中→英,01_FoleyDiary\250430_TungstenCarbide\SFXMeta_TungstenCarbide_Scrape_Concrete_Texture_02_CUX100k.wav,碳化钨 刮擦 混凝土 纹理,Tungsten Carbide Scrape Concrete Texture,pass,,命中建议,Tungsten Carbide Scrape Concrete Texture,通过,全部token安全映射
+REC-014,个人录音抽样,中→英,01_FoleyDiary\250525_SewingMachine_Cymbal_iron_Balloon\CYMBAL_Drag_RubberRod_Small_Dry_Geofon.wav,镲片 拖动 橡胶棒 小 干,Cymbal Drag Rubber Rod,needs_review,小;干,部分命中,Cymbal Drag Rubber Rod Small Dry,通过,未知项保持完整并留在review
+REC-015,个人录音抽样,中→英,01_FoleyDiary\250525_SewingMachine_Cymbal_iron_Balloon\SEWING MACHINE_Turn_Handwheel_Left_Old_Medium_Tail_CO-100K.wav,缝纫机 转动 手轮 左 老旧 中等 尾音,Sewing Machine Turn Handwheel Old Medium Tail,needs_review,左,部分命中,Sewing Machine Turn Handwheel Left Old Medium Tail,通过,未知项保持完整并留在review
+REC-016,个人录音抽样,中→英,01_FoleyDiary\250525_SewingMachine_Cymbal_iron_Balloon\SEWING MACHINE_Turn_Handwheel_Right_Old_Fast_Tail_Geofon.wav,缝纫机 转动 手轮 右 老旧 快速 尾音,Sewing Machine Turn Handwheel Old Fast Tail,needs_review,右,部分命中,Sewing Machine Turn Handwheel Right Old Fast Tail,通过,未知项保持完整并留在review
+REC-017,个人录音抽样,中→英,01_FoleyDiary\250525_SewingMachine_Cymbal_iron_Balloon\SEWING MACHINE_Turn_Handwheel_Right_Old_Slow_Tail_MKH8040_L.wav,缝纫机 转动 手轮 右 老旧 缓慢 尾音,Sewing Machine Turn Handwheel Old Slow Tail,needs_review,右,部分命中,Sewing Machine Turn Handwheel Right Old Slow Tail,通过,未知项保持完整并留在review
+REC-018,个人录音抽样,中→英,01_FoleyDiary\250601_MOGANSHAN\MECHClik_ArcadeStick_03_Geofon.wav,街机摇杆 点击,Arcade Stick Click,pass,,命中建议,Arcade Stick Click,通过,全部token安全映射
+REC-019,个人录音抽样,中→英,01_FoleyDiary\250606_WindSinger\RUBRTonl_WINDSINGER_Rotate_Latex_Rubber_Backward_whoosh_02_Master.wav,风鸣器 旋转 乳胶 橡胶 向后 呼啸,Wind Singer Spin Latex Rubber Backward Whoosh,pass,,部分命中,Wind Singer Rotate Latex Rubber Backward Whoosh,通过,全部token安全映射
+REC-020,个人录音抽样,中→英,01_FoleyDiary\250608_BubbleWrap\PLASMvmt_BubbleWarp_Rub_Crinkle_Crumple_Handle_MKH8040.wav,气泡膜 摩擦 褶皱 揉皱 操作,Bubble Wrap Friction Crinkle Crumple Operate,pass,,部分命中,Bubble Wrap Rub Crinkle Crumple Handle,通过,全部token安全映射
+REC-021,个人录音抽样,中→英,01_FoleyDiary\250611_DryBoxDoor\DOORCreak_DRY BOX DOOR Medium Creak Layer Complex_02_CO-100K.wav,干燥箱门 中等 吱呀 复杂,Dry Box Door Medium Creak Complex,pass,,命中建议,Dry Box Door Medium Creak Complex,通过,全部token安全映射
+REC-022,个人录音抽样,中→英,01_FoleyDiary\250615_OLYMPUS830\MOTRSrvo_OLYMPUS CAMERA Zoom In Out Rocker Switch Motor_MMPro.wav,奥林巴斯相机 变焦 进出 摇杆 开关 马达,Olympus Camera Zoom In Out Rocker Switch Motors,pass,,部分命中,Olympus Camera Zoom In Out Rocker Switch Motor,通过,全部token安全映射
+REC-023,个人录音抽样,中→英,01_FoleyDiary\250619_Material Test 1\CERMMvmt_STEEL BALL Roll Textured Tile Back Steady Scrape_MKH8040.wav,钢球 滚动 纹理瓷砖 返回 稳定 刮擦,Steel Ball Roll Textured Tile Back Steady Scrape,pass,,命中建议,Steel Ball Roll Textured Tile Back Steady Scrape,通过,全部token安全映射
+REC-024,个人录音抽样,中→英,01_FoleyDiary\250627_Yunara Foley\CERMImpt_CERAMIC BOWL Stack Impact Brittle_CO-100K.wav,陶瓷碗 堆叠 撞击 易碎,Ceramic Bowl Stack Impact Brittle,pass,,命中建议,Ceramic Bowl Stack Impact Brittle,通过,全部token安全映射
+REC-025,个人录音抽样,中→英,01_FoleyDiary\250627_Yunara Foley\WOODImpt_BAMBOO CHOPSTICKS Empty Click Collision_MKH416.wav,竹筷 空心 点击 碰撞,Bamboo Chopsticks Hollow Click Impact,pass,,部分命中,Bamboo Chopsticks Hollow Click Collision,通过,全部token安全映射
+REC-026,个人录音抽样,中→英,01_FoleyDiary\250628_HouTanPark\METLImpt_WOOD STICK Hit Steel Wall Poke_MasterMix.wav,木棍 击打 钢墙 戳,Wood Stick Blows Steel Wall,needs_review,戳,部分命中,Wood Stick Hit Steel Wall Poke,通过,未知项保持完整并留在review
+REC-027,个人录音抽样,中→英,01_FoleyDiary\251120_BubbleTeaBear\AIRBlow_Thick Hollow Wood Tube Blow Air.wav,厚 空心 木管 吹气,Hollow Woodwind Blow,needs_review,厚,部分命中,Thick Hollow Wood Tube Blow Air,通过,未知项保持完整并留在review
+REC-028,个人录音抽样,中→英,01_FoleyDiary\251120_BubbleTeaBear\WATRFlow_Water Balloon Drop Ground.wav,水气球 掉落 地面,Water Balloon Drop Ground,pass,,命中建议,Water Balloon Drop Ground,通过,全部token安全映射
+REC-029,个人录音抽样,中→英,02_FieldRecording\2507_YinZhouClimbingPark\Raw_FirePart\Raw_Fire Torch Burn Drips - Cave_MKH416.wav,火炬 燃烧 滴落 洞穴,Torch Burn Drip Cave,pass,,部分命中,Fire Torch Burn Drips Cave,通过,全部token安全映射
+REC-030,个人录音抽样,中→英,02_FieldRecording\2507_YinZhouClimbingPark\Raw_FirePart_DeReverb\Raw_Fire Gas Can Flame Burst - SHT - Cave Mouth_02_DeReverb_CO-100K.wav,汽油罐 火焰 爆发 短 洞口,Gas Can Fire Airhose Cave Mouth,needs_review,短,部分命中,Gas Can Flame Burst Short Cave Mouth,通过,未知项保持完整并留在review
+REC-031,个人录音抽样,中→英,02_FieldRecording\2507_YinZhouClimbingPark\Raw_RockPart\Raw_Rock Block Slide Rock - CLS - Cave Mouth_02_Geofon.wav,石块 滑过 岩石 洞口,Rock Slide Rocks Cave Mouth,pass,,部分命中,Rock Block Slide Rock Close Cave Mouth,通过,全部token安全映射
+REC-032,个人录音抽样,中→英,02_FieldRecording\2507_YinZhouClimbingPark\Raw_RockPart\Raw_Rock MED Roll on Pile Debris - MED - Cave_MKH8040.wav,中型石头 滚过 碎屑堆 洞穴,Medium Rock Roll On Debris Pile Cave,pass,,部分命中,Medium Rock Roll Debris Pile Cave,通过,全部token安全映射
+REC-033,个人录音抽样,中→英,02_FieldRecording\2507_YinZhouClimbingPark\Raw_RockPart_DeReverb\Raw_Rock MED Impact Pile - CLS - Cave_01_DeReverb_Mix.wav,中型石头 撞击 石堆 洞穴,Medium Rock Impact Pile Cave,pass,,部分命中,Medium Rock Impact Pile Close Cave,通过,全部token安全映射
+REC-034,个人录音抽样,中→英,03_PropSet\250731_DryIce\MicLayer\Dry Ice - Baking Pan - Screech on Wood_01_CS-3e.wav,干冰 烤盘 木头 尖叫,Dry Ice Baking Pan Wood Scream,pass,,部分命中,Dry Ice Baking Pan Screech Wood,通过,全部token安全映射
+REC-035,个人录音抽样,中→英,03_PropSet\250731_DryIce\MicLayer\Dry Ice - Bowl - Screech Rattle Tremble_02_MKH8040.wav,干冰 碗 尖叫 摇晃 颤动,Dry Ice Scream Shake Tremble,needs_review,碗,部分命中,Dry Ice Bowl Screech Rattle Tremble,通过,未知项保持完整并留在review
+REC-036,个人录音抽样,中→英,03_PropSet\250731_DryIce\MicLayer\Dry Ice - Copper Lid - Press on Wood_CO-100K.wav,干冰 铜盖 按压 木头,Dry Ice Copper Lid Pressing Wood,pass,,部分命中,Dry Ice Copper Lid Press Wood,通过,全部token安全映射
+REC-037,个人录音抽样,中→英,03_PropSet\250731_DryIce\MicLayer\Dry Ice - Dumbbell - Press Screech_02_CO-100K.wav,干冰 哑铃 按压 尖叫,Dry Ice Dumbbell Pressing Scream,pass,,部分命中,Dry Ice Dumbbell Press Screech,通过,全部token安全映射
+REC-038,个人录音抽样,中→英,03_PropSet\250731_DryIce\MicLayer\Dry Ice - Fork - Screech Tremble on Wood_01_CO-100K.wav,干冰 叉子 尖叫 颤动 木头,Dry Ice Fork Scream Tremble Wood,pass,,部分命中,Dry Ice Fork Screech Tremble Wood,通过,全部token安全映射
+REC-039,个人录音抽样,中→英,03_PropSet\250731_DryIce\MicLayer\Dry Ice - Ladder Handrail Mid - Screech Dampened_01_CS-3e.wav,干冰 楼梯扶手 中等 尖叫 沉闷,Dry Ice Ladder Handrail Medium Scream Dull,pass,,部分命中,Dry Ice Ladder Handrail Medium Screech Dampened,通过,全部token安全映射
+REC-040,个人录音抽样,中→英,03_PropSet\250731_DryIce\MicLayer\Dry Ice - Ladder Tread Mid - Screech Dampened_01_MKH8040.wav,干冰 楼梯踏板 中等 尖叫 沉闷,Dry Ice Ladder Tread Medium Scream Dull,pass,,部分命中,Dry Ice Ladder Tread Medium Screech Dampened,通过,全部token安全映射
+REC-041,个人录音抽样,中→英,03_PropSet\250731_DryIce\MicLayer\Dry Ice - Nut - Screech Rattle Tremble_02_tlm103.wav,干冰 螺母 尖叫 摇晃 颤动,Dry Ice Nut Scream Shake Tremble,pass,,部分命中,Dry Ice Nut Screech Rattle Tremble,通过,全部token安全映射
+REC-042,个人录音抽样,中→英,03_PropSet\250731_DryIce\MicLayer\Dry Ice - Spoon - Screech Tremble on Wood_02_MKH8040.wav,干冰 勺子 尖叫 颤动 木头,Dry Ice Spoon Scream Tremble Wood,pass,,部分命中,Dry Ice Spoon Screech Tremble Wood,通过,全部token安全映射
+REC-043,个人录音抽样,中→英,03_PropSet\250731_DryIce\MicLayer\Dry Ice - Tuning Fork - Screech Rattle Tremble Press on Wood_tlm103.wav,干冰 音叉 尖叫 摇晃 颤动 按压 木头,Dry Ice Tuning Fork Scream Shake Tremble Pressing Wood,pass,,部分命中,Dry Ice Tuning Fork Screech Rattle Tremble Press Wood,通过,全部token安全映射
+REC-044,个人录音抽样,中→英,03_PropSet\250731_DryIce\Mix\Dry Ice - Copper Can - Friction Roll Granular on Wood_01_Mix.wav,干冰 铜罐 摩擦 滚动 颗粒 木头,Dry Ice Copper Can Friction Roll Grain Particle Wood,pass,,部分命中,Dry Ice Copper Can Friction Roll Granular Wood,通过,全部token安全映射
+REC-045,个人录音抽样,中→英,03_PropSet\250731_DryIce\Mix\Dry Ice - Metal Skewer - Rattle Tremble on Wood_Mix.wav,干冰 金属签 摇晃 颤动 木头,Dry Ice Metal Skewer Shake Tremble Wood,pass,,部分命中,Dry Ice Metal Skewer Rattle Tremble Wood,通过,全部token安全映射
 REC-046,个人录音抽样,中→英,03_PropSet\250804_ICE\MicLayer\Raw_ICE - Ice Axe Scratch - Friction Ice Brick 01_MKIII.wav,冰 斧 刮擦 摩擦 冰砖,Ice Scrape Friction Ice Brick,needs_review,斧,部分命中,Ice Axe Scratch Friction Ice Brick,通过,未知项保持完整并留在review
-REC-047,个人录音抽样,中→英,03_PropSet\250804_ICE\MicLayer\Raw_ICE - Large Ice Cubes - Mutual Press 01_CO100k.wav,大冰块 相互 按压,Pressing,needs_review,大冰块;相互,结果与建议不同，待review,Large Ice Cubes Mutual Press,通过,未知项保持完整并留在review
-REC-048,个人录音抽样,中→英,03_PropSet\250804_ICE\MicLayer\Raw_ICE - Thin Ice - Nutcracker 01_MKH8040.wav,薄冰 胡桃夹,,needs_review,薄冰;胡桃夹,无final，待review,Thin Ice Nutcracker,通过,未知项保持完整并留在review
-REC-049,个人录音抽样,中→英,03_PropSet\250804_ICE\Mix\Raw_ICE - Tin Foil Pan - Round Demold 01_MIX.wav,冰 锡纸盘 圆形 脱模,Ice,needs_review,锡纸盘;圆形;脱模,部分命中,Ice Tin Foil Pan Round Demold,通过,未知项保持完整并留在review
-REC-050,个人录音抽样,中→英,03_PropSet\251129_GlassRing\GLASTonl_Straight Glass Sustained Ring.wav,直玻璃 持续 鸣响,Continuous,needs_review,直玻璃;鸣响,结果与建议不同，待review,Straight Glass Sustained Ring,通过,未知项保持完整并留在review
+REC-047,个人录音抽样,中→英,03_PropSet\250804_ICE\MicLayer\Raw_ICE - Large Ice Cubes - Mutual Press 01_CO100k.wav,大冰块 相互 按压,Large Ice Cubes Mutual Pressing,pass,,部分命中,Large Ice Cubes Mutual Press,通过,全部token安全映射
+REC-048,个人录音抽样,中→英,03_PropSet\250804_ICE\MicLayer\Raw_ICE - Thin Ice - Nutcracker 01_MKH8040.wav,薄冰 胡桃夹,Thin Ice Nutcracker,pass,,命中建议,Thin Ice Nutcracker,通过,全部token安全映射
+REC-049,个人录音抽样,中→英,03_PropSet\250804_ICE\Mix\Raw_ICE - Tin Foil Pan - Round Demold 01_MIX.wav,冰 锡纸盘 圆形 脱模,Ice Tin Foil Pan Round Demold,pass,,命中建议,Ice Tin Foil Pan Round Demold,通过,全部token安全映射
+REC-050,个人录音抽样,中→英,03_PropSet\251129_GlassRing\GLASTonl_Straight Glass Sustained Ring.wav,直玻璃 持续 鸣响,Straight Glass Continuous Ring,pass,,部分命中,Straight Glass Sustained Ring,通过,全部token安全映射
 MIX-001,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,metal 摩擦 anvil 刺耳的,Metal Friction Anvil Harsh,pass,,命中建议,Metal Friction Anvil Harsh,通过,全部token安全映射
-MIX-002,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,magic 电涌 impact long tail,Magic Impact Long Tail,needs_review,电涌,部分命中,Magic Power Surge Impact Long Tail,通过,未知项保持完整并留在review
+MIX-002,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,magic 电涌 impact long tail,Magic Power Surge Impact Long Tail,pass,,命中建议,Magic Power Surge Impact Long Tail,通过,全部token安全映射
 MIX-003,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,arcane 能量 burst,Arcane Energy Burst,pass,,命中建议,Arcane Energy Burst,通过,全部token安全映射
 MIX-004,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,魔法 whoosh 上升,Magic Whoosh Rise,pass,,命中建议,Magic Whoosh Rise,通过,全部token安全映射
-MIX-005,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,electric 奥术 crackle,Electric Crackle,needs_review,奥术,部分命中,Electric Arcane Crackle,通过,未知项保持完整并留在review
+MIX-005,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,electric 奥术 crackle,Electric Arcane Crackle,pass,,命中建议,Electric Arcane Crackle,通过,全部token安全映射
 MIX-006,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,plasma 电弧 short impact,Plasma Arc Short Impact,pass,,命中建议,Plasma Arc Short Impact,通过,全部token安全映射
-MIX-007,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,rune 激活 shimmer,Rune Shimmer,needs_review,激活,部分命中,Rune Activate Shimmer,通过,未知项保持完整并留在review
+MIX-007,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,rune 激活 shimmer,Rune Activate Shimmer,pass,,命中建议,Rune Activate Shimmer,通过,全部token安全映射
 MIX-008,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,portal 打开 deep whoosh,Portal Open Deep Whoosh,pass,,命中建议,Portal Open Deep Whoosh,通过,全部token安全映射
-MIX-009,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,spell 充能 闪烁,Spell Twinkle,needs_review,充能,部分命中,Spell Charge Sparkle,通过,未知项保持完整并留在review
+MIX-009,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,spell 充能 闪烁,Spell Charge Twinkle,pass,,部分命中,Spell Charge Sparkle,通过,全部token安全映射
 MIX-010,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,mana 爆发 bright tail,Airhose Bright Tail,needs_review,mana,部分命中,Mana Burst Bright Tail,通过,未知项保持完整并留在review
 MIX-011,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,dragon 呼吸 fire burst,Dragon Breathe Fire Burst,pass,,部分命中,Dragon Breath Fire Burst,通过,全部token安全映射
-MIX-012,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,ghost 低语 distant,Ghost Distant,needs_review,低语,部分命中,Ghost Whisper Distant,通过,未知项保持完整并留在review
-MIX-013,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,crystal 共振 magic,Crystal Magic,needs_review,共振,部分命中,Crystal Resonance Magic,通过,未知项保持完整并留在review
+MIX-012,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,ghost 低语 distant,Ghost Whisper Distant,pass,,命中建议,Ghost Whisper Distant,通过,全部token安全映射
+MIX-013,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,crystal 共振 magic,Crystal Resonance Magic,pass,,命中建议,Crystal Resonance Magic,通过,全部token安全映射
 MIX-014,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,void 冲击 low rumble,Punchy Low Rumble,needs_review,void,部分命中,Void Impact Low Rumble,通过,未知项保持完整并留在review
-MIX-015,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,thunder 电涌 arcane,Thunder Arcane,needs_review,电涌,部分命中,Thunder Power Surge Arcane,通过,未知项保持完整并留在review
+MIX-015,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,thunder 电涌 arcane,Thunder Power Surge Arcane,pass,,命中建议,Thunder Power Surge Arcane,通过,全部token安全映射
 MIX-016,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,cyber 魔法 glitch,Cyber Magic Glitch,pass,,命中建议,Cyber Magic Glitch,通过,全部token安全映射
-MIX-017,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,laser 奥术 sweep,Laser Sweep,needs_review,奥术,部分命中,Laser Arcane Sweep,通过,未知项保持完整并留在review
-MIX-018,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,metal door 魔法撞击,Metal Door,needs_review,魔法撞击,部分命中,Metal Door Magic Impact,通过,未知项保持完整并留在review
-MIX-019,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,energy core 过载,Energy,needs_review,core;过载,部分命中,Energy Core Overload,通过,未知项保持完整并留在review
-MIX-020,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,ancient 符文 hum,Ancient Hum,needs_review,符文,部分命中,Ancient Rune Hum,通过,未知项保持完整并留在review
+MIX-017,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,laser 奥术 sweep,Laser Arcane Sweep,pass,,命中建议,Laser Arcane Sweep,通过,全部token安全映射
+MIX-018,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,metal door 魔法撞击,Metal Door Magic Impact,pass,,命中建议,Metal Door Magic Impact,通过,全部token安全映射
+MIX-019,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,energy core 过载,Energy Overload,needs_review,core,部分命中,Energy Core Overload,通过,未知项保持完整并留在review
+MIX-020,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,ancient 符文 hum,Ancient Rune Hum,pass,,命中建议,Ancient Rune Hum,通过,全部token安全映射
 MIX-021,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,electric chain 摇晃,Electric Chain Shake,pass,,部分命中,Electric Chain Rattle,通过,全部token安全映射
 MIX-022,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,magic 护盾 impact,Magic Shield Impact,pass,,命中建议,Magic Shield Impact,通过,全部token安全映射
 MIX-023,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,plasma 剑 whoosh,Plasma Whoosh,needs_review,剑,部分命中,Plasma Sword Whoosh,通过,未知项保持完整并留在review
 MIX-024,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,arcane 铃 ring,Arcane Ring,needs_review,铃,部分命中,Arcane Bell Ring,通过,未知项保持完整并留在review
 MIX-025,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,portal 关闭 heavy,Portal Close Heavy,pass,,命中建议,Portal Close Heavy,通过,全部token安全映射
-MIX-026,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,spell 失败 glitch,Spell Glitch,needs_review,失败,部分命中,Spell Fail Glitch,通过,未知项保持完整并留在review
+MIX-026,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,spell 失败 glitch,Spell Fail Glitch,pass,,命中建议,Spell Fail Glitch,通过,全部token安全映射
 MIX-027,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,fireball 爆炸 long tail,Fireball Explosion Long Tail,pass,,命中建议,Fireball Explosion Long Tail,通过,全部token安全映射
 MIX-028,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,ice 魔法 crack,Ice Magic Crack,pass,,命中建议,Ice Magic Crack,通过,全部token安全映射
 MIX-029,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,shadow 移动 soft,Shadow Movement Soft,pass,,命中建议,Shadow Movement Soft,通过,全部token安全映射
-MIX-030,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,holy 风铃 bright,Holy Dong Bright,pass,,部分命中,Holy Chime Bright,通过,全部token安全映射
+MIX-030,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,holy 风铃 bright,Holy Chime Bright,pass,,命中建议,Holy Chime Bright,通过,全部token安全映射
 MIX-031,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,demon 低吼 distant,Growl Distant,needs_review,demon,部分命中,Demon Growl Distant,通过,未知项保持完整并留在review
 MIX-032,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,alien 装置 charge,Alien Spy Charge,pass,,部分命中,Alien Device Charge,通过,全部token安全映射
-MIX-033,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,robot servo 电涌,Robot Servo,needs_review,电涌,部分命中,Robot Servo Power Surge,通过,未知项保持完整并留在review
+MIX-033,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,robot servo 电涌,Robot Servo Power Surge,pass,,命中建议,Robot Servo Power Surge,通过,全部token安全映射
 MIX-034,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,magical 布料 flap,Magical Cloth Flap,pass,,命中建议,Magical Cloth Flap,通过,全部token安全映射
 MIX-035,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,enchanted 玻璃 shatter,Enchanted Glass Shatter,pass,,命中建议,Enchanted Glass Shatter,通过,全部token安全映射
 MIX-036,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,rune 石头 impact,Rune Stone Impact,pass,,命中建议,Rune Stone Impact,通过,全部token安全映射
 MIX-037,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,arcane 水 splash,Arcane Water Splash,pass,,命中建议,Arcane Water Splash,通过,全部token安全映射
 MIX-038,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,electric 风暴 ambience,Electric Storm Ambience,pass,,命中建议,Electric Storm Ambience,通过,全部token安全映射
-MIX-039,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,magic 粉尘 sparkle,Magic Sparkle,needs_review,粉尘,部分命中,Magic Dust Sparkle,通过,未知项保持完整并留在review
-MIX-040,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,void 传送门 rumble,Rumble,needs_review,void;传送门,部分命中,Void Portal Rumble,通过,未知项保持完整并留在review
-MIX-041,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,sword 奥术碰撞,Sword,needs_review,奥术碰撞,部分命中,Sword Arcane Collision,通过,未知项保持完整并留在review
-MIX-042,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,shield 电涌反弹,Shield,needs_review,电涌反弹,部分命中,Shield Power Surge Rebound,通过,未知项保持完整并留在review
-MIX-043,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,wand 魔法挥动,Wand,needs_review,魔法挥动,部分命中,Wand Magic Whoosh,通过,未知项保持完整并留在review
-MIX-044,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,crystal 电流碎裂,Crystal,needs_review,电流碎裂,部分命中,Crystal Electric Shatter,通过,未知项保持完整并留在review
+MIX-039,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,magic 粉尘 sparkle,Magic Dust Sparkle,pass,,命中建议,Magic Dust Sparkle,通过,全部token安全映射
+MIX-040,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,void 传送门 rumble,Portal Rumble,needs_review,void,部分命中,Void Portal Rumble,通过,未知项保持完整并留在review
+MIX-041,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,sword 奥术碰撞,Sword Arcane Collision,pass,,命中建议,Sword Arcane Collision,通过,全部token安全映射
+MIX-042,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,shield 电涌反弹,Shield Power Surge Rebound,pass,,命中建议,Shield Power Surge Rebound,通过,全部token安全映射
+MIX-043,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,wand 魔法挥动,Wand Magic Whoosh,pass,,命中建议,Wand Magic Whoosh,通过,全部token安全映射
+MIX-044,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,crystal 电流碎裂,Crystal Electric Shatter,pass,,命中建议,Crystal Electric Shatter,通过,全部token安全映射
 MIX-045,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,spectral 链条 rattle,Spectral Chain Rattle,pass,,命中建议,Spectral Chain Rattle,通过,全部token安全映射
 MIX-046,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,mana 光束 sweep,Beam Sweep,needs_review,mana,部分命中,Mana Beam Sweep,通过,未知项保持完整并留在review
-MIX-047,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,ancient 机关 unlock,Ancient Unlock,needs_review,机关,部分命中,Ancient Mechanism Unlock,通过,未知项保持完整并留在review
+MIX-047,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,ancient 机关 unlock,Ancient Mechanism Unlock,pass,,命中建议,Ancient Mechanism Unlock,通过,全部token安全映射
 MIX-048,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,cosmic 爆炸 deep tail,Cosmic Explosion Deep Tail,pass,,命中建议,Cosmic Explosion Deep Tail,通过,全部token安全映射
-MIX-049,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,magic 界面 confirm,Magic Confirm,needs_review,界面,部分命中,Magic Interface Confirm,通过,未知项保持完整并留在review
+MIX-049,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,magic 界面 confirm,Magic Interface Confirm,pass,,命中建议,Magic Interface Confirm,通过,全部token安全映射
 MIX-050,中英混合非写实,中→英,人工构造：魔法/电涌/奥术等非写实描述,arcane 警报 ring,Arcane Alarm Ring,pass,,命中建议,Arcane Alarm Ring,通过,全部token安全映射

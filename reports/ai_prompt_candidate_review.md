@@ -75,5 +75,5 @@ Deterministic machine review before AI alias prompt execution.
 
 ## Canonical token guard
 
-- canonical_tokens_sha256: `A7981F8BBED28C33038F5C5DEF267952EE78EFEC80CDE5DB7313F17EB1E5FE9E`
+- canonical_tokens_sha256: `8D6E2767DB80544F89B784682199BEECE5DEDE97AC02500A4DA7BB5E6165CE29`
 - canonical path: `E:\WorkSpace\SoundDesign Translater\fxengine\data\canonical_tokens.csv`

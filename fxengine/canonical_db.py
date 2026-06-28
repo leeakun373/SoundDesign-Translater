@@ -63,6 +63,7 @@ ALLOWED_SOURCES = {
     "manual",
     "ai_candidate",
     "ai_reviewed",
+    "ai_reviewed_batch",
     "boom_mined",
     "glossary_seed",
 }

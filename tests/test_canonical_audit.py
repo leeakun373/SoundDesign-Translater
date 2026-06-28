@@ -13,11 +13,11 @@ def test_current_canonical_csv_passes_audit() -> None:
     result = audit_canonical_csv()
 
     assert result.passed is True
-    assert result.total_rows == 358
-    assert result.runtime_keep_rows == 350
+    assert result.total_rows == 526
+    assert result.runtime_keep_rows == 518
     assert result.review_rows == 8
     assert result.reject_rows == 0
-    assert result.valid_rows == 358
+    assert result.valid_rows == 526
     assert result.error_count == 0
     assert result.warning_count == 3
     assert result.issue_counts == {"high_risk_single_keep": 3}

@@ -1,9 +1,9 @@
 {
   "csv_path": "E:\\WorkSpace\\SoundDesign Translater\\tests\\zh_fxname_governance_cases_150.csv",
-  "generated_at": "2026-06-28T06:48:43.848947+00:00",
+  "generated_at": "2026-06-28T10:21:55.621413+00:00",
   "total": 150,
-  "pass": 41,
-  "fail": 109,
+  "pass": 105,
+  "fail": 45,
   "pending": 0,
   "results": [
     {
@@ -86,15 +86,11 @@
       "id": "003",
       "input": "抽屉拉开又关上",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Drawer Pull Open Close",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Drawer Open Close] got [Drawer Pull Open Close]",
-        "must_not_contain violated: Pull in [Drawer Pull Open Close]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Drawer Open Close",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Drawer Open Close",
@@ -103,36 +99,15 @@
         "must_not_contain": "Pull"
       },
       "actual": {
-        "output_fxname": "Drawer Pull Open Close",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Drawer Open Close",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "抽屉",
-            "text": "Drawer",
+            "raw": "抽屉拉开又关上",
+            "text": "Drawer Open Close",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
-            "status": "ok"
-          },
-          {
-            "raw": "拉开",
-            "text": "Pull Open",
-            "decision": "mapped_canonical",
-            "source": "canonical_csv",
-            "status": "ok"
-          },
-          {
-            "raw": "又",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "关上",
-            "text": "Close",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
             "status": "ok"
           }
         ]
@@ -183,13 +158,11 @@
       "id": "005",
       "input": "刮擦铁板",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Scrape Iron Plate",
+      "status": "pass",
+      "output_fxname": "Metal Plate Scrape",
       "derived_review_status": "mapped_phrase",
       "derived_source": "phrase_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Metal Plate Scrape] got [Scrape Iron Plate]"
-      ],
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Metal Plate Scrape",
@@ -198,29 +171,15 @@
         "must_not_contain": ""
       },
       "actual": {
-        "output_fxname": "Scrape Iron Plate",
+        "output_fxname": "Metal Plate Scrape",
         "derived_review_status": "mapped_phrase",
         "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "刮擦",
-            "text": "Scrape",
+            "raw": "刮擦铁板",
+            "text": "Metal Plate Scrape",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
-            "status": "ok"
-          },
-          {
-            "raw": "铁",
-            "text": "Iron",
-            "decision": "mapped_canonical",
-            "source": "canonical_csv",
-            "status": "ok"
-          },
-          {
-            "raw": "板",
-            "text": "Plate",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
             "status": "ok"
           }
         ]
@@ -230,13 +189,11 @@
       "id": "006",
       "input": "摩擦皮革",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Friction Leather",
+      "status": "pass",
+      "output_fxname": "Leather Friction",
       "derived_review_status": "mapped_phrase",
       "derived_source": "phrase_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Leather Friction] got [Friction Leather]"
-      ],
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Leather Friction",
@@ -245,20 +202,13 @@
         "must_not_contain": "Rub"
       },
       "actual": {
-        "output_fxname": "Friction Leather",
+        "output_fxname": "Leather Friction",
         "derived_review_status": "mapped_phrase",
         "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "摩擦",
-            "text": "Friction",
-            "decision": "mapped_canonical",
-            "source": "canonical_csv",
-            "status": "ok"
-          },
-          {
-            "raw": "皮革",
-            "text": "Leather",
+            "raw": "摩擦皮革",
+            "text": "Leather Friction",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
@@ -270,13 +220,11 @@
       "id": "007",
       "input": "冰块刮擦冰砖",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Ice Block Scrape Ice Brick",
+      "status": "pass",
+      "output_fxname": "Ice Scrape Ice Brick",
       "derived_review_status": "mapped_phrase",
       "derived_source": "phrase_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Ice Scrape Ice Brick] got [Ice Block Scrape Ice Brick]"
-      ],
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Ice Scrape Ice Brick",
@@ -285,36 +233,15 @@
         "must_not_contain": ""
       },
       "actual": {
-        "output_fxname": "Ice Block Scrape Ice Brick",
+        "output_fxname": "Ice Scrape Ice Brick",
         "derived_review_status": "mapped_phrase",
         "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "冰",
-            "text": "Ice",
+            "raw": "冰块刮擦冰砖",
+            "text": "Ice Scrape Ice Brick",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
-            "status": "ok"
-          },
-          {
-            "raw": "块",
-            "text": "Block",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
-            "status": "ok"
-          },
-          {
-            "raw": "刮擦",
-            "text": "Scrape",
-            "decision": "mapped_canonical",
-            "source": "canonical_csv",
-            "status": "ok"
-          },
-          {
-            "raw": "冰砖",
-            "text": "Ice Brick",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
             "status": "ok"
           }
         ]
@@ -448,13 +375,11 @@
       "id": "011",
       "input": "轮胎摩擦",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Tire Rub",
+      "status": "pass",
+      "output_fxname": "Tire Friction",
       "derived_review_status": "mapped_phrase",
       "derived_source": "phrase_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Tire Friction] got [Tire Rub]"
-      ],
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Tire Friction",
@@ -463,15 +388,15 @@
         "must_not_contain": "Screech|Squeal"
       },
       "actual": {
-        "output_fxname": "Tire Rub",
+        "output_fxname": "Tire Friction",
         "derived_review_status": "mapped_phrase",
         "derived_source": "phrase_rule",
         "token_summary": [
           {
             "raw": "轮胎摩擦",
-            "text": "Tire Rub",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
+            "text": "Tire Friction",
+            "decision": "mapped_canonical",
+            "source": "canonical_csv",
             "status": "ok"
           }
         ]
@@ -514,13 +439,11 @@
       "id": "013",
       "input": "敲木门",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Knock Wood Door",
+      "status": "pass",
+      "output_fxname": "Wood Door Knock",
       "derived_review_status": "mapped_phrase",
       "derived_source": "phrase_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Wood Door Knock] got [Knock Wood Door]"
-      ],
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Wood Door Knock",
@@ -529,20 +452,13 @@
         "must_not_contain": "Tap"
       },
       "actual": {
-        "output_fxname": "Knock Wood Door",
+        "output_fxname": "Wood Door Knock",
         "derived_review_status": "mapped_phrase",
         "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "敲",
-            "text": "Knock",
-            "decision": "mapped_canonical",
-            "source": "canonical_csv",
-            "status": "ok"
-          },
-          {
-            "raw": "木门",
-            "text": "Wood Door",
+            "raw": "敲木门",
+            "text": "Wood Door Knock",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
@@ -554,14 +470,11 @@
       "id": "014",
       "input": "晃链条",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Chain",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Chain Rattle] got [Chain]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Chain Rattle",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Chain Rattle",
@@ -570,20 +483,13 @@
         "must_not_contain": "Shake"
       },
       "actual": {
-        "output_fxname": "Chain",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Chain Rattle",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "晃",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "链条",
-            "text": "Chain",
+            "raw": "晃链条",
+            "text": "Chain Rattle",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
@@ -636,14 +542,11 @@
       "id": "016",
       "input": "来回蹭地毯",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Rub",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Carpet Rub] got [Rub]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Carpet Rub",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Carpet Rub",
@@ -652,37 +555,16 @@
         "must_not_contain": "Friction"
       },
       "actual": {
-        "output_fxname": "Rub",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Carpet Rub",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "来",
-            "text": "",
-            "decision": "ignored_pollution",
-            "source": "pollution_filter",
-            "status": "ignored"
-          },
-          {
-            "raw": "回",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "蹭",
-            "text": "Rub",
+            "raw": "来回蹭地毯",
+            "text": "Carpet Rub",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
-          },
-          {
-            "raw": "地毯",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
           }
         ]
       }
@@ -911,17 +793,12 @@
       "id": "022",
       "input": "转旋钮",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Knob Turn] got []",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
-      "pending": [
-        "source pending: engine taxonomy differs (expected phrase_rule, derived ambiguity_rule)"
-      ],
+      "status": "pass",
+      "output_fxname": "Knob Turn",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
+      "pending": [],
       "expected": {
         "expected_fxname": "Knob Turn",
         "expected_review_status": "mapped_phrase",
@@ -929,16 +806,16 @@
         "must_not_contain": "Click"
       },
       "actual": {
-        "output_fxname": "",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Knob Turn",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
             "raw": "转旋钮",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
+            "text": "Knob Turn",
+            "decision": "mapped_canonical",
+            "source": "canonical_csv",
+            "status": "ok"
           }
         ]
       }
@@ -988,17 +865,12 @@
       "id": "024",
       "input": "关保险柜",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Safe Close] got []",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
-      "pending": [
-        "source pending: engine taxonomy differs (expected phrase_rule, derived ambiguity_rule)"
-      ],
+      "status": "pass",
+      "output_fxname": "Safe Close",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
+      "pending": [],
       "expected": {
         "expected_fxname": "Safe Close",
         "expected_review_status": "mapped_phrase",
@@ -1006,16 +878,16 @@
         "must_not_contain": ""
       },
       "actual": {
-        "output_fxname": "",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Safe Close",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
             "raw": "关保险柜",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
+            "text": "Safe Close",
+            "decision": "mapped_canonical",
+            "source": "canonical_csv",
+            "status": "ok"
           }
         ]
       }
@@ -1551,14 +1423,11 @@
       "id": "042",
       "input": "轻碰桌边",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Bump",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Table Bump] got [Bump]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Table Bump",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Table Bump",
@@ -1567,23 +1436,16 @@
         "must_not_contain": "Impact"
       },
       "actual": {
-        "output_fxname": "Bump",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Table Bump",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "轻碰",
-            "text": "Bump",
+            "raw": "轻碰桌边",
+            "text": "Table Bump",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
-          },
-          {
-            "raw": "桌边",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
           }
         ]
       }
@@ -1685,13 +1547,11 @@
       "id": "046",
       "input": "铃响",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Ring",
+      "status": "pass",
+      "output_fxname": "Bell Ring",
       "derived_review_status": "mapped_phrase",
       "derived_source": "phrase_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Bell Ring] got [Ring]"
-      ],
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Bell Ring",
@@ -1700,13 +1560,13 @@
         "must_not_contain": ""
       },
       "actual": {
-        "output_fxname": "Ring",
+        "output_fxname": "Bell Ring",
         "derived_review_status": "mapped_phrase",
         "derived_source": "phrase_rule",
         "token_summary": [
           {
             "raw": "铃响",
-            "text": "Ring",
+            "text": "Bell Ring",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
@@ -1763,14 +1623,11 @@
       "id": "048",
       "input": "来回摩擦毛毯",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Rub",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Carpet Rub] got [Rub]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Carpet Rub",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Carpet Rub",
@@ -1779,23 +1636,16 @@
         "must_not_contain": "Friction"
       },
       "actual": {
-        "output_fxname": "Rub",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Carpet Rub",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "来回摩擦",
-            "text": "Rub",
+            "raw": "来回摩擦毛毯",
+            "text": "Carpet Rub",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
-          },
-          {
-            "raw": "毛毯",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
           }
         ]
       }
@@ -1854,11 +1704,11 @@
       "input": "敲黑板",
       "test_kind": "both",
       "status": "fail",
-      "output_fxname": "Knock Plate",
+      "output_fxname": "Knock",
       "derived_review_status": "review_required",
       "derived_source": "ambiguity_rule",
       "reasons": [
-        "fxname mismatch: expected one of [Chalkboard Knock] got [Knock Plate]",
+        "fxname mismatch: expected one of [Chalkboard Knock] got [Knock]",
         "review_status mismatch: expected [mapped_phrase] derived [review_required]"
       ],
       "pending": [],
@@ -1869,7 +1719,7 @@
         "must_not_contain": "Tap"
       },
       "actual": {
-        "output_fxname": "Knock Plate",
+        "output_fxname": "Knock",
         "derived_review_status": "review_required",
         "derived_source": "ambiguity_rule",
         "token_summary": [
@@ -1881,18 +1731,11 @@
             "status": "ok"
           },
           {
-            "raw": "黑",
+            "raw": "黑板",
             "text": "",
             "decision": "unknown",
             "source": "unknown_review",
             "status": "unknown"
-          },
-          {
-            "raw": "板",
-            "text": "Plate",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
-            "status": "ok"
           }
         ]
       }
@@ -1901,14 +1744,11 @@
       "id": "051",
       "input": "打火机",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Fire",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Lighter Click] got [Fire]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Lighter Click",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Lighter Click",
@@ -1917,30 +1757,16 @@
         "must_not_contain": "Hit"
       },
       "actual": {
-        "output_fxname": "Fire",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Lighter Click",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "打",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "火",
-            "text": "Fire",
+            "raw": "打火机",
+            "text": "Lighter Click",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
-          },
-          {
-            "raw": "机",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
           }
         ]
       }
@@ -1949,14 +1775,11 @@
       "id": "052",
       "input": "打雷",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Thunder",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Thunder Rumble] got [Thunder]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Thunder Rumble",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Thunder Rumble",
@@ -1965,22 +1788,15 @@
         "must_not_contain": "Hit"
       },
       "actual": {
-        "output_fxname": "Thunder",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Thunder Rumble",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "打",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "雷",
-            "text": "Thunder",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
+            "raw": "打雷",
+            "text": "Thunder Rumble",
+            "decision": "mapped_canonical",
+            "source": "canonical_csv",
             "status": "ok"
           }
         ]
@@ -1990,13 +1806,11 @@
       "id": "053",
       "input": "打字",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Typing",
+      "status": "pass",
+      "output_fxname": "Keyboard Typing",
       "derived_review_status": "mapped_phrase",
       "derived_source": "phrase_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Keyboard Typing] got [Typing]"
-      ],
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Keyboard Typing",
@@ -2005,15 +1819,15 @@
         "must_not_contain": "Hit"
       },
       "actual": {
-        "output_fxname": "Typing",
+        "output_fxname": "Keyboard Typing",
         "derived_review_status": "mapped_phrase",
         "derived_source": "phrase_rule",
         "token_summary": [
           {
             "raw": "打字",
-            "text": "Typing",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
+            "text": "Keyboard Typing",
+            "decision": "mapped_canonical",
+            "source": "canonical_csv",
             "status": "ok"
           }
         ]
@@ -2023,14 +1837,11 @@
       "id": "054",
       "input": "打水漂",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Water",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Stone Skip Water] got [Water]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Stone Skip Water",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Stone Skip Water",
@@ -2039,30 +1850,16 @@
         "must_not_contain": "Hit"
       },
       "actual": {
-        "output_fxname": "Water",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Stone Skip Water",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "打",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "水",
-            "text": "Water",
+            "raw": "打水漂",
+            "text": "Stone Skip Water",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
-          },
-          {
-            "raw": "漂",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
           }
         ]
       }
@@ -2071,17 +1868,12 @@
       "id": "055",
       "input": "打蛋",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Egg Whisk] got []",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
-      "pending": [
-        "source pending: engine taxonomy differs (expected phrase_rule, derived ambiguity_rule)"
-      ],
+      "status": "pass",
+      "output_fxname": "Egg Whisk",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
+      "pending": [],
       "expected": {
         "expected_fxname": "Egg Whisk",
         "expected_review_status": "mapped_phrase",
@@ -2089,23 +1881,16 @@
         "must_not_contain": "Hit"
       },
       "actual": {
-        "output_fxname": "",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Egg Whisk",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "打",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "蛋",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
+            "raw": "打蛋",
+            "text": "Egg Whisk",
+            "decision": "mapped_canonical",
+            "source": "canonical_csv",
+            "status": "ok"
           }
         ]
       }
@@ -2221,13 +2006,11 @@
       "id": "059",
       "input": "打磨金属",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Sand Metal",
+      "status": "pass",
+      "output_fxname": "Metal Grind",
       "derived_review_status": "mapped_phrase",
       "derived_source": "phrase_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Metal Grind] got [Sand Metal]"
-      ],
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Metal Grind",
@@ -2236,20 +2019,13 @@
         "must_not_contain": "Hit"
       },
       "actual": {
-        "output_fxname": "Sand Metal",
+        "output_fxname": "Metal Grind",
         "derived_review_status": "mapped_phrase",
         "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "打磨",
-            "text": "Sand",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
-            "status": "ok"
-          },
-          {
-            "raw": "金属",
-            "text": "Metal",
+            "raw": "打磨金属",
+            "text": "Metal Grind",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
@@ -2261,13 +2037,11 @@
       "id": "060",
       "input": "打滑轮胎",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Skid Tire",
+      "status": "pass",
+      "output_fxname": "Tire Skid",
       "derived_review_status": "mapped_phrase",
       "derived_source": "phrase_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Tire Skid] got [Skid Tire]"
-      ],
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Tire Skid",
@@ -2276,20 +2050,13 @@
         "must_not_contain": "Slide"
       },
       "actual": {
-        "output_fxname": "Skid Tire",
+        "output_fxname": "Tire Skid",
         "derived_review_status": "mapped_phrase",
         "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "打滑",
-            "text": "Skid",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
-            "status": "ok"
-          },
-          {
-            "raw": "轮胎",
-            "text": "Tire",
+            "raw": "打滑轮胎",
+            "text": "Tire Skid",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
@@ -2301,17 +2068,12 @@
       "id": "061",
       "input": "碰到麦架",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Mic Stand Bump] got []",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
-      "pending": [
-        "source pending: engine taxonomy differs (expected phrase_rule, derived ambiguity_rule)"
-      ],
+      "status": "pass",
+      "output_fxname": "Mic Stand Bump",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
+      "pending": [],
       "expected": {
         "expected_fxname": "Mic Stand Bump",
         "expected_review_status": "mapped_phrase",
@@ -2319,30 +2081,16 @@
         "must_not_contain": "Clink"
       },
       "actual": {
-        "output_fxname": "",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Mic Stand Bump",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "碰",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "到",
-            "text": "",
-            "decision": "ignored_pollution",
-            "source": "pollution_filter",
-            "status": "ignored"
-          },
-          {
-            "raw": "麦架",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
+            "raw": "碰到麦架",
+            "text": "Mic Stand Bump",
+            "decision": "mapped_canonical",
+            "source": "canonical_csv",
+            "status": "ok"
           }
         ]
       }
@@ -2351,14 +2099,11 @@
       "id": "062",
       "input": "碰倒玻璃杯",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Glass",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Glass Cup Knock Over] got [Glass]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Glass Cup Knock Over",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Glass Cup Knock Over",
@@ -2367,37 +2112,16 @@
         "must_not_contain": "Clink"
       },
       "actual": {
-        "output_fxname": "Glass",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Glass Cup Knock Over",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "碰",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "倒",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "玻璃",
-            "text": "Glass",
+            "raw": "碰倒玻璃杯",
+            "text": "Glass Cup Knock Over",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
-          },
-          {
-            "raw": "杯",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
           }
         ]
       }
@@ -2406,14 +2130,11 @@
       "id": "063",
       "input": "石头互碰",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Stone",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Rock Clack] got [Stone]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Rock Clack",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Rock Clack",
@@ -2422,30 +2143,16 @@
         "must_not_contain": "Glass"
       },
       "actual": {
-        "output_fxname": "Stone",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Rock Clack",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "石头",
-            "text": "Stone",
+            "raw": "石头互碰",
+            "text": "Rock Clack",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
-          },
-          {
-            "raw": "互",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "碰",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
           }
         ]
       }
@@ -2454,14 +2161,11 @@
       "id": "064",
       "input": "塑料盒互碰",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Plastic Box",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Plastic Box Clack] got [Plastic Box]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Plastic Box Clack",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Plastic Box Clack",
@@ -2470,30 +2174,16 @@
         "must_not_contain": "Glass"
       },
       "actual": {
-        "output_fxname": "Plastic Box",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Plastic Box Clack",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "塑料盒",
-            "text": "Plastic Box",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
+            "raw": "塑料盒互碰",
+            "text": "Plastic Box Clack",
+            "decision": "mapped_canonical",
+            "source": "canonical_csv",
             "status": "ok"
-          },
-          {
-            "raw": "互",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "碰",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
           }
         ]
       }
@@ -2502,14 +2192,11 @@
       "id": "065",
       "input": "金属杆相碰",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Metal Bar",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Metal Rod Clank] got [Metal Bar]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Metal Rod Clank",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Metal Rod Clank",
@@ -2518,37 +2205,16 @@
         "must_not_contain": "Glass"
       },
       "actual": {
-        "output_fxname": "Metal Bar",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Metal Rod Clank",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "金属",
-            "text": "Metal",
+            "raw": "金属杆相碰",
+            "text": "Metal Rod Clank",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
-          },
-          {
-            "raw": "杆",
-            "text": "Bar",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
-            "status": "ok"
-          },
-          {
-            "raw": "相",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "碰",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
           }
         ]
       }
@@ -2557,13 +2223,11 @@
       "id": "066",
       "input": "轻碰麦克风",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Bump Microphone",
+      "status": "pass",
+      "output_fxname": "Mic Bump",
       "derived_review_status": "mapped_phrase",
       "derived_source": "phrase_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Mic Bump] got [Bump Microphone]"
-      ],
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Mic Bump",
@@ -2572,22 +2236,15 @@
         "must_not_contain": "Impact"
       },
       "actual": {
-        "output_fxname": "Bump Microphone",
+        "output_fxname": "Mic Bump",
         "derived_review_status": "mapped_phrase",
         "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "轻碰",
-            "text": "Bump",
+            "raw": "轻碰麦克风",
+            "text": "Mic Bump",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
-            "status": "ok"
-          },
-          {
-            "raw": "麦克风",
-            "text": "Microphone",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
             "status": "ok"
           }
         ]
@@ -2639,17 +2296,12 @@
       "id": "068",
       "input": "身体碰墙",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Body Bump Wall] got []",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
-      "pending": [
-        "source pending: engine taxonomy differs (expected phrase_rule, derived ambiguity_rule)"
-      ],
+      "status": "pass",
+      "output_fxname": "Body Bump Wall",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
+      "pending": [],
       "expected": {
         "expected_fxname": "Body Bump Wall",
         "expected_review_status": "mapped_phrase",
@@ -2657,30 +2309,16 @@
         "must_not_contain": "Clink"
       },
       "actual": {
-        "output_fxname": "",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Body Bump Wall",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "身体",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "碰",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "墙",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
+            "raw": "身体碰墙",
+            "text": "Body Bump Wall",
+            "decision": "mapped_canonical",
+            "source": "canonical_csv",
+            "status": "ok"
           }
         ]
       }
@@ -2823,14 +2461,11 @@
       "id": "072",
       "input": "链条响",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Chain",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Chain Rattle] got [Chain]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Chain Rattle",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Chain Rattle",
@@ -2839,23 +2474,16 @@
         "must_not_contain": "Ring"
       },
       "actual": {
-        "output_fxname": "Chain",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Chain Rattle",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "链条",
-            "text": "Chain",
+            "raw": "链条响",
+            "text": "Chain Rattle",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
-          },
-          {
-            "raw": "响",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
           }
         ]
       }
@@ -2864,14 +2492,11 @@
       "id": "073",
       "input": "风扇响",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Fan",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Fan Whir] got [Fan]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Fan Whir",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Fan Whir",
@@ -2880,23 +2505,16 @@
         "must_not_contain": "Ring"
       },
       "actual": {
-        "output_fxname": "Fan",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Fan Whir",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "风扇",
-            "text": "Fan",
+            "raw": "风扇响",
+            "text": "Fan Whir",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
-          },
-          {
-            "raw": "响",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
           }
         ]
       }
@@ -2951,7 +2569,7 @@
       "input": "木板响",
       "test_kind": "governance",
       "status": "pass",
-      "output_fxname": "Wood Plate",
+      "output_fxname": "Wood",
       "derived_review_status": "review_required",
       "derived_source": "ambiguity_rule",
       "reasons": [],
@@ -2963,7 +2581,7 @@
         "must_not_contain": "Ring"
       },
       "actual": {
-        "output_fxname": "Wood Plate",
+        "output_fxname": "Wood",
         "derived_review_status": "review_required",
         "derived_source": "ambiguity_rule",
         "token_summary": [
@@ -2976,10 +2594,10 @@
           },
           {
             "raw": "板",
-            "text": "Plate",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
-            "status": "ok"
+            "text": "",
+            "decision": "unknown",
+            "source": "unknown_review",
+            "status": "unknown"
           },
           {
             "raw": "响",
@@ -2995,17 +2613,12 @@
       "id": "076",
       "input": "肚子响",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Stomach Growl] got []",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
-      "pending": [
-        "source pending: engine taxonomy differs (expected phrase_rule, derived ambiguity_rule)"
-      ],
+      "status": "pass",
+      "output_fxname": "Stomach Growl",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
+      "pending": [],
       "expected": {
         "expected_fxname": "Stomach Growl",
         "expected_review_status": "mapped_phrase",
@@ -3013,23 +2626,16 @@
         "must_not_contain": "Ring"
       },
       "actual": {
-        "output_fxname": "",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Stomach Growl",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "肚子",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "响",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
+            "raw": "肚子响",
+            "text": "Stomach Growl",
+            "decision": "mapped_canonical",
+            "source": "canonical_csv",
+            "status": "ok"
           }
         ]
       }
@@ -3076,14 +2682,11 @@
       "id": "078",
       "input": "警报响",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Alarm",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Alarm Ring] got [Alarm]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Alarm Ring",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Alarm Ring",
@@ -3092,23 +2695,16 @@
         "must_not_contain": "Rattle"
       },
       "actual": {
-        "output_fxname": "Alarm",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Alarm Ring",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "警报",
-            "text": "Alarm",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
+            "raw": "警报响",
+            "text": "Alarm Ring",
+            "decision": "mapped_canonical",
+            "source": "canonical_csv",
             "status": "ok"
-          },
-          {
-            "raw": "响",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
           }
         ]
       }
@@ -3117,14 +2713,11 @@
       "id": "079",
       "input": "金属片响",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Metal Plate",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Metal Sheet Rattle] got [Metal Plate]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Metal Sheet Rattle",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Metal Sheet Rattle",
@@ -3133,30 +2726,16 @@
         "must_not_contain": "Ring"
       },
       "actual": {
-        "output_fxname": "Metal Plate",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Metal Sheet Rattle",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "金属",
-            "text": "Metal",
+            "raw": "金属片响",
+            "text": "Metal Sheet Rattle",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
-          },
-          {
-            "raw": "片",
-            "text": "Plate",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
-            "status": "ok"
-          },
-          {
-            "raw": "响",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
           }
         ]
       }
@@ -3165,14 +2744,11 @@
       "id": "080",
       "input": "硬币响",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Coins",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Coin Jingle] got [Coins]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Coin Jingle",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Coin Jingle",
@@ -3181,23 +2757,16 @@
         "must_not_contain": "Ring"
       },
       "actual": {
-        "output_fxname": "Coins",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Coin Jingle",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "硬币",
-            "text": "Coins",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
+            "raw": "硬币响",
+            "text": "Coin Jingle",
+            "decision": "mapped_canonical",
+            "source": "canonical_csv",
             "status": "ok"
-          },
-          {
-            "raw": "响",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
           }
         ]
       }
@@ -3206,17 +2775,12 @@
       "id": "081",
       "input": "甩毛巾",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Towel Flap] got []",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
-      "pending": [
-        "source pending: engine taxonomy differs (expected phrase_rule, derived ambiguity_rule)"
-      ],
+      "status": "pass",
+      "output_fxname": "Towel Flap",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
+      "pending": [],
       "expected": {
         "expected_fxname": "Towel Flap",
         "expected_review_status": "mapped_phrase",
@@ -3224,23 +2788,16 @@
         "must_not_contain": "Whip"
       },
       "actual": {
-        "output_fxname": "",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Towel Flap",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "甩",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "毛巾",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
+            "raw": "甩毛巾",
+            "text": "Towel Flap",
+            "decision": "mapped_canonical",
+            "source": "canonical_csv",
+            "status": "ok"
           }
         ]
       }
@@ -3249,14 +2806,11 @@
       "id": "082",
       "input": "甩水",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Water",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Water Flick] got [Water]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Water Flick",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Water Flick",
@@ -3265,20 +2819,13 @@
         "must_not_contain": "Swing"
       },
       "actual": {
-        "output_fxname": "Water",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Water Flick",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "甩",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "水",
-            "text": "Water",
+            "raw": "甩水",
+            "text": "Water Flick",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
@@ -3290,17 +2837,12 @@
       "id": "083",
       "input": "甩尾巴",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Tail Swing] got []",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
-      "pending": [
-        "source pending: engine taxonomy differs (expected phrase_rule, derived ambiguity_rule)"
-      ],
+      "status": "pass",
+      "output_fxname": "Tail Swing",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
+      "pending": [],
       "expected": {
         "expected_fxname": "Tail Swing",
         "expected_review_status": "mapped_phrase",
@@ -3308,23 +2850,16 @@
         "must_not_contain": "Cloth"
       },
       "actual": {
-        "output_fxname": "",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Tail Swing",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "甩",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "尾巴",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
+            "raw": "甩尾巴",
+            "text": "Tail Swing",
+            "decision": "mapped_canonical",
+            "source": "canonical_csv",
+            "status": "ok"
           }
         ]
       }
@@ -3333,14 +2868,11 @@
       "id": "084",
       "input": "甩刀",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Knife",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Knife Whoosh] got [Knife]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Knife Whoosh",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Knife Whoosh",
@@ -3349,22 +2881,15 @@
         "must_not_contain": "Flap"
       },
       "actual": {
-        "output_fxname": "Knife",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Knife Whoosh",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "甩",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "刀",
-            "text": "Knife",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
+            "raw": "甩刀",
+            "text": "Knife Whoosh",
+            "decision": "mapped_canonical",
+            "source": "canonical_csv",
             "status": "ok"
           }
         ]
@@ -3374,17 +2899,12 @@
       "id": "085",
       "input": "甩棍",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Stick Whoosh] got []",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
-      "pending": [
-        "source pending: engine taxonomy differs (expected phrase_rule, derived ambiguity_rule)"
-      ],
+      "status": "pass",
+      "output_fxname": "Stick Whoosh",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
+      "pending": [],
       "expected": {
         "expected_fxname": "Stick Whoosh",
         "expected_review_status": "mapped_phrase",
@@ -3392,23 +2912,16 @@
         "must_not_contain": "Flap"
       },
       "actual": {
-        "output_fxname": "",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Stick Whoosh",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "甩",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "棍",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
+            "raw": "甩棍",
+            "text": "Stick Whoosh",
+            "decision": "mapped_canonical",
+            "source": "canonical_csv",
+            "status": "ok"
           }
         ]
       }
@@ -3417,14 +2930,11 @@
       "id": "086",
       "input": "甩手",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Hands",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Hand Whoosh] got [Hands]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Hand Whoosh",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Hand Whoosh",
@@ -3433,22 +2943,15 @@
         "must_not_contain": "Whip"
       },
       "actual": {
-        "output_fxname": "Hands",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Hand Whoosh",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "甩",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "手",
-            "text": "Hands",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
+            "raw": "甩手",
+            "text": "Hand Whoosh",
+            "decision": "mapped_canonical",
+            "source": "canonical_csv",
             "status": "ok"
           }
         ]
@@ -3458,14 +2961,11 @@
       "id": "087",
       "input": "甩门",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Door",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Door Slam] got [Door]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Door Slam",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Door Slam",
@@ -3474,20 +2974,13 @@
         "must_not_contain": "Swing"
       },
       "actual": {
-        "output_fxname": "Door",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Door Slam",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "甩",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "门",
-            "text": "Door",
+            "raw": "甩门",
+            "text": "Door Slam",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
@@ -3544,14 +3037,11 @@
       "id": "089",
       "input": "甩绳子",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Rope",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Rope Swing] got [Rope]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Rope Swing",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Rope Swing",
@@ -3560,20 +3050,13 @@
         "must_not_contain": "Cloth"
       },
       "actual": {
-        "output_fxname": "Rope",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Rope Swing",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "甩",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "绳子",
-            "text": "Rope",
+            "raw": "甩绳子",
+            "text": "Rope Swing",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
@@ -3586,12 +3069,11 @@
       "input": "甩鞭尾音",
       "test_kind": "both",
       "status": "fail",
-      "output_fxname": "Whip Crack",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
+      "output_fxname": "Whip Crack Tail",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
       "reasons": [
-        "fxname mismatch: expected one of [Whip Tail] got [Whip Crack]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
+        "fxname mismatch: expected one of [Whip Tail] got [Whip Crack Tail]"
       ],
       "pending": [],
       "expected": {
@@ -3601,9 +3083,9 @@
         "must_not_contain": "Cloth"
       },
       "actual": {
-        "output_fxname": "Whip Crack",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Whip Crack Tail",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
             "raw": "甩鞭",
@@ -3614,10 +3096,10 @@
           },
           {
             "raw": "尾音",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
+            "text": "Tail",
+            "decision": "mapped_canonical",
+            "source": "canonical_csv",
+            "status": "ok"
           }
         ]
       }
@@ -3675,14 +3157,11 @@
       "id": "092",
       "input": "划船",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Scratch Boat",
+      "status": "pass",
+      "output_fxname": "Boat Row",
       "derived_review_status": "mapped_phrase",
       "derived_source": "phrase_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Boat Row] got [Scratch Boat]",
-        "must_not_contain violated: Scratch in [Scratch Boat]"
-      ],
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Boat Row",
@@ -3691,22 +3170,15 @@
         "must_not_contain": "Scratch"
       },
       "actual": {
-        "output_fxname": "Scratch Boat",
+        "output_fxname": "Boat Row",
         "derived_review_status": "mapped_phrase",
         "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "划",
-            "text": "Scratch",
+            "raw": "划船",
+            "text": "Boat Row",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
-            "status": "ok"
-          },
-          {
-            "raw": "船",
-            "text": "Boat",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
             "status": "ok"
           }
         ]
@@ -3716,13 +3188,11 @@
       "id": "093",
       "input": "划玻璃",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Scratch Glass",
+      "status": "pass",
+      "output_fxname": "Glass Scratch",
       "derived_review_status": "mapped_phrase",
       "derived_source": "phrase_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Glass Scratch] got [Scratch Glass]"
-      ],
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Glass Scratch",
@@ -3731,20 +3201,13 @@
         "must_not_contain": "Scrape"
       },
       "actual": {
-        "output_fxname": "Scratch Glass",
+        "output_fxname": "Glass Scratch",
         "derived_review_status": "mapped_phrase",
         "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "划",
-            "text": "Scratch",
-            "decision": "mapped_canonical",
-            "source": "canonical_csv",
-            "status": "ok"
-          },
-          {
-            "raw": "玻璃",
-            "text": "Glass",
+            "raw": "划玻璃",
+            "text": "Glass Scratch",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
@@ -4016,11 +3479,14 @@
       "id": "100",
       "input": "刀划木头",
       "test_kind": "both",
-      "status": "pass",
-      "output_fxname": "Knife Scratch Wood",
-      "derived_review_status": "mapped_phrase",
-      "derived_source": "phrase_rule",
-      "reasons": [],
+      "status": "fail",
+      "output_fxname": "Scratch Wood",
+      "derived_review_status": "review_required",
+      "derived_source": "ambiguity_rule",
+      "reasons": [
+        "fxname mismatch: expected one of [Knife Scratch Wood] got [Scratch Wood]",
+        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
+      ],
       "pending": [],
       "expected": {
         "expected_fxname": "Knife Scratch Wood",
@@ -4029,16 +3495,16 @@
         "must_not_contain": "Scrape"
       },
       "actual": {
-        "output_fxname": "Knife Scratch Wood",
-        "derived_review_status": "mapped_phrase",
-        "derived_source": "phrase_rule",
+        "output_fxname": "Scratch Wood",
+        "derived_review_status": "review_required",
+        "derived_source": "ambiguity_rule",
         "token_summary": [
           {
             "raw": "刀",
-            "text": "Knife",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
-            "status": "ok"
+            "text": "",
+            "decision": "unknown",
+            "source": "unknown_review",
+            "status": "unknown"
           },
           {
             "raw": "划",
@@ -4061,14 +3527,11 @@
       "id": "101",
       "input": "刮风",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Scrape Wind",
+      "status": "pass",
+      "output_fxname": "Wind Gust",
       "derived_review_status": "mapped_phrase",
       "derived_source": "phrase_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Wind Gust] got [Scrape Wind]",
-        "must_not_contain violated: Scrape in [Scrape Wind]"
-      ],
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Wind Gust",
@@ -4077,22 +3540,15 @@
         "must_not_contain": "Scrape"
       },
       "actual": {
-        "output_fxname": "Scrape Wind",
+        "output_fxname": "Wind Gust",
         "derived_review_status": "mapped_phrase",
         "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "刮",
-            "text": "Scrape",
+            "raw": "刮风",
+            "text": "Wind Gust",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
-            "status": "ok"
-          },
-          {
-            "raw": "风",
-            "text": "Wind",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
             "status": "ok"
           }
         ]
@@ -4399,13 +3855,11 @@
       "id": "109",
       "input": "蹭衣服",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Rub Textile",
+      "status": "pass",
+      "output_fxname": "Cloth Rub",
       "derived_review_status": "mapped_phrase",
       "derived_source": "phrase_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Cloth Rub] got [Rub Textile]"
-      ],
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Cloth Rub",
@@ -4414,22 +3868,15 @@
         "must_not_contain": "Scuff"
       },
       "actual": {
-        "output_fxname": "Rub Textile",
+        "output_fxname": "Cloth Rub",
         "derived_review_status": "mapped_phrase",
         "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "蹭",
-            "text": "Rub",
+            "raw": "蹭衣服",
+            "text": "Cloth Rub",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
-            "status": "ok"
-          },
-          {
-            "raw": "衣服",
-            "text": "Textile",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
             "status": "ok"
           }
         ]
@@ -4439,14 +3886,11 @@
       "id": "110",
       "input": "蹭地板",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Rub Floor",
+      "status": "pass",
+      "output_fxname": "Floor Scuff",
       "derived_review_status": "mapped_phrase",
       "derived_source": "phrase_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Floor Scuff] got [Rub Floor]",
-        "must_not_contain violated: Rub in [Rub Floor]"
-      ],
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Floor Scuff",
@@ -4455,20 +3899,13 @@
         "must_not_contain": "Rub"
       },
       "actual": {
-        "output_fxname": "Rub Floor",
+        "output_fxname": "Floor Scuff",
         "derived_review_status": "mapped_phrase",
         "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "蹭",
-            "text": "Rub",
-            "decision": "mapped_canonical",
-            "source": "canonical_csv",
-            "status": "ok"
-          },
-          {
-            "raw": "地板",
-            "text": "Floor",
+            "raw": "蹭地板",
+            "text": "Floor Scuff",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
@@ -4521,13 +3958,11 @@
       "id": "112",
       "input": "车轮打滑",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Wheel Skid",
+      "status": "pass",
+      "output_fxname": "Tire Skid",
       "derived_review_status": "mapped_phrase",
       "derived_source": "phrase_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Tire Skid] got [Wheel Skid]"
-      ],
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Tire Skid",
@@ -4536,22 +3971,15 @@
         "must_not_contain": "Slide"
       },
       "actual": {
-        "output_fxname": "Wheel Skid",
+        "output_fxname": "Tire Skid",
         "derived_review_status": "mapped_phrase",
         "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "车轮",
-            "text": "Wheel",
+            "raw": "车轮打滑",
+            "text": "Tire Skid",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
-            "status": "ok"
-          },
-          {
-            "raw": "打滑",
-            "text": "Skid",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
             "status": "ok"
           }
         ]
@@ -4641,11 +4069,11 @@
       "input": "金属片滑落",
       "test_kind": "both",
       "status": "fail",
-      "output_fxname": "Metal Plate",
+      "output_fxname": "Metal",
       "derived_review_status": "review_required",
       "derived_source": "ambiguity_rule",
       "reasons": [
-        "fxname mismatch: expected one of [Metal Sheet Slide Down] got [Metal Plate]",
+        "fxname mismatch: expected one of [Metal Sheet Slide Down] got [Metal]",
         "review_status mismatch: expected [mapped_phrase] derived [review_required]"
       ],
       "pending": [],
@@ -4656,7 +4084,7 @@
         "must_not_contain": "Slip"
       },
       "actual": {
-        "output_fxname": "Metal Plate",
+        "output_fxname": "Metal",
         "derived_review_status": "review_required",
         "derived_source": "ambiguity_rule",
         "token_summary": [
@@ -4668,14 +4096,7 @@
             "status": "ok"
           },
           {
-            "raw": "片",
-            "text": "Plate",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
-            "status": "ok"
-          },
-          {
-            "raw": "滑落",
+            "raw": "片滑落",
             "text": "",
             "decision": "unknown",
             "source": "unknown_review",
@@ -4689,11 +4110,11 @@
       "input": "冰块滑过地面",
       "test_kind": "both",
       "status": "fail",
-      "output_fxname": "Ice Block",
+      "output_fxname": "Ice Slide Ground",
       "derived_review_status": "review_required",
       "derived_source": "ambiguity_rule",
       "reasons": [
-        "fxname mismatch: expected one of [Ice Slide Across Floor] got [Ice Block]",
+        "fxname mismatch: expected one of [Ice Slide Across Floor] got [Ice Slide Ground]",
         "review_status mismatch: expected [mapped_phrase] derived [review_required]"
       ],
       "pending": [],
@@ -4704,7 +4125,7 @@
         "must_not_contain": "Slip"
       },
       "actual": {
-        "output_fxname": "Ice Block",
+        "output_fxname": "Ice Slide Ground",
         "derived_review_status": "review_required",
         "derived_source": "ambiguity_rule",
         "token_summary": [
@@ -4717,17 +4138,24 @@
           },
           {
             "raw": "块",
-            "text": "Block",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
-            "status": "ok"
-          },
-          {
-            "raw": "滑过地面",
             "text": "",
             "decision": "unknown",
             "source": "unknown_review",
             "status": "unknown"
+          },
+          {
+            "raw": "滑过",
+            "text": "Slide",
+            "decision": "mapped_canonical",
+            "source": "canonical_csv",
+            "status": "ok"
+          },
+          {
+            "raw": "地面",
+            "text": "Ground",
+            "decision": "mapped_canonical",
+            "source": "canonical_csv",
+            "status": "ok"
           }
         ]
       }
@@ -4777,13 +4205,11 @@
       "id": "118",
       "input": "滑板滑行",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Skateboard Skid",
+      "status": "pass",
+      "output_fxname": "Skateboard Roll",
       "derived_review_status": "mapped_phrase",
       "derived_source": "phrase_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Skateboard Roll] got [Skateboard Skid]"
-      ],
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Skateboard Roll",
@@ -4792,22 +4218,15 @@
         "must_not_contain": "Slip"
       },
       "actual": {
-        "output_fxname": "Skateboard Skid",
+        "output_fxname": "Skateboard Roll",
         "derived_review_status": "mapped_phrase",
         "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "滑板",
-            "text": "Skateboard",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
-            "status": "ok"
-          },
-          {
-            "raw": "滑行",
-            "text": "Skid",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
+            "raw": "滑板滑行",
+            "text": "Skateboard Roll",
+            "decision": "mapped_canonical",
+            "source": "canonical_csv",
             "status": "ok"
           }
         ]
@@ -4818,12 +4237,12 @@
       "input": "雪地滑行",
       "test_kind": "both",
       "status": "fail",
-      "output_fxname": "Snow Skid",
+      "output_fxname": "Skid",
       "derived_review_status": "review_required",
       "derived_source": "ambiguity_rule",
       "reasons": [
-        "fxname mismatch: expected one of [Snow Glide] got [Snow Skid]",
-        "must_not_contain violated: Skid in [Snow Skid]",
+        "fxname mismatch: expected one of [Snow Glide] got [Skid]",
+        "must_not_contain violated: Skid in [Skid]",
         "review_status mismatch: expected [mapped_phrase] derived [review_required]"
       ],
       "pending": [],
@@ -4834,19 +4253,12 @@
         "must_not_contain": "Skid"
       },
       "actual": {
-        "output_fxname": "Snow Skid",
+        "output_fxname": "Skid",
         "derived_review_status": "review_required",
         "derived_source": "ambiguity_rule",
         "token_summary": [
           {
-            "raw": "雪",
-            "text": "Snow",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
-            "status": "ok"
-          },
-          {
-            "raw": "地",
+            "raw": "雪地",
             "text": "",
             "decision": "unknown",
             "source": "unknown_review",
@@ -4866,14 +4278,11 @@
       "id": "120",
       "input": "布料滑过皮肤",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Cloth Skin",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Cloth Slide Skin] got [Cloth Skin]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Cloth Slide Skin",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Cloth Slide Skin",
@@ -4882,9 +4291,9 @@
         "must_not_contain": "Scratch"
       },
       "actual": {
-        "output_fxname": "Cloth Skin",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Cloth Slide Skin",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
             "raw": "布料",
@@ -4895,10 +4304,10 @@
           },
           {
             "raw": "滑过",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
+            "text": "Slide",
+            "decision": "mapped_canonical",
+            "source": "canonical_csv",
+            "status": "ok"
           },
           {
             "raw": "皮肤",
@@ -4942,7 +4351,21 @@
             "status": "ok"
           },
           {
-            "raw": "杯摔碎",
+            "raw": "杯",
+            "text": "",
+            "decision": "unknown",
+            "source": "unknown_review",
+            "status": "unknown"
+          },
+          {
+            "raw": "摔",
+            "text": "",
+            "decision": "unknown",
+            "source": "unknown_review",
+            "status": "unknown"
+          },
+          {
+            "raw": "碎",
             "text": "",
             "decision": "unknown",
             "source": "unknown_review",
@@ -4983,7 +4406,14 @@
             "status": "ok"
           },
           {
-            "raw": "摔地",
+            "raw": "摔",
+            "text": "",
+            "decision": "unknown",
+            "source": "unknown_review",
+            "status": "unknown"
+          },
+          {
+            "raw": "地",
             "text": "",
             "decision": "unknown",
             "source": "unknown_review",
@@ -4997,14 +4427,16 @@
       "input": "人摔倒",
       "test_kind": "both",
       "status": "fail",
-      "output_fxname": "Human",
+      "output_fxname": "",
       "derived_review_status": "review_required",
       "derived_source": "ambiguity_rule",
       "reasons": [
-        "fxname mismatch: expected one of [Body Fall] got [Human]",
+        "fxname mismatch: expected one of [Body Fall] got []",
         "review_status mismatch: expected [mapped_phrase] derived [review_required]"
       ],
-      "pending": [],
+      "pending": [
+        "source pending: engine taxonomy differs (expected phrase_rule, derived ambiguity_rule)"
+      ],
       "expected": {
         "expected_fxname": "Body Fall",
         "expected_review_status": "mapped_phrase",
@@ -5012,19 +4444,26 @@
         "must_not_contain": "Drop"
       },
       "actual": {
-        "output_fxname": "Human",
+        "output_fxname": "",
         "derived_review_status": "review_required",
         "derived_source": "ambiguity_rule",
         "token_summary": [
           {
             "raw": "人",
-            "text": "Human",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
-            "status": "ok"
+            "text": "",
+            "decision": "unknown",
+            "source": "unknown_review",
+            "status": "unknown"
           },
           {
-            "raw": "摔倒",
+            "raw": "摔",
+            "text": "",
+            "decision": "unknown",
+            "source": "unknown_review",
+            "status": "unknown"
+          },
+          {
+            "raw": "倒",
             "text": "",
             "decision": "unknown",
             "source": "unknown_review",
@@ -5078,17 +4517,12 @@
       "id": "125",
       "input": "摔书",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Book Drop] got []",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
-      "pending": [
-        "source pending: engine taxonomy differs (expected phrase_rule, derived ambiguity_rule)"
-      ],
+      "status": "pass",
+      "output_fxname": "Book Drop",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
+      "pending": [],
       "expected": {
         "expected_fxname": "Book Drop",
         "expected_review_status": "mapped_phrase",
@@ -5096,16 +4530,16 @@
         "must_not_contain": "Slam"
       },
       "actual": {
-        "output_fxname": "",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Book Drop",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
             "raw": "摔书",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
+            "text": "Book Drop",
+            "decision": "mapped_canonical",
+            "source": "canonical_csv",
+            "status": "ok"
           }
         ]
       }
@@ -5162,13 +4596,11 @@
       "id": "127",
       "input": "锤子砸铁板",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Hammer Impact Iron Plate",
+      "status": "pass",
+      "output_fxname": "Hammer Hit Metal Plate",
       "derived_review_status": "mapped_phrase",
       "derived_source": "phrase_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Hammer Hit Metal Plate] got [Hammer Impact Iron Plate]"
-      ],
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Hammer Hit Metal Plate",
@@ -5177,36 +4609,15 @@
         "must_not_contain": "Drop"
       },
       "actual": {
-        "output_fxname": "Hammer Impact Iron Plate",
+        "output_fxname": "Hammer Hit Metal Plate",
         "derived_review_status": "mapped_phrase",
         "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "锤子",
-            "text": "Hammer",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
-            "status": "ok"
-          },
-          {
-            "raw": "砸",
-            "text": "Impact",
+            "raw": "锤子砸铁板",
+            "text": "Hammer Hit Metal Plate",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
-            "status": "ok"
-          },
-          {
-            "raw": "铁",
-            "text": "Iron",
-            "decision": "mapped_canonical",
-            "source": "canonical_csv",
-            "status": "ok"
-          },
-          {
-            "raw": "板",
-            "text": "Plate",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
             "status": "ok"
           }
         ]
@@ -5319,17 +4730,12 @@
       "id": "130",
       "input": "苹果掉地上",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Apple Drop Floor] got []",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
-      "pending": [
-        "source pending: engine taxonomy differs (expected phrase_rule, derived ambiguity_rule)"
-      ],
+      "status": "pass",
+      "output_fxname": "Apple Drop Floor",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
+      "pending": [],
       "expected": {
         "expected_fxname": "Apple Drop Floor",
         "expected_review_status": "mapped_phrase",
@@ -5337,16 +4743,16 @@
         "must_not_contain": "Slam"
       },
       "actual": {
-        "output_fxname": "",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Apple Drop Floor",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
             "raw": "苹果掉地上",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
+            "text": "Apple Drop Floor",
+            "decision": "mapped_canonical",
+            "source": "canonical_csv",
+            "status": "ok"
           }
         ]
       }
@@ -5551,13 +4957,11 @@
       "id": "136",
       "input": "骨头断裂",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Bone Apart",
+      "status": "pass",
+      "output_fxname": "Bone Crack",
       "derived_review_status": "mapped_phrase",
       "derived_source": "phrase_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Bone Crack] got [Bone Apart]"
-      ],
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Bone Crack",
@@ -5566,22 +4970,15 @@
         "must_not_contain": "Tear"
       },
       "actual": {
-        "output_fxname": "Bone Apart",
+        "output_fxname": "Bone Crack",
         "derived_review_status": "mapped_phrase",
         "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "骨头",
-            "text": "Bone",
+            "raw": "骨头断裂",
+            "text": "Bone Crack",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
-            "status": "ok"
-          },
-          {
-            "raw": "断裂",
-            "text": "Apart",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
             "status": "ok"
           }
         ]
@@ -5591,17 +4988,12 @@
       "id": "137",
       "input": "墙皮脱落",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Plaster Crumble] got []",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
-      "pending": [
-        "source pending: engine taxonomy differs (expected phrase_rule, derived ambiguity_rule)"
-      ],
+      "status": "pass",
+      "output_fxname": "Plaster Crumble",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
+      "pending": [],
       "expected": {
         "expected_fxname": "Plaster Crumble",
         "expected_review_status": "mapped_phrase",
@@ -5609,16 +5001,16 @@
         "must_not_contain": "Break"
       },
       "actual": {
-        "output_fxname": "",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Plaster Crumble",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
             "raw": "墙皮脱落",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
+            "text": "Plaster Crumble",
+            "decision": "mapped_canonical",
+            "source": "canonical_csv",
+            "status": "ok"
           }
         ]
       }
@@ -5627,14 +5019,11 @@
       "id": "138",
       "input": "石头碎裂",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Stone Shatter",
+      "status": "pass",
+      "output_fxname": "Rock Crack",
       "derived_review_status": "mapped_phrase",
       "derived_source": "phrase_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Rock Crack] got [Stone Shatter]",
-        "must_not_contain violated: Shatter in [Stone Shatter]"
-      ],
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Rock Crack",
@@ -5643,20 +5032,13 @@
         "must_not_contain": "Shatter"
       },
       "actual": {
-        "output_fxname": "Stone Shatter",
+        "output_fxname": "Rock Crack",
         "derived_review_status": "mapped_phrase",
         "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "石头",
-            "text": "Stone",
-            "decision": "mapped_canonical",
-            "source": "canonical_csv",
-            "status": "ok"
-          },
-          {
-            "raw": "碎裂",
-            "text": "Shatter",
+            "raw": "石头碎裂",
+            "text": "Rock Crack",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
@@ -5668,13 +5050,11 @@
       "id": "139",
       "input": "陶瓷破碎",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Ceramic Break",
+      "status": "pass",
+      "output_fxname": "Ceramic Shatter",
       "derived_review_status": "mapped_phrase",
       "derived_source": "phrase_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Ceramic Shatter] got [Ceramic Break]"
-      ],
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Ceramic Shatter",
@@ -5683,20 +5063,13 @@
         "must_not_contain": "Tear"
       },
       "actual": {
-        "output_fxname": "Ceramic Break",
+        "output_fxname": "Ceramic Shatter",
         "derived_review_status": "mapped_phrase",
         "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "陶瓷",
-            "text": "Ceramic",
-            "decision": "mapped_canonical",
-            "source": "canonical_csv",
-            "status": "ok"
-          },
-          {
-            "raw": "破碎",
-            "text": "Break",
+            "raw": "陶瓷破碎",
+            "text": "Ceramic Shatter",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
@@ -5708,13 +5081,11 @@
       "id": "140",
       "input": "金属断裂",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Metal Apart",
+      "status": "pass",
+      "output_fxname": "Metal Snap",
       "derived_review_status": "mapped_phrase",
       "derived_source": "phrase_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Metal Snap] got [Metal Apart]"
-      ],
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Metal Snap",
@@ -5723,22 +5094,15 @@
         "must_not_contain": "Tear"
       },
       "actual": {
-        "output_fxname": "Metal Apart",
+        "output_fxname": "Metal Snap",
         "derived_review_status": "mapped_phrase",
         "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "金属",
-            "text": "Metal",
+            "raw": "金属断裂",
+            "text": "Metal Snap",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
-            "status": "ok"
-          },
-          {
-            "raw": "断裂",
-            "text": "Apart",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
             "status": "ok"
           }
         ]
@@ -5748,14 +5112,11 @@
       "id": "141",
       "input": "抽屉拉开又关上",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Drawer Pull Open Close",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Drawer Open Close] got [Drawer Pull Open Close]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Drawer Open Close",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Drawer Open Close",
@@ -5764,36 +5125,15 @@
         "must_not_contain": "OnlyOpen"
       },
       "actual": {
-        "output_fxname": "Drawer Pull Open Close",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Drawer Open Close",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "抽屉",
-            "text": "Drawer",
+            "raw": "抽屉拉开又关上",
+            "text": "Drawer Open Close",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
-            "status": "ok"
-          },
-          {
-            "raw": "拉开",
-            "text": "Pull Open",
-            "decision": "mapped_canonical",
-            "source": "canonical_csv",
-            "status": "ok"
-          },
-          {
-            "raw": "又",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "关上",
-            "text": "Close",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
             "status": "ok"
           }
         ]
@@ -5803,14 +5143,11 @@
       "id": "142",
       "input": "门打开后撞到墙",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Door Open Impact",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Door Open Impact Wall] got [Door Open Impact]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Door Open Impact Wall",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Door Open Impact Wall",
@@ -5819,51 +5156,16 @@
         "must_not_contain": "OnlyOpen"
       },
       "actual": {
-        "output_fxname": "Door Open Impact",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Door Open Impact Wall",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "门",
-            "text": "Door",
+            "raw": "门打开后撞到墙",
+            "text": "Door Open Impact Wall",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
-          },
-          {
-            "raw": "打开",
-            "text": "Open",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
-            "status": "ok"
-          },
-          {
-            "raw": "后",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "撞",
-            "text": "Impact",
-            "decision": "mapped_canonical",
-            "source": "canonical_csv",
-            "status": "ok"
-          },
-          {
-            "raw": "到",
-            "text": "",
-            "decision": "ignored_pollution",
-            "source": "pollution_filter",
-            "status": "ignored"
-          },
-          {
-            "raw": "墙",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
           }
         ]
       }
@@ -5872,14 +5174,11 @@
       "id": "143",
       "input": "拿起杯子放下",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Cup",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Cup Pick Up Put Down] got [Cup]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Cup Pick Up Put Down",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Cup Pick Up Put Down",
@@ -5888,37 +5187,16 @@
         "must_not_contain": "OnlyPick"
       },
       "actual": {
-        "output_fxname": "Cup",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Cup Pick Up Put Down",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "拿起",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "杯子",
-            "text": "Cup",
+            "raw": "拿起杯子放下",
+            "text": "Cup Pick Up Put Down",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
-          },
-          {
-            "raw": "放",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "下",
-            "text": "",
-            "decision": "ignored_pollution",
-            "source": "pollution_filter",
-            "status": "ignored"
           }
         ]
       }
@@ -5927,14 +5205,11 @@
       "id": "144",
       "input": "金属盒打开合上",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Metal Box Open",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Metal Box Open Close] got [Metal Box Open]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Metal Box Open Close",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Metal Box Open Close",
@@ -5943,37 +5218,16 @@
         "must_not_contain": "OnlyOpen"
       },
       "actual": {
-        "output_fxname": "Metal Box Open",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Metal Box Open Close",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "金属",
-            "text": "Metal",
+            "raw": "金属盒打开合上",
+            "text": "Metal Box Open Close",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
-          },
-          {
-            "raw": "盒",
-            "text": "Box",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
-            "status": "ok"
-          },
-          {
-            "raw": "打开",
-            "text": "Open",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
-            "status": "ok"
-          },
-          {
-            "raw": "合上",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
           }
         ]
       }
@@ -5982,14 +5236,11 @@
       "id": "145",
       "input": "拉链拉开再拉上",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Zipper Pull Open Pull",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Zipper Open Close] got [Zipper Pull Open Pull]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Zipper Open Close",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Zipper Open Close",
@@ -5998,44 +5249,16 @@
         "must_not_contain": "OnlyOpen"
       },
       "actual": {
-        "output_fxname": "Zipper Pull Open Pull",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Zipper Open Close",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "拉链",
-            "text": "Zipper",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
-            "status": "ok"
-          },
-          {
-            "raw": "拉开",
-            "text": "Pull Open",
+            "raw": "拉链拉开再拉上",
+            "text": "Zipper Open Close",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
-          },
-          {
-            "raw": "再",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "拉",
-            "text": "Pull",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
-            "status": "ok"
-          },
-          {
-            "raw": "上",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
           }
         ]
       }
@@ -6046,11 +5269,10 @@
       "test_kind": "both",
       "status": "fail",
       "output_fxname": "Lock Open Close",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "composite_phrase",
       "reasons": [
-        "fxname mismatch: expected one of [Latch Open Close] got [Lock Open Close]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
+        "fxname mismatch: expected one of [Latch Open Close] got [Lock Open Close]"
       ],
       "pending": [],
       "expected": {
@@ -6061,22 +5283,15 @@
       },
       "actual": {
         "output_fxname": "Lock Open Close",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "composite_phrase",
         "token_summary": [
           {
-            "raw": "锁",
+            "raw": "锁扣",
             "text": "Lock",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
-          },
-          {
-            "raw": "扣",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
           },
           {
             "raw": "打开",
@@ -6099,14 +5314,11 @@
       "id": "147",
       "input": "纸张揉皱展开",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Paper Crumple",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Paper Crumple Unfold] got [Paper Crumple]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Paper Crumple Unfold",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Paper Crumple Unfold",
@@ -6115,30 +5327,16 @@
         "must_not_contain": "OnlyCrumple"
       },
       "actual": {
-        "output_fxname": "Paper Crumple",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Paper Crumple Unfold",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "纸张",
-            "text": "Paper",
+            "raw": "纸张揉皱展开",
+            "text": "Paper Crumple Unfold",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
-          },
-          {
-            "raw": "揉皱",
-            "text": "Crumple",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
-            "status": "ok"
-          },
-          {
-            "raw": "展开",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
           }
         ]
       }
@@ -6147,13 +5345,11 @@
       "id": "148",
       "input": "布料甩动落地",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Cloth Swipe Land",
+      "status": "pass",
+      "output_fxname": "Cloth Flap Drop",
       "derived_review_status": "mapped_phrase",
-      "derived_source": "composite_phrase",
-      "reasons": [
-        "fxname mismatch: expected one of [Cloth Flap Drop] got [Cloth Swipe Land]"
-      ],
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Cloth Flap Drop",
@@ -6162,27 +5358,13 @@
         "must_not_contain": "OnlyFlap"
       },
       "actual": {
-        "output_fxname": "Cloth Swipe Land",
+        "output_fxname": "Cloth Flap Drop",
         "derived_review_status": "mapped_phrase",
-        "derived_source": "composite_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "布料",
-            "text": "Cloth",
-            "decision": "mapped_canonical",
-            "source": "canonical_csv",
-            "status": "ok"
-          },
-          {
-            "raw": "甩动",
-            "text": "Swipe",
-            "decision": "mapped_canonical",
-            "source": "canonical_csv",
-            "status": "ok"
-          },
-          {
-            "raw": "落地",
-            "text": "Land",
+            "raw": "布料甩动落地",
+            "text": "Cloth Flap Drop",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
@@ -6249,14 +5431,11 @@
       "id": "150",
       "input": "水倒入杯中溅出",
       "test_kind": "both",
-      "status": "fail",
-      "output_fxname": "Water Into Cup",
-      "derived_review_status": "review_required",
-      "derived_source": "ambiguity_rule",
-      "reasons": [
-        "fxname mismatch: expected one of [Water Pour Splash] got [Water Into Cup]",
-        "review_status mismatch: expected [mapped_phrase] derived [review_required]"
-      ],
+      "status": "pass",
+      "output_fxname": "Water Pour Splash",
+      "derived_review_status": "mapped_phrase",
+      "derived_source": "phrase_rule",
+      "reasons": [],
       "pending": [],
       "expected": {
         "expected_fxname": "Water Pour Splash",
@@ -6265,37 +5444,16 @@
         "must_not_contain": "OnlyPour"
       },
       "actual": {
-        "output_fxname": "Water Into Cup",
-        "derived_review_status": "review_required",
-        "derived_source": "ambiguity_rule",
+        "output_fxname": "Water Pour Splash",
+        "derived_review_status": "mapped_phrase",
+        "derived_source": "phrase_rule",
         "token_summary": [
           {
-            "raw": "水",
-            "text": "Water",
+            "raw": "水倒入杯中溅出",
+            "text": "Water Pour Splash",
             "decision": "mapped_canonical",
             "source": "canonical_csv",
             "status": "ok"
-          },
-          {
-            "raw": "倒",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
-          },
-          {
-            "raw": "入杯",
-            "text": "Into Cup",
-            "decision": "mapped_glossary",
-            "source": "glossary_fallback",
-            "status": "ok"
-          },
-          {
-            "raw": "中溅出",
-            "text": "",
-            "decision": "unknown",
-            "source": "unknown_review",
-            "status": "unknown"
           }
         ]
       }
