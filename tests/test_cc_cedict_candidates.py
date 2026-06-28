@@ -9,6 +9,7 @@ These tests use a tiny in-memory fixture index. They MUST NOT depend on the real
 
 from __future__ import annotations
 
+import gzip
 import hashlib
 
 import pytest
@@ -107,6 +108,32 @@ def test_candidates_supported_by_target_filters(index: CEDictIndex) -> None:
     canon = [c.canonical for c in supported]
     assert "Wardrobe" in canon
     assert "Closet" not in canon  # not present in the target string
+
+
+def test_lookup_blocked_tokens_return_empty(index: CEDictIndex) -> None:
+    assert index.lookup("杯") == []
+    assert index.lookup("打") == []
+
+
+def test_from_file_reads_gz(tmp_path) -> None:
+    gz_path = tmp_path / "cedict_fixture.u8.gz"
+    with gzip.open(gz_path, "wt", encoding="utf-8") as handle:
+        handle.write("\n".join(FIXTURE_LINES) + "\n")
+
+    gz_index = CEDictIndex.from_file(gz_path)
+    result = gz_index.propose_for_target("衣柜", TARGET)
+    assert result["status"] == "promote_candidate"
+    assert "Wardrobe" in _canonicals(result)
+
+
+def test_from_file_reads_u8(tmp_path) -> None:
+    u8_path = tmp_path / "cedict_fixture.u8"
+    u8_path.write_text("\n".join(FIXTURE_LINES) + "\n", encoding="utf-8")
+
+    u8_index = CEDictIndex.from_file(u8_path)
+    result = u8_index.propose_for_target("衣柜", TARGET)
+    assert result["status"] == "promote_candidate"
+    assert "Wardrobe" in _canonicals(result)
 
 
 def test_layer_does_not_modify_canonical_csv(index: CEDictIndex) -> None:

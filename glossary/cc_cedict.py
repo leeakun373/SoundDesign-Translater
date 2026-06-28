@@ -18,8 +18,9 @@ Hard constraints (see ``docs/cc_cedict/cc_cedict_candidate_layer_v0_1.md``):
 
 from __future__ import annotations
 
+import gzip
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List, Optional
 
@@ -199,7 +200,11 @@ class CEDictIndex:
 
         source = Path(path) if path is not None else DEFAULT_CEDICT_PATH
         entries: Dict[str, List[str]] = {}
-        with source.open("r", encoding="utf-8") as handle:
+        if source.suffix == ".gz":
+            opener = gzip.open(source, "rt", encoding="utf-8")
+        else:
+            opener = source.open("r", encoding="utf-8")
+        with opener as handle:
             for line in handle:
                 line = line.rstrip("\n")
                 if not line or line.startswith("#"):
@@ -237,10 +242,16 @@ class CEDictIndex:
         return list(self._entries.get(token.strip(), []))
 
     def lookup(self, token: str) -> List[CEDictCandidate]:
-        """Return all weak candidates for *token* (unfiltered by any target)."""
+        """Return all weak candidates for *token* (unfiltered by any target).
+
+        Blocked tokens (single character or :data:`FORBIDDEN_BROAD_TOKENS`)
+        always return ``[]`` so callers can never accidentally surface a
+        blocked candidate.
+        """
 
         token = token.strip()
-        block_reason = _is_blocked_token(token)
+        if _is_blocked_token(token):
+            return []
         candidates: List[CEDictCandidate] = []
         seen: set[str] = set()
         for gloss in self._entries.get(token, []):
@@ -248,13 +259,12 @@ class CEDictIndex:
                 if word in seen:
                     continue
                 seen.add(word)
-                reason = block_reason or "weak_candidate"
                 candidates.append(
                     CEDictCandidate(
                         raw=token,
                         canonical=word,
                         confidence=_CONFIDENCE_WEAK,
-                        reason=reason,
+                        reason="weak_candidate",
                         gloss=gloss.strip(),
                     )
                 )
