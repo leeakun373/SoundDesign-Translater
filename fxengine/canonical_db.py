@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Mapping
 
 from glossary.fx_slots import infer_slot
-from glossary.matcher import GlossaryMatcher
+from glossary.matcher import GlossaryEntry, GlossaryMatcher
 from glossary.zh_compose import FILLER_CHARS, FILLER_PHRASES, build_compose_index
 
 
@@ -70,6 +70,43 @@ ALLOWED_SOURCES = {
 # Backwards-compatible public name used by existing callers and tests.
 CANONICAL_SLOTS = ALLOWED_SLOTS
 
+USER_TOKEN_PREFIXES = (
+    "请帮我做",
+    "请帮我",
+    "帮我做",
+    "我想要",
+    "听起来像",
+    "听起来",
+    "这是一个",
+    "这是",
+    "非常",
+    "比较",
+    "有点",
+    "很",
+)
+USER_TOKEN_FILLERS = frozenset(
+    {
+        "的",
+        "然后",
+        "一下",
+        "一个",
+        "请帮我做",
+        "请帮我",
+        "帮我做",
+        "我想要",
+        "听起来像",
+        "听起来",
+        "这是一个",
+        "这是",
+        "请帮我翻译",
+        "这个声音是",
+        "非常",
+        "比较",
+        "有点",
+        "很",
+    }
+)
+
 
 @dataclass(frozen=True)
 class CanonicalToken:
@@ -111,6 +148,7 @@ class CanonicalDB:
             key=lambda token: (len(token.raw), token.priority),
             reverse=True,
         )
+        self._zh_exact = {token.raw: token for token in self._zh_tokens}
         self._ascii_tokens = {
             token.raw.casefold(): token
             for token in self._tokens
@@ -126,12 +164,16 @@ class CanonicalDB:
             key=len,
             reverse=True,
         )
+        self._non_runtime_zh_exact = set(self._non_runtime_zh)
         self._non_runtime_ascii = {
             token.raw.casefold()
             for token in non_runtime
             if _uses_ascii_index(token)
         }
         self._zh_index = build_compose_index(self.matcher)
+        self._zh_glossary_exact: dict[str, GlossaryEntry] = {}
+        for raw, entry in self._zh_index:
+            self._zh_glossary_exact.setdefault(raw, entry)
 
     @property
     def token_count(self) -> int:
@@ -191,6 +233,53 @@ class CanonicalDB:
             issues=[],
         )
 
+    def resolve_chinese_user_token(self, raw: str) -> CanonicalMatch:
+        """Resolve one explicit Chinese user token without segmenting its core."""
+        cleaned = cleanup_chinese_user_token(raw)
+        if not cleaned:
+            return CanonicalMatch(
+                raw=raw,
+                canonical=None,
+                slot="ignored",
+                source="filler",
+                status="ignored",
+                issues=[],
+            )
+
+        canonical_token = self._zh_exact.get(cleaned)
+        if canonical_token:
+            return _token_to_match(canonical_token)
+        if cleaned in self._non_runtime_zh_exact:
+            return CanonicalMatch(
+                raw=cleaned,
+                canonical=None,
+                slot="unknown",
+                source="canonical_review",
+                status="unknown",
+                issues=["unknown_zh", "canonical_review_required"],
+            )
+
+        glossary_entry = self._zh_glossary_exact.get(cleaned)
+        if glossary_entry is not None and len(cleaned) > 1:
+            canonical = title_fx_text(glossary_entry.en)
+            return CanonicalMatch(
+                raw=cleaned,
+                canonical=canonical,
+                slot=infer_slot(canonical, glossary_entry.term_type),
+                source="glossary_fallback",
+                status="ok",
+                issues=[],
+            )
+
+        return CanonicalMatch(
+            raw=cleaned,
+            canonical=None,
+            slot="unknown",
+            source="user_token",
+            status="unknown",
+            issues=["unknown_zh"],
+        )
+
     def segment_chinese(self, text: str) -> list[CanonicalMatch]:
         out: list[CanonicalMatch] = []
         unknown: list[str] = []
@@ -226,6 +315,8 @@ class CanonicalDB:
                 ((zh, entry) for zh, entry in self._zh_index if text.startswith(zh, i)),
                 None,
             )
+            if glossary_match and len(glossary_match[0]) == 1:
+                glossary_match = None
             canonical_length = len(canonical_token.raw) if canonical_token else 0
             blocked_length = len(blocked_raw) if blocked_raw else 0
             glossary_length = len(glossary_match[0]) if glossary_match else 0
@@ -290,6 +381,20 @@ class CanonicalDB:
 
         flush_unknown()
         return out
+
+
+def cleanup_chinese_user_token(raw: str) -> str:
+    """Apply boundary-only cleanup without splitting or changing token core."""
+    cleaned = raw.strip()
+    if not cleaned or cleaned in USER_TOKEN_FILLERS:
+        return ""
+    for prefix in USER_TOKEN_PREFIXES:
+        if cleaned.startswith(prefix) and len(cleaned) > len(prefix):
+            cleaned = cleaned[len(prefix) :]
+            break
+    if cleaned.endswith("的") and len(cleaned) > 1:
+        cleaned = cleaned[:-1]
+    return "" if cleaned in USER_TOKEN_FILLERS else cleaned
 
 
 def title_fx_text(text: str) -> str:

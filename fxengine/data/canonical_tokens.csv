@@ -356,3 +356,4 @@
 "滑板滑行","Skateboard Roll","motion","zh","100","phrase","keep","low","skateboard/roll","manual","batch_repair_v0.2 rule-bug repair"
 "锤子砸铁板","Hammer Hit Metal Plate","action","zh","100","phrase","keep","medium","hammer/hit/metal/plate","manual","batch_repair_v0.2 governed contextual phrase"
 "车辆碰撞","Car Crash","action","zh","100","phrase","keep","low","car/crash","manual","batch_repair_v0.2 rule-bug repair"
+"刺耳","Harsh","modifier","zh","100","phrase","keep","low","harsh/abrasive","manual","user-authorized token-boundary parser test"

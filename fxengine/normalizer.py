@@ -9,7 +9,12 @@ from glossary.fx_name import strip_unsafe_fx_phrases, unsafe_fx_word_indices
 from glossary.fx_slots import SlotTerm, assemble_fx_name, infer_slot, split_slot_terms
 from glossary.zh_normalize import normalize_fxname_input
 
-from fxengine.canonical_db import CanonicalDB, CanonicalMatch, title_fx_text
+from fxengine.canonical_db import (
+    CanonicalDB,
+    CanonicalMatch,
+    cleanup_chinese_user_token,
+    title_fx_text,
+)
 from fxengine.models import TOKEN_REVIEW_SCHEMA_VERSION, FXNameResult, FXToken
 from fxengine.personal_dictionary import PersonalDictionary, PersonalEntry
 from fxengine.preferences import FXPreferences
@@ -250,6 +255,17 @@ class FXNameNormalizer:
         return _match_to_token(match)
 
     def _resolve_chinese(self, raw_token: RawToken) -> list[FXToken]:
+        if raw_token.kind == "zh_user":
+            cleaned = cleanup_chinese_user_token(raw_token.raw)
+            personal = self.personal_dictionary.resolve_entry(cleaned) if cleaned else None
+            if personal:
+                return [self._personal_token(cleaned, personal)]
+            return [
+                _match_to_token(
+                    self.canonical_db.resolve_chinese_user_token(raw_token.raw)
+                )
+            ]
+
         personal = self.personal_dictionary.resolve_entry(raw_token.raw)
         if personal:
             return [self._personal_token(raw_token.raw, personal)]
