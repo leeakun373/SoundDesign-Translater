@@ -19,6 +19,8 @@ CANONICAL_PATH = (
 FX_OVERRIDES_PATH = Path(__file__).resolve().parent / "data" / "fx_overrides.csv"
 # 数据驱动「自动」策展层（由 tools/mine_overrides.py 从 BOOM 词频生成；低维护）。
 FX_OVERRIDES_AUTO_PATH = Path(__file__).resolve().parent / "data" / "fx_overrides_auto.csv"
+# 双语挖掘层（由 tools/mine_overrides_bilingual.py 从精翻对照学到；观测真值，高可信）。
+FX_OVERRIDES_BILINGUAL_PATH = Path(__file__).resolve().parent / "data" / "fx_overrides_bilingual.csv"
 
 
 def _read_override_csv(path: Path) -> dict[str, dict[str, str]]:
@@ -41,10 +43,11 @@ def _read_override_csv(path: Path) -> dict[str, dict[str, str]]:
 
 @lru_cache(maxsize=1)
 def _load() -> dict[str, dict[str, str]]:
-    """raw(zh) -> {canonical, slot}。优先级：手工 > canonical(keep) > 自动挖掘。"""
-    table = _read_override_csv(FX_OVERRIDES_AUTO_PATH)  # 最低
-    table.update(_load_canonical())                     # canonical 覆盖自动
-    table.update(_read_override_csv(FX_OVERRIDES_PATH))  # 手工最高
+    """raw(zh) -> {canonical, slot}。优先级：手工 > 双语挖掘 > canonical(keep) > cedict自动。"""
+    table = _read_override_csv(FX_OVERRIDES_AUTO_PATH)       # 最低：cedict×词频（弱）
+    table.update(_load_canonical())                          # canonical(keep) 覆盖自动
+    table.update(_read_override_csv(FX_OVERRIDES_BILINGUAL_PATH))  # 双语观测真值覆盖 canonical
+    table.update(_read_override_csv(FX_OVERRIDES_PATH))       # 手工最高
     return table
 
 

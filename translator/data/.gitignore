@@ -4,7 +4,11 @@ zh_en_alignment.csv
 
 # 回译测试集（长跑生成，规模大，不入库）
 boom_zh_testcases.csv
+# 留出评测集（mine_overrides_bilingual.py 临时生成，不入库）
+jingfan_holdout.csv
 
-# 手工策展层 + 数据驱动自动覆盖层需要入库（开箱即用 F1≈0.71）
+# 手工策展层 + 数据驱动自动覆盖层需要入库（开箱即用）
 !fx_overrides.csv
 !fx_overrides_auto.csv
+# 双语挖掘覆盖（从精翻学到的观测真值，入库；随精翻增多而增长）
+!fx_overrides_bilingual.csv

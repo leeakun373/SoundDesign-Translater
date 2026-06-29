@@ -22,7 +22,48 @@
 | BOOM 吸附 | `translator/boom_snap.py` | 把结果吸附成 BOOM 写法 | 吸附过激/不足 → 调阈值 |
 | 组装 | `glossary/fx_slots.py` | slot 排序/Title Case | 语序问题改这里 |
 
-优先级：手工 > canonical > 自动 > cedict > NLLB。
+优先级：手工 > **双语挖掘** > canonical > cedict自动 > cedict > NLLB。
+
+> ⚠️ `fx_overrides_auto.csv`（cedict×词频）是**弱信号**：它靠「某中文词碰巧有个义项映射到高频英文词」来猜，会产生噪声（如 `七分熟/中白鹭/灵媒 → Medium`）。**真正提准的是「双语挖掘层」**，见 §1.5。
+
+---
+
+## 1.5 精翻双语数据 = 提准主路径（最重要）
+
+`fx_overrides_auto.csv` 是猜的；`fx_overrides_bilingual.csv` 是**观测真值**——从人/强 AI 的中英对照里直接学到的 `中文token → 英文token`。这是目前唯一能稳定、可度量地提高准确率的方式。
+
+**精翻数据格式**（放 `docs/训练数据/*.csv`，让便宜 AL/AI 批量产）：
+
+```
+完整原始名字, 原FXName, 中文翻译
+DSGNWhsh_..._B00M.wav, Abyss Breeze, 深渊微风
+```
+
+- `原FXName` = BOOM 英文金标准（管线要产出的目标）
+- `中文翻译` = 喂给管线的输入（要自然、口语化，模拟用户真会打的中文）
+
+**一条龙工作流：**
+
+```powershell
+# 1) 学词：从所有精翻挖高置信覆盖（全量入库给生产用）
+python tools/mine_overrides_bilingual.py --all
+
+# 2) 诚实评测：80/20 留出，在「没学过」的数据上看泛化 F1
+python tools/mine_overrides_bilingual.py          # 写 jingfan_holdout.csv
+python tools/eval_jingfan.py --holdout translator/data/jingfan_holdout.csv
+#  -> reports/jingfan_eval_*.md（高频缺失词 + 最差样例）
+```
+
+**已验证机制**（Magic Wisp 707 对，同一 147 条留出集）：
+
+| | token-F1 | 完全匹配 |
+|---|---|---|
+| 不含双语层 | 0.414 | 11/147 |
+| 含双语层（仅 38 个映射） | **0.448** | 13/147 |
+
+> 707 对只挖到 38 个映射就 +0.034。**精翻覆盖越多库 → 受控词汇挖得越全 → F1 越高**。这就是「让便宜 AI 长跑」该跑的活：把 BOOM 所有库做成精翻 CSV，而不是回译。
+
+**为什么比回译（gen_zh_testcases.py）好**：回译是 NLLB 自己把英文转中文，噪声大且会「自证」；精翻的中文来自外部强翻译，干净，既能当测试集又能当训练源。
 
 ---
 
