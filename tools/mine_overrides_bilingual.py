@@ -38,10 +38,11 @@ DATA_DIR = ROOT / "docs" / "训练数据"
 OUT_PATH = ROOT / "translator" / "data" / "fx_overrides_bilingual.csv"
 HOLDOUT_PATH = ROOT / "translator" / "data" / "jingfan_holdout.csv"
 
-MIN_SUPPORT = 3      # 该中文 token 至少出现这么多次
-MIN_BEST = 3         # 最佳英文票数下限
-DOMINANCE = 0.50     # 最佳英文票数 / 该中文 token 总票数
-POS_BONUS = 2        # 位置对齐额外加权
+MIN_SUPPORT = 4      # 该中文 token 至少出现这么多行
+MIN_BEST = 4         # 最佳英文「共现行数」下限（要有实证）
+DICE_MIN = 0.06      # 最佳英文的 Dice 关联度下限
+RATIO = 1.25         # 最佳 / 次佳 关联度之比（要明显胜出）
+POS_BONUS = 3        # 位置对齐(等长)给的额外共现票，强信号
 
 _WORD_RE = re.compile(r"[A-Za-z][A-Za-z+\-]*")
 _NUM_RE = re.compile(r"^\d+[a-z]?$", re.I)
@@ -104,8 +105,10 @@ def main() -> None:
         print("未找到精翻数据"); sys.exit(1)
 
     manual = overrides.manual_keys()
-    cooc: dict[str, Counter] = defaultdict(Counter)
-    total: Counter = Counter()
+    cooc: dict[str, Counter] = defaultdict(Counter)   # 行级共现(含位置加权)
+    raw_cooc: dict[str, Counter] = defaultdict(Counter)  # 纯行级共现(算实证用)
+    zfreq: Counter = Counter()   # 中文 token 出现的行数
+    efreq: Counter = Counter()   # 英文 token 出现的行数
     holdout_rows: list[tuple[str, str]] = []
     n_train = 0
 
@@ -117,23 +120,35 @@ def main() -> None:
         zts, ets = zh_tokens(zh), en_tokens(en)
         if not zts or not ets:
             continue
-        for zt in zts:
-            total[zt] += 1
-            for et in ets:
+        zset, eset = set(zts), set(ets)
+        for zt in zset:
+            zfreq[zt] += 1
+            for et in eset:
                 cooc[zt][et] += 1
-        if len(zts) == len(ets):
+                raw_cooc[zt][et] += 1
+        for et in eset:
+            efreq[et] += 1
+        if len(zts) == len(ets):  # 等长：位置对齐是强信号
             for zt, et in zip(zts, ets):
                 cooc[zt][et] += POS_BONUS
 
-    mined: list[tuple[str, str, int]] = []
+    mined: list[tuple[str, str, float]] = []
     for zt, counter in cooc.items():
-        if total[zt] < MIN_SUPPORT or zt in manual:
+        if zfreq[zt] < MIN_SUPPORT or zt in manual:
             continue
-        best_en, best_cnt = counter.most_common(1)[0]
-        votes = sum(counter.values())
-        if best_cnt < MIN_BEST or best_cnt / votes < DOMINANCE:
+        # Dice 关联度：2*共现 /(中文行数+英文行数)，降权到处都出现的常见英文词
+        scored = sorted(
+            ((et, raw_cooc[zt][et], (2.0 * cnt) / (zfreq[zt] + efreq[et]))
+             for et, cnt in counter.items()),
+            key=lambda x: -x[2],
+        )
+        best_en, best_raw, best_s = scored[0]
+        if best_raw < MIN_BEST or best_s < DICE_MIN:
             continue
-        mined.append((zt, _title(best_en), best_cnt))
+        second_s = scored[1][2] if len(scored) > 1 else 0.0
+        if second_s > 0 and best_s / second_s < RATIO:
+            continue
+        mined.append((zt, _title(best_en), round(best_s, 3)))
 
     mined.sort(key=lambda x: -x[2])
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)

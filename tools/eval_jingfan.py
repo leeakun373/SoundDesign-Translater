@@ -68,9 +68,14 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--holdout", default=None)
     ap.add_argument("--limit", type=int, default=None)
+    ap.add_argument("--sample", type=int, default=None, help="随机抽样N条(固定种子,A/B可比)")
     args = ap.parse_args()
 
     pairs = load_pairs(args.holdout)
+    if args.sample and len(pairs) > args.sample:
+        import random
+        random.Random(42).shuffle(pairs)
+        pairs = pairs[: args.sample]
     if args.limit:
         pairs = pairs[: args.limit]
     if not pairs:

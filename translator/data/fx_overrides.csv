@@ -90,3 +90,5 @@ raw,canonical,slot,note
 机动,Maneuver,action,
 排气,Exhaust,object,
 装置,Device,object,
+远处,Distant,modifier,挖词学成Distance纠正为形容词
+远,Distant,modifier,
