@@ -1,10 +1,36 @@
 # SoundDesign Translater
 
-本地离线音效翻译：NLLB + UCS/音效术语库。英→中（库文件名/描述）、中→英（中文写 FX 关键词）。
+本地离线音效翻译：中文 → BOOM 风格英文音效名，以及中英互译/整句翻译。全程离线。
 
 ---
 
-## 核心路径
+## ⭐ 当前方向（Current Direction）— 先看这里
+
+**现在的主翻译引擎是 `translator/`（混合引擎）**：jieba 分词 + 词典/CC-CEDICT + 本地 NLLB 兜底 + BOOM 全库风格吸附。
+旧的纯词表确定性流水线（`fxengine` normalize）与老 GUI **保留不删，仅作 legacy/参考**。
+
+| 想了解什么 | 看这个 |
+|------------|--------|
+| **大白话：用了哪些文件、怎么翻的** | [docs/翻译系统_大白话说明.md](docs/翻译系统_大白话说明.md) |
+| 技术架构（分层、吸附逻辑） | [docs/TRANSLATOR_ARCHITECTURE.md](docs/TRANSLATOR_ARCHITECTURE.md) |
+| 方法论（怎么测/调/维护/换模型） | [docs/TRANSLATOR_METHODOLOGY.md](docs/TRANSLATOR_METHODOLOGY.md) |
+| 给其他 AI 的导航 | [AGENTS.md](AGENTS.md) 顶部 |
+
+四种能力（统一入口 `translator/api.py`）：中文→FXName 关键词英文、英→中、中→英整句、英文长句→中。
+
+常用命令：
+
+```powershell
+python tools/quick_fxname_smoke.py "喷火器" "金属门重重关上"   # 看单条翻译+每词决策
+python tools/eval_translator.py                              # 1000 对黄金集打分(F1≈0.71)
+python tools/mine_overrides.py                               # 重建数据驱动的自动译法表
+```
+
+当前 GUI（`python app.py`）的「FXName / 音效命名」任务已接入新引擎。
+
+---
+
+## （Legacy / 保留）老术语库系统核心路径
 
 | 用途 | 路径 |
 |------|------|
