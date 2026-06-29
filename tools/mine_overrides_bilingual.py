@@ -84,7 +84,12 @@ def main() -> None:
     frac = 0.0 if args.all else args.holdout_frac
 
     pairs: list[tuple[str, str]] = []
-    for f in glob.glob(str(DATA_DIR / "*.csv")):
+    seen: dict[str, str] = {}
+    for f in glob.glob(str(DATA_DIR / "**" / "*.csv"), recursive=True):
+        base = Path(f).name
+        if base not in seen or "精确翻译" in f:
+            seen[base] = f
+    for f in seen.values():
         with open(f, encoding="utf-8-sig", newline="") as h:
             reader = csv.DictReader(h)
             if "原FXName" not in (reader.fieldnames or []):

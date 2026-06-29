@@ -36,12 +36,19 @@ def tokenize(text: str) -> list[str]:
     return [t for t in _TOK_RE.findall((text or "").lower()) if not _NUM_RE.match(t)]
 
 
+def jingfan_csvs() -> list[Path]:
+    """递归扫描精翻 CSV，按文件名去重（同名优先 精确翻译/ 下的）。"""
+    seen: dict[str, str] = {}
+    for f in glob.glob(str(DATA_DIR / "**" / "*.csv"), recursive=True):
+        base = Path(f).name
+        if base not in seen or "精确翻译" in f:
+            seen[base] = f
+    return [Path(f) for f in seen.values()]
+
+
 def load_pairs(holdout: str | None) -> list[tuple[str, str]]:
     pairs: list[tuple[str, str]] = []
-    if holdout:
-        files = [Path(holdout)]
-    else:
-        files = [Path(f) for f in glob.glob(str(DATA_DIR / "*.csv"))]
+    files = [Path(holdout)] if holdout else jingfan_csvs()
     for path in files:
         if not path.exists():
             continue
