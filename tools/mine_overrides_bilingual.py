@@ -38,10 +38,11 @@ DATA_DIR = ROOT / "docs" / "训练数据"
 OUT_PATH = ROOT / "translator" / "data" / "fx_overrides_bilingual.csv"
 HOLDOUT_PATH = ROOT / "translator" / "data" / "jingfan_holdout.csv"
 
-MIN_SUPPORT = 4      # 该中文 token 至少出现这么多行
-MIN_BEST = 4         # 最佳英文「共现行数」下限（要有实证）
-DICE_MIN = 0.06      # 最佳英文的 Dice 关联度下限
-RATIO = 1.25         # 最佳 / 次佳 关联度之比（要明显胜出）
+# 阈值经留出集 F1 扫描标定（放宽到此处 F1 最优且仍保留弱 dominance 防乱配）
+MIN_SUPPORT = 3      # 该中文 token 至少出现这么多行
+MIN_BEST = 3         # 最佳英文「共现行数」下限（要有实证）
+DICE_MIN = 0.04      # 最佳英文的 Dice 关联度下限
+RATIO = 1.10         # 最佳 / 次佳 关联度之比（要明显胜出）
 POS_BONUS = 3        # 位置对齐(等长)给的额外共现票，强信号
 
 _WORD_RE = re.compile(r"[A-Za-z][A-Za-z+\-]*")
@@ -81,8 +82,15 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--all", action="store_true", help="不留出，全部用于挖词")
     ap.add_argument("--holdout-frac", type=float, default=0.2)
+    ap.add_argument("--min-support", type=int, default=MIN_SUPPORT)
+    ap.add_argument("--min-best", type=int, default=MIN_BEST)
+    ap.add_argument("--dice-min", type=float, default=DICE_MIN)
+    ap.add_argument("--ratio", type=float, default=RATIO)
     args = ap.parse_args()
     frac = 0.0 if args.all else args.holdout_frac
+    min_support, min_best, dice_min, ratio = (
+        args.min_support, args.min_best, args.dice_min, args.ratio
+    )
 
     pairs: list[tuple[str, str]] = []
     seen: dict[str, str] = {}
@@ -134,7 +142,7 @@ def main() -> None:
 
     mined: list[tuple[str, str, float]] = []
     for zt, counter in cooc.items():
-        if zfreq[zt] < MIN_SUPPORT or zt in manual:
+        if zfreq[zt] < min_support or zt in manual:
             continue
         # Dice 关联度：2*共现 /(中文行数+英文行数)，降权到处都出现的常见英文词
         scored = sorted(
@@ -143,10 +151,10 @@ def main() -> None:
             key=lambda x: -x[2],
         )
         best_en, best_raw, best_s = scored[0]
-        if best_raw < MIN_BEST or best_s < DICE_MIN:
+        if best_raw < min_best or best_s < dice_min:
             continue
         second_s = scored[1][2] if len(scored) > 1 else 0.0
-        if second_s > 0 and best_s / second_s < RATIO:
+        if second_s > 0 and best_s / second_s < ratio:
             continue
         mined.append((zt, _title(best_en), round(best_s, 3)))
 
