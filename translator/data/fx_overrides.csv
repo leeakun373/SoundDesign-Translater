@@ -106,3 +106,72 @@ raw,canonical,slot,note
 返回,Back,action,双语层噪声Return
 过载,Overload,action,误成Overdrive
 打开,Open,action,误成Opened
+拳头,Fist,object,误成Key
+击中,Hit,action,误成Touche
+升级,Upgrade,action,误成Be
+蜂鸣,Buzz,detail,NLLB误成Cells
+成就,Achievement,detail,误成Ok
+礁石,Reef,object,误成Rockpool
+急促,Rapid,modifier,误拼Hectical
+喘息,Pant,action,误成Chuff
+汽笛,Horn,object,cedict冗余ship horn
+收集,Collect,action,cedict取gather
+蹄声,Hooves,object,NLLB误成Sound
+吐信,Tongue Flick,action,NLLB胡乱输出
+拉奏,Bowing,action,NLLB误成Razzie
+切菜,Chop,action,NLLB误成Cuts of food
+撒娇,Purr,detail,拆字乱译
+敲响,Strike,action,cedict弱译Sound
+余韵,Resonance,detail,误成Tune
+喷涌,Gush,action,误成Out
+油锅,Oil Pan,object,误成Deep
+案板,Cutting Board,object,cedict弱译Board
+倒水,Pour,action,NLLB整句
+开瓶,Uncork,action,NLLB整句
+吹奏,Blow,action,cedict弱译play
+面糊,Batter,object,cedict误成panada
+窜动,Surge,action,NLLB弱译Moving
+进纸,Paper Feed,action,NLLB误成On paper
+双击,Double Click,action,误成Flam
+震动,Vibrate,action,误成Seismic
+连拍,Burst,detail,拆字Continuously Slap
+摆头,Oscillate,action,NLLB胡译
+铁门,Iron Door,object,NLLB整句
+顺流,Flow,action,NLLB整句
+搅动,Stir,action,cedict弱译mix
+翻页,Page Turn,action,NLLB整句
+飘扬,Flap,action,cedict弱译fly
+风中,Wind,modifier,NLLB整句
+积木,Blocks,object,误成Toy
+倒塌,Collapse,action,误成Over
+嬉闹,Playing,action,NLLB胡译
+重物,Heavy Object,object,拆字丢物
+铁锤,Hammer,object,NLLB误成Iron Curtain
+坠地,Fall,action,NLLB胡译
+划燃,Strike,action,NLLB弱译Burning up
+弩箭,Crossbow,object,NLLB误成Arrows
+上弦,Draw,action,cedict误成first quarter月相
+拔栓,Pull Pin,action,NLLB误成Pull Bolt
+机枪,Machine Gun,object,弱译Gun
+扫射,Strafe,action,误成Down
+弹链,Ammo Belt,object,NLLB误成Shot chain
+战机,Fighter Jet,object,cedict误成war secret
+喷气式,Jet,modifier,cedict冗余jet-propelled
+轰鸣,Rumble,detail,误成引擎Rev
+倾泻,Cascade,action,弱译Down
+劈下,Strike,action,NLLB误成Keep it down
+震地,Tremor,detail,NLLB冗余earthquake
+闷哼,Grunt,action,拆字Muted Harrumph
+锅铲,Spatula,object,误成Cooking
+油花,Oil Splatter,detail,弱译Liquid
+高压锅,Pressure Cooker,object,弱译Pressure
+泄压,Release,action,NLLB冗余
+嘶鸣,Hiss,detail,误成马嘶Neigh
+开罐,Open Can,action,NLLB误成Open door
+蝉鸣,Cicada,object,弱译Insects
+自动门,Auto Door,object,NLLB冗余
+感应,Sensor,detail,cedict弱译response
+强化,Enhance,action,cedict弱译intensify
+宝箱,Treasure Chest,object,NLLB冗余
+砂轮,Grinding Wheel,object,cedict弱译Wheel
+符咒,Rune,object,cedict弱译charm
