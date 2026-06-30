@@ -3048,3 +3048,202 @@ debuff 闪烁,Debuff Flash,55
 铆钉 敲击,Rivet Tap,55
 黄铜 阀门,Brass Valve,55
 皮革 护目镜,Leather Goggles,55
+撑杆 过杆,Pole Vault,55
+鞍马 腾跃,Pommel Vault,55
+法官 落槌,Gavel Bang,55
+书记员 记录,Clerk Record,55
+证据 呈堂,Evidence Present,55
+验钞 机,Bill Counter,55
+点钞 声,Bill Count,55
+母舰 机库,Mothership Hangar,55
+战列舰 主炮,Battleship Main Cannon,55
+激光 炮列,Laser Cannon Battery,55
+偏导 护盾,Deflector Shield,55
+舰炮 充能,Ship Cannon Charge,55
+续关 提示,Continue Prompt,55
+必杀 技,Special Move,55
+大招 释放,Ultimate Release,55
+像素 剑击,Pixel Sword Slash,55
+冰杖 射击,Ice Staff Shot,55
+百米 冲刺,100m Sprint,55
+起跑 发令,Start Gun,55
+跨栏 跳跃,Hurdle Jump,55
+标枪 投掷,Javelin Throw,55
+铅球 推出,Shot Put,55
+铁饼 旋转,Discus Spin,55
+跳远 沙坑,Long Jump Sand,55
+三级 跳,Triple Jump,55
+马拉松 脚步,Marathon Footstep,55
+接力 棒,Relay Baton,55
+游泳 出发,Swim Start,55
+自由泳 划水,Freestyle Stroke,55
+蝶泳 破浪,Butterfly Stroke,55
+蛙泳 蹬腿,Breaststroke Kick,55
+跳水 入水,Dive Entry,55
+体操 落地,Gymnastics Landing,55
+单杠 摆动,High Bar Swing,55
+双杠 支撑,Parallel Bars,55
+平衡木 行走,Balance Beam Walk,55
+篮球 扣篮,Basketball Dunk,55
+足球 射门,Soccer Kick,55
+排球 扣球,Volleyball Spike,55
+网球 发球,Tennis Serve,55
+羽毛球 扣杀,Badminton Smash,55
+乒乓球 对打,Ping Pong Rally,55
+高尔夫 挥杆,Golf Swing,55
+棒球 全垒打,Baseball Homerun,55
+冰球 滑行,Hockey Skate,55
+拳击 擂台,Boxing Ring,55
+摔跤 抱摔,Wrestling Takedown,55
+击剑 突刺,Fencing Lunge,55
+射箭 靶心,Archery Bullseye,55
+马术 跨越,Equestrian Jump,55
+赛车 冲线,Race Finish,55
+F1 进站,F1 Pit Stop,55
+拉力 漂移,Rally Drift,55
+马拉松 终点,Marathon Finish,55
+法庭 开庭,Court Session Open,55
+法警 押送,Bailiff Escort,55
+律师 辩护,Lawyer Defense,55
+检察官 指控,Prosecutor Charge,55
+证人 作证,Witness Testify,55
+宣誓 作证,Oath Testify,55
+陪审团 商议,Jury Deliberation,55
+旁听 席,Gallery Seat,55
+合同 签署,Contract Sign,55
+违约 诉讼,Breach Lawsuit,55
+仲裁 裁决,Arbitration Ruling,55
+调解 会议,Mediation Meeting,55
+传票 送达,Summons Serve,55
+拘留 所,Detention Center,55
+保释 金,Bail Bond,55
+罚款 缴纳,Fine Payment,55
+拍卖 锤子,Auction Hammer,55
+抵押 登记,Mortgage Register,55
+贷款 审批,Loan Approve,55
+利率 调整,Interest Rate Adjust,55
+汇率 波动,Exchange Rate Swing,55
+股票 交易,Stock Trade,55
+基金 申购,Fund Subscribe,55
+债券 发行,Bond Issue,55
+信用卡 刷卡,Credit Card Swipe,55
+ATM 取款,ATM Withdraw,55
+柜台 办理,Teller Counter,55
+汇款 转账,Wire Transfer,55
+支票 兑现,Check Cash,55
+金库 门,Vault Door,55
+假币 警报,Counterfeit Alarm,55
+洗钱 调查,Money Laundering Probe,55
+征信 查询,Credit Check,55
+破产 清算,Bankruptcy Liquidation,55
+遗嘱 公证,Will Notarize,55
+遗产 继承,Estate Inherit,55
+税务 稽查,Tax Audit,55
+发票 查验,Invoice Verify,55
+合同 盖章,Contract Stamp,55
+星舰 旗舰,Starship Flagship,55
+舰队 跃迁,Fleet Warp,55
+护航 舰,Escort Ship,55
+驱逐舰 炮火,Destroyer Cannon,55
+巡洋舰 齐射,Cruiser Volley,55
+太空 战机,Space Fighter,55
+拦截 机,Interceptor,55
+轰炸 舰,Bomber Ship,55
+登陆 艇,Landing Craft,55
+轨道 轰炸,Orbital Bombardment,55
+行星 登陆,Planet Landing,55
+殖民 船,Colony Ship,55
+贸易 舰,Trade Ship,55
+走私 船,Smuggler Ship,55
+海盗 舰,Pirate Ship,55
+赏金 猎人,Bounty Hunter,55
+帝国 舰队,Imperial Fleet,55
+叛军 旗舰,Rebel Flagship,55
+离子 炮,Ion Cannon,55
+相位 炮,Phaser Cannon,55
+护盾 过载,Shield Overload,55
+全息 舰桥,Hologram Bridge,55
+舰长 命令,Captain Command,55
+通讯 阵列,Comm Array,55
+超空间 航道,Hyperspace Lane,55
+星图 导航,Star Chart Nav,55
+小行星 带,Asteroid Belt,55
+星云 穿行,Nebula Transit,55
+黑洞 边缘,Black Hole Edge,55
+空间站 对接,Station Dock,55
+太空 电梯,Space Elevator,55
+轨道 环,Orbital Ring,55
+卫星 部署,Satellite Deploy,55
+行星 护盾,Planetary Shield,55
+大气 层,Atmosphere Layer,55
+登陆 舱,Landing Pod,55
+弹射 座椅,Ejection Seat,55
+反重力 靴,Anti Gravity Boot,55
+太空 服,Spacesuit,55
+氧气 循环,Oxygen Cycle,55
+鱼雷 齐射,Torpedo Volley,55
+隐形 启动,Cloak Activate,55
+曲速 核心,Warp Core,55
+星门 网络,Stargate Network,55
+银河 议会,Galactic Council,55
+外交 使团,Diplomatic Delegation,55
+和平 条约,Peace Treaty,55
+战争 宣言,War Declaration,55
+像素 跳跃,Pixel Jump,55
+8bit 音效,8 Bit SFX,55
+16bit 芯片,16 Bit Chip,55
+复古 街机,Retro Arcade,55
+投币 开始,Coin Start,55
+Game Over,Game Over,55
+1UP 获得,1UP Gain,55
+高分 榜,High Score Board,55
+关卡 完成,Stage Clear,55
+Boss 战,Boss Fight,55
+血条 减少,Health Bar Down,55
+魔法 条,Mana Bar,55
+经验 条,XP Bar,55
+道具 拾取,Item Pickup,55
+金币 叮当,Gold Coin,55
+钥匙 开门,Key Door Open,55
+宝箱 开启,Chest Open,55
+传送 门,Teleport Door,55
+存档 点,Save Point,55
+密码 输入,Password Input,55
+Konami 秘籍,Konami Code,55
+街机 摇杆,Arcade Joystick,55
+十字 键,D Pad,55
+A键 按下,A Button Press,55
+B键 按下,B Button Press,55
+Start 开始,Start Press,55
+Select 选择,Select Press,55
+连击 计数,Combo Counter,55
+格挡 成功,Parry Success,55
+闪避 翻滚,Dodge Roll,55
+像素 爆炸,Pixel Explosion,55
+8bit 跳跃,8 Bit Jump,55
+复古 射击,Retro Shooter,55
+弹幕 躲避,Bullet Hell Dodge,55
+像素 脚步,Pixel Footstep,55
+机关 门,Mechanism Door,55
+陷阱 触发,Trap Trigger,55
+平台 掉落,Platform Fall,55
+弹簧 弹跳,Spring Bounce,55
+梯子 攀爬,Ladder Climb,55
+藤蔓 摆动,Vine Swing,55
+魔法 弹,Magic Bullet,55
+火球 发射,Fireball Shoot,55
+闪电 杖,Lightning Staff,55
+治疗 瓶,Heal Potion,55
+回复 泉,Restore Spring,55
+商店 铃铛,Shop Bell,55
+商人 对话,Merchant Talk,55
+任务 感叹号,Quest Marker,55
+对话框 弹出,Dialog Popup,55
+打字 机,Typewriter,55
+菜单 哔声,Menu Beep,55
+光标 移动,Cursor Move,55
+选择 确认,Select Confirm,55
+取消 返回,Cancel Back,55
+像素 胜利,Pixel Victory,55
+通关 音乐,Clear Music,55
+街机 演示,Arcade Attract,55

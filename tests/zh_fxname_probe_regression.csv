@@ -1,0 +1,1483 @@
+id,round,theme,input,expected_fxname,must_not_unknown,must_not_nllb
+probe-13-0001,13,工业机械,铁砧 敲击,Anvil Hit,yes,yes
+probe-13-0002,13,工业机械,砂轮 打磨,Grinding Wheel Sanding,yes,yes
+probe-13-0003,13,工业机械,电焊 火花,Electric Spark,yes,yes
+probe-13-0004,13,工业机械,车床 旋转,Lathe Spin,yes,yes
+probe-13-0005,13,工业机械,液压 泄漏,Pressure Leak,yes,yes
+probe-13-0006,13,工业机械,压缩 空气,Compress Air,yes,yes
+probe-13-0007,13,工业机械,真空 泵,Vacuum Pump,yes,yes
+probe-13-0008,13,工业机械,传送 带,Teleport Band,yes,yes
+probe-13-0009,13,工业机械,包装 机,Show Package Maker,yes,yes
+probe-13-0010,13,工业机械,贴标 机,Label Maker,yes,yes
+probe-13-0011,13,工业机械,封箱 胶带,Pack Tape,yes,yes
+probe-13-0012,13,工业机械,叉车 倒车,Forklift Reverse,yes,yes
+probe-13-0013,13,工业机械,托盘 落地,Tray Landing,yes,yes
+probe-13-0014,13,工业机械,货柜 开门,Container Door Open,yes,yes
+probe-13-0015,13,工业机械,仓库 警报,Warehouse Alarm,yes,yes
+probe-13-0016,13,工业机械,卷帘 门,Roller Door,yes,yes
+probe-13-0017,13,工业机械,自动 门,Auto Door,yes,yes
+probe-13-0018,13,工业机械,旋转 门,Spin Door,yes,yes
+probe-13-0019,13,工业机械,感应 器,Sensor Phaser,yes,yes
+probe-13-0020,13,工业机械,刷卡 通过,Use Pass,yes,yes
+probe-13-0021,13,工业机械,闸机 关闭,Turnstile Close,yes,yes
+probe-13-0022,13,工业机械,电梯 到达,Elevator Arrival,yes,yes
+probe-13-0023,13,工业机械,扶梯 运行,Escalators Run,yes,yes
+probe-13-0024,13,工业机械,轨道 切换,Track Switch,yes,yes
+probe-13-0025,13,工业机械,月台 装卸,Platform Load,yes,yes
+probe-13-0026,13,工业机械,集装箱 落箱,Container Drop,yes,yes
+probe-13-0027,13,工业机械,起重机 吊臂,Crane Boom Arm,yes,yes
+probe-13-0028,13,工业机械,钢缆 摩擦,Steel Rub,yes,yes
+probe-13-0029,13,工业机械,滑轮 转动,Pulley Turn,yes,yes
+probe-13-0030,13,工业机械,链条 传动,Chain Drive,yes,yes
+probe-13-0031,13,工业机械,齿轮 咬合,Gear Mesh,yes,yes
+probe-13-0032,13,工业机械,轴承 磨损,Bearing Worn,yes,yes
+probe-13-0033,13,工业机械,弹簧 回弹,Spring Rebound,yes,yes
+probe-13-0034,13,工业机械,阀门 开启,Valve Open,yes,yes
+probe-13-0035,13,工业机械,管道 爆裂,Pipe Blast,yes,yes
+probe-13-0036,13,工业机械,锅炉 蒸汽,Boiler Steam,yes,yes
+probe-13-0037,13,工业机械,烟囱 排烟,Chimney Discharge,yes,yes
+probe-13-0038,13,工业机械,熔炉 倾倒,Forge Pour,yes,yes
+probe-13-0039,13,工业机械,铸造 金属,Cast Metal,yes,yes
+probe-13-0040,13,工业机械,淬火 冷却,Quench Cool,yes,yes
+probe-14-0041,14,自然动物,雷暴 远场,Thunder Distant,yes,yes
+probe-14-0042,14,自然动物,闪电 劈击,Lightning Strike,yes,yes
+probe-14-0043,14,自然动物,冰雹 砸窗,Hail Smash Window,yes,yes
+probe-14-0044,14,自然动物,霜冻 开裂,Frost Open,yes,yes
+probe-14-0045,14,自然动物,融雪 滴落,Snow Drips,yes,yes
+probe-14-0046,14,自然动物,泥石流 冲刷,Mud Wash,yes,yes
+probe-14-0047,14,自然动物,山崩 滚石,Landslide Rock,yes,yes
+probe-14-0048,14,自然动物,地震 余震,Earthquake Aftershock,yes,yes
+probe-14-0049,14,自然动物,海啸 逼近,Tsunami Approach,yes,yes
+probe-14-0050,14,自然动物,潮汐 退去,Tide Recede,yes,yes
+probe-14-0051,14,自然动物,珊瑚 碎裂,Coral Shatter,yes,yes
+probe-14-0052,14,自然动物,海藻 漂浮,Seaweed Float,yes,yes
+probe-14-0053,14,自然动物,鲸鱼 喷水,Whale Spout,yes,yes
+probe-14-0054,14,自然动物,海豚 跃出,Dolphin Leap,yes,yes
+probe-14-0055,14,自然动物,鲨鱼 巡游,Shark Cruise,yes,yes
+probe-14-0056,14,自然动物,水母 脉动,Jellyfish Pulsing,yes,yes
+probe-14-0057,14,自然动物,章鱼 游动,Octopus Move,yes,yes
+probe-14-0058,14,自然动物,海星 吸附,Starfish Cling,yes,yes
+probe-14-0059,14,自然动物,贝壳 开合,Shell Close,yes,yes
+probe-14-0060,14,自然动物,螃蟹 横走,Crab Sideway Go,yes,yes
+probe-14-0061,14,自然动物,龙虾 钳击,Lobster Claw,yes,yes
+probe-14-0062,14,自然动物,火烈鸟 振翅,Flamingo Fluttering,yes,yes
+probe-14-0063,14,自然动物,秃鹫 盘旋,Vulture Circle,yes,yes
+probe-14-0064,14,自然动物,猫头鹰 啼叫,Owl Hoot,yes,yes
+probe-14-0065,14,自然动物,啄木鸟 啄木,Woodpecker Peck,yes,yes
+probe-14-0066,14,自然动物,翠鸟 入水,Kingfisher In Water,yes,yes
+probe-14-0067,14,自然动物,蜂鸟 悬停,Hummingbird Hover,yes,yes
+probe-14-0068,14,自然动物,蝙蝠 出洞,Bat Emerge,yes,yes
+probe-14-0069,14,自然动物,狼群 嚎叫,Wolf Pack Howl,yes,yes
+probe-14-0070,14,自然动物,狐狸 脚步,Fox Footstep,yes,yes
+probe-14-0071,14,自然动物,鹿 奔跑,Deer Run,yes,yes
+probe-14-0072,14,自然动物,野猪 冲撞,Boar Collide,yes,yes
+probe-14-0073,14,自然动物,熊 咆哮,Bear Snarl,yes,yes
+probe-14-0074,14,自然动物,河马 入水,Hippo In Water,yes,yes
+probe-14-0075,14,自然动物,鳄鱼 咬合,Crocodile Bite,yes,yes
+probe-14-0076,14,自然动物,蜥蜴 爬行,Lizard Crawl,yes,yes
+probe-14-0077,14,自然动物,蛇 吐信,Snake Tongue Flick,yes,yes
+probe-14-0078,14,自然动物,青蛙 入水,Frogs In Water,yes,yes
+probe-14-0079,14,自然动物,蟋蟀 鸣叫,Cricket Call,yes,yes
+probe-14-0080,14,自然动物,蝉 合唱,Cicadas Chorus,yes,yes
+probe-15-0081,15,科幻太空,激光 切割,Laser Cutting,yes,yes
+probe-15-0082,15,科幻太空,等离子 炮,Plasma Cannon,yes,yes
+probe-15-0083,15,科幻太空,离子 束,Ion Beam,yes,yes
+probe-15-0084,15,科幻太空,粒子 加速,Grain Accelerate,yes,yes
+probe-15-0085,15,科幻太空,反物质 湮灭,Antimatter Annihilation,yes,yes
+probe-15-0086,15,科幻太空,曲速 引擎,Warp Drive,yes,yes
+probe-15-0087,15,科幻太空,跃迁 启动,Jump Drive,yes,yes
+probe-15-0088,15,科幻太空,护盾 充能,Shield Charge,yes,yes
+probe-15-0089,15,科幻太空,力场 展开,Force Field,yes,yes
+probe-15-0090,15,科幻太空,隐形 启动,Cloak Activate,yes,yes
+probe-15-0091,15,科幻太空,传送 门,Teleport Door,yes,yes
+probe-15-0092,15,科幻太空,虫洞 开启,Wormhole Open,yes,yes
+probe-15-0093,15,科幻太空,星门 激活,Stargate Activate,yes,yes
+probe-15-0094,15,科幻太空,太空 行走,Spacewalk,yes,yes
+probe-15-0095,15,科幻太空,舱外 作业,Eva Work,yes,yes
+probe-15-0096,15,科幻太空,对接 成功,Dock Success,yes,yes
+probe-15-0097,15,科幻太空,分离 推进,Detach Boost,yes,yes
+probe-15-0098,15,科幻太空,轨道 修正,Orbit Correct,yes,yes
+probe-15-0099,15,科幻太空,陨石 撞击,Meteor Impact,yes,yes
+probe-15-0100,15,科幻太空,小行星 碎裂,Asteroid Break,yes,yes
+probe-15-0101,15,科幻太空,彗星 尾迹,Comet Tail,yes,yes
+probe-15-0102,15,科幻太空,星云 脉动,Nebula Pulsing,yes,yes
+probe-15-0103,15,科幻太空,黑洞 吸积,Black Hole,yes,yes
+probe-15-0104,15,科幻太空,超新星 爆发,Supernova Burst,yes,yes
+probe-15-0105,15,科幻太空,外星 信号,Alien Signal,yes,yes
+probe-15-0106,15,科幻太空,机器人 巡逻,Robot Patrol,yes,yes
+probe-15-0107,15,科幻太空,机甲 脚步,Mech Footstep,yes,yes
+probe-15-0108,15,科幻太空,外骨骼 启动,Exoskeleton Startup,yes,yes
+probe-15-0109,15,科幻太空,纳米 修复,Nano Repair,yes,yes
+probe-15-0110,15,科幻太空,克隆 舱,Clone Pod,yes,yes
+probe-15-0111,15,科幻太空,冷冻 休眠,Cryo Sleep,yes,yes
+probe-15-0112,15,科幻太空,基因 改造,Gene Mutate,yes,yes
+probe-15-0113,15,科幻太空,变异 咆哮,Mutant Roar,yes,yes
+probe-15-0114,15,科幻太空,僵尸 群,Zombie Horde,yes,yes
+probe-15-0115,15,科幻太空,吸血鬼 嘶吼,Vampire Hiss,yes,yes
+probe-15-0116,15,科幻太空,幽灵 飘过,Ghost Pass,yes,yes
+probe-15-0117,15,科幻太空,恶魔 召唤,Demon Summon,yes,yes
+probe-15-0118,15,科幻太空,天使 降临,Angel Descend,yes,yes
+probe-15-0119,15,科幻太空,圣光 爆发,Holy Burst,yes,yes
+probe-15-0120,15,科幻太空,诅咒 生效,Curse Activate,yes,yes
+probe-15-0121,15,科幻太空,符文 激活,Rune Activate,yes,yes
+probe-16-0122,16,办公家电,键盘 打字,Keyboard Type,yes,yes
+probe-16-0123,16,办公家电,鼠标 点击,Mouse Click,yes,yes
+probe-16-0124,16,办公家电,触控 板,Touchpad,yes,yes
+probe-16-0125,16,办公家电,打印机 出纸,Printer Paper Out,yes,yes
+probe-16-0126,16,办公家电,扫描 仪,Scan Present,yes,yes
+probe-16-0127,16,办公家电,碎纸 机,Paper Shredder,yes,yes
+probe-16-0128,16,办公家电,复印 机,Copy Maker,yes,yes
+probe-16-0129,16,办公家电,投影仪 风扇,Projector Fan,yes,yes
+probe-16-0130,16,办公家电,会议 电话,Meeting Call,yes,yes
+probe-16-0131,16,办公家电,视频会议 连接,Video Call Connect,yes,yes
+probe-16-0132,16,办公家电,邮件 通知,Email Alert,yes,yes
+probe-16-0133,16,办公家电,短信 提示,Text Alert,yes,yes
+probe-16-0134,16,办公家电,闹钟 响起,Alarm Ring,yes,yes
+probe-16-0135,16,办公家电,计时 器,Timer Phaser,yes,yes
+probe-16-0136,16,办公家电,秒表 启动,Stopwatch Start,yes,yes
+probe-16-0137,16,办公家电,计算器 按键,Calculator Key,yes,yes
+probe-16-0138,16,办公家电,U盘 插入,U Plate Insert,yes,yes
+probe-16-0139,16,办公家电,硬盘 读写,Hard Drive Read Write,yes,yes
+probe-16-0140,16,办公家电,路由器 重启,Router Restart,yes,yes
+probe-16-0141,16,办公家电,网线 拔插,Ethernet Cable Draw Insert,yes,yes
+probe-16-0142,16,办公家电,蓝牙 配对,Bluetooth Pair,yes,yes
+probe-16-0143,16,办公家电,WiFi 连接,Wifi Connection,yes,yes
+probe-16-0144,16,办公家电,充电 完成,Charge Complete,yes,yes
+probe-16-0145,16,办公家电,电池 低电,Battery Low,yes,yes
+probe-16-0146,16,办公家电,电源 断开,Power Off,yes,yes
+probe-16-0147,16,办公家电,插排 开关,Powerstrip Switch,yes,yes
+probe-16-0148,16,办公家电,灯泡 闪烁,Bulb Flicker,yes,yes
+probe-16-0149,16,办公家电,灯管 启动,Fluorescent Startup,yes,yes
+probe-16-0150,16,办公家电,风扇 摇头,Fan Oscillate,yes,yes
+probe-16-0151,16,办公家电,空调 制冷,Ac Cool,yes,yes
+probe-16-0152,16,办公家电,加湿器 喷雾,Humidifier Mist,yes,yes
+probe-16-0153,16,办公家电,净化 器,Purify Phaser,yes,yes
+probe-16-0154,16,办公家电,除湿 机,Dehumidifier,yes,yes
+probe-16-0155,16,办公家电,咖啡 机,Coffee Maker,yes,yes
+probe-16-0156,16,办公家电,榨汁 机,Juicer,yes,yes
+probe-16-0157,16,办公家电,面包 机,Bread Maker,yes,yes
+probe-16-0158,16,办公家电,微波炉 叮,Microwave Ping,yes,yes
+probe-16-0159,16,办公家电,电磁炉 加热,Induction Heat,yes,yes
+probe-16-0160,16,办公家电,电饭煲 保温,Rice Cooker Warm,yes,yes
+probe-16-0161,16,办公家电,压力 锅,Pressure Cooker,yes,yes
+probe-16-0162,16,办公家电,空气 炸锅,Air Fryer,yes,yes
+probe-17-0163,17,宗教武术,教堂 钟声,Church Bell,yes,yes
+probe-17-0164,17,宗教武术,修道院 走廊,Monastery Hall,yes,yes
+probe-17-0165,17,宗教武术,忏悔 室,Confession Room,yes,yes
+probe-17-0166,17,宗教武术,圣餐 仪式,Communion Ritual,yes,yes
+probe-17-0167,17,宗教武术,管风琴 演奏,Organ Play,yes,yes
+probe-17-0168,17,宗教武术,唱诗班 合唱,Choir Sing,yes,yes
+probe-17-0169,17,宗教武术,诵经 低语,Chants Whisper,yes,yes
+probe-17-0170,17,宗教武术,木鱼 敲击,Wood Block Hit,yes,yes
+probe-17-0171,17,宗教武术,铜钟 摇摆,Bronze Bell Swing,yes,yes
+probe-17-0172,17,宗教武术,铃铛 摇响,Bell Ring,yes,yes
+probe-17-0173,17,宗教武术,蜡烛 点燃,Candle Light,yes,yes
+probe-17-0174,17,宗教武术,香火 缭绕,Incense Smolder,yes,yes
+probe-17-0175,17,宗教武术,纸钱 燃烧,Joss Burn,yes,yes
+probe-17-0176,17,宗教武术,符咒 贴附,Talisman Attach,yes,yes
+probe-17-0177,17,宗教武术,桃木 剑,Peachwood Sword,yes,yes
+probe-17-0178,17,宗教武术,八卦 旋转,Bagua Spin,yes,yes
+probe-17-0179,17,宗教武术,太极 推手,Tai Chi Push,yes,yes
+probe-17-0180,17,宗教武术,气功 发劲,Chi Burst,yes,yes
+probe-17-0181,17,宗教武术,武术 套路,Martial Arts Standard,yes,yes
+probe-17-0182,17,宗教武术,咏春 寸拳,Wing Chun Punch,yes,yes
+probe-17-0183,17,宗教武术,跆拳道 踢击,Taekwondo Kick,yes,yes
+probe-17-0184,17,宗教武术,柔道 摔投,Judo Throw,yes,yes
+probe-17-0185,17,宗教武术,拳击 擂台,Boxing Ring,yes,yes
+probe-17-0186,17,宗教武术,摔跤 擂台,Fall Ring,yes,yes
+probe-17-0187,17,宗教武术,剑道 劈砍,Kendo Splitting Slash,yes,yes
+probe-17-0188,17,宗教武术,弓箭 齐射,Bow Volley,yes,yes
+probe-17-0189,17,宗教武术,弩机 上弦,Crossbow Cock,yes,yes
+probe-17-0190,17,宗教武术,投矛 飞出,Spear Throw,yes,yes
+probe-17-0191,17,宗教武术,链锤 挥舞,Flail Swing,yes,yes
+probe-17-0192,17,宗教武术,双节 棍,Nunchaku,yes,yes
+probe-18-0193,18,交通极限,地铁 进站,Subway Arrive,yes,yes
+probe-18-0194,18,交通极限,轻轨 通过,Light Rail Pass,yes,yes
+probe-18-0195,18,交通极限,有轨 电车,Tram,yes,yes
+probe-18-0196,18,交通极限,双层 巴士,Double Decker,yes,yes
+probe-18-0197,18,交通极限,校车 停靠,School Bus Stop,yes,yes
+probe-18-0198,18,交通极限,出租 计价,Taxi Meter,yes,yes
+probe-18-0199,18,交通极限,网约车 到达,Rideshare Arrive,yes,yes
+probe-18-0200,18,交通极限,共享单车 解锁,Share Bike Unlock,yes,yes
+probe-18-0201,18,交通极限,滑板 滑行,Skateboard Slide,yes,yes
+probe-18-0202,18,交通极限,轮滑 刹车,Roller Brake,yes,yes
+probe-18-0203,18,交通极限,独轮 平衡,Unicycle Balance,yes,yes
+probe-18-0204,18,交通极限,Segway 启动,Segway Startup,yes,yes
+probe-18-0205,18,交通极限,缆车 上行,Cable Car Up,yes,yes
+probe-18-0206,18,交通极限,索道 滑行,Gondola Slide,yes,yes
+probe-18-0207,18,交通极限,热气球 点火,Balloon Ignite,yes,yes
+probe-18-0208,18,交通极限,滑翔 伞,Paragliding,yes,yes
+probe-18-0209,18,交通极限,跳伞 开伞,Parachute Open,yes,yes
+probe-18-0210,18,交通极限,翼装 飞行,Wingsuit Fly,yes,yes
+probe-18-0211,18,交通极限,潜水 下潜,Dive Submerge,yes,yes
+probe-18-0212,18,交通极限,氧气 瓶,Oxygen Tank,yes,yes
+probe-18-0213,18,交通极限,减压 阀,Relief Valve,yes,yes
+probe-18-0214,18,交通极限,潜水 服,Wetsuit,yes,yes
+probe-18-0215,18,交通极限,脚蹼 划水,Fins Paddle,yes,yes
+probe-18-0216,18,交通极限,浮潜 呼吸,Snorkel Breath,yes,yes
+probe-18-0217,18,交通极限,冲浪 板,Surfboard,yes,yes
+probe-18-0218,18,交通极限,帆板 迎风,Windsurf Wind,yes,yes
+probe-18-0219,18,交通极限,皮划 艇,Kayak,yes,yes
+probe-18-0220,18,交通极限,独木 舟,Canoe,yes,yes
+probe-18-0221,18,交通极限,漂流 木筏,Raft Drift,yes,yes
+probe-18-0222,18,交通极限,摩托 艇,Jet Ski,yes,yes
+probe-18-0223,18,交通极限,快艇 破浪,Speedboat Wake,yes,yes
+probe-19-0224,19,乐器管弦,钢琴 弹奏,Piano Play,yes,yes
+probe-19-0225,19,乐器管弦,小提琴 拉弓,Violin Bow,yes,yes
+probe-19-0226,19,乐器管弦,大提琴 拨弦,Cello Pluck,yes,yes
+probe-19-0227,19,乐器管弦,吉他 扫弦,Guitar Strum,yes,yes
+probe-19-0228,19,乐器管弦,贝斯 拨弦,Bass Pluck,yes,yes
+probe-19-0229,19,乐器管弦,架子 鼓,Drum Kit,yes,yes
+probe-19-0230,19,乐器管弦,军鼓 滚奏,Snare Roll,yes,yes
+probe-19-0231,19,乐器管弦,镲片 撞击,Cymbal Hit,yes,yes
+probe-19-0232,19,乐器管弦,三角 铁,Triangle Hit,yes,yes
+probe-19-0233,19,乐器管弦,木琴 敲击,Xylophone Hit,yes,yes
+probe-19-0234,19,乐器管弦,马林 巴,Marimba,yes,yes
+probe-19-0235,19,乐器管弦,竖琴 拨弦,Harp Pluck,yes,yes
+probe-19-0236,19,乐器管弦,长笛 吹奏,Flute Play,yes,yes
+probe-19-0237,19,乐器管弦,单簧 管,Clarinet,yes,yes
+probe-19-0238,19,乐器管弦,双簧 管,Oboe,yes,yes
+probe-19-0239,19,乐器管弦,萨克斯 吹奏,Sax Play,yes,yes
+probe-19-0240,19,乐器管弦,小号 吹奏,Trumpet Play,yes,yes
+probe-19-0241,19,乐器管弦,长号 滑音,Trombone Slide,yes,yes
+probe-19-0242,19,乐器管弦,圆号 吹奏,French Horn,yes,yes
+probe-19-0243,19,乐器管弦,大号 吹奏,Tuba Play,yes,yes
+probe-19-0244,19,乐器管弦,口琴 吹奏,Harmonica Play,yes,yes
+probe-19-0245,19,乐器管弦,手风琴 拉合,Accordion Squeeze,yes,yes
+probe-19-0246,19,乐器管弦,风笛 吹奏,Bagpipes Blow,yes,yes
+probe-19-0247,19,乐器管弦,二胡 拉弦,Erhu Pull String,yes,yes
+probe-19-0248,19,乐器管弦,古筝 拨弦,Guzheng Pluck,yes,yes
+probe-19-0249,19,乐器管弦,琵琶 扫弦,Pipa Strum,yes,yes
+probe-19-0250,19,乐器管弦,扬琴 敲击,Yangqin Hit,yes,yes
+probe-19-0251,19,乐器管弦,唢呐 吹奏,Suona Play,yes,yes
+probe-19-0252,19,乐器管弦,编钟 敲击,Bell Chime,yes,yes
+probe-19-0253,19,乐器管弦,定音 鼓,Timpani,yes,yes
+probe-20-0254,20,安防应急,核爆 蘑菇云,Nuclear Cloud,yes,yes
+probe-20-0255,20,安防应急,生化 泄漏,Biohazard Leak,yes,yes
+probe-20-0256,20,安防应急,毒气 扩散,Gas Spread,yes,yes
+probe-20-0257,20,安防应急,辐射 警报,Radiation Alarm,yes,yes
+probe-20-0258,20,安防应急,防毒 面具,Gas Mask,yes,yes
+probe-20-0259,20,安防应急,隔离 舱,Isolation Pod,yes,yes
+probe-20-0260,20,安防应急,疫苗 注射,Vaccine Inject,yes,yes
+probe-20-0261,20,安防应急,检疫 通道,Quarantine Gate,yes,yes
+probe-20-0262,20,安防应急,指纹 扫描,Fingerprint Scan,yes,yes
+probe-20-0263,20,安防应急,虹膜 识别,Iris Scan,yes,yes
+probe-20-0264,20,安防应急,面部 识别,Face Scan,yes,yes
+probe-20-0265,20,安防应急,门禁 刷卡,Access Card,yes,yes
+probe-20-0266,20,安防应急,监控 转动,Cctv Pan,yes,yes
+probe-20-0267,20,安防应急,红外 感应,Ir Sensor,yes,yes
+probe-20-0268,20,安防应急,金属 探测,Metal Detect,yes,yes
+probe-20-0269,20,安防应急,安检 门,Security Gate,yes,yes
+probe-20-0270,20,安防应急,X光 扫描,X Light Scan,yes,yes
+probe-20-0271,20,安防应急,测谎 仪,Lie Detector,yes,yes
+probe-20-0272,20,安防应急,审讯 室,Interrogation Room,yes,yes
+probe-20-0273,20,安防应急,牢门 关闭,Cell Door Close,yes,yes
+probe-20-0274,20,安防应急,手铐 锁紧,Handcuff Lock,yes,yes
+probe-20-0275,20,安防应急,警棍 挥舞,Baton Swing,yes,yes
+probe-20-0276,20,安防应急,催泪 瓦斯,Tear Gas,yes,yes
+probe-20-0277,20,安防应急,防暴 盾牌,Riot Shield,yes,yes
+probe-20-0278,20,安防应急,路障 架设,Barricade,yes,yes
+probe-20-0279,20,安防应急,交通管制 哨,Traffic Whistle,yes,yes
+probe-20-0280,20,安防应急,消防 栓,Fire Hydrant,yes,yes
+probe-20-0281,20,安防应急,喷淋 系统,Sprinkler,yes,yes
+probe-20-0282,20,安防应急,烟雾 报警,Smoke Alarm,yes,yes
+probe-20-0283,20,安防应急,逃生 梯,Fire Escape,yes,yes
+probe-20-0284,20,安防应急,急救 包,First Aid,yes,yes
+probe-21-0285,21,极地农村,雪花 飘落,Snow Drift,yes,yes
+probe-21-0286,21,极地农村,暴雪 封路,Blizzard Close,yes,yes
+probe-21-0287,21,极地农村,冰柱 坠落,Icicle Fall,yes,yes
+probe-21-0288,21,极地农村,冰窟 回声,Ice Cave Echo,yes,yes
+probe-21-0289,21,极地农村,雪橇 滑行,Sled Taxi,yes,yes
+probe-21-0290,21,极地农村,狗拉 雪橇,Dog Pull Sled,yes,yes
+probe-21-0291,21,极地农村,驯鹿 蹄声,Reindeer Hoof,yes,yes
+probe-21-0292,21,极地农村,北极 风,Arctic Wind,yes,yes
+probe-21-0293,21,极地农村,极光 闪烁,Aurora Flicker,yes,yes
+probe-21-0294,21,极地农村,帐篷 搭建,Tent Erect,yes,yes
+probe-21-0295,21,极地农村,睡袋 摩擦,Sleeping Bag,yes,yes
+probe-21-0296,21,极地农村,篝火 噼啪,Bonfire Crackle,yes,yes
+probe-21-0297,21,极地农村,营火 熄灭,Campfire Out,yes,yes
+probe-21-0298,21,极地农村,指南针 指针,Compass Needle,yes,yes
+probe-21-0299,21,极地农村,地图 展开,Map Unfold,yes,yes
+probe-21-0300,21,极地农村,绳索 垂降,Rappel,yes,yes
+probe-21-0301,21,极地农村,岩钉 打入,Piton Hammer,yes,yes
+probe-21-0302,21,极地农村,冰镐 凿冰,Ice Axe Pick,yes,yes
+probe-21-0303,21,极地农村,攀冰 瀑布,Ice Climb,yes,yes
+probe-21-0304,21,极地农村,洞穴 滴水,Cave Drip,yes,yes
+probe-21-0305,21,极地农村,钟乳 石,Stalactite Rock,yes,yes
+probe-21-0306,21,极地农村,石笋 生长,Stalagmite Grow,yes,yes
+probe-21-0307,21,极地农村,蝙蝠 群,Bat Swarm,yes,yes
+probe-21-0308,21,极地农村,地下 河,Underground River,yes,yes
+probe-21-0309,21,极地农村,矿洞 推车,Mine Cart,yes,yes
+probe-21-0310,21,极地农村,煤矿 塌方,Coal Collapse,yes,yes
+probe-21-0311,21,极地农村,金矿 筛洗,Gold Pan,yes,yes
+probe-21-0312,21,极地农村,石油 井喷,Oil Gusher,yes,yes
+probe-21-0313,21,极地农村,天然气 泄漏,Gas Leak,yes,yes
+probe-21-0314,21,极地农村,太阳能 板,Solar Panel,yes,yes
+probe-21-0315,21,极地农村,风力 涡轮,Wind Turbine,yes,yes
+probe-21-0316,21,极地农村,水力 大坝,Hydro Dam,yes,yes
+probe-21-0317,21,极地农村,核电站 冷却,Nuclear Cool,yes,yes
+probe-21-0318,21,极地农村,垃圾 焚烧,Garbage Burn,yes,yes
+probe-21-0319,21,极地农村,回收 压缩,Recycle Compress,yes,yes
+probe-21-0320,21,极地农村,堆肥 翻搅,Compost Turn,yes,yes
+probe-21-0321,21,极地农村,污染 警报,Pollution Alarm,yes,yes
+probe-21-0322,21,极地农村,雾霾 笼罩,Smog Shroud,yes,yes
+probe-21-0323,21,极地农村,沙尘 暴,Dust Storm,yes,yes
+probe-21-0324,21,极地农村,龙卷风 逼近,Tornado Approach,yes,yes
+probe-21-0325,21,极地农村,飓风 眼,Hurricane Eye,yes,yes
+probe-21-0326,21,极地农村,台风 登陆,Typhoon Landfall,yes,yes
+probe-21-0327,21,极地农村,洪水 漫堤,Flood Overtop,yes,yes
+probe-21-0328,21,极地农村,干旱 裂土,Drought Crack,yes,yes
+probe-21-0329,21,极地农村,野火 蔓延,Wildfire Spread,yes,yes
+probe-21-0330,21,极地农村,消防 飞机,Fire Plane,yes,yes
+probe-21-0331,21,极地农村,洒水 车,Water Truck,yes,yes
+probe-21-0332,21,极地农村,砍树 倒下,Tree Fell,yes,yes
+probe-21-0333,21,极地农村,伐木 链锯,Logging Chainsaw,yes,yes
+probe-21-0334,21,极地农村,锯木 厂,Sawmill,yes,yes
+probe-22-0335,22,影视舞台,婚礼 进行曲,Wedding March,yes,yes
+probe-22-0336,22,影视舞台,新娘 入场,Bride Entrance,yes,yes
+probe-22-0337,22,影视舞台,捧花 抛掷,Bouquet Toss,yes,yes
+probe-22-0338,22,影视舞台,香槟 开瓶,Champagne Pop,yes,yes
+probe-22-0339,22,影视舞台,祝酒 碰杯,Toast Clink,yes,yes
+probe-22-0340,22,影视舞台,蛋糕 切分,Cake Slice,yes,yes
+probe-22-0341,22,影视舞台,气球 释放,Balloon Release,yes,yes
+probe-22-0342,22,影视舞台,彩带 飘落,Streamer Drift,yes,yes
+probe-22-0343,22,影视舞台,烟花 绽放,Firework Bloom,yes,yes
+probe-22-0344,22,影视舞台,礼炮 鸣响,Salute Boom,yes,yes
+probe-22-0345,22,影视舞台,阅兵 方阵,Parade Formation,yes,yes
+probe-22-0346,22,影视舞台,国旗 升起,Flag Raising,yes,yes
+probe-22-0347,22,影视舞台,国歌 齐唱,Anthem Sing,yes,yes
+probe-22-0348,22,影视舞台,礼宾 炮,Ceremonial Salute,yes,yes
+probe-22-0349,22,影视舞台,21响 礼炮,21 Pop Salute,yes,yes
+probe-22-0350,22,影视舞台,降旗 仪式,Flag Lower,yes,yes
+probe-22-0351,22,影视舞台,宣誓 就职,Oath Inauguration,yes,yes
+probe-22-0352,22,影视舞台,投票 箱,Ballot Box,yes,yes
+probe-22-0353,22,影视舞台,计票 机,Vote Count,yes,yes
+probe-22-0354,22,影视舞台,新闻发布会 快门,Press Shutter,yes,yes
+probe-22-0355,22,影视舞台,采访 话筒,Interview Mic,yes,yes
+probe-22-0356,22,影视舞台,直播 导播,Live Director,yes,yes
+probe-22-0357,22,影视舞台,导播 切换,Director Cut,yes,yes
+probe-22-0358,22,影视舞台,提词 器,Teleprompter,yes,yes
+probe-22-0359,22,影视舞台,字幕 滚动,Subtitle Scroll,yes,yes
+probe-22-0360,22,影视舞台,广告 插播,Ad Interstitial,yes,yes
+probe-22-0361,22,影视舞台,片头 动画,Opening Animation,yes,yes
+probe-22-0362,22,影视舞台,片尾 演职员,End Credits,yes,yes
+probe-22-0363,22,影视舞台,场记 板,Clapperboard Plate,yes,yes
+probe-22-0364,22,影视舞台,打板 开拍,Clapper Action,yes,yes
+probe-22-0365,22,影视舞台,导演 喊卡,Director Cut,yes,yes
+probe-22-0366,22,影视舞台,补妆 粉扑,Makeup Powder,yes,yes
+probe-22-0367,22,影视舞台,绿幕 抠像,Green Screen Key,yes,yes
+probe-22-0368,22,影视舞台,威亚 吊起,Wire Lift,yes,yes
+probe-22-0369,22,影视舞台,特技 爆炸,Stunt Explosion,yes,yes
+probe-22-0370,22,影视舞台,替身 翻滚,Stunt Tumble,yes,yes
+probe-22-0371,22,影视舞台,群演 喧哗,Extras Commotion,yes,yes
+probe-22-0372,22,影视舞台,群众 演员,Extras Crowd,yes,yes
+probe-22-0373,22,影视舞台,化妆 间,Makeup Room,yes,yes
+probe-22-0374,22,影视舞台,服装 间,Dress Room,yes,yes
+probe-22-0375,22,影视舞台,道具 间,Prop Room,yes,yes
+probe-22-0376,22,影视舞台,布景 搭建,Set Build,yes,yes
+probe-22-0377,22,影视舞台,舞台 升降,Stage Lift,yes,yes
+probe-22-0378,22,影视舞台,幕布 拉开,Curtain Open,yes,yes
+probe-22-0379,22,影视舞台,追光 灯,Spotlight,yes,yes
+probe-22-0380,22,影视舞台,面光 灯,Key Light,yes,yes
+probe-22-0381,22,影视舞台,侧光 灯,Side Light,yes,yes
+probe-22-0382,22,影视舞台,背光 灯,Backlight Lamp,yes,yes
+probe-22-0383,22,影视舞台,烟雾 机,Smoke Machine,yes,yes
+probe-22-0384,22,影视舞台,干冰 机,Dry Ice Machine,yes,yes
+probe-22-0385,22,影视舞台,泡泡 机,Bubble Machine,yes,yes
+probe-22-0386,22,影视舞台,彩纸 炮,Confetti Cannon,yes,yes
+probe-23-0387,23,医疗康复,挂号 窗口,Registration Window,yes,yes
+probe-23-0388,23,医疗康复,候诊 大厅,Waiting Room,yes,yes
+probe-23-0389,23,医疗康复,分诊 台,Triage Desk,yes,yes
+probe-23-0390,23,医疗康复,病历 翻阅,Chart Flip,yes,yes
+probe-23-0391,23,医疗康复,听诊 器,Stethoscope,yes,yes
+probe-23-0392,23,医疗康复,血压 计,Blood Pressure Monitor,yes,yes
+probe-23-0393,23,医疗康复,体温 计,Thermometer,yes,yes
+probe-23-0394,23,医疗康复,输液 滴管,Iv Drip,yes,yes
+probe-23-0395,23,医疗康复,打针 注射,Injection Shot,yes,yes
+probe-23-0396,23,医疗康复,抽血 化验,Blood Lab Test,yes,yes
+probe-23-0397,23,医疗康复,X光 拍片,X Light Scan,yes,yes
+probe-23-0398,23,医疗康复,B超 探头,B Ultra Probe,yes,yes
+probe-23-0399,23,医疗康复,核磁 扫描,Mri Scan,yes,yes
+probe-23-0400,23,医疗康复,手术 灯,Surgery Light,yes,yes
+probe-23-0401,23,医疗康复,无影 灯,Surgical Light,yes,yes
+probe-23-0402,23,医疗康复,麻醉 机,Anesthesia Machine,yes,yes
+probe-23-0403,23,医疗康复,呼吸机 通气,Ventilator Breath,yes,yes
+probe-23-0404,23,医疗康复,除颤 仪,Defibrillator,yes,yes
+probe-23-0405,23,医疗康复,心电 监护,Ecg Monitor,yes,yes
+probe-23-0406,23,医疗康复,监护 仪,Patient Monitor,yes,yes
+probe-23-0407,23,医疗康复,担架 推送,Stretcher Push,yes,yes
+probe-23-0408,23,医疗康复,轮椅 推行,Wheelchair Push,yes,yes
+probe-23-0409,23,医疗康复,拐杖 点地,Cane Tap,yes,yes
+probe-23-0410,23,医疗康复,石膏 固定,Cast Set,yes,yes
+probe-23-0411,23,医疗康复,绷带 缠绕,Bandage Wrap,yes,yes
+probe-23-0412,23,医疗康复,纱布 撕开,Gauze Rip,yes,yes
+probe-23-0413,23,医疗康复,消毒 棉球,Alcohol Swab,yes,yes
+probe-23-0414,23,医疗康复,碘伏 擦拭,Iodine Wipe,yes,yes
+probe-23-0415,23,医疗康复,口罩 佩戴,Mask Wear,yes,yes
+probe-23-0416,23,医疗康复,手套 穿戴,Glove Don,yes,yes
+probe-23-0417,23,医疗康复,隔离 服,Isolation Gown,yes,yes
+probe-23-0418,23,医疗康复,病房 呼叫,Ward Call,yes,yes
+probe-23-0419,23,医疗康复,护士 推车,Nurse Cart,yes,yes
+probe-23-0420,23,医疗康复,药房 取药,Pharmacy Pickup,yes,yes
+probe-23-0421,23,医疗康复,胶囊 吞咽,Swallow Pill,yes,yes
+probe-23-0422,23,医疗康复,药片 碾碎,Crush Pill,yes,yes
+probe-23-0423,23,医疗康复,雾化 吸入,Nebulizer Inhale,yes,yes
+probe-23-0424,23,医疗康复,针灸 进针,Acupuncture Needle,yes,yes
+probe-23-0425,23,医疗康复,拔罐 吸附,Cupping Suction,yes,yes
+probe-23-0426,23,医疗康复,推拿 按压,Tui Na Press,yes,yes
+probe-23-0427,23,医疗康复,康复 训练,Rehab Training,yes,yes
+probe-24-0428,24,学校课堂,上课 铃响,Class Bell,yes,yes
+probe-24-0429,24,学校课堂,下课 铃响,School Bell End,yes,yes
+probe-24-0430,24,学校课堂,黑板 擦写,Blackboard Erase,yes,yes
+probe-24-0431,24,学校课堂,粉笔 折断,Chalk Snap,yes,yes
+probe-24-0432,24,学校课堂,课桌 挪动,Desk Slide,yes,yes
+probe-24-0433,24,学校课堂,书包 拉链,Bag Zip,yes,yes
+probe-24-0434,24,学校课堂,铅笔 削尖,Pencil Sharpen,yes,yes
+probe-24-0435,24,学校课堂,橡皮 擦拭,Eraser Rub,yes,yes
+probe-24-0436,24,学校课堂,尺子 掉落,Ruler Drop,yes,yes
+probe-24-0437,24,学校课堂,圆规 画圆,Compass Draw,yes,yes
+probe-24-0438,24,学校课堂,试卷 翻动,Paper Flip,yes,yes
+probe-24-0439,24,学校课堂,答题 卡,Answer Sheet,yes,yes
+probe-24-0440,24,学校课堂,监考 巡视,Proctor Patrol,yes,yes
+probe-24-0441,24,学校课堂,升旗 仪式,Flag Ceremony,yes,yes
+probe-24-0442,24,学校课堂,课间 操,Recess Exercise,yes,yes
+probe-24-0443,24,学校课堂,操场 跑步,Track Run,yes,yes
+probe-24-0444,24,学校课堂,篮球 运球,Basketball Dribble,yes,yes
+probe-24-0445,24,学校课堂,足球 射门,Soccer Kick,yes,yes
+probe-24-0446,24,学校课堂,排球 扣球,Volleyball Spike,yes,yes
+probe-24-0447,24,学校课堂,乒乓球 对打,Ping Pong Rally,yes,yes
+probe-24-0448,24,学校课堂,羽毛球 扣杀,Badminton Smash,yes,yes
+probe-24-0449,24,学校课堂,游泳 课,Swim Class,yes,yes
+probe-24-0450,24,学校课堂,美术 课,Art Class,yes,yes
+probe-24-0451,24,学校课堂,音乐 课,Music Class,yes,yes
+probe-24-0452,24,学校课堂,合唱 排练,Choir Rehearse,yes,yes
+probe-24-0453,24,学校课堂,图书馆 借书,Library Borrow,yes,yes
+probe-24-0454,24,学校课堂,还书 扫码,Return Scan,yes,yes
+probe-24-0455,24,学校课堂,书架 抽书,Bookshelf Pull,yes,yes
+probe-24-0456,24,学校课堂,阅览室 安静,Reading Room Quiet,yes,yes
+probe-24-0457,24,学校课堂,实验室 烧杯,Lab Beaker,yes,yes
+probe-24-0458,24,学校课堂,试管 摇晃,Test Tube Shake,yes,yes
+probe-24-0459,24,学校课堂,显微镜 观察,Microscope View,yes,yes
+probe-24-0460,24,学校课堂,化学 实验,Chemistry Lab,yes,yes
+probe-24-0461,24,学校课堂,物理 实验,Physics Lab,yes,yes
+probe-24-0462,24,学校课堂,地理 课,Geography Class,yes,yes
+probe-24-0463,24,学校课堂,历史 课,History Class,yes,yes
+probe-24-0464,24,学校课堂,电脑 课,Computer Class,yes,yes
+probe-24-0465,24,学校课堂,编程 键盘,Coding Keyboard,yes,yes
+probe-24-0466,24,学校课堂,3D 打印,3D Print,yes,yes
+probe-24-0467,24,学校课堂,机器人 社团,Robot Club,yes,yes
+probe-24-0468,24,学校课堂,校车 发车,School Bus Depart,yes,yes
+probe-24-0469,24,学校课堂,放学 涌出,School Rush,yes,yes
+probe-25-0470,25,餐饮厨房,餐厅 迎宾,Restaurant Greet,yes,yes
+probe-25-0471,25,餐饮厨房,点餐 平板,Order Tablet,yes,yes
+probe-25-0472,25,餐饮厨房,菜单 翻阅,Menu Flip,yes,yes
+probe-25-0473,25,餐饮厨房,服务员 托盘,Waiter Tray,yes,yes
+probe-25-0474,25,餐饮厨房,餐盘 摆放,Plate Serve,yes,yes
+probe-25-0475,25,餐饮厨房,刀叉 碰撞,Silverware Clink,yes,yes
+probe-25-0476,25,餐饮厨房,筷子 摆放,Chopsticks Place,yes,yes
+probe-25-0477,25,餐饮厨房,碗碟 碰撞,Dishes Clink,yes,yes
+probe-25-0478,25,餐饮厨房,汤勺 搅动,Ladle Stir,yes,yes
+probe-25-0479,25,餐饮厨房,火锅 沸腾,Hot Pot Boil,yes,yes
+probe-25-0480,25,餐饮厨房,烧烤 架,Bbq Grill,yes,yes
+probe-25-0481,25,餐饮厨房,铁板 滋滋,Teppan Sizzle,yes,yes
+probe-25-0482,25,餐饮厨房,炒菜 颠锅,Wok Toss,yes,yes
+probe-25-0483,25,餐饮厨房,切菜 砧板,Chop Board,yes,yes
+probe-25-0484,25,餐饮厨房,剁骨 刀,Chop Bone Knife,yes,yes
+probe-25-0485,25,餐饮厨房,和面 揉搓,Knead Dough,yes,yes
+probe-25-0486,25,餐饮厨房,擀面 杖,Rolling Pin,yes,yes
+probe-25-0487,25,餐饮厨房,蒸笼 冒气,Steamer Steam,yes,yes
+probe-25-0488,25,餐饮厨房,油炸 下锅,Deep Fry,yes,yes
+probe-25-0489,25,餐饮厨房,焯水 翻滚,Blanch Boil,yes,yes
+probe-25-0490,25,餐饮厨房,调味 翻炒,Season Stir Fry,yes,yes
+probe-25-0491,25,餐饮厨房,上菜 揭盖,Serve Uncover,yes,yes
+probe-25-0492,25,餐饮厨房,撤盘 收桌,Clear Table,yes,yes
+probe-25-0493,25,餐饮厨房,结账 刷卡,Checkout Card,yes,yes
+probe-25-0494,25,餐饮厨房,小费 放桌,Tip Place,yes,yes
+probe-25-0495,25,餐饮厨房,外卖 取餐,Takeout Pickup,yes,yes
+probe-25-0496,25,餐饮厨房,打包 袋,Takeout Bag,yes,yes
+probe-25-0497,25,餐饮厨房,奶茶 封口,Milk Tea Seal,yes,yes
+probe-25-0498,25,餐饮厨房,咖啡 拉花,Latte Art,yes,yes
+probe-25-0499,25,餐饮厨房,调酒 摇壶,Cocktail Shake,yes,yes
+probe-25-0500,25,餐饮厨房,开瓶 倒酒,Pop Cork Fall Wine,yes,yes
+probe-25-0501,25,餐饮厨房,香槟 气泡,Champagne Fizz,yes,yes
+probe-25-0502,25,餐饮厨房,啤酒 泡沫,Beer Foam,yes,yes
+probe-25-0503,25,餐饮厨房,冰块 落入,Ice Drop,yes,yes
+probe-25-0504,25,餐饮厨房,榨汁 搅拌,Juice Blend,yes,yes
+probe-25-0505,25,餐饮厨房,面包 出炉,Bread Bake Out,yes,yes
+probe-25-0506,25,餐饮厨房,蛋糕 裱花,Cake Piping,yes,yes
+probe-25-0507,25,餐饮厨房,寿司 卷帘,Sushi Roll,yes,yes
+probe-25-0508,25,餐饮厨房,拉面 吸溜,Ramen Slurp,yes,yes
+probe-25-0509,25,餐饮厨房,饺子 下锅,Dumpling Boil,yes,yes
+probe-25-0510,25,餐饮厨房,包子 出笼,Bun Steam Out,yes,yes
+probe-25-0511,25,餐饮厨房,烧烤 摊,Bbq Stall,yes,yes
+probe-26-0512,26,动物园所,动物园 开园,Zoo Open,yes,yes
+probe-26-0513,26,动物园所,狮子 吼叫,Lion Roar,yes,yes
+probe-26-0514,26,动物园所,老虎 低吼,Tiger Growl,yes,yes
+probe-26-0515,26,动物园所,大象 长鸣,Elephant Trumpet,yes,yes
+probe-26-0516,26,动物园所,长颈鹿 咀嚼,Giraffe Chew,yes,yes
+probe-26-0517,26,动物园所,斑马 奔跑,Zebra Run,yes,yes
+probe-26-0518,26,动物园所,犀牛 冲撞,Rhino Charge,yes,yes
+probe-26-0519,26,动物园所,河马 打哈欠,Hippo Yawn,yes,yes
+probe-26-0520,26,动物园所,猴子 嬉闹,Monkey Play,yes,yes
+probe-26-0521,26,动物园所,猩猩 捶胸,Gorilla Chest Beat,yes,yes
+probe-26-0522,26,动物园所,熊猫 咀嚼,Panda Chew,yes,yes
+probe-26-0523,26,动物园所,考拉 攀爬,Koala Climb,yes,yes
+probe-26-0524,26,动物园所,袋鼠 跳跃,Kangaroo Hop,yes,yes
+probe-26-0525,26,动物园所,企鹅 摇摆,Penguin Waddle,yes,yes
+probe-26-0526,26,动物园所,鹦鹉 学舌,Parrot Mimic,yes,yes
+probe-26-0527,26,动物园所,孔雀 开屏,Peacock Display,yes,yes
+probe-26-0528,26,动物园所,老鹰 俯冲,Eagle Dive,yes,yes
+probe-26-0529,26,动物园所,秃鹫 盘旋,Vulture Circle,yes,yes
+probe-26-0530,26,动物园所,蛇 蜕皮,Snake Shed,yes,yes
+probe-26-0531,26,动物园所,蜥蜴 晒太阳,Lizard Bask,yes,yes
+probe-26-0532,26,动物园所,乌龟 缩头,Turtle Retract,yes,yes
+probe-26-0533,26,动物园所,青蛙 呱呱,Frog Croak,yes,yes
+probe-26-0534,26,动物园所,鳄鱼 潜伏,Crocodile Lurk,yes,yes
+probe-26-0535,26,动物园所,水族馆 隧道,Aquarium Tunnel,yes,yes
+probe-26-0536,26,动物园所,鲨鱼 巡游,Shark Cruise,yes,yes
+probe-26-0537,26,动物园所,魔鬼 鱼,Manta Ray,yes,yes
+probe-26-0538,26,动物园所,海马 游动,Seahorse Swim,yes,yes
+probe-26-0539,26,动物园所,水母 漂浮,Jellyfish Float,yes,yes
+probe-26-0540,26,动物园所,珊瑚 礁,Coral Reef,yes,yes
+probe-26-0541,26,动物园所,潜水员 气泡,Diver Bubble,yes,yes
+probe-26-0542,26,动物园所,海洋 表演,Ocean Show,yes,yes
+probe-26-0543,26,动物园所,马戏团 入场,Circus Enter,yes,yes
+probe-26-0544,26,动物园所,小丑 喇叭,Clown Horn,yes,yes
+probe-26-0545,26,动物园所,杂技 抛接,Juggle Toss,yes,yes
+probe-26-0546,26,动物园所,走钢丝 平衡,Tightrope Balance,yes,yes
+probe-26-0547,26,动物园所,魔术 变牌,Magic Card Trick,yes,yes
+probe-26-0548,26,动物园所,老虎 钻圈,Tiger Jump Hoop,yes,yes
+probe-26-0549,26,动物园所,大象 站立,Elephant Stand,yes,yes
+probe-26-0550,26,动物园所,马术 表演,Equestrian Show,yes,yes
+probe-26-0551,26,动物园所,飞人 秋千,Trapeze Swing,yes,yes
+probe-26-0552,26,动物园所,烟花 马戏,Circus Firework,yes,yes
+probe-26-0553,26,动物园所,赌场 筹码,Casino Chips,yes,yes
+probe-26-0554,26,动物园所,老虎 机,Slot Machine,yes,yes
+probe-26-0555,26,动物园所,轮盘 转动,Roulette Spin,yes,yes
+probe-26-0556,26,动物园所,骰子 投掷,Dice Roll,yes,yes
+probe-26-0557,26,动物园所,扑克 洗牌,Card Shuffle,yes,yes
+probe-26-0558,26,动物园所,百家乐 发牌,Baccarat Deal,yes,yes
+probe-26-0559,26,动物园所,筹码 碰撞,Chip Clink,yes,yes
+probe-26-0560,26,动物园所,中奖 铃声,Jackpot Bell,yes,yes
+probe-26-0561,26,动物园所,角子 机,Slot Machine,yes,yes
+probe-26-0562,26,动物园所,宾果 报号,Bingo Call,yes,yes
+probe-26-0563,26,动物园所,彩票 刮开,Lottery Scratch,yes,yes
+probe-26-0564,26,动物园所,夜店 DJ,Nightclub Dj,yes,yes
+probe-26-0565,26,动物园所,舞池 低音,Dance Floor Bass,yes,yes
+probe-26-0566,26,动物园所,霓虹 闪烁,Neon Flicker,yes,yes
+probe-27-0567,27,军事战场,坦克 履带上弦,Tank Track Cock,yes,yes
+probe-27-0568,27,军事战场,装甲 车推进,Armored Car Advance,yes,yes
+probe-27-0569,27,军事战场,步兵 冲锋,Infantry Charge,yes,yes
+probe-27-0570,27,军事战场,机枪 点射,Machine Gun Burst,yes,yes
+probe-27-0571,27,军事战场,步枪 上膛,Rifle Cock,yes,yes
+probe-27-0572,27,军事战场,狙击 瞄准,Sniper Aim,yes,yes
+probe-27-0573,27,军事战场,榴弹 发射,Grenade Launch,yes,yes
+probe-27-0574,27,军事战场,迫击 炮击,Mortar Barrage,yes,yes
+probe-27-0575,27,军事战场,火箭 弹发射,Rocket Shot Launch,yes,yes
+probe-27-0576,27,军事战场,导弹 升空,Missile Launch,yes,yes
+probe-27-0577,27,军事战场,高射 炮开火,Flak Cannon Open Fire,yes,yes
+probe-27-0578,27,军事战场,防空 警报,Air Raid Alarm,yes,yes
+probe-27-0579,27,军事战场,雷达 扫描,Radar Sweep,yes,yes
+probe-27-0580,27,军事战场,战壕 挖掘,Trench Dig,yes,yes
+probe-27-0581,27,军事战场,沙袋 堆砌,Sandbag Stack,yes,yes
+probe-27-0582,27,军事战场,铁丝 网,Barbed Wire,yes,yes
+probe-27-0583,27,军事战场,地雷 引爆,Mine Detonate,yes,yes
+probe-27-0584,27,军事战场,手雷 投掷,Grenade Throw,yes,yes
+probe-27-0585,27,军事战场,刺刀 拼刺,Bayonet Charge,yes,yes
+probe-27-0586,27,军事战场,军靴 踏步,Boot March,yes,yes
+probe-27-0587,27,军事战场,口令 呼喊,Command Shout,yes,yes
+probe-27-0588,27,军事战场,旗语 传递,Flag Signal,yes,yes
+probe-27-0589,27,军事战场,无线电 呼叫,Radio Call,yes,yes
+probe-27-0590,27,军事战场,对讲 机杂音,Walkie Talkie Noise,yes,yes
+probe-27-0591,27,军事战场,直升机 盘旋,Heli Hover,yes,yes
+probe-27-0592,27,军事战场,武装 直升机,Attack Heli,yes,yes
+probe-27-0593,27,军事战场,空降 伞降,Airborne Drop,yes,yes
+probe-27-0594,27,军事战场,运输机 引擎,Transport Engine,yes,yes
+probe-27-0595,27,军事战场,战斗机 掠过,Fighter Flyby,yes,yes
+probe-27-0596,27,军事战场,音爆 轰鸣,Sonic Boom,yes,yes
+probe-27-0597,27,军事战场,轰炸 机投弹,Bomber Maker Bomb Drop,yes,yes
+probe-27-0598,27,军事战场,无人机 蜂鸣,Drone Buzz,yes,yes
+probe-27-0599,27,军事战场,雷达 锁定,Radar Lock,yes,yes
+probe-27-0600,27,军事战场,电子 干扰,Ecm Jam,yes,yes
+probe-27-0601,27,军事战场,烟幕 弹,Smoke Grenade,yes,yes
+probe-27-0602,27,军事战场,闪光 弹,Flashbang,yes,yes
+probe-27-0603,27,军事战场,催泪 弹,Tear Gas Grenade,yes,yes
+probe-27-0604,27,军事战场,战场 救护,Battlefield Medevac,yes,yes
+probe-27-0605,27,军事战场,担架 后送,Stretcher Evac,yes,yes
+probe-27-0606,27,军事战场,军号 吹响,Bugle Call,yes,yes
+probe-27-0607,27,军事战场,胜利 号角,Victory Horn,yes,yes
+probe-28-0608,28,机场航空,登机 口,Boarding Gate,yes,yes
+probe-28-0609,28,机场航空,安检 通道,Security Lane,yes,yes
+probe-28-0610,28,机场航空,行李 托运,Baggage Check In,yes,yes
+probe-28-0611,28,机场航空,登机牌 扫描,Boarding Pass Scan,yes,yes
+probe-28-0612,28,机场航空,护照 查验,Passport Inspect,yes,yes
+probe-28-0613,28,机场航空,海关 申报,Customs Declare,yes,yes
+probe-28-0614,28,机场航空,入境 盖章,Entry Stamp,yes,yes
+probe-28-0615,28,机场航空,出境 离境,Departure Exit,yes,yes
+probe-28-0616,28,机场航空,候机 大厅,Terminal Hall,yes,yes
+probe-28-0617,28,机场航空,登机 广播,Boarding Pa,yes,yes
+probe-28-0618,28,机场航空,航班 延误,Flight Delay,yes,yes
+probe-28-0619,28,机场航空,航班 取消,Flight Cancel,yes,yes
+probe-28-0620,28,机场航空,跑道 滑行,Runway Taxi,yes,yes
+probe-28-0621,28,机场航空,起飞 离地,Takeoff Liftoff,yes,yes
+probe-28-0622,28,机场航空,爬升 引擎,Climb Engine,yes,yes
+probe-28-0623,28,机场航空,巡航 高度,Cruise Altitude,yes,yes
+probe-28-0624,28,机场航空,下降 襟翼,Descent Flap,yes,yes
+probe-28-0625,28,机场航空,降落 接地,Landing Touchdown,yes,yes
+probe-28-0626,28,机场航空,刹车 反推,Brake Reverse,yes,yes
+probe-28-0627,28,机场航空,廊桥 对接,Jet Bridge Dock,yes,yes
+probe-28-0628,28,机场航空,摆渡 车,Shuttle Bus,yes,yes
+probe-28-0629,28,机场航空,行李 转盘,Baggage Carousel,yes,yes
+probe-28-0630,28,机场航空,提取 行李,Retrieve Luggage,yes,yes
+probe-28-0631,28,机场航空,遗失 行李,Lost Baggage,yes,yes
+probe-28-0632,28,机场航空,贵宾 休息室,Vip Lounge,yes,yes
+probe-28-0633,28,机场航空,免税店 购物,Duty Free Shop,yes,yes
+probe-28-0634,28,机场航空,候机 椅,Waiting Seat,yes,yes
+probe-28-0635,28,机场航空,登机 梯,Boarding Stairs,yes,yes
+probe-28-0636,28,机场航空,舷梯 放下,Airstairs Lower,yes,yes
+probe-28-0637,28,机场航空,加油 车,Fuel Truck,yes,yes
+probe-28-0638,28,机场航空,除冰 车,Deicer Truck,yes,yes
+probe-28-0639,28,机场航空,牵引 车,Tug Truck,yes,yes
+probe-28-0640,28,机场航空,塔台 指令,Tower Command,yes,yes
+probe-28-0641,28,机场航空,雷达 引导,Radar Guide,yes,yes
+probe-28-0642,28,机场航空,盲降 系统,Ils System,yes,yes
+probe-28-0643,28,机场航空,紧急 迫降,Emergency Landing,yes,yes
+probe-28-0644,28,机场航空,氧气 面罩,Oxygen Mask,yes,yes
+probe-28-0645,28,机场航空,救生 衣,Life Vest,yes,yes
+probe-28-0646,28,机场航空,滑梯 充气,Slide Inflate,yes,yes
+probe-28-0647,28,机场航空,黑匣子 记录,Black Box Record,yes,yes
+probe-28-0648,28,机场航空,延误 通知,Delay Notice,yes,yes
+probe-29-0649,29,酒店客房,酒店 入住,Hotel Check In,yes,yes
+probe-29-0650,29,酒店客房,前台 登记,Front Desk Register,yes,yes
+probe-29-0651,29,酒店客房,房卡 刷卡,Key Card Swipe,yes,yes
+probe-29-0652,29,酒店客房,电梯 上行,Elevator Up,yes,yes
+probe-29-0653,29,酒店客房,行李 推车,Luggage Cart,yes,yes
+probe-29-0654,29,酒店客房,客房 打扫,Room Clean,yes,yes
+probe-29-0655,29,酒店客房,铺床 整理,Make Bed,yes,yes
+probe-29-0656,29,酒店客房,换洗 毛巾,Linen Change,yes,yes
+probe-29-0657,29,酒店客房,迷你 吧,Mini Bar,yes,yes
+probe-29-0658,29,酒店客房,冰箱 开门,Fridge Open,yes,yes
+probe-29-0659,29,酒店客房,淋浴 水流,Shower Water,yes,yes
+probe-29-0660,29,酒店客房,浴缸 放水,Bathtub Drain,yes,yes
+probe-29-0661,29,酒店客房,马桶 冲水,Toilet Flush,yes,yes
+probe-29-0662,29,酒店客房,吹风机 启动,Hair Dryer,yes,yes
+probe-29-0663,29,酒店客房,保险箱 开启,Safe Open,yes,yes
+probe-29-0664,29,酒店客房,窗帘 拉开,Curtain Open,yes,yes
+probe-29-0665,29,酒店客房,空调 调节,Ac Adjust,yes,yes
+probe-29-0666,29,酒店客房,叫醒 服务,Wake Up Call,yes,yes
+probe-29-0667,29,酒店客房,客房 送餐,Room Service,yes,yes
+probe-29-0668,29,酒店客房,餐厅 早餐,Breakfast Buffet,yes,yes
+probe-29-0669,29,酒店客房,自助餐 取餐,Buffet Serve,yes,yes
+probe-29-0670,29,酒店客房,健身房 器械,Gym Equipment,yes,yes
+probe-29-0671,29,酒店客房,游泳池 跳水,Pool Dive,yes,yes
+probe-29-0672,29,酒店客房,桑拿 蒸汽,Sauna Steam,yes,yes
+probe-29-0673,29,酒店客房,SPA 按摩,Spa Massage,yes,yes
+probe-29-0674,29,酒店客房,会议室 投影,Meeting Projector,yes,yes
+probe-29-0675,29,酒店客房,商务 中心,Business Center,yes,yes
+probe-29-0676,29,酒店客房,退房 结账,Checkout Bill,yes,yes
+probe-29-0677,29,酒店客房,发票 打印,Receipt Print,yes,yes
+probe-29-0678,29,酒店客房,行李 员,Bellhop,yes,yes
+probe-29-0679,29,酒店客房,门童 开门,Doorman Open,yes,yes
+probe-29-0680,29,酒店客房,泊车 服务,Valet Park,yes,yes
+probe-29-0681,29,酒店客房,礼宾 接待,Concierge Host,yes,yes
+probe-29-0682,29,酒店客房,婚礼 宴会,Wedding Banquet,yes,yes
+probe-29-0683,29,酒店客房,香槟 塔,Champagne Tower,yes,yes
+probe-29-0684,29,酒店客房,舞厅 乐队,Ballroom Band,yes,yes
+probe-29-0685,29,酒店客房,酒吧 点单,Bar Order,yes,yes
+probe-29-0686,29,酒店客房,夜床 服务,Turndown Service,yes,yes
+probe-29-0687,29,酒店客房,洗衣 服务,Laundry Service,yes,yes
+probe-29-0688,29,酒店客房,熨烫 衣物,Clothes Iron,yes,yes
+probe-29-0689,29,酒店客房,投诉 处理,Complaint Handle,yes,yes
+probe-29-0690,29,酒店客房,紧急 疏散,Emergency Evac,yes,yes
+probe-30-0691,30,警务刑侦,警车 警笛,Police Siren,yes,yes
+probe-30-0692,30,警务刑侦,巡逻 车,Patrol Car,yes,yes
+probe-30-0693,30,警务刑侦,特警 突击,Swat Raid,yes,yes
+probe-30-0694,30,警务刑侦,刑警 勘查,Detective Investigate,yes,yes
+probe-30-0695,30,警务刑侦,现场 封锁,Crime Scene Cordon,yes,yes
+probe-30-0696,30,警务刑侦,警戒 线,Police Line,yes,yes
+probe-30-0697,30,警务刑侦,取证 拍照,Evidence Photo,yes,yes
+probe-30-0698,30,警务刑侦,指纹 粉末,Fingerprint Dust,yes,yes
+probe-30-0699,30,警务刑侦,脚印 拓印,Footprint Cast,yes,yes
+probe-30-0700,30,警务刑侦,血迹 采样,Blood Sample,yes,yes
+probe-30-0701,30,警务刑侦,弹壳 收集,Shell Collect,yes,yes
+probe-30-0702,30,警务刑侦,弹道 分析,Ballistics Analysis,yes,yes
+probe-30-0703,30,警务刑侦,测距 标尺,Ranging Scale,yes,yes
+probe-30-0704,30,警务刑侦,尸体 袋,Body Bag,yes,yes
+probe-30-0705,30,警务刑侦,法医 鉴定,Coroner Exam,yes,yes
+probe-30-0706,30,警务刑侦,审讯 记录,Interrogation Record,yes,yes
+probe-30-0707,30,警务刑侦,笔录 签字,Statement Sign,yes,yes
+probe-30-0708,30,警务刑侦,嫌疑人 押送,Suspect Escort,yes,yes
+probe-30-0709,30,警务刑侦,手铐 咔嚓,Handcuff Snap,yes,yes
+probe-30-0710,30,警务刑侦,脚镣 拖拽,Leg Iron Drag,yes,yes
+probe-30-0711,30,警务刑侦,警棍 击打,Baton Strike,yes,yes
+probe-30-0712,30,警务刑侦,电击 枪,Taser Shot,yes,yes
+probe-30-0713,30,警务刑侦,催泪 喷射,Tear Gas Spray,yes,yes
+probe-30-0714,30,警务刑侦,防暴 驱散,Riot Disperse,yes,yes
+probe-30-0715,30,警务刑侦,路障 设卡,Barricade Checkpoint,yes,yes
+probe-30-0716,30,警务刑侦,盘查 证件,Id Check,yes,yes
+probe-30-0717,30,警务刑侦,搜身 检查,Pat Down,yes,yes
+probe-30-0718,30,警务刑侦,扣押 物品,Seized Goods,yes,yes
+probe-30-0719,30,警务刑侦,通缉 令,Warrant,yes,yes
+probe-30-0720,30,警务刑侦,悬赏 通告,Bounty Notice,yes,yes
+probe-30-0721,30,警务刑侦,监狱 铁门,Prison Gate,yes,yes
+probe-30-0722,30,警务刑侦,牢房 巡视,Cell Patrol,yes,yes
+probe-30-0723,30,警务刑侦,放风 操场,Yard Time,yes,yes
+probe-30-0724,30,警务刑侦,越狱 挖掘,Prison Dig,yes,yes
+probe-30-0725,30,警务刑侦,探照 灯,Searchlight,yes,yes
+probe-30-0726,30,警务刑侦,无人机 追踪,Drone Track,yes,yes
+probe-30-0727,30,警务刑侦,警犬 嗅探,K9 Sniff,yes,yes
+probe-30-0728,30,警务刑侦,痕迹 鉴定,Trace Exam,yes,yes
+probe-30-0729,30,警务刑侦,DNA 比对,Dna Match,yes,yes
+probe-30-0730,30,警务刑侦,监控 回放,Cctv Playback,yes,yes
+probe-30-0731,30,警务刑侦,对讲 调度,Radio Dispatch,yes,yes
+probe-30-0732,30,警务刑侦,指挥中心 大屏,Command Center Display,yes,yes
+probe-30-0733,30,警务刑侦,报警 电话,Emergency Call,yes,yes
+probe-30-0734,30,警务刑侦,110 接警,110 Dispatch Call,yes,yes
+probe-30-0735,30,警务刑侦,火警 119,Fire Alarm 119,yes,yes
+probe-30-0736,30,警务刑侦,急救 120,First Aid 120,yes,yes
+probe-31-0737,31,工地农村,工地 开工,Site Start,yes,yes
+probe-31-0738,31,工地农村,塔吊 旋转,Tower Crane Swing,yes,yes
+probe-31-0739,31,工地农村,吊车 起吊,Crane Hoist,yes,yes
+probe-31-0740,31,工地农村,挖掘机 铲斗,Excavator Bucket,yes,yes
+probe-31-0741,31,工地农村,推土机 推进,Bulldozer Push,yes,yes
+probe-31-0742,31,工地农村,压路机 碾压,Road Roller,yes,yes
+probe-31-0743,31,工地农村,混凝土 搅拌,Concrete Mix,yes,yes
+probe-31-0744,31,工地农村,泵车 浇筑,Concrete Pour,yes,yes
+probe-31-0745,31,工地农村,钢筋 绑扎,Rebar Tie,yes,yes
+probe-31-0746,31,工地农村,焊接 火花,Weld Spark,yes,yes
+probe-31-0747,31,工地农村,切割 钢板,Steel Cut,yes,yes
+probe-31-0748,31,工地农村,脚手架 搭建,Scaffold Build,yes,yes
+probe-31-0749,31,工地农村,安全 网,Safety Net,yes,yes
+probe-31-0750,31,工地农村,头盔 佩戴,Helmet Wear,yes,yes
+probe-31-0751,31,工地农村,反光 背心,Reflective Vest,yes,yes
+probe-31-0752,31,工地农村,洞口 坠落,Opening Fall,yes,yes
+probe-31-0753,31,工地农村,扬尘 弥漫,Dust Cloud,yes,yes
+probe-31-0754,31,工地农村,打桩 锤击,Pile Hammer,yes,yes
+probe-31-0755,31,工地农村,钻孔 机,Drill Rig,yes,yes
+probe-31-0756,31,工地农村,破碎 锤,Breaker Hammer,yes,yes
+probe-31-0757,31,工地农村,拆除 楼体,Building Demolish,yes,yes
+probe-31-0758,31,工地农村,爆破 拆除,Blast Demolish,yes,yes
+probe-31-0759,31,工地农村,沉降 裂缝,Settlement Crack,yes,yes
+probe-31-0760,31,工地农村,漏水 修补,Leak Patch,yes,yes
+probe-31-0761,31,工地农村,防水 涂层,Waterproof Coat,yes,yes
+probe-31-0762,31,工地农村,贴砖 敲击,Tile Tap,yes,yes
+probe-31-0763,31,工地农村,粉刷 滚筒,Paint Roller,yes,yes
+probe-31-0764,31,工地农村,吊顶 安装,Ceiling Install,yes,yes
+probe-31-0765,31,工地农村,铺地板 敲击,Floor Tap,yes,yes
+probe-31-0766,31,工地农村,装门窗 框,Dress Door Window Frame,yes,yes
+probe-31-0767,31,工地农村,通水 电,Utilities On,yes,yes
+probe-31-0768,31,工地农村,验收 检查,Final Inspect,yes,yes
+probe-31-0769,31,工地农村,交房 钥匙,Handover Keys,yes,yes
+probe-31-0770,31,工地农村,装修 垃圾,Reno Debris,yes,yes
+probe-31-0771,31,工地农村,小区 门禁,Community Gate,yes,yes
+probe-31-0772,31,工地农村,物业 巡逻,Property Patrol,yes,yes
+probe-31-0773,31,工地农村,快递 柜,Parcel Locker,yes,yes
+probe-31-0774,31,工地农村,垃圾 清运,Garbage Haul,yes,yes
+probe-31-0775,31,工地农村,绿化 修剪,Garden Trim,yes,yes
+probe-31-0776,31,工地农村,洒水 浇灌,Water Spray,yes,yes
+probe-31-0777,31,工地农村,儿童 游乐,Playground Kids,yes,yes
+probe-31-0778,31,工地农村,老人 棋牌,Very People Mahjong,yes,yes
+probe-31-0779,31,工地农村,广场舞 音响,Square Dance Speaker,yes,yes
+probe-31-0780,31,工地农村,夜市 摊位,Night Market Stall,yes,yes
+probe-31-0781,31,工地农村,赶集 叫卖,Market Hawker,yes,yes
+probe-31-0782,31,工地农村,杀猪 放血,Slaughter Bleed,yes,yes
+probe-31-0783,31,工地农村,磨面 机器,Flour Mill,yes,yes
+probe-31-0784,31,工地农村,榨油 作坊,Oil Press Workshop,yes,yes
+probe-31-0785,31,工地农村,酿酒 作坊,Brew Workshop,yes,yes
+probe-31-0786,31,工地农村,熏肉 熏制,Smoked Meat Cure,yes,yes
+probe-31-0787,31,工地农村,晒谷 场,Grain Drying Yard,yes,yes
+probe-32-0788,32,海运港口,货轮 鸣笛,Cargo Ship Horn,yes,yes
+probe-32-0789,32,海运港口,港口 装卸,Port Load,yes,yes
+probe-32-0790,32,海运港口,集装箱 吊装,Container Lift,yes,yes
+probe-32-0791,32,海运港口,码头 缆绳,Pier Mooring,yes,yes
+probe-32-0792,32,海运港口,系泊 桩,Mooring Bollard,yes,yes
+probe-32-0793,32,海运港口,锚链 抛锚,Anchor Drop,yes,yes
+probe-32-0794,32,海运港口,起锚 机,Anchor Winch,yes,yes
+probe-32-0795,32,海运港口,拖轮 辅助,Tug Assist,yes,yes
+probe-32-0796,32,海运港口,引航 艇,Pilot Boat,yes,yes
+probe-32-0797,32,海运港口,海关 查验,Custom Verify,yes,yes
+probe-32-0798,32,海运港口,检疫 登船,Quarantine Board,yes,yes
+probe-32-0799,32,海运港口,登轮 桥,Gangway,yes,yes
+probe-32-0800,32,海运港口,船舱 门,Cabin Door,yes,yes
+probe-32-0801,32,海运港口,货舱 打开,Cargo Hold Open,yes,yes
+probe-32-0802,32,海运港口,压载 水,Ballast Water,yes,yes
+probe-32-0803,32,海运港口,排水 泵,Bilge Pump,yes,yes
+probe-32-0804,32,海运港口,螺旋 桨,Propeller,yes,yes
+probe-32-0805,32,海运港口,舵机 转动,Rudder Turn,yes,yes
+probe-32-0806,32,海运港口,雷达 回波,Radar Echo,yes,yes
+probe-32-0807,32,海运港口,声呐 探测,Sonar Ping,yes,yes
+probe-32-0808,32,海运港口,对讲 海务,Marine Radio,yes,yes
+probe-32-0809,32,海运港口,救生 艇,Lifeboat,yes,yes
+probe-32-0810,32,海运港口,弃船 警报,Abandon Ship Alarm,yes,yes
+probe-32-0811,32,海运港口,消防 泵,Fire Pump,yes,yes
+probe-32-0812,32,海运港口,海盗 袭击,Pirate Attack,yes,yes
+probe-32-0813,32,海运港口,护航 舰队,Convoy Fleet,yes,yes
+probe-32-0814,32,海运港口,潜艇 下潜,Sub Dive,yes,yes
+probe-32-0815,32,海运港口,鱼雷 发射,Torpedo Launch,yes,yes
+probe-32-0816,32,海运港口,深水 炸弹,Depth Charge,yes,yes
+probe-32-0817,32,海运港口,声呐 浮标,Sonar Buoy,yes,yes
+probe-32-0818,32,海运港口,海上 补给,Sea Resupply,yes,yes
+probe-32-0819,32,海运港口,钻井 平台,Offshore Rig,yes,yes
+probe-32-0820,32,海运港口,海上 风电,Offshore Wind,yes,yes
+probe-32-0821,32,海运港口,灯塔 雾号,Lighthouse Foghorn,yes,yes
+probe-32-0822,32,海运港口,浮标 碰撞,Buoy Hit,yes,yes
+probe-32-0823,32,海运港口,海冰 碎裂,Sea Ice Break,yes,yes
+probe-32-0824,32,海运港口,渡轮 靠岸,Ferry Dock,yes,yes
+probe-32-0825,32,海运港口,客舱 广播,Cabin Pa,yes,yes
+probe-32-0826,32,海运港口,晕船 呕吐,Seasick Vomit,yes,yes
+probe-32-0827,32,海运港口,海鸥 盘旋,Seagull Circle,yes,yes
+probe-32-0828,32,海运港口,港口 吊机,Port Crane,yes,yes
+probe-33-0829,33,铁路列车,铁路 轨道,Rail Track,yes,yes
+probe-33-0830,33,铁路列车,火车站 广播,Station Pa,yes,yes
+probe-33-0831,33,铁路列车,检票 闸机,Ticket Gate,yes,yes
+probe-33-0832,33,铁路列车,站台 候车,Platform Wait,yes,yes
+probe-33-0833,33,铁路列车,高铁 进站,High Speed Arrive,yes,yes
+probe-33-0834,33,铁路列车,动车 出站,Bullet Depart,yes,yes
+probe-33-0835,33,铁路列车,货运 列车,Freight Train,yes,yes
+probe-33-0836,33,铁路列车,编组 场,Yard,yes,yes
+probe-33-0837,33,铁路列车,调车 作业,Shunting Work,yes,yes
+probe-33-0838,33,铁路列车,道岔 切换,Switch Change,yes,yes
+probe-33-0839,33,铁路列车,信号灯 变灯,Signal Change,yes,yes
+probe-33-0840,33,铁路列车,道口 栏杆,Crossing Gate,yes,yes
+probe-33-0841,33,铁路列车,平交 道口,Grade Crossing,yes,yes
+probe-33-0842,33,铁路列车,轮对 检修,Wheelset Service,yes,yes
+probe-33-0843,33,铁路列车,转向 架,Bogie,yes,yes
+probe-33-0844,33,铁路列车,制动 测试,Brake Test,yes,yes
+probe-33-0845,33,铁路列车,受电 弓,Pantograph,yes,yes
+probe-33-0846,33,铁路列车,接触 网,Catenary,yes,yes
+probe-33-0847,33,铁路列车,供电 段,Power Section,yes,yes
+probe-33-0848,33,铁路列车,隧道 进洞,Tunnel Entry,yes,yes
+probe-33-0849,33,铁路列车,桥梁 通过,Bridge Pass,yes,yes
+probe-33-0850,33,铁路列车,涵洞 排水,Culvert Drain,yes,yes
+probe-33-0851,33,铁路列车,枕木 更换,Sleeper Replace,yes,yes
+probe-33-0852,33,铁路列车,道砟 铺设,Scaffolding Ballast Lay Track,yes,yes
+probe-33-0853,33,铁路列车,钢轨 焊接,Rail Weld,yes,yes
+probe-33-0854,33,铁路列车,探伤 检测,Flaw Detect,yes,yes
+probe-33-0855,33,铁路列车,列检 作业,Train Inspect,yes,yes
+probe-33-0856,33,铁路列车,列尾 装置,Eot Device,yes,yes
+probe-33-0857,33,铁路列车,机车 换挂,Locomotive Swap Quickdraws,yes,yes
+probe-33-0858,33,铁路列车,重联 运行,Multi Unit Run,yes,yes
+probe-33-0859,33,铁路列车,甩挂 作业,Uncouple Quickdraws Work,yes,yes
+probe-33-0860,33,铁路列车,编组 解体,Yard Split,yes,yes
+probe-33-0861,33,铁路列车,到达 解体,Arrival Split,yes,yes
+probe-33-0862,33,铁路列车,出发 编组,Departure Makeup,yes,yes
+probe-33-0863,33,铁路列车,调车 机,Shunter,yes,yes
+probe-33-0864,33,铁路列车,驼峰 溜放,Hump Release,yes,yes
+probe-33-0865,33,铁路列车,货场 装卸,Freight Yard Load,yes,yes
+probe-33-0866,33,铁路列车,集装箱 平车,Container Flatcar,yes,yes
+probe-33-0867,33,铁路列车,敞车 卸货,Open Wagon Unload,yes,yes
+probe-33-0868,33,铁路列车,罐车 清洗,Tank Car Clean,yes,yes
+probe-33-0869,33,铁路列车,棚车 开门,Boxcar Open,yes,yes
+probe-33-0870,33,铁路列车,守车 标志,Caboose Mark,yes,yes
+probe-33-0871,33,铁路列车,铁路 道口,Rail Crossing,yes,yes
+probe-33-0872,33,铁路列车,卧铺 车厢,Sleeper Car,yes,yes
+probe-33-0873,33,铁路列车,餐车 厨房,Dining Car Kitchen,yes,yes
+probe-33-0874,33,铁路列车,行李 架,Luggage Rack,yes,yes
+probe-34-0875,34,汽修赛车,汽修 车间,Auto Shop,yes,yes
+probe-34-0876,34,汽修赛车,举升 机,Car Lift,yes,yes
+probe-34-0877,34,汽修赛车,轮胎 更换,Tire Change,yes,yes
+probe-34-0878,34,汽修赛车,动平衡 机,Wheel Balancer,yes,yes
+probe-34-0879,34,汽修赛车,四轮 定位,Wheel Alignment,yes,yes
+probe-34-0880,34,汽修赛车,发动机 拆解,Engine Tear Down,yes,yes
+probe-34-0881,34,汽修赛车,变速箱 检修,Gearbox Service,yes,yes
+probe-34-0882,34,汽修赛车,排气 改装,Exhaust Mod,yes,yes
+probe-34-0883,34,汽修赛车,刹车 片,Brake Pad,yes,yes
+probe-34-0884,34,汽修赛车,机油 更换,Oil Change,yes,yes
+probe-34-0885,34,汽修赛车,冷却 液,Coolant,yes,yes
+probe-34-0886,34,汽修赛车,火花 塞,Spark Plug,yes,yes
+probe-34-0887,34,汽修赛车,电瓶 搭电,Battery Jump,yes,yes
+probe-34-0888,34,汽修赛车,喷漆 房,Spray Booth,yes,yes
+probe-34-0889,34,汽修赛车,抛光 机,Polisher,yes,yes
+probe-34-0890,34,汽修赛车,钣金 修复,Body Repair,yes,yes
+probe-34-0891,34,汽修赛车,凹陷 拉拔,Dent Pull,yes,yes
+probe-34-0892,34,汽修赛车,玻璃 更换,Windshield Replace,yes,yes
+probe-34-0893,34,汽修赛车,雨刮 器,Wiper,yes,yes
+probe-34-0894,34,汽修赛车,空调 加氟,Ac Recharge,yes,yes
+probe-34-0895,34,汽修赛车,故障 诊断,Fault Diagnose,yes,yes
+probe-34-0896,34,汽修赛车,OBD 读取,Obd Scan Read,yes,yes
+probe-34-0897,34,汽修赛车,赛车 维修,Race Car Service,yes,yes
+probe-34-0898,34,汽修赛车,进站 换胎,Pit Tire Change,yes,yes
+probe-34-0899,34,汽修赛车,加油 进站,Refuel Stop,yes,yes
+probe-34-0900,34,汽修赛车,维修 区,Pit Lane,yes,yes
+probe-34-0901,34,汽修赛车,发车 线,Grid Start,yes,yes
+probe-34-0902,34,汽修赛车,排位 圈,Qualifying Lap,yes,yes
+probe-34-0903,34,汽修赛车,暖胎 圈,Warm Up Lap,yes,yes
+probe-34-0904,34,汽修赛车,冲线 庆祝,Finish Celebrate,yes,yes
+probe-34-0905,34,汽修赛车,引擎 爆缸,Engine Blow,yes,yes
+probe-34-0906,34,汽修赛车,轮胎 爆胎,Tire Blowout,yes,yes
+probe-34-0907,34,汽修赛车,碰撞 退赛,Crash Dnf,yes,yes
+probe-34-0908,34,汽修赛车,安全 车,Safety Car,yes,yes
+probe-34-0909,34,汽修赛车,红旗 终止,Red Flag Stop,yes,yes
+probe-34-0910,34,汽修赛车,维修 通道,Pit Lane,yes,yes
+probe-34-0911,34,汽修赛车,车库 门,Garage Door,yes,yes
+probe-34-0912,34,汽修赛车,洗车 机,Car Wash,yes,yes
+probe-34-0913,34,汽修赛车,泡沫 喷淋,Foam Spray,yes,yes
+probe-34-0914,34,汽修赛车,吸尘 器,Vacuum,yes,yes
+probe-34-0915,34,汽修赛车,打蜡 抛光,Wax Polish,yes,yes
+probe-34-0916,34,汽修赛车,内饰 清洁,Interior Clean,yes,yes
+probe-34-0917,34,汽修赛车,贴膜 施工,Window Tint,yes,yes
+probe-34-0918,34,汽修赛车,改装 排气,Exhaust Mod,yes,yes
+probe-34-0919,34,汽修赛车,低趴 避震,Stance Suspension,yes,yes
+probe-34-0920,34,汽修赛车,轮毂 更换,Wheel Swap,yes,yes
+probe-34-0921,34,汽修赛车,尾翼 安装,Spoiler Install,yes,yes
+probe-34-0922,34,汽修赛车,涡轮 改装,Turbo Mod,yes,yes
+probe-34-0923,34,汽修赛车,中冷 器,Medium Intercooler Phaser,yes,yes
+probe-34-0924,34,汽修赛车,泄压 阀,Blow Off Valve,yes,yes
+probe-34-0925,34,汽修赛车,烧胎 起步,Burnout Launch,yes,yes
+probe-34-0926,34,汽修赛车,漂移 过弯,Drift Corner,yes,yes
+probe-34-0927,34,汽修赛车,越野 涉水,Offroad Wade,yes,yes
+probe-34-0928,34,汽修赛车,底盘 护板,Skid Plate,yes,yes
+probe-35-0929,35,广电录音,新闻 播报,News Anchor,yes,yes
+probe-35-0930,35,广电录音,直播 导播,Live Director,yes,yes
+probe-35-0931,35,广电录音,提词 器,Teleprompter,yes,yes
+probe-35-0932,35,广电录音,耳返 监听,In Ear Monitor,yes,yes
+probe-35-0933,35,广电录音,话筒 试音,Mic Check,yes,yes
+probe-35-0934,35,广电录音,混音 台,Mixing Console,yes,yes
+probe-35-0935,35,广电录音,推子 推起,Fader Push Together,yes,yes
+probe-35-0936,35,广电录音,压缩 器,Compressor,yes,yes
+probe-35-0937,35,广电录音,均衡 器,Equalizer,yes,yes
+probe-35-0938,35,广电录音,混响 效果,Reverb Effect,yes,yes
+probe-35-0939,35,广电录音,降噪 处理,Noise Reduce,yes,yes
+probe-35-0940,35,广电录音,录音 棚,Recording Studio,yes,yes
+probe-35-0941,35,广电录音,隔音 门,Soundproof Door,yes,yes
+probe-35-0942,35,广电录音,防喷 罩,Pop Filter,yes,yes
+probe-35-0943,35,广电录音,领夹 麦,Lavalier Mic,yes,yes
+probe-35-0944,35,广电录音,枪式 话筒,Shotgun Mic,yes,yes
+probe-35-0945,35,广电录音,挑杆 收音,Boom Record,yes,yes
+probe-35-0946,35,广电录音,同期 录音,Production Sound,yes,yes
+probe-35-0947,35,广电录音,拟音 棚,Foley Stage,yes,yes
+probe-35-0948,35,广电录音,foley 脚步,Foley Footstep,yes,yes
+probe-35-0949,35,广电录音,foley 衣物,Foley Cloth Rustle,yes,yes
+probe-35-0950,35,广电录音,foley 道具,Foley Prop,yes,yes
+probe-35-0951,35,广电录音,ADR 补录,Adr Adr Record,yes,yes
+probe-35-0952,35,广电录音,字幕 制作,Subtitle Make,yes,yes
+probe-35-0953,35,广电录音,片花 剪辑,Promo Edit,yes,yes
+probe-35-0954,35,广电录音,转场 特效,Transition Vfx,yes,yes
+probe-35-0955,35,广电录音,绿幕 合成,Green Screen Comp,yes,yes
+probe-35-0956,35,广电录音,调光 台,Light Console,yes,yes
+probe-35-0957,35,广电录音,聚光 灯,Spotlight,yes,yes
+probe-35-0958,35,广电录音,柔光 箱,Softbox,yes,yes
+probe-35-0959,35,广电录音,反光 板,Reflector,yes,yes
+probe-35-0960,35,广电录音,监视 器,Monitor,yes,yes
+probe-35-0961,35,广电录音,返送 画面,Return Feed,yes,yes
+probe-35-0962,35,广电录音,导播 切换,Director Cut,yes,yes
+probe-35-0963,35,广电录音,慢动作 回放,Slo Mo Replay,yes,yes
+probe-35-0964,35,广电录音,快切 剪辑,Quick Cut Edit,yes,yes
+probe-35-0965,35,广电录音,片头 包装,Show Open,yes,yes
+probe-35-0966,35,广电录音,天气预报 图,Weather Chart,yes,yes
+probe-35-0967,35,广电录音,雷达 回波图,Radar Echo Chart,yes,yes
+probe-35-0968,35,广电录音,演播 室,Studio,yes,yes
+probe-35-0969,35,广电录音,提词 滚动,Teleprompter Scroll,yes,yes
+probe-35-0970,35,广电录音,电话 连线,Phone Link,yes,yes
+probe-35-0971,35,广电录音,卫星 连线,Satellite Link,yes,yes
+probe-35-0972,35,广电录音,现场 记者,Field Reporter,yes,yes
+probe-35-0973,35,广电录音,ENG 背包,Eng Inventory,yes,yes
+probe-35-0974,35,广电录音,转播 车,Ob Van,yes,yes
+probe-35-0975,35,广电录音,卫星 车,Satellite Truck,yes,yes
+probe-35-0976,35,广电录音,微波 传输,Microwave Link,yes,yes
+probe-35-0977,35,广电录音,讯道 分配,Channel Route,yes,yes
+probe-35-0978,35,广电录音,时钟 同步,Clock Sync,yes,yes
+probe-35-0979,35,广电录音,彩条 测试,Color Bars Test,yes,yes
+probe-35-0980,35,广电录音,静音 段,Dead Air,yes,yes
+probe-35-0981,35,广电录音,报时 声,Time Check,yes,yes
+probe-35-0982,35,广电录音,台标 呼号,Station Id,yes,yes
+probe-35-0983,35,广电录音,片尾 鸣谢,End Credits,yes,yes
+probe-36-0984,36,魔法奥术,火球 施放,Fireball Cast,yes,yes
+probe-36-0985,36,魔法奥术,火球 命中,Fireball Hit,yes,yes
+probe-36-0986,36,魔法奥术,冰锥 冻结,Ice Freeze,yes,yes
+probe-36-0987,36,魔法奥术,闪电 链击,Chain Lightning,yes,yes
+probe-36-0988,36,魔法奥术,治疗 法术,Heal Spell,yes,yes
+probe-36-0989,36,魔法奥术,增益 光环,Buff Aura,yes,yes
+probe-36-0990,36,魔法奥术,减益 诅咒,Debuff Curse,yes,yes
+probe-36-0991,36,魔法奥术,奥术 屏障,Arcane Barrier,yes,yes
+probe-36-0992,36,魔法奥术,奥术 偏转,Arcane Deflect,yes,yes
+probe-36-0993,36,魔法奥术,魔法 护盾,Magic Shield,yes,yes
+probe-36-0994,36,魔法奥术,魔法 充能,Magic Charge,yes,yes
+probe-36-0995,36,魔法奥术,法术 吟唱,Spell Cast,yes,yes
+probe-36-0996,36,魔法奥术,法术 命中,Spell Impact,yes,yes
+probe-36-0997,36,魔法奥术,附魔 武器,Enchant Weapon,yes,yes
+probe-36-0998,36,魔法奥术,驱散 魔法,Dispel Magic,yes,yes
+probe-36-0999,36,魔法奥术,召唤 元素,Summon Elemental,yes,yes
+probe-36-1000,36,魔法奥术,酸液 箭矢,Acid Arrow,yes,yes
+probe-36-1001,36,魔法奥术,暗影 箭,Shadow Arrow,yes,yes
+probe-36-1002,36,魔法奥术,神圣 打击,Holy Strike,yes,yes
+probe-36-1003,36,魔法奥术,亡灵 复生,Undead Rise,yes,yes
+probe-36-1004,36,魔法奥术,灵魂 抽取,Soul Drain,yes,yes
+probe-36-1005,36,魔法奥术,魔力 涌动,Mana Surge,yes,yes
+probe-36-1006,36,魔法奥术,符文 激活,Rune Activate,yes,yes
+probe-36-1007,36,魔法奥术,法阵 展开,Magic Circle,yes,yes
+probe-36-1008,36,魔法奥术,魔药 沸腾,Potion Boil,yes,yes
+probe-36-1009,36,魔法奥术,炼金 反应,Alchemy Reaction,yes,yes
+probe-36-1010,36,魔法奥术,灵体 飘移,Spirit Drift,yes,yes
+probe-36-1011,36,魔法奥术,秘法 脉冲,Arcane Pulse,yes,yes
+probe-36-1012,36,魔法奥术,奥能 爆发,Arcane Burst,yes,yes
+probe-36-1013,36,魔法奥术,元素 融合,Elemental Fusion,yes,yes
+probe-36-1014,36,魔法奥术,冰霜 新星,Frost Nova,yes,yes
+probe-36-1015,36,魔法奥术,烈焰 风暴,Fire Storm,yes,yes
+probe-36-1016,36,魔法奥术,自然 缠绕,Nature Entangle,yes,yes
+probe-36-1017,36,魔法奥术,时空 扭曲,Time Warp,yes,yes
+probe-36-1018,36,魔法奥术,传送 法术,Teleport Spell,yes,yes
+probe-36-1019,36,魔法奥术,隐身 术,Invisibility Spell,yes,yes
+probe-36-1020,36,魔法奥术,变形 术,Polymorph Spell,yes,yes
+probe-36-1021,36,魔法奥术,复活 术,Resurrect Spell,yes,yes
+probe-36-1022,36,魔法奥术,法力 耗尽,Mana Empty,yes,yes
+probe-36-1023,36,魔法奥术,魔法 消散,Magic Dissipate,yes,yes
+probe-37-1024,37,中世纪,中世纪 战场,Medieval Battlefield,yes,yes
+probe-37-1025,37,中世纪,链甲 奔跑,Chainmail Run,yes,yes
+probe-37-1026,37,中世纪,板甲 碰撞,Plate Armor Crash,yes,yes
+probe-37-1027,37,中世纪,骑士 冲锋,Knight Charge,yes,yes
+probe-37-1028,37,中世纪,长剑 挥砍,Longsword Slash,yes,yes
+probe-37-1029,37,中世纪,短剑 突刺,Dagger Stab,yes,yes
+probe-37-1030,37,中世纪,盾牌 格挡,Shield Block,yes,yes
+probe-37-1031,37,中世纪,盾牌 撞击,Shield Impact,yes,yes
+probe-37-1032,37,中世纪,弓箭 齐射,Bow Volley,yes,yes
+probe-37-1033,37,中世纪,弩箭 发射,Crossbow Shot,yes,yes
+probe-37-1034,37,中世纪,投石 车,Catapult,yes,yes
+probe-37-1035,37,中世纪,攻城 槌,Siege Ram,yes,yes
+probe-37-1036,37,中世纪,云梯 架设,Siege Ladder,yes,yes
+probe-37-1037,37,中世纪,护城河 吊桥,Moat Drawbridge,yes,yes
+probe-37-1038,37,中世纪,城堡 大门,Castle Gate,yes,yes
+probe-37-1039,37,中世纪,吊闸 落下,Portcullis Drop,yes,yes
+probe-37-1040,37,中世纪,铁门 关闭,Iron Gate Close,yes,yes
+probe-37-1041,37,中世纪,马匹 奔腾,Horse Gallop,yes,yes
+probe-37-1042,37,中世纪,战车 碾压,Chariot Crush,yes,yes
+probe-37-1043,37,中世纪,步兵 方阵,Infantry Formation,yes,yes
+probe-37-1044,37,中世纪,长矛 突刺,Spear Thrust,yes,yes
+probe-37-1045,37,中世纪,战斧 劈砍,Battle Axe Splitting Slash,yes,yes
+probe-37-1046,37,中世纪,钉头 锤,Mace Hit,yes,yes
+probe-37-1047,37,中世纪,链锤 挥舞,Flail Swing,yes,yes
+probe-37-1048,37,中世纪,火把 燃烧,Torch Burn,yes,yes
+probe-37-1049,37,中世纪,营火 噼啪,Campfire Crackle,yes,yes
+probe-37-1050,37,中世纪,铁匠 锻造,Blacksmith Forge,yes,yes
+probe-37-1051,37,中世纪,磨刀 石,Whetstone,yes,yes
+probe-37-1052,37,中世纪,皮革 摩擦,Leather Rub,yes,yes
+probe-37-1053,37,中世纪,木桶 滚动,Barrel Roll,yes,yes
+probe-37-1054,37,中世纪,酒馆 喧闹,Tavern Racket,yes,yes
+probe-37-1055,37,中世纪,集市 叫卖,Market Hawker,yes,yes
+probe-37-1056,37,中世纪,教堂 钟声,Church Bell,yes,yes
+probe-37-1057,37,中世纪,修道院 走廊,Monastery Hall,yes,yes
+probe-37-1058,37,中世纪,吟游 诗人,Bard,yes,yes
+probe-37-1059,37,中世纪,号角 吹响,Horn Call,yes,yes
+probe-37-1060,37,中世纪,战鼓 擂动,War Drum Beat,yes,yes
+probe-37-1061,37,中世纪,旗帜 飘扬,Flag Wave,yes,yes
+probe-37-1062,37,中世纪,俘虏 押送,Prisoner Escort,yes,yes
+probe-37-1063,37,中世纪,战马 嘶鸣,Warhorse Neigh,yes,yes
+probe-37-1064,37,中世纪,盔甲 摩擦,Armor Rub,yes,yes
+probe-38-1065,38,赛博朋克,赛博 朋克,Cyberpunk,yes,yes
+probe-38-1066,38,赛博朋克,激光 枪,Laser Gun,yes,yes
+probe-38-1067,38,赛博朋克,等离子 炮,Plasma Cannon,yes,yes
+probe-38-1068,38,赛博朋克,能量 武器,Energy Weapon,yes,yes
+probe-38-1069,38,赛博朋克,脉冲 步枪,Pulse Rifle,yes,yes
+probe-38-1070,38,赛博朋克,电磁 炮,Railgun,yes,yes
+probe-38-1071,38,赛博朋克,粒子 束,Particle Beam,yes,yes
+probe-38-1072,38,赛博朋克,高斯 步枪,Gauss Rifle,yes,yes
+probe-38-1073,38,赛博朋克,轨道 炮,Railgun,yes,yes
+probe-38-1074,38,赛博朋克,狙击 激光,Sniper Laser,yes,yes
+probe-38-1075,38,赛博朋克,黑客 入侵,Hack Intrusion,yes,yes
+probe-38-1076,38,赛博朋克,神经 接口,Neural Interface,yes,yes
+probe-38-1077,38,赛博朋克,义体 启动,Cyberware Boot,yes,yes
+probe-38-1078,38,赛博朋克,芯片 植入,Chip Implant,yes,yes
+probe-38-1079,38,赛博朋克,全息 投影,Hologram,yes,yes
+probe-38-1080,38,赛博朋克,数据 流,Data Stream,yes,yes
+probe-38-1081,38,赛博朋克,防火墙 破解,Firewall Crack,yes,yes
+probe-38-1082,38,赛博朋克,病毒 上传,Virus Upload,yes,yes
+probe-38-1083,38,赛博朋克,EMP 脉冲,Emp Pulse,yes,yes
+probe-38-1084,38,赛博朋克,电磁 干扰,Ecm Jam,yes,yes
+probe-38-1085,38,赛博朋克,义眼 扫描,Cyber Eye Scan,yes,yes
+probe-38-1086,38,赛博朋克,机械 臂,Mech Arm,yes,yes
+probe-38-1087,38,赛博朋克,动力 骨骼,Power Exo,yes,yes
+probe-38-1088,38,赛博朋克,钛合金 装甲,Titanium Armor,yes,yes
+probe-38-1089,38,赛博朋克,霓虹 街道,Neon Street,yes,yes
+probe-38-1090,38,赛博朋克,雨夜 都市,Rainy Night City,yes,yes
+probe-38-1091,38,赛博朋克,飞车 追逐,Hovercar Chase,yes,yes
+probe-38-1092,38,赛博朋克,磁悬浮 车,Maglev Car,yes,yes
+probe-38-1093,38,赛博朋克,无人机 蜂群,Drone Swarm,yes,yes
+probe-38-1094,38,赛博朋克,巡逻 机器人,Patrol Bot,yes,yes
+probe-38-1095,38,赛博朋克,安保 无人机,Security Drone,yes,yes
+probe-38-1096,38,赛博朋克,激光 栅栏,Laser Grid,yes,yes
+probe-38-1097,38,赛博朋克,能量 护盾,Energy Shield,yes,yes
+probe-38-1098,38,赛博朋克,力场 展开,Force Field,yes,yes
+probe-38-1099,38,赛博朋克,传送 门,Teleport Door,yes,yes
+probe-38-1100,38,赛博朋克,虫洞 开启,Wormhole Open,yes,yes
+probe-38-1101,38,赛博朋克,太空 行走,Spacewalk,yes,yes
+probe-38-1102,38,赛博朋克,舱外 作业,Eva Work,yes,yes
+probe-38-1103,38,赛博朋克,星舰 引擎,Starship Engine,yes,yes
+probe-38-1104,38,赛博朋克,曲速 引擎,Warp Drive,yes,yes
+probe-38-1105,38,赛博朋克,跃迁 启动,Jump Drive,yes,yes
+probe-38-1106,38,赛博朋克,外星 信号,Alien Signal,yes,yes
+probe-38-1107,38,赛博朋克,机甲 脚步,Mech Footstep,yes,yes
+probe-38-1108,38,赛博朋克,纳米 修复,Nano Repair,yes,yes
+probe-38-1109,38,赛博朋克,克隆 舱,Clone Pod,yes,yes
+probe-38-1110,38,赛博朋克,冷冻 休眠,Cryo Sleep,yes,yes
+probe-38-1111,38,赛博朋克,反物质 湮灭,Antimatter Annihilation,yes,yes
+probe-38-1112,38,赛博朋克,离子 风暴,Ion Storm,yes,yes
+probe-38-1113,38,赛博朋克,等离子 护盾,Plasma Shield,yes,yes
+probe-38-1114,38,赛博朋克,赛博 义肢,Cyber Prosthetic,yes,yes
+probe-39-1115,39,幻想RPG,幻想 世界,Fantasy World,yes,yes
+probe-39-1116,39,幻想RPG,地下城 入口,Dungeon Entrance,yes,yes
+probe-39-1117,39,幻想RPG,Boss 战,Boss Battle,yes,yes
+probe-39-1118,39,幻想RPG,小怪 刷新,Mob Respawn,yes,yes
+probe-39-1119,39,幻想RPG,精英 怪,Elite Mob,yes,yes
+probe-39-1120,39,幻想RPG,兽人 咆哮,Orc Roar,yes,yes
+probe-39-1121,39,幻想RPG,哥布林 尖叫,Goblin Scream,yes,yes
+probe-39-1122,39,幻想RPG,巨魔 脚步,Troll Footstep,yes,yes
+probe-39-1123,39,幻想RPG,食人魔 捶胸,Ogre Chest Beat,yes,yes
+probe-39-1124,39,幻想RPG,地精 窃笑,Gnome Giggle,yes,yes
+probe-39-1125,39,幻想RPG,骷髅 行走,Skeleton Walk,yes,yes
+probe-39-1126,39,幻想RPG,僵尸 群,Zombie Horde,yes,yes
+probe-39-1127,39,幻想RPG,亡灵 大军,Undead Army,yes,yes
+probe-39-1128,39,幻想RPG,巫妖 低语,Lich Whisper,yes,yes
+probe-39-1129,39,幻想RPG,龙 咆哮,Dragon Roar,yes,yes
+probe-39-1130,39,幻想RPG,幼龙 喷火,Wyrmling Fire Breath,yes,yes
+probe-39-1131,39,幻想RPG,巨龙 翅膀,Dragon Wing,yes,yes
+probe-39-1132,39,幻想RPG,凤凰 涅槃,Phoenix Rebirth,yes,yes
+probe-39-1133,39,幻想RPG,独角兽 蹄声,Unicorn Hoof,yes,yes
+probe-39-1134,39,幻想RPG,树人 移动,Treant Move,yes,yes
+probe-39-1135,39,幻想RPG,史莱姆 弹跳,Slime Bounce,yes,yes
+probe-39-1136,39,幻想RPG,哥布林 营地,Goblin Camp,yes,yes
+probe-39-1137,39,幻想RPG,宝箱 开启,Chest Open,yes,yes
+probe-39-1138,39,幻想RPG,掉落 物品,Loot Drop,yes,yes
+probe-39-1139,39,幻想RPG,拾取 金币,Gold Pickup,yes,yes
+probe-39-1140,39,幻想RPG,任务 完成,Quest Complete,yes,yes
+probe-39-1141,39,幻想RPG,等级 提升,Level Up,yes,yes
+probe-39-1142,39,幻想RPG,经验 获取,Xp Gain,yes,yes
+probe-39-1143,39,幻想RPG,技能 升级,Skill Upgrade,yes,yes
+probe-39-1144,39,幻想RPG,天赋 点,Talent Point,yes,yes
+probe-39-1145,39,幻想RPG,装备 穿戴,Equip Gear,yes,yes
+probe-39-1146,39,幻想RPG,武器 强化,Weapon Upgrade,yes,yes
+probe-39-1147,39,幻想RPG,附魔 台,Enchant Table,yes,yes
+probe-39-1148,39,幻想RPG,锻造 炉,Forge,yes,yes
+probe-39-1149,39,幻想RPG,药水 合成,Potion Craft,yes,yes
+probe-39-1150,39,幻想RPG,卷轴 阅读,Scroll Read,yes,yes
+probe-39-1151,39,幻想RPG,地图 展开,Map Unfold,yes,yes
+probe-39-1152,39,幻想RPG,指南针 指针,Compass Needle,yes,yes
+probe-39-1153,39,幻想RPG,营地 休息,Camp Rest,yes,yes
+probe-39-1154,39,幻想RPG,存档 点,Save Point,yes,yes
+probe-39-1155,39,幻想RPG,复活 点,Respawn Point,yes,yes
+probe-39-1156,39,幻想RPG,传送 石,Teleport Stone,yes,yes
+probe-39-1157,39,幻想RPG,公会 大厅,Guild Hall,yes,yes
+probe-39-1158,39,幻想RPG,组队 邀请,Party Invite,yes,yes
+probe-39-1159,39,幻想RPG,副本 入口,Instance Entrance,yes,yes
+probe-39-1160,39,幻想RPG,世界 首领,World Boss,yes,yes
+probe-39-1161,39,幻想RPG,传说 武器,Legendary Weapon,yes,yes
+probe-39-1162,39,幻想RPG,史诗 装备,Epic Gear,yes,yes
+probe-39-1163,39,幻想RPG,稀有 掉落,Rare Loot,yes,yes
+probe-39-1164,39,幻想RPG,诅咒 物品,Cursed Item,yes,yes
+probe-39-1165,39,幻想RPG,灵魂 绑定,Soulbound,yes,yes
+probe-40-1166,40,恐怖游戏,恐怖 游戏,Horror Game,yes,yes
+probe-40-1167,40,恐怖游戏,黑暗 环境,Dark Ambience,yes,yes
+probe-40-1168,40,恐怖游戏,心跳 加速,Heartbeat Fast,yes,yes
+probe-40-1169,40,恐怖游戏,呼吸 急促,Breath Gasp,yes,yes
+probe-40-1170,40,恐怖游戏,脚步 回响,Footstep Echo,yes,yes
+probe-40-1171,40,恐怖游戏,门 吱呀,Door Creak,yes,yes
+probe-40-1172,40,恐怖游戏,地板 嘎吱,Floor Squeak,yes,yes
+probe-40-1173,40,恐怖游戏,玻璃 碎裂,Glass Shatter,yes,yes
+probe-40-1174,40,恐怖游戏,镜子 破裂,Mirror Crack,yes,yes
+probe-40-1175,40,恐怖游戏,娃娃 笑声,Doll Laugh,yes,yes
+probe-40-1176,40,恐怖游戏,童谣 哼唱,Lullaby Hum,yes,yes
+probe-40-1177,40,恐怖游戏,电话 铃声,Phone Ring,yes,yes
+probe-40-1178,40,恐怖游戏,电视 雪花,Tv Static,yes,yes
+probe-40-1179,40,恐怖游戏,收音机 杂音,Radio Static,yes,yes
+probe-40-1180,40,恐怖游戏,地下室 滴水,Basement Drip,yes,yes
+probe-40-1181,40,恐怖游戏,阁楼 脚步,Attic Footstep,yes,yes
+probe-40-1182,40,恐怖游戏,走廊 尽头,Hallway End,yes,yes
+probe-40-1183,40,恐怖游戏,楼梯 咯吱,Stair Creak,yes,yes
+probe-40-1184,40,恐怖游戏,电梯 故障,Elevator Fault,yes,yes
+probe-40-1185,40,恐怖游戏,停电 黑暗,Blackout Dark,yes,yes
+probe-40-1186,40,恐怖游戏,蜡烛 熄灭,Candle Out,yes,yes
+probe-40-1187,40,恐怖游戏,闪电 照亮,Lightning Flash,yes,yes
+probe-40-1188,40,恐怖游戏,雷声 轰鸣,Thunder Rumble,yes,yes
+probe-40-1189,40,恐怖游戏,暴雨 敲打,Rain Hammer,yes,yes
+probe-40-1190,40,恐怖游戏,迷雾 弥漫,Fog Spread,yes,yes
+probe-40-1191,40,恐怖游戏,幽灵 飘过,Ghost Pass,yes,yes
+probe-40-1192,40,恐怖游戏,怨灵 哭泣,Wraith Sob,yes,yes
+probe-40-1193,40,恐怖游戏,女妖 尖叫,Banshee Scream,yes,yes
+probe-40-1194,40,恐怖游戏,恶魔 低语,Demon Whisper,yes,yes
+probe-40-1195,40,恐怖游戏,邪教 仪式,Cult Ritual,yes,yes
+probe-40-1196,40,恐怖游戏,血祭 完成,Blood Ritual,yes,yes
+probe-40-1197,40,恐怖游戏,棺材 打开,Coffin Open,yes,yes
+probe-40-1198,40,恐怖游戏,坟墓 挖掘,Grave Dig,yes,yes
+probe-40-1199,40,恐怖游戏,骸骨 散落,Bone Scatter,yes,yes
+probe-40-1200,40,恐怖游戏,腐肉 滴落,Carrion Drip,yes,yes
+probe-40-1201,40,恐怖游戏,触手 蠕动,Tentacle Squirm,yes,yes
+probe-40-1202,40,恐怖游戏,异形 孵化,Alien Hatch,yes,yes
+probe-40-1203,40,恐怖游戏,寄生 虫,Parasite Bug,yes,yes
+probe-40-1204,40,恐怖游戏,变异 咆哮,Mutant Roar,yes,yes
+probe-40-1205,40,恐怖游戏,疯狂 笑声,Mad Laugh,yes,yes
+probe-40-1206,40,恐怖游戏,追逐 脚步,Chase Footstep,yes,yes
+probe-40-1207,40,恐怖游戏,躲藏 柜中,Hide Locker,yes,yes
+probe-40-1208,40,恐怖游戏,钥匙 转动,Key Turn,yes,yes
+probe-40-1209,40,恐怖游戏,锁链 拖拽,Chain Drag,yes,yes
+probe-40-1210,40,恐怖游戏,铁笼 摇晃,Iron Cage Shake,yes,yes
+probe-40-1211,40,恐怖游戏,审讯 室,Interrogation Room,yes,yes
+probe-40-1212,40,恐怖游戏,监控 雪花,Cctv Static,yes,yes
+probe-40-1213,40,恐怖游戏,录像 带,Vhs Tape,yes,yes
+probe-40-1214,40,恐怖游戏,旧照片 翻动,Old Photo Flip,yes,yes
+probe-40-1215,40,恐怖游戏,诅咒 录像,Cursed Tape,yes,yes
+probe-40-1216,40,恐怖游戏,死亡 钟声,Death Bell,yes,yes
+probe-40-1217,40,恐怖游戏,黑暗 轰鸣,Dark Rumble,yes,yes
+probe-41-1218,41,游戏UI蒸汽,游戏 界面,Game Ui,yes,yes
+probe-41-1219,41,游戏UI蒸汽,按钮 点击,Button Click,yes,yes
+probe-41-1220,41,游戏UI蒸汽,菜单 打开,Menu Open,yes,yes
+probe-41-1221,41,游戏UI蒸汽,菜单 关闭,Menu Close,yes,yes
+probe-41-1222,41,游戏UI蒸汽,确认 音效,Confirm SFX,yes,yes
+probe-41-1223,41,游戏UI蒸汽,取消 音效,Cancel SFX,yes,yes
+probe-41-1224,41,游戏UI蒸汽,错误 提示,Error Alert,yes,yes
+probe-41-1225,41,游戏UI蒸汽,成功 提示,Success Alert,yes,yes
+probe-41-1226,41,游戏UI蒸汽,警告 弹窗,Warning Popup,yes,yes
+probe-41-1227,41,游戏UI蒸汽,加载 进度,Loading Progress,yes,yes
+probe-41-1228,41,游戏UI蒸汽,存档 成功,Save Success,yes,yes
+probe-41-1229,41,游戏UI蒸汽,读档 完成,Load Complete,yes,yes
+probe-41-1230,41,游戏UI蒸汽,暂停 菜单,Pause Menu,yes,yes
+probe-41-1231,41,游戏UI蒸汽,设置 切换,Settings Toggle,yes,yes
+probe-41-1232,41,游戏UI蒸汽,音量 调节,Volume Adjust,yes,yes
+probe-41-1233,41,游戏UI蒸汽,画质 切换,Graphics Toggle,yes,yes
+probe-41-1234,41,游戏UI蒸汽,手柄 连接,Gamepad Connect,yes,yes
+probe-41-1235,41,游戏UI蒸汽,键盘 映射,Keybind Map,yes,yes
+probe-41-1236,41,游戏UI蒸汽,鼠标 悬停,Mouse Hover,yes,yes
+probe-41-1237,41,游戏UI蒸汽,滑块 拖动,Slider Drag,yes,yes
+probe-41-1238,41,游戏UI蒸汽,复选框 勾选,Checkbox Tick,yes,yes
+probe-41-1239,41,游戏UI蒸汽,下拉 菜单,Dropdown Menu,yes,yes
+probe-41-1240,41,游戏UI蒸汽,标签 切换,Tab Switch,yes,yes
+probe-41-1241,41,游戏UI蒸汽,背包 打开,Inventory Open,yes,yes
+probe-41-1242,41,游戏UI蒸汽,物品 拖拽,Item Drag,yes,yes
+probe-41-1243,41,游戏UI蒸汽,装备 对比,Gear Compare,yes,yes
+probe-41-1244,41,游戏UI蒸汽,技能 树,Skill Tree,yes,yes
+probe-41-1245,41,游戏UI蒸汽,天赋 面板,Talent Panel,yes,yes
+probe-41-1246,41,游戏UI蒸汽,任务 日志,Quest Log,yes,yes
+probe-41-1247,41,游戏UI蒸汽,地图 标记,Map Marker,yes,yes
+probe-41-1248,41,游戏UI蒸汽,小地图 缩放,Minimap Zoom,yes,yes
+probe-41-1249,41,游戏UI蒸汽,血条 减少,Health Bar Down,yes,yes
+probe-41-1250,41,游戏UI蒸汽,蓝条 恢复,Mana Restore,yes,yes
+probe-41-1251,41,游戏UI蒸汽,buff 图标,Buff Icon,yes,yes
+probe-41-1252,41,游戏UI蒸汽,debuff 闪烁,Debuff Flicker,yes,yes
+probe-41-1253,41,游戏UI蒸汽,连击 计数,Combo Counter,yes,yes
+probe-41-1254,41,游戏UI蒸汽,暴击 数字,Critical Number,yes,yes
+probe-41-1255,41,游戏UI蒸汽,伤害 飘字,Damage Number,yes,yes
+probe-41-1256,41,游戏UI蒸汽,金币 入账,Gold Credit,yes,yes
+probe-41-1257,41,游戏UI蒸汽,经验 条,Xp Bar,yes,yes
+probe-41-1258,41,游戏UI蒸汽,升级 闪光,Level Up Flash,yes,yes
+probe-41-1259,41,游戏UI蒸汽,成就 解锁,Success Unlock,yes,yes
+probe-41-1260,41,游戏UI蒸汽,排行榜 刷新,Leaderboard Refresh,yes,yes
+probe-41-1261,41,游戏UI蒸汽,多人 匹配,Multiple People Matchmaking,yes,yes
+probe-41-1262,41,游戏UI蒸汽,房间 创建,Room Create,yes,yes
+probe-41-1263,41,游戏UI蒸汽,蒸汽 朋克,Steampunk,yes,yes
+probe-41-1264,41,游戏UI蒸汽,齿轮 咬合,Gear Mesh,yes,yes
+probe-41-1265,41,游戏UI蒸汽,发条 上弦,Clockwork Wind,yes,yes
+probe-41-1266,41,游戏UI蒸汽,钟表 滴答,Clock Tick,yes,yes
+probe-41-1267,41,游戏UI蒸汽,锅炉 蒸汽,Boiler Steam,yes,yes
+probe-41-1268,41,游戏UI蒸汽,管道 泄漏,Pipe Leak,yes,yes
+probe-41-1269,41,游戏UI蒸汽,飞艇 引擎,Airship Engine,yes,yes
+probe-41-1270,41,游戏UI蒸汽,蒸汽 火车,Steam Train,yes,yes
+probe-41-1271,41,游戏UI蒸汽,铆钉 敲击,Rivet Tap,yes,yes
+probe-41-1272,41,游戏UI蒸汽,黄铜 阀门,Brass Valve,yes,yes
+probe-41-1273,41,游戏UI蒸汽,皮革 护目镜,Leather Goggles,yes,yes
+probe-42-1274,42,体育竞技,百米 冲刺,100m Sprint,yes,yes
+probe-42-1275,42,体育竞技,起跑 发令,Start Gun,yes,yes
+probe-42-1276,42,体育竞技,跨栏 跳跃,Hurdle Jump,yes,yes
+probe-42-1277,42,体育竞技,标枪 投掷,Javelin Throw,yes,yes
+probe-42-1278,42,体育竞技,铅球 推出,Shot Put,yes,yes
+probe-42-1279,42,体育竞技,铁饼 旋转,Discus Spin,yes,yes
+probe-42-1280,42,体育竞技,撑杆 过杆,Pole Vault,yes,yes
+probe-42-1281,42,体育竞技,跳远 沙坑,Long Jump Sand,yes,yes
+probe-42-1282,42,体育竞技,三级 跳,Triple Jump,yes,yes
+probe-42-1283,42,体育竞技,马拉松 脚步,Marathon Footstep,yes,yes
+probe-42-1284,42,体育竞技,接力 棒,Relay Baton,yes,yes
+probe-42-1285,42,体育竞技,游泳 出发,Swim Start,yes,yes
+probe-42-1286,42,体育竞技,自由泳 划水,Freestyle Stroke,yes,yes
+probe-42-1287,42,体育竞技,蝶泳 破浪,Butterfly Stroke,yes,yes
+probe-42-1288,42,体育竞技,蛙泳 蹬腿,Breaststroke Kick,yes,yes
+probe-42-1289,42,体育竞技,跳水 入水,Dive In Water,yes,yes
+probe-42-1290,42,体育竞技,体操 落地,Gymnastics Landing,yes,yes
+probe-42-1291,42,体育竞技,单杠 摆动,High Bar Swing,yes,yes
+probe-42-1292,42,体育竞技,双杠 支撑,Parallel Bars,yes,yes
+probe-42-1293,42,体育竞技,鞍马 腾跃,Pommel Vault,yes,yes
+probe-42-1294,42,体育竞技,平衡木 行走,Balance Beam Walk,yes,yes
+probe-42-1295,42,体育竞技,篮球 扣篮,Basketball Dunk,yes,yes
+probe-42-1296,42,体育竞技,足球 射门,Soccer Kick,yes,yes
+probe-42-1297,42,体育竞技,排球 扣球,Volleyball Spike,yes,yes
+probe-42-1298,42,体育竞技,网球 发球,Tennis Serve,yes,yes
+probe-42-1299,42,体育竞技,羽毛球 扣杀,Badminton Smash,yes,yes
+probe-42-1300,42,体育竞技,乒乓球 对打,Ping Pong Rally,yes,yes
+probe-42-1301,42,体育竞技,高尔夫 挥杆,Golf Swing,yes,yes
+probe-42-1302,42,体育竞技,棒球 全垒打,Baseball Homerun,yes,yes
+probe-42-1303,42,体育竞技,冰球 滑行,Hockey Skate,yes,yes
+probe-42-1304,42,体育竞技,滑雪 急停,Ski Stop,yes,yes
+probe-42-1305,42,体育竞技,滑冰 旋转,Skate Spin,yes,yes
+probe-42-1306,42,体育竞技,拳击 擂台,Boxing Ring,yes,yes
+probe-42-1307,42,体育竞技,摔跤 抱摔,Wrestling Takedown,yes,yes
+probe-42-1308,42,体育竞技,击剑 突刺,Fencing Lunge,yes,yes
+probe-42-1309,42,体育竞技,射箭 靶心,Archery Bullseye,yes,yes
+probe-42-1310,42,体育竞技,马术 跨越,Equestrian Jump,yes,yes
+probe-42-1311,42,体育竞技,赛车 冲线,Race Finish,yes,yes
+probe-42-1312,42,体育竞技,F1 进站,F1 Pit Entry,yes,yes
+probe-42-1313,42,体育竞技,拉力 漂移,Rally Drift,yes,yes
+probe-42-1314,42,体育竞技,马拉松 终点,Marathon Finish,yes,yes
+probe-43-1315,43,法庭银行,法庭 开庭,Court Session Open,yes,yes
+probe-43-1316,43,法庭银行,法官 落槌,Gavel Bang,yes,yes
+probe-43-1317,43,法庭银行,法警 押送,Bailiff Escort,yes,yes
+probe-43-1318,43,法庭银行,律师 辩护,Lawyer Defense,yes,yes
+probe-43-1319,43,法庭银行,检察官 指控,Prosecutor Charge,yes,yes
+probe-43-1320,43,法庭银行,证人 作证,Witness Testify,yes,yes
+probe-43-1321,43,法庭银行,宣誓 作证,Oath Testify,yes,yes
+probe-43-1322,43,法庭银行,陪审团 商议,Jury Deliberation,yes,yes
+probe-43-1323,43,法庭银行,旁听 席,Gallery Seat,yes,yes
+probe-43-1324,43,法庭银行,书记员 记录,Clerk Record,yes,yes
+probe-43-1325,43,法庭银行,证据 呈堂,Evidence Present,yes,yes
+probe-43-1326,43,法庭银行,物证 展示,Material Present,yes,yes
+probe-43-1327,43,法庭银行,指纹 鉴定,Fingerprint Examine,yes,yes
+probe-43-1328,43,法庭银行,DNA 比对,Dna Match,yes,yes
+probe-43-1329,43,法庭银行,监控 录像,Cctv Recording,yes,yes
+probe-43-1330,43,法庭银行,合同 签署,Contract Sign,yes,yes
+probe-43-1331,43,法庭银行,违约 诉讼,Breach Lawsuit,yes,yes
+probe-43-1332,43,法庭银行,仲裁 裁决,Arbitration Ruling,yes,yes
+probe-43-1333,43,法庭银行,调解 会议,Mediation Meeting,yes,yes
+probe-43-1334,43,法庭银行,传票 送达,Summons Serve,yes,yes
+probe-43-1335,43,法庭银行,拘留 所,Detention Center,yes,yes
+probe-43-1336,43,法庭银行,保释 金,Bail Bond,yes,yes
+probe-43-1337,43,法庭银行,罚款 缴纳,Fine Payment,yes,yes
+probe-43-1338,43,法庭银行,拍卖 锤子,Auction Hammer,yes,yes
+probe-43-1339,43,法庭银行,抵押 登记,Mortgage Register,yes,yes
+probe-43-1340,43,法庭银行,贷款 审批,Loan Approve,yes,yes
+probe-43-1341,43,法庭银行,利率 调整,Interest Rate Adjust,yes,yes
+probe-43-1342,43,法庭银行,汇率 波动,Exchange Rate Swing,yes,yes
+probe-43-1343,43,法庭银行,股票 交易,Stock Trade,yes,yes
+probe-43-1344,43,法庭银行,基金 申购,Fund Subscribe,yes,yes
+probe-43-1345,43,法庭银行,债券 发行,Bond Issue,yes,yes
+probe-43-1346,43,法庭银行,信用卡 刷卡,Credit Card Swipe,yes,yes
+probe-43-1347,43,法庭银行,ATM 取款,Atm Withdraw,yes,yes
+probe-43-1348,43,法庭银行,柜台 办理,Teller Counter,yes,yes
+probe-43-1349,43,法庭银行,汇款 转账,Wire Transfer,yes,yes
+probe-43-1350,43,法庭银行,支票 兑现,Check Cash,yes,yes
+probe-43-1351,43,法庭银行,保险箱 开启,Safe Open,yes,yes
+probe-43-1352,43,法庭银行,金库 门,Vault Door,yes,yes
+probe-43-1353,43,法庭银行,验钞 机,Bill Counter,yes,yes
+probe-43-1354,43,法庭银行,点钞 声,Bill Count,yes,yes
+probe-43-1355,43,法庭银行,假币 警报,Counterfeit Alarm,yes,yes
+probe-43-1356,43,法庭银行,洗钱 调查,Money Laundering Probe,yes,yes
+probe-43-1357,43,法庭银行,征信 查询,Credit Check,yes,yes
+probe-43-1358,43,法庭银行,破产 清算,Bankruptcy Liquidation,yes,yes
+probe-43-1359,43,法庭银行,遗嘱 公证,Will Notarize,yes,yes
+probe-43-1360,43,法庭银行,遗产 继承,Estate Inherit,yes,yes
+probe-43-1361,43,法庭银行,税务 稽查,Tax Audit,yes,yes
+probe-43-1362,43,法庭银行,发票 查验,Invoice Verify,yes,yes
+probe-43-1363,43,法庭银行,合同 盖章,Contract Stamp,yes,yes
+probe-44-1364,44,太空歌剧,星舰 旗舰,Starship Flagship,yes,yes
+probe-44-1365,44,太空歌剧,舰队 跃迁,Fleet Warp,yes,yes
+probe-44-1366,44,太空歌剧,母舰 机库,Mothership Hangar,yes,yes
+probe-44-1367,44,太空歌剧,护航 舰,Escort Ship,yes,yes
+probe-44-1368,44,太空歌剧,驱逐舰 炮火,Destroyer Cannon,yes,yes
+probe-44-1369,44,太空歌剧,巡洋舰 齐射,Cruiser Volley,yes,yes
+probe-44-1370,44,太空歌剧,战列舰 主炮,Battleship Main Cannon,yes,yes
+probe-44-1371,44,太空歌剧,太空 战机,Space Fighter,yes,yes
+probe-44-1372,44,太空歌剧,拦截 机,Interceptor,yes,yes
+probe-44-1373,44,太空歌剧,轰炸 舰,Bomber Ship,yes,yes
+probe-44-1374,44,太空歌剧,登陆 艇,Landing Craft,yes,yes
+probe-44-1375,44,太空歌剧,轨道 轰炸,Orbital Bombardment,yes,yes
+probe-44-1376,44,太空歌剧,行星 登陆,Planet Landing,yes,yes
+probe-44-1377,44,太空歌剧,殖民 船,Colony Ship,yes,yes
+probe-44-1378,44,太空歌剧,贸易 舰,Trade Ship,yes,yes
+probe-44-1379,44,太空歌剧,走私 船,Smuggler Ship,yes,yes
+probe-44-1380,44,太空歌剧,海盗 舰,Pirate Ship,yes,yes
+probe-44-1381,44,太空歌剧,赏金 猎人,Bounty Hunter,yes,yes
+probe-44-1382,44,太空歌剧,帝国 舰队,Imperial Fleet,yes,yes
+probe-44-1383,44,太空歌剧,叛军 旗舰,Rebel Flagship,yes,yes
+probe-44-1384,44,太空歌剧,激光 炮列,Laser Cannon Battery,yes,yes
+probe-44-1385,44,太空歌剧,离子 炮,Ion Cannon,yes,yes
+probe-44-1386,44,太空歌剧,相位 炮,Phaser Cannon,yes,yes
+probe-44-1387,44,太空歌剧,护盾 过载,Shield Overload,yes,yes
+probe-44-1388,44,太空歌剧,偏导 护盾,Deflector Shield,yes,yes
+probe-44-1389,44,太空歌剧,全息 舰桥,Hologram Bridge,yes,yes
+probe-44-1390,44,太空歌剧,舰长 命令,Captain Command,yes,yes
+probe-44-1391,44,太空歌剧,通讯 阵列,Comm Array,yes,yes
+probe-44-1392,44,太空歌剧,超空间 航道,Hyperspace Lane,yes,yes
+probe-44-1393,44,太空歌剧,星图 导航,Star Chart Nav,yes,yes
+probe-44-1394,44,太空歌剧,小行星 带,Asteroid Belt,yes,yes
+probe-44-1395,44,太空歌剧,彗星 尾迹,Comet Tail,yes,yes
+probe-44-1396,44,太空歌剧,星云 穿行,Nebula Transit,yes,yes
+probe-44-1397,44,太空歌剧,黑洞 边缘,Black Hole Edge,yes,yes
+probe-44-1398,44,太空歌剧,空间站 对接,Station Dock,yes,yes
+probe-44-1399,44,太空歌剧,太空 电梯,Space Elevator,yes,yes
+probe-44-1400,44,太空歌剧,轨道 环,Orbital Ring,yes,yes
+probe-44-1401,44,太空歌剧,卫星 部署,Satellite Deploy,yes,yes
+probe-44-1402,44,太空歌剧,行星 护盾,Planetary Shield,yes,yes
+probe-44-1403,44,太空歌剧,大气 层,Atmosphere Layer,yes,yes
+probe-44-1404,44,太空歌剧,登陆 舱,Landing Pod,yes,yes
+probe-44-1405,44,太空歌剧,弹射 座椅,Ejection Seat,yes,yes
+probe-44-1406,44,太空歌剧,反重力 靴,Anti Gravity Boot,yes,yes
+probe-44-1407,44,太空歌剧,太空 服,Spacesuit,yes,yes
+probe-44-1408,44,太空歌剧,氧气 循环,Oxygen Cycle,yes,yes
+probe-44-1409,44,太空歌剧,舰炮 充能,Ship Cannon Charge,yes,yes
+probe-44-1410,44,太空歌剧,鱼雷 齐射,Torpedo Volley,yes,yes
+probe-44-1411,44,太空歌剧,隐形 cloak,Stealth Cloak,yes,yes
+probe-44-1412,44,太空歌剧,跃迁 引擎,Warp Engine,yes,yes
+probe-44-1413,44,太空歌剧,曲速 核心,Warp Core,yes,yes
+probe-44-1414,44,太空歌剧,星门 网络,Stargate Network,yes,yes
+probe-44-1415,44,太空歌剧,银河 议会,Galactic Council,yes,yes
+probe-44-1416,44,太空歌剧,外交 使团,Diplomatic Delegation,yes,yes
+probe-44-1417,44,太空歌剧,和平 条约,Peace Treaty,yes,yes
+probe-44-1418,44,太空歌剧,战争 宣言,War Declaration,yes,yes
+probe-45-1419,45,像素街机,像素 跳跃,Pixel Jump,yes,yes
+probe-45-1420,45,像素街机,8bit 音效,8bit FX,yes,yes
+probe-45-1421,45,像素街机,16bit 芯片,16bit Chip,yes,yes
+probe-45-1422,45,像素街机,复古 街机,Retro Arcade,yes,yes
+probe-45-1423,45,像素街机,投币 开始,Coin Start,yes,yes
+probe-45-1424,45,像素街机,续关 提示,Continue Prompt,yes,yes
+probe-45-1425,45,像素街机,Game Over,Game Over,yes,yes
+probe-45-1426,45,像素街机,1UP 获得,1UP Get,yes,yes
+probe-45-1427,45,像素街机,高分 榜,High Score Board,yes,yes
+probe-45-1428,45,像素街机,关卡 完成,Stage Clear,yes,yes
+probe-45-1429,45,像素街机,Boss 战,Boss Battle,yes,yes
+probe-45-1430,45,像素街机,血条 减少,Health Bar Down,yes,yes
+probe-45-1431,45,像素街机,魔法 条,Mana Bar,yes,yes
+probe-45-1432,45,像素街机,经验 条,Xp Bar,yes,yes
+probe-45-1433,45,像素街机,道具 拾取,Item Pickup,yes,yes
+probe-45-1434,45,像素街机,金币 叮当,Gold Coin,yes,yes
+probe-45-1435,45,像素街机,钥匙 开门,Key Door Open,yes,yes
+probe-45-1436,45,像素街机,宝箱 开启,Chest Open,yes,yes
+probe-45-1437,45,像素街机,传送 门,Teleport Door,yes,yes
+probe-45-1438,45,像素街机,存档 点,Save Point,yes,yes
+probe-45-1439,45,像素街机,密码 输入,Password Input,yes,yes
+probe-45-1440,45,像素街机,Konami 秘籍,Konami Book,yes,yes
+probe-45-1441,45,像素街机,街机 摇杆,Arcade Joystick,yes,yes
+probe-45-1442,45,像素街机,十字 键,D Pad,yes,yes
+probe-45-1443,45,像素街机,A键 按下,A Button Pressed,yes,yes
+probe-45-1444,45,像素街机,B键 按下,B Button Pressed,yes,yes
+probe-45-1445,45,像素街机,Start 开始,Start,yes,yes
+probe-45-1446,45,像素街机,Select 选择,Select,yes,yes
+probe-45-1447,45,像素街机,连击 计数,Combo Counter,yes,yes
+probe-45-1448,45,像素街机,必杀 技,Special Move,yes,yes
+probe-45-1449,45,像素街机,大招 释放,Ultimate Release,yes,yes
+probe-45-1450,45,像素街机,格挡 成功,Parry Success,yes,yes
+probe-45-1451,45,像素街机,闪避 翻滚,Dodge Roll,yes,yes
+probe-45-1452,45,像素街机,像素 爆炸,Pixel Explosion,yes,yes
+probe-45-1453,45,像素街机,8bit 跳跃,8bit Hop,yes,yes
+probe-45-1454,45,像素街机,复古 射击,Retro Shooter,yes,yes
+probe-45-1455,45,像素街机,弹幕 躲避,Bullet Hell Dodge,yes,yes
+probe-45-1456,45,像素街机,像素 脚步,Pixel Footstep,yes,yes
+probe-45-1457,45,像素街机,机关 门,Mechanism Door,yes,yes
+probe-45-1458,45,像素街机,陷阱 触发,Trap Trigger,yes,yes
+probe-45-1459,45,像素街机,平台 掉落,Platform Fall,yes,yes
+probe-45-1460,45,像素街机,弹簧 弹跳,Spring Bounce,yes,yes
+probe-45-1461,45,像素街机,梯子 攀爬,Ladder Climb,yes,yes
+probe-45-1462,45,像素街机,藤蔓 摆动,Vine Swing,yes,yes
+probe-45-1463,45,像素街机,像素 剑击,Pixel Sword Slash,yes,yes
+probe-45-1464,45,像素街机,魔法 弹,Magic Bullet,yes,yes
+probe-45-1465,45,像素街机,火球 发射,Fireball Shoot,yes,yes
+probe-45-1466,45,像素街机,冰杖 射击,Ice Staff Shot,yes,yes
+probe-45-1467,45,像素街机,闪电 杖,Lightning Staff,yes,yes
+probe-45-1468,45,像素街机,治疗 瓶,Heal Potion,yes,yes
+probe-45-1469,45,像素街机,回复 泉,Restore Spring,yes,yes
+probe-45-1470,45,像素街机,商店 铃铛,Shop Bell,yes,yes
+probe-45-1471,45,像素街机,商人 对话,Merchant Talk,yes,yes
+probe-45-1472,45,像素街机,任务 感叹号,Quest Marker,yes,yes
+probe-45-1473,45,像素街机,对话框 弹出,Dialog Popup,yes,yes
+probe-45-1474,45,像素街机,打字 机,Typewriter,yes,yes
+probe-45-1475,45,像素街机,菜单 哔声,Menu Beep,yes,yes
+probe-45-1476,45,像素街机,光标 移动,Cursor Move,yes,yes
+probe-45-1477,45,像素街机,选择 确认,Select Confirm,yes,yes
+probe-45-1478,45,像素街机,取消 返回,Cancel Back,yes,yes
+probe-45-1479,45,像素街机,像素 胜利,Pixel Victory,yes,yes
+probe-45-1480,45,像素街机,通关 音乐,Clear Music,yes,yes
+probe-45-1481,45,像素街机,隐形 启动,Cloak Activate,yes,yes
+probe-45-1482,45,像素街机,街机 演示,Arcade Attract,yes,yes
