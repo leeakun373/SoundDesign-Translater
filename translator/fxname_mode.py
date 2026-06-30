@@ -1,7 +1,10 @@
 """模式1：中文 / 中英混合 -> BOOM 风格 FXName 关键词英文。
 
-管线：分词(保护ASCII/数字) -> 逐 token 译(canonical覆盖 > CC-CEDICT > NLLB兜底)
+管线：分词(保护ASCII/数字) -> 逐 token 译(canonical覆盖 > CC-CEDICT，未命中即 unknown)
        -> BOOM 风格吸附 -> 关键词化 -> 复用 fx_slots 组装。
+
+不使用任何 AI/NLLB 兜底：词典命不中的 token 一律判为 unknown，从最终名里略去
+并留待 review，绝不机器臆测乱翻。
 """
 
 from __future__ import annotations
@@ -52,21 +55,17 @@ def _title(word: str) -> str:
 
 
 def _translate_zh_token(tok: str) -> tuple[str, str, str | None]:
-    """返回 (english, source, slot_hint)。"""
+    """返回 (english, source, slot_hint)。
+
+    优先级：override 覆盖层 > CC-CEDICT。两层都未命中即判 unknown（不翻），
+    不调用任何 AI/NLLB 兜底，避免机器臆测乱翻。
+    """
     entry = overrides.lookup(tok)
     if entry:
         return entry["canonical"], "override", entry.get("slot") or None
     gloss = cedict.lookup(tok)
     if gloss:
         return gloss, "cedict", None
-    try:
-        from translator import nllb
-
-        english = nllb.zh2en(tok)
-    except Exception:
-        english = ""
-    if english:
-        return english, "nllb", None
     return "", "unknown", None
 
 

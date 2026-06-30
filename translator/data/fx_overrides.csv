@@ -175,3 +175,5 @@ raw,canonical,slot,note
 宝箱,Treasure Chest,object,NLLB冗余
 砂轮,Grinding Wheel,object,cedict弱译Wheel
 符咒,Rune,object,cedict弱译charm
+木地板,Wood Floor,material,原靠NLLB提升进词典
+木管,Wood Tube,object,原靠NLLB提升进词典
