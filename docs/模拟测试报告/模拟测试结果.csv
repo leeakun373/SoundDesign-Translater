@@ -31,11 +31,11 @@ BOOM-029,BOOM参考中文,中→英,上升 动作 移动,Rise Action Move,否,,,
 BOOM-030,BOOM参考中文,中→英,拳击手套 沙发 靠垫 重摔,Boxing Glove Couch Pillow Drop Hard,否,,,override override override override
 BOOM-031,BOOM参考中文,中→英,内脏 嘴 气泡,Guts Mouth Bubble,否,,,override override override
 BOOM-032,BOOM参考中文,中→英,抽吸 装置,Suction Device,否,,,override override
-BOOM-033,BOOM参考中文,中→英,上升 风铃 闪烁 频移,Rise Chime Sparkling Freq Shift,否,,,override override override override
+BOOM-033,BOOM参考中文,中→英,上升 风铃 闪烁 频移,Rise Chime Flicker Freq Shift,否,,,override override override override
 BOOM-034,BOOM参考中文,中→英,盒子 关闭 锁扣 中等,Box Close Lock Medium,否,,,override override override override override
 BOOM-035,BOOM参考中文,中→英,咖啡机 组装,Coffee Maker Assemble,否,,,override override
 BOOM-036,BOOM参考中文,中→英,空气感 绕卷,Airy Winding,否,,,override override
-BOOM-037,BOOM参考中文,中→英,木琴 延迟 闪烁 颤音,Xylophone Delay Sparkling Tremolo,否,,,override override override override
+BOOM-037,BOOM参考中文,中→英,木琴 延迟 闪烁 颤音,Xylophone Delay Flicker Tremolo,否,,,override override override override
 BOOM-038,BOOM参考中文,中→英,书本 掉落 低沉,Book Drop Subdued,否,,,override override override
 BOOM-039,BOOM参考中文,中→英,多层 纸张 近距离 操作,Several Layers Paper Close Handling,否,,,override override override override
 BOOM-040,BOOM参考中文,中→英,购物袋 脆响 用力,Shopping Bag Snappy Hard,否,,,override override override
@@ -50,7 +50,7 @@ BOOM-048,BOOM参考中文,中→英,牛叫盒 长,Moo Box Long,否,,,override ov
 BOOM-049,BOOM参考中文,中→英,界面 故障 降噪,Interface Glitch Denoised,否,,,override override override
 BOOM-050,BOOM参考中文,中→英,挤压 蔬菜 持续,Squeeze Vegetables Constant,否,,,override override override
 REC-001,个人录音抽样,中→英,钢球 掉落 瓷砖 清脆 明亮 叮当,Steel Ball Drop Tiles Crisp Bright Jingle,否,,,override override override override override override
-REC-002,个人录音抽样,中→英,磁铁 碰撞 哑铃 沉重 叮当,Magnet Bump Dumbbell Hard Jingle,否,,,override override override override override
+REC-002,个人录音抽样,中→英,磁铁 碰撞 哑铃 沉重 叮当,Magnet Clink Dumbbell Hard Jingle,否,,,override override override override override
 REC-003,个人录音抽样,中→英,齿轮 滚动 木地板 闷响 摇晃,Gear Scroll Wood Floor Thud Shake,否,,,override override override override override
 REC-004,个人录音抽样,中→英,卷心菜 刀 刺入,Cabbage Knife Stab,否,,,override override override
 REC-005,个人录音抽样,中→英,西瓜 斧头 切割,Watermelon Axe Cutting,否,,,override override override
@@ -73,7 +73,7 @@ REC-021,个人录音抽样,中→英,干燥箱门 中等 吱呀 复杂,Dry Box D
 REC-022,个人录音抽样,中→英,奥林巴斯相机 变焦 进出 摇杆 开关 马达,Olympus Camera Zoom In Out Joystick Switch Motor,否,,,override override override override override override
 REC-023,个人录音抽样,中→英,钢球 滚动 纹理瓷砖 返回 稳定 刮擦,Steel Ball Scroll Textured Tile Back Steady Scrape,否,,,override override override override override override
 REC-024,个人录音抽样,中→英,陶瓷碗 堆叠 撞击 易碎,Ceramic Bowl Stack Impact Brittle,否,,,override override override cedict
-REC-025,个人录音抽样,中→英,竹筷 空心 点击 碰撞,Bamboo Chopsticks Hollow Click Bump,否,,,override cedict override override
+REC-025,个人录音抽样,中→英,竹筷 空心 点击 碰撞,Bamboo Chopsticks Hollow Click Clink,否,,,override cedict override override
 REC-026,个人录音抽样,中→英,木棍 击打 钢墙 戳,Wood Stick Hit Steel Wall Jab,否,,,override override override cedict
 REC-027,个人录音抽样,中→英,厚 空心 木管 吹气,Thick Hollow Wood Tube Blow,否,,,override cedict override override
 REC-028,个人录音抽样,中→英,水气球 掉落 地面,Water Balloon Drop Ground,否,,,override override override
@@ -107,7 +107,7 @@ MIX-005,中英混合非写实,中→英,electric 奥术 crackle,Electric Arcane 
 MIX-006,中英混合非写实,中→英,plasma 电弧 short impact,Plasma Arc Short Impact,否,,,protected override protected protected
 MIX-007,中英混合非写实,中→英,rune 激活 shimmer,Rune Activate Shimmer,否,,,protected override protected
 MIX-008,中英混合非写实,中→英,portal 打开 deep whoosh,Portal Open Deep Whoosh,否,,,protected override protected protected
-MIX-009,中英混合非写实,中→英,spell 充能 闪烁,Spell Charge Sparkling,否,,,protected override override
+MIX-009,中英混合非写实,中→英,spell 充能 闪烁,Spell Charge Flicker,否,,,protected override override
 MIX-010,中英混合非写实,中→英,mana 爆发 bright tail,Mana Burst Bright Tail,否,,,protected override protected protected
 MIX-011,中英混合非写实,中→英,dragon 呼吸 fire burst,Dragon Breath Fire Burst,否,,,protected override protected protected
 MIX-012,中英混合非写实,中→英,ghost 低语 distant,Ghost Whisper Distant,否,,,protected override protected

@@ -2156,3 +2156,187 @@ X光 扫描,X-Ray Scan,50
 烟雾 机,Smoke Machine,50
 干冰 机,Dry Ice Machine,50
 泡泡 机,Bubble Machine,50
+挂号 窗口,Registration Window,50
+候诊 大厅,Waiting Room,50
+分诊 台,Triage Desk,50
+病历 翻阅,Chart Flip,50
+听诊 器,Stethoscope,50
+血压 计,Blood Pressure Monitor,50
+体温 计,Thermometer,50
+输液 滴管,IV Drip,50
+打针 注射,Injection Shot,50
+抽血 化验,Blood Lab Test,50
+X光 拍片,X-Ray Scan,50
+B超 探头,Ultrasound Probe,50
+核磁 扫描,MRI Scan,50
+手术 灯,Surgery Light,50
+无影 灯,Surgical Light,50
+麻醉 机,Anesthesia Machine,50
+呼吸机 通气,Ventilator Breath,50
+除颤 仪,Defibrillator,50
+心电 监护,ECG Monitor,50
+监护 仪,Patient Monitor,50
+担架 推送,Stretcher Push,50
+轮椅 推行,Wheelchair Push,50
+拐杖 点地,Cane Tap,50
+石膏 固定,Cast Set,50
+绷带 缠绕,Bandage Wrap,50
+纱布 撕开,Gauze Rip,50
+消毒 棉球,Alcohol Swab,50
+碘伏 擦拭,Iodine Wipe,50
+口罩 佩戴,Mask Wear,50
+手套 穿戴,Glove Don,50
+隔离 服,Isolation Gown,50
+病房 呼叫,Ward Call,50
+护士 推车,Nurse Cart,50
+药房 取药,Pharmacy Pickup,50
+胶囊 吞咽,Swallow Pill,50
+药片 碾碎,Crush Pill,50
+雾化 吸入,Nebulizer Inhale,50
+针灸 进针,Acupuncture Needle,50
+拔罐 吸附,Cupping Suction,50
+推拿 按压,Tui Na Press,50
+康复 训练,Rehab Training,50
+上课 铃响,Class Bell,50
+下课 铃响,School Bell End,50
+黑板 擦写,Blackboard Erase,50
+粉笔 折断,Chalk Snap,50
+课桌 挪动,Desk Slide,50
+书包 拉链,Bag Zip,50
+铅笔 削尖,Pencil Sharpen,50
+橡皮 擦拭,Eraser Rub,50
+尺子 掉落,Ruler Drop,50
+圆规 画圆,Compass Draw,50
+试卷 翻动,Paper Flip,50
+答题 卡,Answer Sheet,50
+监考 巡视,Proctor Patrol,50
+升旗 仪式,Flag Ceremony,50
+课间 操,Recess Exercise,50
+操场 跑步,Track Run,50
+篮球 运球,Basketball Dribble,50
+足球 射门,Soccer Kick,50
+排球 扣球,Volleyball Spike,50
+乒乓球 对打,Ping Pong Rally,50
+羽毛球 扣杀,Badminton Smash,50
+游泳 课,Swim Class,50
+美术 课,Art Class,50
+音乐 课,Music Class,50
+合唱 排练,Choir Rehearse,50
+图书馆 借书,Library Borrow,50
+还书 扫码,Return Scan,50
+书架 抽书,Bookshelf Pull,50
+阅览室 安静,Reading Room Quiet,50
+实验室 烧杯,Lab Beaker,50
+试管 摇晃,Test Tube Shake,50
+显微镜 观察,Microscope View,50
+化学 实验,Chemistry Lab,50
+物理 实验,Physics Lab,50
+地理 课,Geography Class,50
+历史 课,History Class,50
+电脑 课,Computer Class,50
+编程 键盘,Coding Keyboard,50
+3D 打印,3D Print,50
+机器人 社团,Robot Club,50
+校车 发车,School Bus Depart,50
+放学 涌出,School Rush,50
+餐厅 迎宾,Restaurant Greet,50
+点餐 平板,Order Tablet,50
+菜单 翻阅,Menu Flip,50
+服务员 托盘,Waiter Tray,50
+餐盘 摆放,Plate Serve,50
+刀叉 碰撞,Silverware Clink,50
+筷子 摆放,Chopsticks Place,50
+碗碟 碰撞,Dishes Clink,50
+汤勺 搅动,Ladle Stir,50
+火锅 沸腾,Hot Pot Boil,50
+烧烤 架,BBQ Grill,50
+铁板 滋滋,Teppan Sizzle,50
+炒菜 颠锅,Wok Toss,50
+切菜 砧板,Chop Board,50
+剁骨 刀,Cleaver Chop,50
+和面 揉搓,Knead Dough,50
+擀面 杖,Rolling Pin,50
+蒸笼 冒气,Steamer Steam,50
+油炸 下锅,Deep Fry,50
+焯水 翻滚,Blanch Boil,50
+调味 翻炒,Season Stir Fry,50
+上菜 揭盖,Serve Uncover,50
+撤盘 收桌,Clear Table,50
+结账 刷卡,Checkout Card,50
+小费 放桌,Tip Place,50
+外卖 取餐,Takeout Pickup,50
+打包 袋,Takeout Bag,50
+奶茶 封口,Milk Tea Seal,50
+咖啡 拉花,Latte Art,50
+调酒 摇壶,Cocktail Shake,50
+开瓶 倒酒,Pour Wine,50
+香槟 气泡,Champagne Fizz,50
+啤酒 泡沫,Beer Foam,50
+冰块 落入,Ice Drop,50
+榨汁 搅拌,Juice Blend,50
+面包 出炉,Bread Bake Out,50
+蛋糕 裱花,Cake Piping,50
+寿司 卷帘,Sushi Roll,50
+拉面 吸溜,Ramen Slurp,50
+饺子 下锅,Dumpling Boil,50
+包子 出笼,Bun Steam Out,50
+烧烤 摊,BBQ Stall,50
+动物园 开园,Zoo Open,50
+狮子 吼叫,Lion Roar,50
+老虎 低吼,Tiger Growl,50
+大象 长鸣,Elephant Trumpet,50
+长颈鹿 咀嚼,Giraffe Chew,50
+斑马 奔跑,Zebra Run,50
+犀牛 冲撞,Rhino Charge,50
+河马 打哈欠,Hippo Yawn,50
+猴子 嬉闹,Monkey Play,50
+猩猩 捶胸,Gorilla Chest Beat,50
+熊猫 咀嚼,Panda Chew,50
+考拉 攀爬,Koala Climb,50
+袋鼠 跳跃,Kangaroo Hop,50
+企鹅 摇摆,Penguin Waddle,50
+鹦鹉 学舌,Parrot Mimic,50
+孔雀 开屏,Peacock Display,50
+老鹰 俯冲,Eagle Dive,50
+秃鹫 盘旋,Vulture Circle,50
+蛇 蜕皮,Snake Shed,50
+蜥蜴 晒太阳,Lizard Bask,50
+乌龟 缩头,Turtle Retract,50
+青蛙 呱呱,Frog Croak,50
+鳄鱼 潜伏,Crocodile Lurk,50
+水族馆 隧道,Aquarium Tunnel,50
+鲨鱼 巡游,Shark Cruise,50
+魔鬼 鱼,Manta Ray,50
+海马 游动,Seahorse Swim,50
+水母 漂浮,Jellyfish Float,50
+珊瑚 礁,Coral Reef,50
+潜水员 气泡,Diver Bubble,50
+海洋 表演,Ocean Show,50
+马戏团 入场,Circus Enter,50
+小丑 喇叭,Clown Horn,50
+杂技 抛接,Juggle Toss,50
+走钢丝 平衡,Tightrope Balance,50
+魔术 变牌,Magic Card Trick,50
+老虎 钻圈,Tiger Jump Hoop,50
+大象 站立,Elephant Stand,50
+马术 表演,Equestrian Show,50
+飞人 秋千,Trapeze Swing,50
+烟花 马戏,Circus Firework,50
+赌场 筹码,Casino Chips,50
+老虎 机,Slot Machine,50
+轮盘 转动,Roulette Spin,50
+骰子 投掷,Dice Roll,50
+扑克 洗牌,Card Shuffle,50
+百家乐 发牌,Baccarat Deal,50
+筹码 碰撞,Chip Clink,50
+中奖 铃声,Jackpot Bell,50
+角子 机,Slot Machine,50
+宾果 报号,Bingo Call,50
+彩票 刮开,Lottery Scratch,50
+夜店 DJ,Club DJ,50
+舞池 低音,Dance Floor Bass,50
+霓虹 闪烁,Neon Flicker,50
+礼宾 炮,Ceremonial Salute,50
+绿幕 抠像,Green Screen Key,50
+群众 演员,Extras Crowd,50
+宾果 报,Bingo Call,50
