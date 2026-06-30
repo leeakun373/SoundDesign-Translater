@@ -75,10 +75,14 @@ def normalize(text: str) -> FXResult:
     terms: list[SlotTerm] = []
     group = 0
 
-    for s in seg.segment(text):
+    segments = seg.segment(text)
+    i = 0
+    while i < len(segments):
+        s = segments[i]
         if s.kind == "ascii":
             words = [_title(w) for w in _WORD_RE.findall(s.text)]
             if not words:
+                i += 1
                 continue
             trace = TokenTrace(s.text, "ascii", translated=s.text, snapped=s.text,
                                decision="protected", final_words=words)
@@ -88,16 +92,36 @@ def normalize(text: str) -> FXResult:
                 terms.append(SlotTerm(w, slot if slot != "unknown" else "detail",
                                       "protected", group))
             group += 1
+            i += 1
             continue
 
         if s.text in ZH_STOP or all(c in ZH_STOP for c in s.text):
             traces.append(TokenTrace(s.text, "zh", decision="dropped_stop"))
+            i += 1
             continue
+
+        # 短语(2-gram)覆盖：相邻两个中文词若命中，优先用上下文译法（多义词消歧）
+        if i + 1 < len(segments) and segments[i + 1].kind == "zh":
+            phrase_en = overrides.phrase_lookup(s.text, segments[i + 1].text)
+            if phrase_en:
+                src = f"{s.text} {segments[i + 1].text}"
+                words = [_title(w) for w in _WORD_RE.findall(phrase_en)]
+                trace = TokenTrace(src, "zh", translated=phrase_en, snapped=phrase_en,
+                                   decision="phrase", final_words=words)
+                traces.append(trace)
+                for w in words:
+                    slot = infer_slot(w)
+                    terms.append(SlotTerm(w, slot if slot != "unknown" else "detail",
+                                          "phrase", group))
+                group += 1
+                i += 2
+                continue
 
         english, source, slot_hint = _translate_zh_token(s.text)
         trace = TokenTrace(s.text, "zh", translated=english, decision=source)
         if not english:
             traces.append(trace)
+            i += 1
             continue
 
         snap = boom_snap.snap_term(english, s.text)
@@ -110,6 +134,7 @@ def normalize(text: str) -> FXResult:
             kept = [w for w in _WORD_RE.findall(snap.final)]
         if not kept:
             traces.append(trace)
+            i += 1
             continue
         trace.final_words = [_title(w) for w in kept]
         traces.append(trace)
@@ -118,6 +143,7 @@ def normalize(text: str) -> FXResult:
             terms.append(SlotTerm(w, slot if slot != "unknown" else (slot_hint or "unknown"),
                                   source, group))
         group += 1
+        i += 1
 
     assembled = assemble_fx_name(terms, preserve_order=True)
     return FXResult(output_fxname=assembled.text, traces=traces)

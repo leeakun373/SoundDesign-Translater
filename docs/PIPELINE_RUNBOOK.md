@@ -21,10 +21,11 @@
 逐 token 翻译走**优先级覆盖**：
 
 ```
-手工(fx_overrides.csv) > 双语挖掘(fx_overrides_bilingual.csv) > canonical(只读) > cedict自动 > CC-CEDICT > NLLB兜底
+短语2gram(fx_overrides_phrase.csv) > 手工(fx_overrides.csv) > 双语挖掘(fx_overrides_bilingual.csv) > canonical(只读) > cedict自动 > CC-CEDICT > NLLB兜底
 ```
 
 > 正确率主要由**双语挖掘层**决定——它从「精翻」中英对照里自动学 `撞击→Impact` 这种受控词汇。
+> **短语层**解决多义词上下文：`开关 关闭→Switch Off`、`拉 关闭→Pull Off`（相邻两词命中时优先于逐词翻译）。
 
 ---
 

@@ -9,24 +9,16 @@ if errorlevel 1 (
     exit /b 1
 )
 
-if not exist "glossary\audio_glossary.sqlite" (
-    echo [ERROR] Glossary missing: glossary\audio_glossary.sqlite
-    echo Run build_glossary.bat first.
+if not exist "nllb_int8_model" (
+    echo [ERROR] NLLB model missing: nllb_int8_model\
     pause
     exit /b 1
 )
 
-python -B -c "from fxengine.ui import main" >nul 2>&1
-if errorlevel 1 (
-    echo [ERROR] FXName Engine startup check failed.
-    echo Run: python -m fxengine.ui
-    pause
-    exit /b 1
-)
-
+REM 最新测试前端：中->FXName / 中->英 / 英->中，模式可选
 where pythonw.exe >nul 2>&1
 if errorlevel 1 (
-    python -B -m fxengine.ui
+    python -B translator_gui.py
     if errorlevel 1 (
         pause
         exit /b 1
@@ -34,5 +26,5 @@ if errorlevel 1 (
     exit /b 0
 )
 
-start "" pythonw.exe -B -m fxengine.ui
+start "" pythonw.exe -B translator_gui.py
 exit /b 0

@@ -36,7 +36,11 @@ from translator.fxname_mode import EN_DROP, ZH_STOP, _title  # noqa: E402
 
 DATA_DIR = ROOT / "docs" / "训练数据"
 OUT_PATH = ROOT / "translator" / "data" / "fx_overrides_bilingual.csv"
+PHRASE_PATH = ROOT / "translator" / "data" / "fx_overrides_phrase.csv"
 HOLDOUT_PATH = ROOT / "translator" / "data" / "jingfan_holdout.csv"
+
+PHRASE_MIN_SUPPORT = 5   # 短语(2-gram)支持度下限（比单词严，防噪声）
+PHRASE_DOM = 0.70        # 短语主义项占比下限
 
 # 阈值经留出集 F1 扫描标定（放宽到此处 F1 最优且仍保留弱 dominance 防乱配）
 MIN_SUPPORT = 3      # 该中文 token 至少出现这么多行
@@ -117,6 +121,8 @@ def main() -> None:
     raw_cooc: dict[str, Counter] = defaultdict(Counter)  # 纯行级共现(算实证用)
     zfreq: Counter = Counter()   # 中文 token 出现的行数
     efreq: Counter = Counter()   # 英文 token 出现的行数
+    pbig: dict[str, Counter] = defaultdict(Counter)   # 中文2-gram -> 英文2-gram(仅位置对齐)
+    pzfreq: Counter = Counter()
     holdout_rows: list[tuple[str, str]] = []
     n_train = 0
 
@@ -139,6 +145,11 @@ def main() -> None:
         if len(zts) == len(ets):  # 等长：位置对齐是强信号
             for zt, et in zip(zts, ets):
                 cooc[zt][et] += POS_BONUS
+            for i in range(len(zts) - 1):  # 顺带挖 2-gram 上下文短语
+                zb = zts[i] + " " + zts[i + 1]
+                eb = ets[i] + " " + ets[i + 1]
+                pbig[zb][eb] += 1
+                pzfreq[zb] += 1
 
     mined: list[tuple[str, str, float]] = []
     for zt, counter in cooc.items():
@@ -166,6 +177,32 @@ def main() -> None:
         for raw, canon, sup in mined:
             w.writerow([raw, canon, "", sup])
 
+    # 短语(2-gram)覆盖：解决多义词上下文（开关 关闭->Switch Off）。只保留稳定且“有增量”的。
+    phrases: list[tuple[str, str, int]] = []
+    unigram = {raw: canon for raw, canon, _ in mined}
+    for zb, c in pbig.items():
+        if pzfreq[zb] < PHRASE_MIN_SUPPORT:
+            continue
+        eb, cnt = c.most_common(1)[0]
+        if cnt / sum(c.values()) < PHRASE_DOM:
+            continue
+        en_words = eb.split()
+        if len(en_words) != 2:
+            continue
+        canon = " ".join(_title(x) for x in en_words)
+        # 只在“短语义≠逐词义拼接”时才需要短语层（即上下文改变了译法）
+        z1, z2 = zb.split()
+        naive = f"{unigram.get(z1, '')} {unigram.get(z2, '')}".strip()
+        if naive.lower() == canon.lower():
+            continue
+        phrases.append((zb, canon, cnt))
+    phrases.sort(key=lambda x: -x[2])
+    with PHRASE_PATH.open("w", encoding="utf-8", newline="") as h:
+        w = csv.writer(h)
+        w.writerow(["raw", "canonical", "support"])
+        for raw, canon, sup in phrases:
+            w.writerow([raw, canon, sup])
+
     if holdout_rows:
         with HOLDOUT_PATH.open("w", encoding="utf-8", newline="") as h:
             w = csv.writer(h)
@@ -173,7 +210,7 @@ def main() -> None:
             for zh, en in holdout_rows:
                 w.writerow(["", en, zh])
 
-    print(f"训练对: {n_train}  挖出覆盖: {len(mined)}  留出: {len(holdout_rows)}")
+    print(f"训练对: {n_train}  挖出覆盖: {len(mined)}  短语: {len(phrases)}  留出: {len(holdout_rows)}")
     print(f"-> {OUT_PATH}")
     if holdout_rows:
         print(f"-> {HOLDOUT_PATH}")

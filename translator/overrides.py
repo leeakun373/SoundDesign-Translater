@@ -21,6 +21,8 @@ FX_OVERRIDES_PATH = Path(__file__).resolve().parent / "data" / "fx_overrides.csv
 FX_OVERRIDES_AUTO_PATH = Path(__file__).resolve().parent / "data" / "fx_overrides_auto.csv"
 # 双语挖掘层（由 tools/mine_overrides_bilingual.py 从精翻对照学到；观测真值，高可信）。
 FX_OVERRIDES_BILINGUAL_PATH = Path(__file__).resolve().parent / "data" / "fx_overrides_bilingual.csv"
+# 短语(2-gram)覆盖层：解决多义词上下文（开关 关闭->Switch Off）。
+FX_OVERRIDES_PHRASE_PATH = Path(__file__).resolve().parent / "data" / "fx_overrides_phrase.csv"
 
 
 def _read_override_csv(path: Path) -> dict[str, dict[str, str]]:
@@ -87,6 +89,25 @@ def _load_canonical() -> dict[str, dict[str, str]]:
                 "priority": row.get("priority") or "0",
             }
     return table
+
+
+@lru_cache(maxsize=1)
+def _load_phrases() -> dict[str, str]:
+    """中文相邻2词("a b") -> 英文短语。空表也合法。"""
+    table: dict[str, str] = {}
+    if not FX_OVERRIDES_PHRASE_PATH.exists():
+        return table
+    with FX_OVERRIDES_PHRASE_PATH.open(encoding="utf-8", newline="") as handle:
+        for row in csv.DictReader(handle):
+            raw = (row.get("raw") or "").strip()
+            canonical = (row.get("canonical") or "").strip()
+            if raw and canonical:
+                table[raw] = canonical
+    return table
+
+
+def phrase_lookup(first: str, second: str) -> str | None:
+    return _load_phrases().get(f"{first} {second}")
 
 
 def lookup(word: str) -> dict[str, str] | None:

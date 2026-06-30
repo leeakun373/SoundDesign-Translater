@@ -38,8 +38,8 @@ raw,canonical,slot,support
 独眼巨人,Cyclops,,4.0
 公牛,Bull,,4.0
 拼花地板,Parquet,,4.0
-竞技场,Arena,,4.0
 陀螺,Pegtop,,4.0
+竞技场,Arena,,4.0
 气浪,Airwave,,4.0
 书,Book,,4.0
 斩刀,Chopper,,4.0
@@ -152,8 +152,8 @@ raw,canonical,slot,support
 华丽,Flashy,,4.0
 细节,Detail,,4.0
 马克杯,Mug,,4.0
-牛仔布,Denim,,4.0
 短裤,Shorts,,4.0
+牛仔布,Denim,,4.0
 窸窣,Ruffle,,4.0
 裙,Skirt,,4.0
 手提包,Handbag,,4.0
@@ -186,8 +186,8 @@ raw,canonical,slot,support
 入口,Entrance,,4.0
 水泥,Cement,,4.0
 工地,Site,,4.0
-更新,Renewal,,4.0
 外墙,Facade,,4.0
+更新,Renewal,,4.0
 摩天楼,Skyscraper,,4.0
 美容,Beauty,,4.0
 潜艇,Submarine,,4.0
@@ -235,8 +235,8 @@ raw,canonical,slot,support
 喵,Meow,,4.0
 家养,Domestic,,4.0
 吸溜,Slurp,,4.0
-兔窝,Warren,,4.0
 猎犬,Hound,,4.0
+兔窝,Warren,,4.0
 野猪,Boar,,4.0
 羔羊,Lamb,,4.0
 温和,Mild,,4.0
@@ -343,8 +343,8 @@ raw,canonical,slot,support
 陈旧,Stale,,4.0
 鼓起,Puffed,,4.0
 被子,Duvet,,4.0
-夫,Fu,,4.0
 功,Kung,,4.0
+夫,Fu,,4.0
 燧石,Flintstone,,4.0
 麦克,Mic,,4.0
 粘贴,Affix,,4.0
@@ -501,8 +501,8 @@ raw,canonical,slot,support
 危急,Critical,,4.0
 查询,Query,,4.0
 花,Flowers,,4.0
-锥,Cone,,4.0
 冷杉,Fir,,4.0
+锥,Cone,,4.0
 雪佛兰,Chevrolet,,4.0
 脚撑,Kickstand,,4.0
 科迈罗,Camaro,,4.0
@@ -999,8 +999,8 @@ raw,canonical,slot,support
 舔,Lick,,3.5
 铁路,Railway,,3.5
 药,Drug,,3.5
-杜卡迪,Ducati,,3.5
 巡洋舰,Cruiser,,3.5
+杜卡迪,Ducati,,3.5
 邪恶,Evil,,3.495
 购物,Shopping,,3.495
 使用,Use,,3.495
@@ -2374,8 +2374,8 @@ raw,canonical,slot,support
 跺,Stomp,,2.0
 凹槽,Fluted,,2.0
 轰油,Revving,,2.0
-琴马,Pont,,2.0
 强度,Intensity,,2.0
+琴马,Pont,,2.0
 指弹,Fingered,,2.0
 水库,Reservoir,,2.0
 连帽衫,Hoodie,,2.0
@@ -2573,8 +2573,8 @@ raw,canonical,slot,support
 友善,Friendly,,1.4
 冲击,Punch,,1.388
 少数,Few,,1.379
-超彩,Supercolor,,1.375
 宝丽来,Polaroid,,1.375
+超彩,Supercolor,,1.375
 叮响,Ping,,1.371
 爆响,Blast,,1.367
 容器,Container,,1.365
@@ -2607,8 +2607,8 @@ raw,canonical,slot,support
 洞,Cave,,1.263
 弹夹,Clip,,1.25
 进入,Bullet,,1.246
-韦伯,Webley,,1.24
 利,Mk,,1.24
+韦伯,Webley,,1.24
 空击,Dryfire,,1.236
 玻璃杯,Glass,,1.231
 孔,Hole,,1.214
@@ -2677,8 +2677,8 @@ raw,canonical,slot,support
 毛瑟,Mauser,,1.0
 炮弹,Cannonball,,1.0
 兽,Orc,,1.0
-异体,Mutant,,1.0
 变,Mutant,,1.0
+异体,Mutant,,1.0
 布伦,Bren,,1.0
 汤普森,Thompson,,1.0
 卡宾枪,Carbine,,1.0
@@ -2687,8 +2687,8 @@ raw,canonical,slot,support
 脆,Crispbread,,1.0
 共振,Formant,,1.0
 亚鼓,Alfaia,,1.0
-班苏里,Bansuri,,1.0
 笛,Bansuri,,1.0
+班苏里,Bansuri,,1.0
 杜读,Duduk,,1.0
 基琴,Bouzouki,,1.0
 切琴,Kemence,,1.0
@@ -2696,8 +2696,8 @@ raw,canonical,slot,support
 标准,Standard,,1.0
 自动化,Automation,,1.0
 母马,Mare,,1.0
-温,Wimborne,,1.0
 伯恩,Wimborne,,1.0
+温,Wimborne,,1.0
 无序,Anarchion,,1.0
 体,Anarchion,,1.0
 异形,Xenoraptor,,1.0
@@ -2736,9 +2736,9 @@ raw,canonical,slot,support
 投影仪,Projector,,1.0
 犬,Hellhound,,1.0
 取走,Taken,,1.0
+迪,Didgeridoo,,1.0
 杜,Didgeridoo,,1.0
 吉里,Didgeridoo,,1.0
-迪,Didgeridoo,,1.0
 贝斯,Dubstep,,1.0
 筒,Rainmaker,,1.0
 托普,Toepler,,1.0
@@ -2764,8 +2764,8 @@ raw,canonical,slot,support
 马林巴,Marimba,,1.0
 全音,Tritone,,1.0
 肯肯,Kenken,,1.0
-巴萨,Cabasa,,1.0
 卡,Cabasa,,1.0
+巴萨,Cabasa,,1.0
 高音,Altissimo,,1.0
 罐装,Sixpack,,1.0
 勾拳,Uppercut,,1.0
@@ -2775,11 +2775,11 @@ raw,canonical,slot,support
 已,Accepted,,1.0
 选项,Option,,1.0
 小时,Mph,,1.0
-每,Mph,,1.0
 英里,Mph,,1.0
+每,Mph,,1.0
 奥迪,Audi,,1.0
-特,Kadett,,1.0
 卡德,Kadett,,1.0
+特,Kadett,,1.0
 斯特,Boxster,,1.0
 博克,Boxster,,1.0
 运输车,Transporter,,1.0
@@ -2790,8 +2790,8 @@ raw,canonical,slot,support
 过度,Oversteer,,1.0
 阿尔戈,Argosy,,1.0
 宇航员,Astronaut,,1.0
-锁子,Chainmail,,1.0
 甲,Chainmail,,1.0
+锁子,Chainmail,,1.0
 镶,Studded,,1.0
 原子,Atom,,1.0
 鲁格,Ruger,,0.986
@@ -2833,8 +2833,8 @@ raw,canonical,slot,support
 刮,Guiro,,0.87
 布基,Gaffa,,0.857
 皱,Crumple,,0.857
-华夫,Waffles,,0.857
 饼,Waffles,,0.857
+华夫,Waffles,,0.857
 生动,Animated,,0.857
 移液管,Pipette,,0.857
 拿起,Pick,,0.852

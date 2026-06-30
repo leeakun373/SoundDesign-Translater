@@ -12,3 +12,5 @@ jingfan_holdout.csv
 !fx_overrides_auto.csv
 # 双语挖掘覆盖（从精翻学到的观测真值，入库；随精翻增多而增长）
 !fx_overrides_bilingual.csv
+# 短语(2-gram)覆盖（多义词上下文消歧，入库）
+!fx_overrides_phrase.csv
