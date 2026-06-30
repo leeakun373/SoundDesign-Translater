@@ -2383,3 +2383,183 @@ B超 探头,Ultrasound Probe,50
 担架 后送,Stretcher Evac,50
 军号 吹响,Bugle Call,50
 胜利 号角,Victory Horn,50
+登机 口,Boarding Gate,50
+安检 通道,Security Lane,50
+行李 托运,Baggage Check In,50
+登机牌 扫描,Boarding Pass Scan,50
+护照 查验,Passport Inspect,50
+海关 申报,Customs Declare,50
+入境 盖章,Entry Stamp,50
+出境 离境,Departure Exit,50
+候机 大厅,Terminal Hall,50
+登机 广播,Boarding PA,50
+航班 延误,Flight Delay,50
+航班 取消,Flight Cancel,50
+跑道 滑行,Runway Taxi,50
+起飞 离地,Takeoff Liftoff,50
+爬升 引擎,Climb Engine,50
+巡航 高度,Cruise Altitude,50
+下降 襟翼,Descent Flap,50
+降落 接地,Landing Touchdown,50
+刹车 反推,Brake Reverse,50
+廊桥 对接,Jet Bridge Dock,50
+摆渡 车,Shuttle Bus,50
+行李 转盘,Baggage Carousel,50
+提取 行李,Retrieve Luggage,50
+遗失 行李,Lost Baggage,50
+贵宾 休息室,VIP Lounge,50
+免税店 购物,Duty Free Shop,50
+候机 椅,Waiting Seat,50
+登机 梯,Boarding Stairs,50
+舷梯 放下,Airstairs Lower,50
+加油 车,Fuel Truck,50
+除冰 车,Deicer Truck,50
+牵引 车,Tug Truck,50
+塔台 指令,Tower Command,50
+雷达 引导,Radar Guide,50
+盲降 系统,ILS System,50
+紧急 迫降,Emergency Landing,50
+氧气 面罩,Oxygen Mask,50
+救生 衣,Life Vest,50
+滑梯 充气,Slide Inflate,50
+黑匣子 记录,Black Box Record,50
+延误 通知,Delay Notice,50
+酒店 入住,Hotel Check In,50
+前台 登记,Front Desk Register,50
+房卡 刷卡,Key Card Swipe,50
+电梯 上行,Elevator Up,50
+行李 推车,Luggage Cart,50
+客房 打扫,Room Clean,50
+铺床 整理,Make Bed,50
+换洗 毛巾,Linen Change,50
+迷你 吧,Mini Bar,50
+冰箱 开门,Fridge Open,50
+淋浴 水流,Shower Water,50
+浴缸 放水,Bathtub Drain,50
+马桶 冲水,Toilet Flush,50
+吹风机 启动,Hair Dryer,50
+保险箱 开启,Safe Open,50
+窗帘 拉开,Curtain Open,50
+空调 调节,AC Adjust,50
+叫醒 服务,Wake Up Call,50
+客房 送餐,Room Service,50
+餐厅 早餐,Breakfast Buffet,50
+自助餐 取餐,Buffet Serve,50
+健身房 器械,Gym Equipment,50
+游泳池 跳水,Pool Dive,50
+桑拿 蒸汽,Sauna Steam,50
+SPA 按摩,Spa Massage,50
+会议室 投影,Meeting Projector,50
+商务 中心,Business Center,50
+退房 结账,Checkout Bill,50
+发票 打印,Receipt Print,50
+行李 员,Bellhop,50
+门童 开门,Doorman Open,50
+泊车 服务,Valet Park,50
+礼宾 接待,Concierge Host,50
+婚礼 宴会,Wedding Banquet,50
+香槟 塔,Champagne Tower,50
+舞厅 乐队,Ballroom Band,50
+酒吧 点单,Bar Order,50
+夜床 服务,Turndown Service,50
+洗衣 服务,Laundry Service,50
+熨烫 衣物,Clothes Iron,50
+投诉 处理,Complaint Handle,50
+紧急 疏散,Emergency Evac,50
+警车 警笛,Police Siren,50
+巡逻 车,Patrol Car,50
+特警 突击,SWAT Raid,50
+刑警 勘查,Detective Investigate,50
+现场 封锁,Crime Scene Cordon,50
+警戒 线,Police Line,50
+取证 拍照,Evidence Photo,50
+指纹 粉末,Fingerprint Dust,50
+脚印 拓印,Footprint Cast,50
+血迹 采样,Blood Sample,50
+弹壳 收集,Shell Collect,50
+弹道 分析,Ballistics Analysis,50
+测距 标尺,Ranging Scale,50
+尸体 袋,Body Bag,50
+法医 鉴定,Coroner Exam,50
+审讯 记录,Interrogation Record,50
+笔录 签字,Statement Sign,50
+嫌疑人 押送,Suspect Escort,50
+手铐 咔嚓,Handcuff Snap,50
+脚镣 拖拽,Leg Iron Drag,50
+警棍 击打,Baton Strike,50
+电击 枪,Taser Shot,50
+催泪 喷射,Tear Gas Spray,50
+防暴 驱散,Riot Disperse,50
+路障 设卡,Barricade Checkpoint,50
+盘查 证件,ID Check,50
+搜身 检查,Pat Down,50
+扣押 物品,Seized Goods,50
+通缉 令,Warrant,50
+悬赏 通告,Bounty Notice,50
+监狱 铁门,Prison Gate,50
+牢房 巡视,Cell Patrol,50
+放风 操场,Yard Time,50
+越狱 挖掘,Prison Dig,50
+探照 灯,Searchlight,50
+无人机 追踪,Drone Track,50
+警犬 嗅探,K9 Sniff,50
+痕迹 鉴定,Trace Exam,50
+DNA 比对,DNA Match,50
+监控 回放,CCTV Playback,50
+对讲 调度,Radio Dispatch,50
+指挥中心 大屏,Command Center Display,50
+报警 电话,Emergency Call,50
+110 接警,Police Dispatch,50
+火警 119,Fire Dispatch,50
+急救 120,EMS Dispatch,50
+工地 开工,Site Start,50
+塔吊 旋转,Tower Crane Swing,50
+吊车 起吊,Crane Hoist,50
+挖掘机 铲斗,Excavator Bucket,50
+推土机 推进,Bulldozer Push,50
+压路机 碾压,Road Roller,50
+混凝土 搅拌,Concrete Mix,50
+泵车 浇筑,Concrete Pour,50
+钢筋 绑扎,Rebar Tie,50
+焊接 火花,Weld Spark,50
+切割 钢板,Steel Cut,50
+脚手架 搭建,Scaffold Build,50
+安全 网,Safety Net,50
+头盔 佩戴,Helmet Wear,50
+反光 背心,Reflective Vest,50
+洞口 坠落,Opening Fall,50
+扬尘 弥漫,Dust Cloud,50
+打桩 锤击,Pile Hammer,50
+钻孔 机,Drill Rig,50
+破碎 锤,Breaker Hammer,50
+拆除 楼体,Building Demolish,50
+爆破 拆除,Blast Demolish,50
+沉降 裂缝,Settlement Crack,50
+漏水 修补,Leak Patch,50
+防水 涂层,Waterproof Coat,50
+贴砖 敲击,Tile Tap,50
+粉刷 滚筒,Paint Roller,50
+吊顶 安装,Ceiling Install,50
+铺地板 敲击,Floor Tap,50
+装门窗 框,Door Frame Install,50
+通水 电,Utilities On,50
+验收 检查,Final Inspect,50
+交房 钥匙,Handover Keys,50
+装修 垃圾,Reno Debris,50
+小区 门禁,Community Gate,50
+物业 巡逻,Property Patrol,50
+快递 柜,Parcel Locker,50
+垃圾 清运,Garbage Haul,50
+绿化 修剪,Garden Trim,50
+洒水 浇灌,Water Spray,50
+儿童 游乐,Playground Kids,50
+老人 棋牌,Senior Mahjong,50
+广场舞 音响,Square Dance Speaker,50
+夜市 摊位,Night Market Stall,50
+赶集 叫卖,Market Hawker,50
+杀猪 放血,Slaughter Bleed,50
+磨面 机器,Flour Mill,50
+榨油 作坊,Oil Press Workshop,50
+酿酒 作坊,Brew Workshop,50
+熏肉 熏制,Smoked Meat Cure,50
+晒谷 场,Grain Drying Yard,50

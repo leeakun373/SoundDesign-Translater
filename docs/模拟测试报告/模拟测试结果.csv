@@ -74,12 +74,12 @@ REC-022,个人录音抽样,中→英,奥林巴斯相机 变焦 进出 摇杆 开
 REC-023,个人录音抽样,中→英,钢球 滚动 纹理瓷砖 返回 稳定 刮擦,Steel Ball Scroll Textured Tile Back Steady Scrape,否,,,override override override override override override
 REC-024,个人录音抽样,中→英,陶瓷碗 堆叠 撞击 易碎,Ceramic Bowl Stack Impact Brittle,否,,,override override override cedict
 REC-025,个人录音抽样,中→英,竹筷 空心 点击 碰撞,Bamboo Chopsticks Hollow Click Clink,否,,,override cedict override override
-REC-026,个人录音抽样,中→英,木棍 击打 钢墙 戳,Wood Stick Hit Steel Wall Jab,否,,,override override override cedict
+REC-026,个人录音抽样,中→英,木棍 击打 钢墙 戳,Wood Stick Strike Steel Wall Jab,否,,,override override override cedict
 REC-027,个人录音抽样,中→英,厚 空心 木管 吹气,Thick Hollow Wood Tube Blow,否,,,override cedict override override
 REC-028,个人录音抽样,中→英,水气球 掉落 地面,Water Balloon Drop Ground,否,,,override override override
 REC-029,个人录音抽样,中→英,火炬 燃烧 滴落 洞穴,Torch Burn Drips Cave,否,,,override override override override
-REC-030,个人录音抽样,中→英,汽油罐 火焰 爆发 短 洞口,Gas Can Flame Burst Short Cave Mouth,否,,,override override phrase override
-REC-031,个人录音抽样,中→英,石块 滑过 岩石 洞口,Rock Slide Cave Mouth,否,,,override override override override
+REC-030,个人录音抽样,中→英,汽油罐 火焰 爆发 短 洞口,Gas Can Flame Burst Short Opening,否,,,override override phrase override
+REC-031,个人录音抽样,中→英,石块 滑过 岩石 洞口,Rock Slide Opening,否,,,override override override override
 REC-032,个人录音抽样,中→英,中型石头 滚过 碎屑堆 洞穴,Medium Rock Roll On Debris Pile Cave,否,,,override override override override
 REC-033,个人录音抽样,中→英,中型石头 撞击 石堆 洞穴,Medium Rock Impact Pile Cave,否,,,override override override override
 REC-034,个人录音抽样,中→英,干冰 烤盘 木头 尖叫,Dry Ice Baking Pan Wood Scream,否,,,override override override override
@@ -129,7 +129,7 @@ MIX-027,中英混合非写实,中→英,fireball 爆炸 long tail,Fireball Explo
 MIX-028,中英混合非写实,中→英,ice 魔法 crack,Ice Magic Crack,否,,,protected override protected
 MIX-029,中英混合非写实,中→英,shadow 移动 soft,Shadow Move Soft,否,,,protected override protected
 MIX-030,中英混合非写实,中→英,holy 风铃 bright,Holy Chime Bright,否,,,protected override protected
-MIX-031,中英混合非写实,中→英,demon 低吼 distant,Demon Low Growl Distant,否,,,protected override override protected
+MIX-031,中英混合非写实,中→英,demon 低吼 distant,Demon Growl Distant,否,,,protected override protected
 MIX-032,中英混合非写实,中→英,alien 装置 charge,Alien Device Charge,否,,,protected override protected
 MIX-033,中英混合非写实,中→英,robot servo 电涌,Robot Servo Power Surge,否,,,protected protected override
 MIX-034,中英混合非写实,中→英,magical 布料 flap,Magical Cloth Flap,否,,,protected override protected
