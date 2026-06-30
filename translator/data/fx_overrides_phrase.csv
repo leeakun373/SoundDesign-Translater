@@ -2255,6 +2255,7 @@ B超 探头,Ultrasound Probe,50
 切菜 砧板,Chop Board,50
 剁骨 刀,Cleaver Chop,50
 和面 揉搓,Knead Dough,50
+下 河,Underground River,50
 擀面 杖,Rolling Pin,50
 蒸笼 冒气,Steamer Steam,50
 油炸 下锅,Deep Fry,50
@@ -2563,3 +2564,196 @@ DNA 比对,DNA Match,50
 酿酒 作坊,Brew Workshop,50
 熏肉 熏制,Smoked Meat Cure,50
 晒谷 场,Grain Drying Yard,50
+货轮 鸣笛,Cargo Ship Horn,50
+港口 装卸,Port Load,50
+集装箱 吊装,Container Lift,50
+码头 缆绳,Pier Mooring,50
+系泊 桩,Mooring Bollard,50
+锚链 抛锚,Anchor Drop,50
+起锚 机,Anchor Winch,50
+拖轮 辅助,Tug Assist,50
+引航 艇,Pilot Boat,50
+检疫 登船,Quarantine Board,50
+登轮 桥,Gangway,50
+船舱 门,Cabin Door,50
+货舱 打开,Cargo Hold Open,50
+压载 水,Ballast Water,50
+排水 泵,Bilge Pump,50
+螺旋 桨,Propeller,50
+舵机 转动,Rudder Turn,50
+雷达 回波,Radar Echo,50
+声呐 探测,Sonar Ping,50
+对讲 海务,Marine Radio,50
+救生 艇,Lifeboat,50
+弃船 警报,Abandon Ship Alarm,50
+消防 泵,Fire Pump,50
+海盗 袭击,Pirate Attack,50
+护航 舰队,Convoy Fleet,50
+潜艇 下潜,Sub Dive,50
+鱼雷 发射,Torpedo Launch,50
+深水 炸弹,Depth Charge,50
+声呐 浮标,Sonar Buoy,50
+海上 补给,Sea Resupply,50
+钻井 平台,Offshore Rig,50
+海上 风电,Offshore Wind,50
+灯塔 雾号,Lighthouse Foghorn,50
+浮标 碰撞,Buoy Hit,50
+海冰 碎裂,Sea Ice Break,50
+渡轮 靠岸,Ferry Dock,50
+客舱 广播,Cabin PA,50
+晕船 呕吐,Seasick Vomit,50
+海鸥 盘旋,Seagull Circle,50
+港口 吊机,Port Crane,50
+铁路 轨道,Rail Track,50
+火车站 广播,Station PA,50
+检票 闸机,Ticket Gate,50
+站台 候车,Platform Wait,50
+高铁 进站,High Speed Arrive,50
+动车 出站,Bullet Depart,50
+货运 列车,Freight Train,50
+编组 场,Yard,50
+调车 作业,Shunting Work,50
+道岔 切换,Switch Change,50
+信号灯 变灯,Signal Change,50
+道口 栏杆,Crossing Gate,50
+平交 道口,Grade Crossing,50
+轮对 检修,Wheelset Service,50
+转向 架,Bogie,50
+制动 测试,Brake Test,50
+受电 弓,Pantograph,50
+接触 网,Catenary,50
+供电 段,Power Section,50
+隧道 进洞,Tunnel Entry,50
+桥梁 通过,Bridge Pass,50
+涵洞 排水,Culvert Drain,50
+枕木 更换,Sleeper Replace,50
+道砟 铺设,Ballast Lay,50
+钢轨 焊接,Rail Weld,50
+探伤 检测,Flaw Detect,50
+列检 作业,Train Inspect,50
+列尾 装置,EOT Device,50
+机车 换挂,Loco Change,50
+重联 运行,Multi Unit Run,50
+甩挂 作业,Uncouple Work,50
+编组 解体,Yard Split,50
+到达 解体,Arrival Split,50
+出发 编组,Departure Makeup,50
+调车 机,Shunter,50
+驼峰 溜放,Hump Release,50
+货场 装卸,Freight Yard Load,50
+集装箱 平车,Container Flatcar,50
+敞车 卸货,Open Wagon Unload,50
+罐车 清洗,Tank Car Clean,50
+棚车 开门,Boxcar Open,50
+守车 标志,Caboose Mark,50
+铁路 道口,Rail Crossing,50
+卧铺 车厢,Sleeper Car,50
+餐车 厨房,Dining Car Kitchen,50
+行李 架,Luggage Rack,50
+汽修 车间,Auto Shop,50
+举升 机,Car Lift,50
+轮胎 更换,Tire Change,50
+动平衡 机,Wheel Balancer,50
+四轮 定位,Wheel Alignment,50
+发动机 拆解,Engine Tear Down,50
+变速箱 检修,Gearbox Service,50
+排气 改装,Exhaust Mod,50
+刹车 片,Brake Pad,50
+机油 更换,Oil Change,50
+冷却 液,Coolant,50
+火花 塞,Spark Plug,50
+电瓶 搭电,Battery Jump,50
+喷漆 房,Spray Booth,50
+抛光 机,Polisher,50
+钣金 修复,Body Repair,50
+凹陷 拉拔,Dent Pull,50
+玻璃 更换,Windshield Replace,50
+雨刮 器,Wiper,50
+空调 加氟,AC Recharge,50
+故障 诊断,Fault Diagnose,50
+OBD 读取,OBD Scan,50
+赛车 维修,Race Car Service,50
+进站 换胎,Pit Tire Change,50
+加油 进站,Refuel Stop,50
+维修 区,Pit Lane,50
+发车 线,Grid Start,50
+排位 圈,Qualifying Lap,50
+暖胎 圈,Warm Up Lap,50
+冲线 庆祝,Finish Celebrate,50
+引擎 爆缸,Engine Blow,50
+轮胎 爆胎,Tire Blowout,50
+碰撞 退赛,Crash DNF,50
+安全 车,Safety Car,50
+红旗 终止,Red Flag Stop,50
+维修 通道,Pit Lane,50
+车库 门,Garage Door,50
+洗车 机,Car Wash,50
+泡沫 喷淋,Foam Spray,50
+吸尘 器,Vacuum,50
+打蜡 抛光,Wax Polish,50
+内饰 清洁,Interior Clean,50
+贴膜 施工,Window Tint,50
+改装 排气,Exhaust Mod,50
+低趴 避震,Stance Suspension,50
+轮毂 更换,Wheel Swap,50
+尾翼 安装,Spoiler Install,50
+涡轮 改装,Turbo Mod,50
+中冷 器,Intercooler,50
+泄压 阀,Blow Off Valve,50
+烧胎 起步,Burnout Launch,50
+漂移 过弯,Drift Corner,50
+越野 涉水,Offroad Wade,50
+底盘 护板,Skid Plate,50
+新闻 播报,News Anchor,50
+直播 导播,Live Director,50
+耳返 监听,In Ear Monitor,50
+话筒 试音,Mic Check,50
+混音 台,Mixing Console,50
+推子 推起,Fader Up,50
+压缩 器,Compressor,50
+均衡 器,Equalizer,50
+混响 效果,Reverb Effect,50
+降噪 处理,Noise Reduce,50
+录音 棚,Recording Studio,50
+隔音 门,Soundproof Door,50
+防喷 罩,Pop Filter,50
+领夹 麦,Lavalier Mic,50
+枪式 话筒,Shotgun Mic,50
+挑杆 收音,Boom Record,50
+同期 录音,Production Sound,50
+拟音 棚,Foley Stage,50
+ADR 补录,ADR Record,50
+字幕 制作,Subtitle Make,50
+片花 剪辑,Promo Edit,50
+转场 特效,Transition VFX,50
+绿幕 合成,Green Screen Comp,50
+调光 台,Light Console,50
+聚光 灯,Spotlight,50
+柔光 箱,Softbox,50
+反光 板,Reflector,50
+监视 器,Monitor,50
+返送 画面,Return Feed,50
+导播 切换,Director Cut,50
+慢动作 回放,Slo Mo Replay,50
+快切 剪辑,Quick Cut Edit,50
+片头 包装,Show Open,50
+天气预报 图,Weather Chart,50
+雷达 回波图,Radar Chart,50
+演播 室,Studio,50
+提词 滚动,Teleprompter Scroll,50
+电话 连线,Phone Link,50
+卫星 连线,Satellite Link,50
+现场 记者,Field Reporter,50
+ENG 背包,ENG Pack,50
+转播 车,OB Van,50
+卫星 车,Satellite Truck,50
+微波 传输,Microwave Link,50
+讯道 分配,Channel Route,50
+时钟 同步,Clock Sync,50
+彩条 测试,Color Bars Test,50
+静音 段,Dead Air,50
+报时 声,Time Check,50
+台标 呼号,Station ID,50
+片尾 鸣谢,End Credits,50
+和面 揉搓,Knead Dough,50
+下 河,Underground River,50
