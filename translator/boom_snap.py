@@ -107,8 +107,13 @@ def _form_variants(term: str) -> list[str]:
     return [v for v in out if v and v != low]
 
 
-def snap_term(candidate: str, zh_token: str | None) -> SnapResult:
-    """对单个英文候选做 BOOM 吸附。candidate 可为多词短语。"""
+def snap_term(candidate: str, zh_token: str | None, trust: bool = False) -> SnapResult:
+    """对单个英文候选做 BOOM 吸附。candidate 可为多词短语。
+
+    trust=True 表示候选来自已策展的高优先级覆盖层（override）：只做无损的
+    形变体归一（单复数/拼写/空格），不做会改词/丢词的「同义 BOOM 写法」替换，
+    以免把 `Large Ice Cubes` 吞成 `Large`、`Copper Lid` 吞成 `Lid` 等。
+    """
     cand = candidate.strip()
     if not cand:
         return SnapResult(cand, "empty", "")
@@ -133,7 +138,8 @@ def snap_term(candidate: str, zh_token: str | None) -> SnapResult:
 
     # 3) 同义 BOOM 写法（需对齐证据 + BOOM 常见）
     # 选择标准：优先与候选词重叠多（保住信息），其次频次高，避免被泛化词吞掉。
-    if zh_token:
+    # 已策展覆盖层（trust）跳过本步：策展译法即期望写法，替换只会丢信息/改义。
+    if zh_token and not trust:
         cand_words = set(low.split())
         base_freq = freq(low)
         best_var = None

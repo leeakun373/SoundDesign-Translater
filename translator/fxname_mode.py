@@ -124,7 +124,7 @@ def normalize(text: str) -> FXResult:
             i += 1
             continue
 
-        snap = boom_snap.snap_term(english, s.text)
+        snap = boom_snap.snap_term(english, s.text, trust=(source == "override"))
         trace.snapped = snap.final
         trace.decision = f"{source}+{snap.decision}"
         trace.detail = snap.detail

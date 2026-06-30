@@ -92,3 +92,17 @@ raw,canonical,slot,note
 装置,Device,object,
 远处,Distant,modifier,挖词学成Distance纠正为形容词
 远,Distant,modifier,
+抽吸,Suction,action,缺收录走NLLB误成Smoking
+乞求,Beg,action,挖词误成Otter
+组装,Assemble,action,
+摇晃,Shake,detail,挖词误成Rickety
+共振,Resonance,detail,挖词误成Formant
+购物袋,Shopping Bag,object,挖词丢Bag
+用力,Hard,modifier,cedict误取exert短语
+镲片,Cymbal,object,误拼成Cymbal Sheet
+相互,Mutual,modifier,吸附误成Other
+高音,High,modifier,双语层噪声Altissimo
+脆饼,Crispbread,object,双语层噪声Pretzel
+返回,Back,action,双语层噪声Return
+过载,Overload,action,误成Overdrive
+打开,Open,action,误成Opened
