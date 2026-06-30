@@ -1883,3 +1883,276 @@ raw,canonical,support
 滑雪 急停,Ski Stop,10
 分拣 传送,Sort Conveyor,12
 魔法 传送,Magic Teleport,12
+封箱 胶带,Pack Tape,50
+集装箱 落箱,Container Drop,50
+轨道 切换,Track Switch,50
+轨道 修正,Orbit Correct,50
+对接 成功,Dock Success,50
+月台 装卸,Platform Load,50
+潮汐 退去,Tide Recede,50
+雷暴 远场,Thunder Distant,50
+闪电 劈击,Lightning Strike,50
+海豚 跃出,Dolphin Leap,50
+海星 吸附,Starfish Cling,50
+螃蟹 横走,Crab Sideways,50
+龙虾 钳击,Lobster Claw,50
+猫头鹰 啼叫,Owl Hoot,50
+啄木鸟 啄木,Woodpecker Peck,50
+蝙蝠 出洞,Bat Emerge,50
+狼群 嚎叫,Wolf Pack Howl,50
+星门 激活,Stargate Activate,50
+舱外 作业,Spacewalk,50
+彗星 尾迹,Comet Tail,50
+幽灵 飘过,Ghost Pass,50
+圣光 爆发,Holy Burst,50
+触控 板,Touchpad,50
+打印机 出纸,Printer Paper Out,50
+碎纸 机,Paper Shredder,50
+电池 低电,Battery Low,50
+除湿 机,Dehumidifier,50
+榨汁 机,Juicer,50
+离子 束,Ion Beam,50
+基因 改造,Gene Mutate,50
+冷冻 休眠,Cryo Sleep,50
+纳米 修复,Nano Repair,50
+视频会议 连接,Video Call Connect,50
+WiFi 连接,WiFi Connect,50
+熔炉 倾倒,Forge Pour,50
+淬火 冷却,Quench Cool,50
+曲速 引擎,Warp Drive,50
+跃迁 启动,Jump Drive,50
+力场 展开,Force Field,50
+传送 门,Teleport Portal,50
+太空 行走,Spacewalk,50
+分离 推进,Detach Boost,50
+小行星 碎裂,Asteroid Break,50
+黑洞 吸积,Black Hole,50
+超新星 爆发,Supernova Burst,50
+外星 信号,Alien Signal,50
+机甲 脚步,Mech Footstep,50
+变异 咆哮,Mutant Roar,50
+吸血鬼 嘶吼,Vampire Hiss,50
+恶魔 召唤,Demon Summon,50
+天使 降临,Angel Descend,50
+诅咒 生效,Curse Activate,50
+符文 激活,Rune Activate,50
+键盘 打字,Keyboard Type,50
+鼠标 点击,Mouse Click,50
+邮件 通知,Email Alert,50
+短信 提示,Text Alert,50
+闹钟 响起,Alarm Ring,50
+秒表 启动,Stopwatch Start,50
+蓝牙 配对,Bluetooth Pair,50
+充电 完成,Charge Complete,50
+电源 断开,Power Off,50
+灯泡 闪烁,Bulb Flicker,50
+风扇 摇头,Fan Oscillate,50
+空调 制冷,AC Cool,50
+加湿器 喷雾,Humidifier Mist,50
+咖啡 机,Coffee Maker,50
+面包 机,Bread Maker,50
+电磁炉 加热,Induction Heat,50
+电饭煲 保温,Rice Cooker Warm,50
+压力 锅,Pressure Cooker,50
+空气 炸锅,Air Fryer,50
+铜钟 摇摆,Bronze Bell Swing,50
+铃铛 摇响,Bell Ring,50
+符咒 贴附,Talisman Attach,50
+桃木 剑,Peachwood Sword,50
+气功 发劲,Chi Burst,50
+咏春 寸拳,Wing Chun Punch,50
+跆拳道 踢击,Taekwondo Kick,50
+柔道 摔投,Judo Throw,50
+弩机 上弦,Crossbow Cock,50
+投矛 飞出,Spear Throw,50
+链锤 挥舞,Flail Swing,50
+独轮 平衡,Unicycle Balance,50
+跳伞 开伞,Parachute Open,50
+潜水 下潜,Dive Submerge,50
+皮划 艇,Kayak,50
+独木 舟,Canoe,50
+马林 巴,Marimba,50
+单簧 管,Clarinet,50
+圆号 吹奏,French Horn,50
+手风琴 拉合,Accordion Squeeze,50
+核爆 蘑菇云,Nuclear Cloud,50
+测谎 仪,Lie Detector,50
+牢门 关闭,Cell Door Close,50
+手铐 锁紧,Handcuff Lock,50
+交通管制 哨,Traffic Whistle,50
+教堂 钟声,Church Bell,50
+管风琴 演奏,Organ Play,50
+唱诗班 合唱,Choir Sing,50
+木鱼 敲击,Wood Block Hit,50
+蜡烛 点燃,Candle Light,50
+香火 缭绕,Incense Smolder,50
+纸钱 燃烧,Joss Burn,50
+太极 推手,Tai Chi Push,50
+地铁 进站,Subway Arrive,50
+轻轨 通过,Light Rail Pass,50
+双层 巴士,Double Decker,50
+共享单车 解锁,Bike Unlock,50
+滑板 滑行,Skateboard Slide,50
+轮滑 刹车,Roller Brake,50
+缆车 上行,Cable Car Up,50
+热气球 点火,Balloon Ignite,50
+滑翔 伞,Paragliding,50
+翼装 飞行,Wingsuit Fly,50
+氧气 瓶,Oxygen Tank,50
+减压 阀,Relief Valve,50
+潜水 服,Wetsuit,50
+浮潜 呼吸,Snorkel Breath,50
+冲浪 板,Surfboard,50
+帆板 迎风,Windsurf Wind,50
+漂流 木筏,Raft Drift,50
+摩托 艇,Jet Ski,50
+钢琴 弹奏,Piano Play,50
+小提琴 拉弓,Violin Bow,50
+大提琴 拨弦,Cello Pluck,50
+吉他 扫弦,Guitar Strum,50
+贝斯 拨弦,Bass Pluck,50
+架子 鼓,Drum Kit,50
+军鼓 滚奏,Snare Roll,50
+镲片 撞击,Cymbal Hit,50
+三角 铁,Triangle Hit,50
+木琴 敲击,Xylophone Hit,50
+竖琴 拨弦,Harp Pluck,50
+长笛 吹奏,Flute Play,50
+双簧 管,Oboe,50
+萨克斯 吹奏,Sax Play,50
+小号 吹奏,Trumpet Play,50
+长号 滑音,Trombone Slide,50
+大号 吹奏,Tuba Play,50
+口琴 吹奏,Harmonica Play,50
+二胡 拉弦,Erhu Bow,50
+古筝 拨弦,Guzheng Pluck,50
+琵琶 扫弦,Pipa Strum,50
+扬琴 敲击,Yangqin Hit,50
+唢呐 吹奏,Suona Play,50
+编钟 敲击,Bell Chime,50
+定音 鼓,Timpani,50
+生化 泄漏,Biohazard Leak,50
+毒气 扩散,Gas Spread,50
+辐射 警报,Radiation Alarm,50
+防毒 面具,Gas Mask,50
+隔离 舱,Isolation Pod,50
+疫苗 注射,Vaccine Inject,50
+检疫 通道,Quarantine Gate,50
+指纹 扫描,Fingerprint Scan,50
+虹膜 识别,Iris Scan,50
+面部 识别,Face Scan,50
+门禁 刷卡,Access Card,50
+监控 转动,CCTV Pan,50
+红外 感应,IR Sensor,50
+金属 探测,Metal Detect,50
+安检 门,Security Gate,50
+X光 扫描,X-Ray Scan,50
+审讯 室,Interrogation Room,50
+警棍 挥舞,Baton Swing,50
+催泪 瓦斯,Tear Gas,50
+防暴 盾牌,Riot Shield,50
+路障 架设,Barricade,50
+消防 栓,Fire Hydrant,50
+喷淋 系统,Sprinkler,50
+烟雾 报警,Smoke Alarm,50
+逃生 梯,Fire Escape,50
+急救 包,First Aid,50
+剑道 劈砍,Kendo Slash,50
+弓箭 齐射,Bow Volley,50
+双节 棍,Nunchaku,50
+有轨 电车,Tram,50
+校车 停靠,School Bus Stop,50
+出租 计价,Taxi Meter,50
+网约车 到达,Rideshare Arrive,50
+索道 滑行,Gondola Slide,50
+快艇 破浪,Speedboat Wake,50
+绳索 垂降,Rappel,50
+岩钉 打入,Piton Hammer,50
+冰镐 凿冰,Ice Axe Pick,50
+攀冰 瀑布,Ice Climb,50
+矿洞 推车,Mine Cart,50
+金矿 筛洗,Gold Pan,50
+洪水 漫堤,Flood Overtop,50
+干旱 裂土,Drought Crack,50
+锯木 厂,Sawmill,50
+蛋糕 切分,Cake Slice,50
+片尾 演职员,End Credits,50
+打板 开拍,Clapper Action,50
+导演 喊卡,Director Cut,50
+补妆 粉扑,Makeup Powder,50
+面光 灯,Key Light,50
+侧光 灯,Side Light,50
+彩纸 炮,Confetti Cannon,50
+雪花 飘落,Snow Drift,50
+暴雪 封路,Blizzard Close,50
+冰柱 坠落,Icicle Fall,50
+狗拉 雪橇,Dog Sled,50
+驯鹿 蹄声,Reindeer Hoof,50
+北极 风,Arctic Wind,50
+极光 闪烁,Aurora Flicker,50
+帐篷 搭建,Tent Erect,50
+睡袋 摩擦,Sleeping Bag,50
+篝火 噼啪,Bonfire Crackle,50
+营火 熄灭,Campfire Out,50
+指南针 指针,Compass Needle,50
+地图 展开,Map Unfold,50
+洞穴 滴水,Cave Drip,50
+石笋 生长,Stalagmite Grow,50
+地下 河,Underground River,50
+煤矿 塌方,Coal Collapse,50
+石油 井喷,Oil Gusher,50
+天然气 泄漏,Gas Leak,50
+太阳能 板,Solar Panel,50
+风力 涡轮,Wind Turbine,50
+水力 大坝,Hydro Dam,50
+核电站 冷却,Nuclear Cool,50
+垃圾 焚烧,Garbage Burn,50
+回收 压缩,Recycle Compress,50
+堆肥 翻搅,Compost Turn,50
+污染 警报,Pollution Alarm,50
+雾霾 笼罩,Smog Shroud,50
+沙尘 暴,Dust Storm,50
+龙卷风 逼近,Tornado Approach,50
+飓风 眼,Hurricane Eye,50
+台风 登陆,Typhoon Landfall,50
+野火 蔓延,Wildfire Spread,50
+消防 飞机,Fire Plane,50
+洒水 车,Water Truck,50
+砍树 倒下,Tree Fell,50
+伐木 链锯,Logging Chainsaw,50
+婚礼 进行曲,Wedding March,50
+新娘 入场,Bride Entrance,50
+捧花 抛掷,Bouquet Toss,50
+香槟 开瓶,Champagne Pop,50
+祝酒 碰杯,Toast Clink,50
+气球 释放,Balloon Release,50
+彩带 飘落,Streamer Drift,50
+烟花 绽放,Firework Bloom,50
+礼炮 鸣响,Salute Boom,50
+阅兵 方阵,Parade Formation,50
+国旗 升起,Flag Raising,50
+国歌 齐唱,Anthem Sing,50
+21响 礼炮,21 Gun Salute,50
+降旗 仪式,Flag Lower,50
+宣誓 就职,Oath Inauguration,50
+投票 箱,Ballot Box,50
+计票 机,Vote Count,50
+新闻发布会 快门,Press Shutter,50
+采访 话筒,Interview Mic,50
+直播 导播,Live Director,50
+导播 切换,Director Switch,50
+提词 器,Teleprompter,50
+字幕 滚动,Subtitle Scroll,50
+广告 插播,Ad Interstitial,50
+片头 动画,Opening Animation,50
+威亚 吊起,Wire Lift,50
+特技 爆炸,Stunt Explosion,50
+替身 翻滚,Stunt Tumble,50
+群演 喧哗,Extras Commotion,50
+布景 搭建,Set Build,50
+舞台 升降,Stage Lift,50
+幕布 拉开,Curtain Open,50
+追光 灯,Spotlight,50
+烟雾 机,Smoke Machine,50
+干冰 机,Dry Ice Machine,50
+泡泡 机,Bubble Machine,50

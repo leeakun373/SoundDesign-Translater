@@ -33,17 +33,17 @@ BOOM-031,BOOM参考中文,中→英,内脏 嘴 气泡,Guts Mouth Bubble,否,,,ov
 BOOM-032,BOOM参考中文,中→英,抽吸 装置,Suction Device,否,,,override override
 BOOM-033,BOOM参考中文,中→英,上升 风铃 闪烁 频移,Rise Chime Sparkling Freq Shift,否,,,override override override override
 BOOM-034,BOOM参考中文,中→英,盒子 关闭 锁扣 中等,Box Close Lock Medium,否,,,override override override override override
-BOOM-035,BOOM参考中文,中→英,咖啡机 组装,Espresso Machine Assemble,否,,,override override
+BOOM-035,BOOM参考中文,中→英,咖啡机 组装,Coffee Maker Assemble,否,,,override override
 BOOM-036,BOOM参考中文,中→英,空气感 绕卷,Airy Winding,否,,,override override
 BOOM-037,BOOM参考中文,中→英,木琴 延迟 闪烁 颤音,Xylophone Delay Sparkling Tremolo,否,,,override override override override
 BOOM-038,BOOM参考中文,中→英,书本 掉落 低沉,Book Drop Subdued,否,,,override override override
 BOOM-039,BOOM参考中文,中→英,多层 纸张 近距离 操作,Several Layers Paper Close Handling,否,,,override override override override
 BOOM-040,BOOM参考中文,中→英,购物袋 脆响 用力,Shopping Bag Snappy Hard,否,,,override override override
-BOOM-041,BOOM参考中文,中→英,森林 滴水,Forest Dripping,否,,,override override
+BOOM-041,BOOM参考中文,中→英,森林 滴水,Forest Drip,否,,,override override
 BOOM-042,BOOM参考中文,中→英,脆饼 断裂,Crispbread Break,否,,,override override
 BOOM-043,BOOM参考中文,中→英,狗玩具 摩擦 呻吟 长,Dog Toy Rub Groan Long,否,,,override override override override
 BOOM-044,BOOM参考中文,中→英,科幻 能量 激烈 短,Sci Energy Aggressive Short,否,,,override override override override
-BOOM-045,BOOM参考中文,中→英,老式 旱冰鞋 滚动,Old Roller Skate Roll,否,,,override override override
+BOOM-045,BOOM参考中文,中→英,老式 旱冰鞋 滚动,Old Roller Skate Scroll,否,,,override override override
 BOOM-046,BOOM参考中文,中→英,呼啸 全员登船,Whoosh All Aboard,否,,,override override
 BOOM-047,BOOM参考中文,中→英,斧头 劈 木头,Axe Splitting Wood,否,,,override override override
 BOOM-048,BOOM参考中文,中→英,牛叫盒 长,Moo Box Long,否,,,override override
@@ -51,7 +51,7 @@ BOOM-049,BOOM参考中文,中→英,界面 故障 降噪,Interface Glitch Denois
 BOOM-050,BOOM参考中文,中→英,挤压 蔬菜 持续,Squeeze Vegetables Constant,否,,,override override override
 REC-001,个人录音抽样,中→英,钢球 掉落 瓷砖 清脆 明亮 叮当,Steel Ball Drop Tiles Crisp Bright Jingle,否,,,override override override override override override
 REC-002,个人录音抽样,中→英,磁铁 碰撞 哑铃 沉重 叮当,Magnet Bump Dumbbell Hard Jingle,否,,,override override override override override
-REC-003,个人录音抽样,中→英,齿轮 滚动 木地板 闷响 摇晃,Gear Roll Wood Floor Thud Shake,否,,,override override override override override
+REC-003,个人录音抽样,中→英,齿轮 滚动 木地板 闷响 摇晃,Gear Scroll Wood Floor Thud Shake,否,,,override override override override override
 REC-004,个人录音抽样,中→英,卷心菜 刀 刺入,Cabbage Knife Stab,否,,,override override override
 REC-005,个人录音抽样,中→英,西瓜 斧头 切割,Watermelon Axe Cutting,否,,,override override override
 REC-006,个人录音抽样,中→英,西瓜 刺入,Watermelon Stab,否,,,override override
@@ -70,8 +70,8 @@ REC-018,个人录音抽样,中→英,街机摇杆 点击,Arcade Stick Click,否,
 REC-019,个人录音抽样,中→英,风鸣器 旋转 乳胶 橡胶 向后 呼啸,Wind Singer Spin Latex Rubber Downwards Whoosh,否,,,override override override override override override
 REC-020,个人录音抽样,中→英,气泡膜 摩擦 褶皱 揉皱 操作,Bubble Wrap Rub Crinkle Crumple Handling,否,,,override override override override override override
 REC-021,个人录音抽样,中→英,干燥箱门 中等 吱呀 复杂,Dry Box Door Medium Creak Complex,否,,,override override override override override
-REC-022,个人录音抽样,中→英,奥林巴斯相机 变焦 进出 摇杆 开关 马达,Olympus Camera Zoom In Out Rocker Switch Motor,否,,,override override override override override override
-REC-023,个人录音抽样,中→英,钢球 滚动 纹理瓷砖 返回 稳定 刮擦,Steel Ball Roll Textured Tile Back Steady Scrape,否,,,override override override override override override
+REC-022,个人录音抽样,中→英,奥林巴斯相机 变焦 进出 摇杆 开关 马达,Olympus Camera Zoom In Out Joystick Switch Motor,否,,,override override override override override override
+REC-023,个人录音抽样,中→英,钢球 滚动 纹理瓷砖 返回 稳定 刮擦,Steel Ball Scroll Textured Tile Back Steady Scrape,否,,,override override override override override override
 REC-024,个人录音抽样,中→英,陶瓷碗 堆叠 撞击 易碎,Ceramic Bowl Stack Impact Brittle,否,,,override override override cedict
 REC-025,个人录音抽样,中→英,竹筷 空心 点击 碰撞,Bamboo Chopsticks Hollow Click Bump,否,,,override cedict override override
 REC-026,个人录音抽样,中→英,木棍 击打 钢墙 戳,Wood Stick Hit Steel Wall Jab,否,,,override override override cedict
@@ -92,13 +92,13 @@ REC-040,个人录音抽样,中→英,干冰 楼梯踏板 中等 尖叫 沉闷,Dr
 REC-041,个人录音抽样,中→英,干冰 螺母 尖叫 摇晃 颤动,Dry Ice Nut Scream Shake Flutter,否,,,override override override override override
 REC-042,个人录音抽样,中→英,干冰 勺子 尖叫 颤动 木头,Dry Ice Spoon Scream Flutter Wood,否,,,override override override override override
 REC-043,个人录音抽样,中→英,干冰 音叉 尖叫 摇晃 颤动 按压 木头,Dry Ice Tuning Fork Scream Shake Flutter Press Wood,否,,,override override override override override override override
-REC-044,个人录音抽样,中→英,干冰 铜罐 摩擦 滚动 颗粒 木头,Dry Ice Copper Can Rub Roll Granular Wood,否,,,override override override override override override
+REC-044,个人录音抽样,中→英,干冰 铜罐 摩擦 滚动 颗粒 木头,Dry Ice Copper Can Rub Scroll Granular Wood,否,,,override override override override override override
 REC-045,个人录音抽样,中→英,干冰 金属签 摇晃 颤动 木头,Dry Ice Metal Skewer Shake Flutter Wood,否,,,override override override override override
 REC-046,个人录音抽样,中→英,冰 斧 刮擦 摩擦 冰砖,Ice Axe Scrape Rub,否,,,override override override override override
 REC-047,个人录音抽样,中→英,大冰块 相互 按压,Large Ice Cubes Mutual Press,否,,,override override override
 REC-048,个人录音抽样,中→英,薄冰 胡桃夹,Thin Ice Nutcracker,否,,,override override
 REC-049,个人录音抽样,中→英,冰 锡纸盘 圆形 脱模,Ice Tin Foil Pan Circular Demold,否,,,override override override override
-REC-050,个人录音抽样,中→英,直玻璃 持续 鸣响,Straight Glass Constant Ring,否,,,override override override
+REC-050,个人录音抽样,中→英,直玻璃 持续 鸣响,Straight Glass Constant Booms,否,,,override override override
 MIX-001,中英混合非写实,中→英,metal 摩擦 anvil 刺耳的,Metal Rub Anvil Harsh,否,,,protected override protected override
 MIX-002,中英混合非写实,中→英,magic 电涌 impact long tail,Magic Power Surge Impact Long Tail,否,,,protected override protected protected protected
 MIX-003,中英混合非写实,中→英,arcane 能量 burst,Arcane Energy Burst,否,,,protected override protected
