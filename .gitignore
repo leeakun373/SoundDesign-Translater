@@ -29,6 +29,11 @@ exports/boomone_mining/
 
 # Release 打包临时目录
 release_assets/
+dist/
+release/
+build/*
+!build/
+!build/SoundDesignFXName.iss
 
 # 测试历史快照（保留 latest_* 即可）
 tests/results/run_*/
@@ -39,3 +44,4 @@ glossary/batches/uncovered_batch_*.csv
 # OS
 Thumbs.db
 .Desktop.ini
+node_modules
