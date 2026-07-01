@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass, field
+from functools import lru_cache
 
 from glossary.fx_slots import SlotTerm, assemble_fx_name, infer_slot
 
@@ -19,6 +20,10 @@ from translator import segment as seg
 
 # 中文功能词：翻译前直接丢弃（含易被 cedict 误义的定位/时间虚词 里/后）
 ZH_STOP = set("的了着和与在是得地及并或之而其也都很就里后")
+# 弱声学后缀：单独成词时默认丢弃，避免 bilingual「声→Ambience」误伤摩擦声等。
+# 整词已在手工表策展的（如 欢呼声、虫鸣）走正常 lookup，不经过此处。
+ZH_WEAK_SUFFIX = frozenset({"声", "一声"})
+_CJK_RE = re.compile(r"^[\u4e00-\u9fff\u3400-\u4dbf]+$")
 # 英文虚词：翻译后关键词化时丢弃（保留 on/off/up/down/over/out/away/by/in 等有义介词）
 EN_DROP = {
     "the", "a", "an", "of", "and", "is", "are", "was", "were", "be", "been",
@@ -69,6 +74,86 @@ def _translate_zh_token(tok: str) -> tuple[str, str, str | None]:
     return "", "unknown", None
 
 
+def _is_reliably_translatable(tok: str) -> bool:
+    english, source, _ = _translate_zh_token(tok)
+    if not english or source == "unknown":
+        return False
+    if source == "cedict" and len(tok) < 2:
+        return False
+    return True
+
+
+def _is_droppable_weak_suffix(tok: str) -> bool:
+    if tok not in ZH_WEAK_SUFFIX:
+        return False
+    return tok not in overrides.manual_keys()
+
+
+@lru_cache(maxsize=1)
+def _cn_override_keys_by_len() -> tuple[str, ...]:
+    keys = [k for k in overrides.keys() if k and _CJK_RE.fullmatch(k)]
+    return tuple(sorted(keys, key=len, reverse=True))
+
+
+def _split_unknown_token(tok: str) -> list[str] | None:
+    """对 unknown 整词做保守最长匹配拆分；子词须均可可靠译出。"""
+    if len(tok) < 2:
+        return None
+    keys = _cn_override_keys_by_len()
+    n = len(tok)
+    best: list[str] | None = None
+    dp: list[list[str] | None] = [None] * (n + 1)
+    dp[0] = []
+    for i in range(n):
+        if dp[i] is None:
+            continue
+        for key in keys:
+            end = i + len(key)
+            if end > n or tok[i:end] != key:
+                continue
+            if not _is_reliably_translatable(key):
+                continue
+            candidate = dp[i] + [key]
+            if dp[end] is None or len(candidate) < len(dp[end]):
+                dp[end] = candidate
+    if dp[n] and len(dp[n]) > 1:
+        best = dp[n]
+    return best
+
+
+def _emit_translated_zh_token(
+    tok: str,
+    traces: list[TokenTrace],
+    terms: list[SlotTerm],
+    group: int,
+    *,
+    split_tag: str = "",
+) -> bool:
+    english, source, slot_hint = _translate_zh_token(tok)
+    if not english:
+        return False
+
+    snap = boom_snap.snap_term(english, tok, trust=(source == "override"))
+    decision = f"{source}+{split_tag}+{snap.decision}" if split_tag else f"{source}+{snap.decision}"
+    trace = TokenTrace(tok, "zh", translated=english, snapped=snap.final,
+                       decision=decision, detail=snap.detail)
+
+    kept = [w for w in _WORD_RE.findall(snap.final) if w.lower() not in EN_DROP]
+    if not kept:
+        kept = [w for w in _WORD_RE.findall(snap.final)]
+    if not kept:
+        traces.append(trace)
+        return False
+
+    trace.final_words = [_title(w) for w in kept]
+    traces.append(trace)
+    for w in trace.final_words:
+        slot = infer_slot(w, slot_hint)
+        terms.append(SlotTerm(w, slot if slot != "unknown" else (slot_hint or "unknown"),
+                              source, group))
+    return True
+
+
 def normalize(text: str) -> FXResult:
     traces: list[TokenTrace] = []
     terms: list[SlotTerm] = []
@@ -116,13 +201,30 @@ def normalize(text: str) -> FXResult:
                 i += 2
                 continue
 
-        english, source, slot_hint = _translate_zh_token(s.text)
-        trace = TokenTrace(s.text, "zh", translated=english, decision=source)
-        if not english:
-            traces.append(trace)
+        if _is_droppable_weak_suffix(s.text):
+            traces.append(TokenTrace(s.text, "zh", decision="dropped_suffix"))
             i += 1
             continue
 
+        english, source, slot_hint = _translate_zh_token(s.text)
+        if not english:
+            parts = _split_unknown_token(s.text)
+            if parts:
+                kept_any = False
+                for part in parts:
+                    if _emit_translated_zh_token(part, traces, terms, group, split_tag="unknown_split"):
+                        kept_any = True
+                if kept_any:
+                    group += 1
+                else:
+                    traces.append(TokenTrace(s.text, "zh", decision="unknown"))
+                i += 1
+                continue
+            traces.append(TokenTrace(s.text, "zh", decision="unknown"))
+            i += 1
+            continue
+
+        trace = TokenTrace(s.text, "zh", translated=english, decision=source)
         snap = boom_snap.snap_term(english, s.text, trust=(source == "override"))
         trace.snapped = snap.final
         trace.decision = f"{source}+{snap.decision}"

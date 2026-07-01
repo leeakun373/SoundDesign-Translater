@@ -59,6 +59,11 @@ table.update(_read_override_csv(FX_OVERRIDES_PATH))       # 手工最高
 2. `cedict.lookup(tok)` → source=`cedict`
 3. 否则 → source=`unknown`（从最终名略去，**不调用 AI/NLLB**）
 
+**附加规则**（`translator/fxname_mode.py`）：
+
+- **弱声学后缀**：单独成词的 `声`、`一声` 在未进手工表时 `dropped_suffix`，避免 bilingual `声→Ambience` 误伤。
+- **unknown 拆分回退**：整词 unknown 时用已知 override 键最长匹配拆分；子词均可译才组合，trace 标 `unknown_split`。
+
 ### 路径常量
 
 
@@ -243,6 +248,6 @@ table.update(_read_override_csv(FX_OVERRIDES_PATH))       # 手工最高
 - [TRANSLATOR_ARCHITECTURE.md](TRANSLATOR_ARCHITECTURE.md)
 - [TRANSLATOR_METHODOLOGY.md](TRANSLATOR_METHODOLOGY.md)
 - [cc_cedict/cc_cedict_candidate_layer_v0_1.md](cc_cedict/cc_cedict_candidate_layer_v0_1.md)
-- [glossary/README.md](../glossary/README.md)
+- [UCSRENAMER_SYNC_MAINTENANCE.md](UCSRENAMER_SYNC_MAINTENANCE.md)
 - [fxengine/data/README.md](../fxengine/data/README.md)
 

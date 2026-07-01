@@ -44,6 +44,7 @@ raw,canonical,slot,note
 嗡嗡声,Buzzing,detail,
 嗡嗡,Buzzing,detail,
 咔哒,Click,detail,
+关上门,Close Door,action,完整分词词条，避免关上门整体分词后丢失Door
 风声,Wind,object,
 脚步,Footsteps,action,
 脚步声,Footsteps,action,
@@ -58,6 +59,7 @@ raw,canonical,slot,note
 施工,Construction,object,
 建设,Construction,object,
 怪物,Monster,object,
+狼嚎,Wolf Howl,source,完整分词词条，避免狼嚎整体分词后仅保留方位词
 外星人,Alien,object,
 机械,Mechanical,modifier,
 电子,Electronic,modifier,
@@ -1490,7 +1492,7 @@ WiFi,WiFi,modifier,
 火花塞,Spark Plug,object,
 喷漆,Spray Paint,action,
 凹陷,Dent,object,
-玻璃,Windshield,object,
+挡风玻璃,Windshield,object,
 雨刮器,Wiper,object,
 故障,Fault,object,
 进站,Pit Entry,action,
@@ -1933,3 +1935,10 @@ EMP,EMP,design,
 返回,Back,action,
 音乐,Music,object,
 演示,Attract Mode,action,
+虫鸣,Insect Chirp,source,zhtest
+鸟叫,Bird Chirp,action,zhtest
+冰斧,Ice Axe,object,zhtest
+冰砖,Ice Brick,material,zhtest
+轰油门,Revving,action,zhtest
+落叶林,Deciduous Forest,modifier,zhtest
+飞过去,Fly By,action,zhtest
