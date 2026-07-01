@@ -18,6 +18,7 @@ nllb_int8_model/
 
 # 本地构建索引（tools/build_boom_style_index.py 生成，勿提交）
 glossary/boom_style_index.sqlite
+translator_assets/indexes/boom_style_index.sqlite
 
 # BOOM 训练元数据 Excel（体积大，仅本地保留）
 docs/训练数据/

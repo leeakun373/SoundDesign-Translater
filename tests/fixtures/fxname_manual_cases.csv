@@ -203,7 +203,7 @@ sound effect,,,true,,default,sound effect,review pollution words,ignored_polluti
 10cm,10cm,,true,,default,,review centimeter allowed,kept_raw,distance_rule,true
 10cm,,,false,10cm,default,,review centimeter blocked,metadata_candidate,distance_rule,false
 metal,Metal,,true,,default,,review English glossary,mapped_glossary,glossary_fallback,true
-far,Far,,true,,default,,review common FX raw,kept_raw,keep_raw_rule,true
+far,Far,,true,,default,,review common FX raw,mapped_glossary,glossary_fallback,true
 金属 kuang,Metal,kuang,true,,default,,review canonical plus unknown,mapped_canonical|unknown,canonical_csv|unknown_review,true|false
 impact CO100K,Impact,,true,CO100K,default,,review FX plus metadata,mapped_glossary|metadata_candidate,glossary_fallback|technical_token_rule,true|false
 oh my god 金属,Metal,,true,,default,oh my god,review pollution plus canonical,ignored_pollution|ignored_pollution|ignored_pollution|mapped_canonical,pollution_filter|pollution_filter|pollution_filter|canonical_csv,false|false|false|true

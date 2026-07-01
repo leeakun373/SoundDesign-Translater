@@ -9,21 +9,20 @@ import sqlite3
 from dataclasses import dataclass
 from pathlib import Path
 
+import sys
+
 GLOSSARY_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = GLOSSARY_DIR.parent
-SOURCES_DIR = GLOSSARY_DIR / "sources"
-DEFAULT_DB = GLOSSARY_DIR / "audio_glossary.sqlite"
-OVERRIDES_CSV = GLOSSARY_DIR / "user_overrides.csv"
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
-MY_KEYWORD_CSV = Path(
-    os.environ.get("GLOSSARY_MY_KEYWORD", str(SOURCES_DIR / "MyKeyWordV1.csv"))
-)
-UCS_CATID_CSV = Path(
-    os.environ.get("GLOSSARY_UCS_CATID", str(SOURCES_DIR / "ucs_catid_list.csv"))
-)
-UCS_OFFICIAL_CSV = Path(
-    os.environ.get("GLOSSARY_UCS_OFFICIAL", str(SOURCES_DIR / "ucs_categorylist.csv"))
-)
+from translator import paths as tpaths
+DEFAULT_DB = tpaths.AUDIO_GLOSSARY_DB
+OVERRIDES_CSV = tpaths.USER_OVERRIDES_PATH
+MY_KEYWORD_CSV = Path(os.environ.get("GLOSSARY_MY_KEYWORD", str(tpaths.MY_KEYWORD_CSV)))
+UCS_CATID_CSV = Path(os.environ.get("GLOSSARY_UCS_CATID", str(tpaths.UCS_CATID_CSV)))
+UCS_OFFICIAL_CSV = Path(os.environ.get("GLOSSARY_UCS_OFFICIAL", str(tpaths.UCS_OFFICIAL_CSV)))
+EN_SYNONYM_GROUPS_CSV = tpaths.EN_SYNONYM_GROUPS_CSV
 
 SCHEMA_SQL = """
 PRAGMA journal_mode = WAL;
@@ -53,6 +52,7 @@ PRIORITY = {
     "MyKeyWordV1": 80,
     "ucs_catid_list": 60,
     "ucs_official": 40,
+    "soundminer_synonym": 35,
 }
 
 
@@ -254,6 +254,41 @@ class GlossaryBuilder:
                 count += self._load_ucs_row(row, "ucs_official", PRIORITY["ucs_official"])
         return count
 
+    def load_en_synonym_groups(self) -> int:
+        if not EN_SYNONYM_GROUPS_CSV.is_file():
+            print(f"[skip] en_synonym_groups not found: {EN_SYNONYM_GROUPS_CSV}")
+            return 0
+        count = 0
+        with EN_SYNONYM_GROUPS_CSV.open(encoding="utf-8", newline="") as f:
+            for row in csv.DictReader(f):
+                canonical = (row.get("canonical") or "").strip()
+                variant = (row.get("variant") or "").strip()
+                if not canonical or not variant:
+                    continue
+                zh = ""
+                canon_entry = self._entries.get(canonical)
+                if canon_entry and canon_entry.zh:
+                    zh = canon_entry.zh
+                else:
+                    variant_entry = self._entries.get(variant)
+                    if variant_entry and variant_entry.zh:
+                        zh = variant_entry.zh
+                if not zh:
+                    continue
+                self.add(
+                    TermEntry(
+                        en=variant,
+                        zh=zh,
+                        term_type="synonym",
+                        action="translate",
+                        source="soundminer_synonym",
+                        note=f"canonical={canonical}",
+                        priority=PRIORITY["soundminer_synonym"],
+                    )
+                )
+                count += 1
+        return count
+
     def write_sqlite(self, db_path: Path = DEFAULT_DB) -> None:
         db_path.parent.mkdir(parents=True, exist_ok=True)
         if db_path.exists():
@@ -307,10 +342,12 @@ def build(db_path: Path = DEFAULT_DB) -> dict[str, int]:
     n2 = builder.load_ucs_catid()
     print("Loading UCS official...")
     n3 = builder.load_ucs_official()
+    print("Loading soundminer EN synonym groups...")
+    n4 = builder.load_en_synonym_groups()
     builder.write_sqlite(db_path)
     stats = builder.stats
     print(f"Written {stats['entries']} entries, {stats['catids']} catids -> {db_path}")
-    print(f"  overrides={n0}, mykeyword={n1}, ucs={n2}, official={n3}")
+    print(f"  overrides={n0}, mykeyword={n1}, ucs={n2}, official={n3}, soundminer={n4}")
     return stats
 
 

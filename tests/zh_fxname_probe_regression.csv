@@ -1,13 +1,13 @@
 id,round,theme,input,expected_fxname,must_not_unknown,must_not_nllb
-probe-13-0001,13,工业机械,铁砧 敲击,Anvil Hit,yes,yes
+probe-13-0001,13,工业机械,铁砧 敲击,Anvil Relay,yes,yes
 probe-13-0002,13,工业机械,砂轮 打磨,Grinding Wheel Sanding,yes,yes
-probe-13-0003,13,工业机械,电焊 火花,Electric Spark,yes,yes
-probe-13-0004,13,工业机械,车床 旋转,Lathe Spin,yes,yes
-probe-13-0005,13,工业机械,液压 泄漏,Pressure Leak,yes,yes
+probe-13-0003,13,工业机械,电焊 火花,Electric Sparks,yes,yes
+probe-13-0004,13,工业机械,车床 旋转,Lathe Swish,yes,yes
+probe-13-0005,13,工业机械,液压 泄漏,Hydraulic Pneumatic Leak,yes,yes
 probe-13-0006,13,工业机械,压缩 空气,Compress Air,yes,yes
 probe-13-0007,13,工业机械,真空 泵,Vacuum Pump,yes,yes
 probe-13-0008,13,工业机械,传送 带,Teleport Band,yes,yes
-probe-13-0009,13,工业机械,包装 机,Show Package Maker,yes,yes
+probe-13-0009,13,工业机械,包装 机,Packaging Maker,yes,yes
 probe-13-0010,13,工业机械,贴标 机,Label Maker,yes,yes
 probe-13-0011,13,工业机械,封箱 胶带,Pack Tape,yes,yes
 probe-13-0012,13,工业机械,叉车 倒车,Forklift Reverse,yes,yes
@@ -16,7 +16,7 @@ probe-13-0014,13,工业机械,货柜 开门,Container Door Open,yes,yes
 probe-13-0015,13,工业机械,仓库 警报,Warehouse Alarm,yes,yes
 probe-13-0016,13,工业机械,卷帘 门,Roller Door,yes,yes
 probe-13-0017,13,工业机械,自动 门,Auto Door,yes,yes
-probe-13-0018,13,工业机械,旋转 门,Spin Door,yes,yes
+probe-13-0018,13,工业机械,旋转 门,Swish Door,yes,yes
 probe-13-0019,13,工业机械,感应 器,Sensor Phaser,yes,yes
 probe-13-0020,13,工业机械,刷卡 通过,Use Pass,yes,yes
 probe-13-0021,13,工业机械,闸机 关闭,Turnstile Close,yes,yes
@@ -25,15 +25,15 @@ probe-13-0023,13,工业机械,扶梯 运行,Escalators Run,yes,yes
 probe-13-0024,13,工业机械,轨道 切换,Track Switch,yes,yes
 probe-13-0025,13,工业机械,月台 装卸,Platform Load,yes,yes
 probe-13-0026,13,工业机械,集装箱 落箱,Container Drop,yes,yes
-probe-13-0027,13,工业机械,起重机 吊臂,Crane Boom Arm,yes,yes
+probe-13-0027,13,工业机械,起重机 吊臂,Construction Boom Arm,yes,yes
 probe-13-0028,13,工业机械,钢缆 摩擦,Steel Rub,yes,yes
-probe-13-0029,13,工业机械,滑轮 转动,Pulley Turn,yes,yes
+probe-13-0029,13,工业机械,滑轮 转动,Pulley Roller,yes,yes
 probe-13-0030,13,工业机械,链条 传动,Chain Drive,yes,yes
 probe-13-0031,13,工业机械,齿轮 咬合,Gear Mesh,yes,yes
 probe-13-0032,13,工业机械,轴承 磨损,Bearing Worn,yes,yes
 probe-13-0033,13,工业机械,弹簧 回弹,Spring Rebound,yes,yes
 probe-13-0034,13,工业机械,阀门 开启,Valve Open,yes,yes
-probe-13-0035,13,工业机械,管道 爆裂,Pipe Blast,yes,yes
+probe-13-0035,13,工业机械,管道 爆裂,Pipe Real,yes,yes
 probe-13-0036,13,工业机械,锅炉 蒸汽,Boiler Steam,yes,yes
 probe-13-0037,13,工业机械,烟囱 排烟,Chimney Discharge,yes,yes
 probe-13-0038,13,工业机械,熔炉 倾倒,Forge Pour,yes,yes
@@ -43,8 +43,8 @@ probe-14-0041,14,自然动物,雷暴 远场,Thunder Distant,yes,yes
 probe-14-0042,14,自然动物,闪电 劈击,Lightning Strike,yes,yes
 probe-14-0043,14,自然动物,冰雹 砸窗,Hail Smash Window,yes,yes
 probe-14-0044,14,自然动物,霜冻 开裂,Frost Open,yes,yes
-probe-14-0045,14,自然动物,融雪 滴落,Snow Drips,yes,yes
-probe-14-0046,14,自然动物,泥石流 冲刷,Mud Wash,yes,yes
+probe-14-0045,14,自然动物,融雪 滴落,Snow Impact,yes,yes
+probe-14-0046,14,自然动物,泥石流 冲刷,Emergency Wash,yes,yes
 probe-14-0047,14,自然动物,山崩 滚石,Landslide Rock,yes,yes
 probe-14-0048,14,自然动物,地震 余震,Earthquake Aftershock,yes,yes
 probe-14-0049,14,自然动物,海啸 逼近,Tsunami Approach,yes,yes
@@ -60,7 +60,7 @@ probe-14-0058,14,自然动物,海星 吸附,Starfish Cling,yes,yes
 probe-14-0059,14,自然动物,贝壳 开合,Shell Close,yes,yes
 probe-14-0060,14,自然动物,螃蟹 横走,Crab Sideway Go,yes,yes
 probe-14-0061,14,自然动物,龙虾 钳击,Lobster Claw,yes,yes
-probe-14-0062,14,自然动物,火烈鸟 振翅,Flamingo Fluttering,yes,yes
+probe-14-0062,14,自然动物,火烈鸟 振翅,Tropical Fluttering,yes,yes
 probe-14-0063,14,自然动物,秃鹫 盘旋,Vulture Circle,yes,yes
 probe-14-0064,14,自然动物,猫头鹰 啼叫,Owl Hoot,yes,yes
 probe-14-0065,14,自然动物,啄木鸟 啄木,Woodpecker Peck,yes,yes
@@ -68,21 +68,21 @@ probe-14-0066,14,自然动物,翠鸟 入水,Kingfisher In Water,yes,yes
 probe-14-0067,14,自然动物,蜂鸟 悬停,Hummingbird Hover,yes,yes
 probe-14-0068,14,自然动物,蝙蝠 出洞,Bat Emerge,yes,yes
 probe-14-0069,14,自然动物,狼群 嚎叫,Wolf Pack Howl,yes,yes
-probe-14-0070,14,自然动物,狐狸 脚步,Fox Footstep,yes,yes
+probe-14-0070,14,自然动物,狐狸 脚步,Dog Wild Footsteps,yes,yes
 probe-14-0071,14,自然动物,鹿 奔跑,Deer Run,yes,yes
-probe-14-0072,14,自然动物,野猪 冲撞,Boar Collide,yes,yes
+probe-14-0072,14,自然动物,野猪 冲撞,Wild Collide,yes,yes
 probe-14-0073,14,自然动物,熊 咆哮,Bear Snarl,yes,yes
 probe-14-0074,14,自然动物,河马 入水,Hippo In Water,yes,yes
-probe-14-0075,14,自然动物,鳄鱼 咬合,Crocodile Bite,yes,yes
-probe-14-0076,14,自然动物,蜥蜴 爬行,Lizard Crawl,yes,yes
+probe-14-0075,14,自然动物,鳄鱼 咬合,Crocodile Break,yes,yes
+probe-14-0076,14,自然动物,蜥蜴 爬行,Lizard Creature,yes,yes
 probe-14-0077,14,自然动物,蛇 吐信,Snake Tongue Flick,yes,yes
-probe-14-0078,14,自然动物,青蛙 入水,Frogs In Water,yes,yes
-probe-14-0079,14,自然动物,蟋蟀 鸣叫,Cricket Call,yes,yes
+probe-14-0078,14,自然动物,青蛙 入水,Swamp In Water,yes,yes
+probe-14-0079,14,自然动物,蟋蟀 鸣叫,Insect Birdsong,yes,yes
 probe-14-0080,14,自然动物,蝉 合唱,Cicadas Chorus,yes,yes
-probe-15-0081,15,科幻太空,激光 切割,Laser Cutting,yes,yes
+probe-15-0081,15,科幻太空,激光 切割,Laser Stab,yes,yes
 probe-15-0082,15,科幻太空,等离子 炮,Plasma Cannon,yes,yes
 probe-15-0083,15,科幻太空,离子 束,Ion Beam,yes,yes
-probe-15-0084,15,科幻太空,粒子 加速,Grain Accelerate,yes,yes
+probe-15-0084,15,科幻太空,粒子 加速,Energy Accelerate,yes,yes
 probe-15-0085,15,科幻太空,反物质 湮灭,Antimatter Annihilation,yes,yes
 probe-15-0086,15,科幻太空,曲速 引擎,Warp Drive,yes,yes
 probe-15-0087,15,科幻太空,跃迁 启动,Jump Drive,yes,yes
@@ -145,7 +145,7 @@ probe-16-0143,16,办公家电,WiFi 连接,Wifi Connection,yes,yes
 probe-16-0144,16,办公家电,充电 完成,Charge Complete,yes,yes
 probe-16-0145,16,办公家电,电池 低电,Battery Low,yes,yes
 probe-16-0146,16,办公家电,电源 断开,Power Off,yes,yes
-probe-16-0147,16,办公家电,插排 开关,Powerstrip Switch,yes,yes
+probe-16-0147,16,办公家电,插排 开关,Powerstrip Lever,yes,yes
 probe-16-0148,16,办公家电,灯泡 闪烁,Bulb Flicker,yes,yes
 probe-16-0149,16,办公家电,灯管 启动,Fluorescent Startup,yes,yes
 probe-16-0150,16,办公家电,风扇 摇头,Fan Oscillate,yes,yes
@@ -176,7 +176,7 @@ probe-17-0174,17,宗教武术,香火 缭绕,Incense Smolder,yes,yes
 probe-17-0175,17,宗教武术,纸钱 燃烧,Joss Burn,yes,yes
 probe-17-0176,17,宗教武术,符咒 贴附,Talisman Attach,yes,yes
 probe-17-0177,17,宗教武术,桃木 剑,Peachwood Sword,yes,yes
-probe-17-0178,17,宗教武术,八卦 旋转,Bagua Spin,yes,yes
+probe-17-0178,17,宗教武术,八卦 旋转,Bagua Swish,yes,yes
 probe-17-0179,17,宗教武术,太极 推手,Tai Chi Push,yes,yes
 probe-17-0180,17,宗教武术,气功 发劲,Chi Burst,yes,yes
 probe-17-0181,17,宗教武术,武术 套路,Martial Arts Standard,yes,yes
@@ -184,7 +184,7 @@ probe-17-0182,17,宗教武术,咏春 寸拳,Wing Chun Punch,yes,yes
 probe-17-0183,17,宗教武术,跆拳道 踢击,Taekwondo Kick,yes,yes
 probe-17-0184,17,宗教武术,柔道 摔投,Judo Throw,yes,yes
 probe-17-0185,17,宗教武术,拳击 擂台,Boxing Ring,yes,yes
-probe-17-0186,17,宗教武术,摔跤 擂台,Fall Ring,yes,yes
+probe-17-0186,17,宗教武术,摔跤 擂台,Grab Ring,yes,yes
 probe-17-0187,17,宗教武术,剑道 劈砍,Kendo Splitting Slash,yes,yes
 probe-17-0188,17,宗教武术,弓箭 齐射,Bow Volley,yes,yes
 probe-17-0189,17,宗教武术,弩机 上弦,Crossbow Cock,yes,yes
@@ -198,7 +198,7 @@ probe-18-0196,18,交通极限,双层 巴士,Double Decker,yes,yes
 probe-18-0197,18,交通极限,校车 停靠,School Bus Stop,yes,yes
 probe-18-0198,18,交通极限,出租 计价,Taxi Meter,yes,yes
 probe-18-0199,18,交通极限,网约车 到达,Rideshare Arrive,yes,yes
-probe-18-0200,18,交通极限,共享单车 解锁,Share Bike Unlock,yes,yes
+probe-18-0200,18,交通极限,共享单车 解锁,Share Bicycle Unlock,yes,yes
 probe-18-0201,18,交通极限,滑板 滑行,Skateboard Slide,yes,yes
 probe-18-0202,18,交通极限,轮滑 刹车,Roller Brake,yes,yes
 probe-18-0203,18,交通极限,独轮 平衡,Unicycle Balance,yes,yes
@@ -498,7 +498,7 @@ probe-25-0496,25,餐饮厨房,打包 袋,Takeout Bag,yes,yes
 probe-25-0497,25,餐饮厨房,奶茶 封口,Milk Tea Seal,yes,yes
 probe-25-0498,25,餐饮厨房,咖啡 拉花,Latte Art,yes,yes
 probe-25-0499,25,餐饮厨房,调酒 摇壶,Cocktail Shake,yes,yes
-probe-25-0500,25,餐饮厨房,开瓶 倒酒,Pop Cork Fall Wine,yes,yes
+probe-25-0500,25,餐饮厨房,开瓶 倒酒,Uncork Fall Wine,yes,yes
 probe-25-0501,25,餐饮厨房,香槟 气泡,Champagne Fizz,yes,yes
 probe-25-0502,25,餐饮厨房,啤酒 泡沫,Beer Foam,yes,yes
 probe-25-0503,25,餐饮厨房,冰块 落入,Ice Drop,yes,yes
@@ -595,7 +595,7 @@ probe-27-0593,27,军事战场,空降 伞降,Airborne Drop,yes,yes
 probe-27-0594,27,军事战场,运输机 引擎,Transport Engine,yes,yes
 probe-27-0595,27,军事战场,战斗机 掠过,Fighter Flyby,yes,yes
 probe-27-0596,27,军事战场,音爆 轰鸣,Sonic Boom,yes,yes
-probe-27-0597,27,军事战场,轰炸 机投弹,Bomber Maker Bomb Drop,yes,yes
+probe-27-0597,27,军事战场,轰炸 机投弹,Bombing Maker Bomb Drop,yes,yes
 probe-27-0598,27,军事战场,无人机 蜂鸣,Drone Buzz,yes,yes
 probe-27-0599,27,军事战场,雷达 锁定,Radar Lock,yes,yes
 probe-27-0600,27,军事战场,电子 干扰,Ecm Jam,yes,yes
@@ -795,7 +795,7 @@ probe-32-0793,32,海运港口,锚链 抛锚,Anchor Drop,yes,yes
 probe-32-0794,32,海运港口,起锚 机,Anchor Winch,yes,yes
 probe-32-0795,32,海运港口,拖轮 辅助,Tug Assist,yes,yes
 probe-32-0796,32,海运港口,引航 艇,Pilot Boat,yes,yes
-probe-32-0797,32,海运港口,海关 查验,Custom Verify,yes,yes
+probe-32-0797,32,海运港口,海关 查验,Custom Inspect,yes,yes
 probe-32-0798,32,海运港口,检疫 登船,Quarantine Board,yes,yes
 probe-32-0799,32,海运港口,登轮 桥,Gangway,yes,yes
 probe-32-0800,32,海运港口,船舱 门,Cabin Door,yes,yes
@@ -946,7 +946,7 @@ probe-35-0944,35,广电录音,枪式 话筒,Shotgun Mic,yes,yes
 probe-35-0945,35,广电录音,挑杆 收音,Boom Record,yes,yes
 probe-35-0946,35,广电录音,同期 录音,Production Sound,yes,yes
 probe-35-0947,35,广电录音,拟音 棚,Foley Stage,yes,yes
-probe-35-0948,35,广电录音,foley 脚步,Foley Footstep,yes,yes
+probe-35-0948,35,广电录音,foley 脚步,Foley Footsteps,yes,yes
 probe-35-0949,35,广电录音,foley 衣物,Foley Cloth Rustle,yes,yes
 probe-35-0950,35,广电录音,foley 道具,Foley Prop,yes,yes
 probe-35-0951,35,广电录音,ADR 补录,Adr Adr Record,yes,yes
@@ -1303,7 +1303,7 @@ probe-42-1301,42,体育竞技,高尔夫 挥杆,Golf Swing,yes,yes
 probe-42-1302,42,体育竞技,棒球 全垒打,Baseball Homerun,yes,yes
 probe-42-1303,42,体育竞技,冰球 滑行,Hockey Skate,yes,yes
 probe-42-1304,42,体育竞技,滑雪 急停,Ski Stop,yes,yes
-probe-42-1305,42,体育竞技,滑冰 旋转,Skate Spin,yes,yes
+probe-42-1305,42,体育竞技,滑冰 旋转,Skate Swish,yes,yes
 probe-42-1306,42,体育竞技,拳击 擂台,Boxing Ring,yes,yes
 probe-42-1307,42,体育竞技,摔跤 抱摔,Wrestling Takedown,yes,yes
 probe-42-1308,42,体育竞技,击剑 突刺,Fencing Lunge,yes,yes

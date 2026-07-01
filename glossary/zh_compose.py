@@ -11,8 +11,9 @@ from pathlib import Path
 from glossary.zh_normalize import normalize_fxname_input
 from glossary.fx_slots import SlotTerm, infer_slot, split_slot_terms
 from glossary.matcher import GlossaryEntry, GlossaryMatcher
+from translator.paths import ZH_ORAL_ALIASES_PATH
 
-ORAL_CSV = Path(__file__).resolve().parent / "zh_oral_aliases.csv"
+ORAL_CSV = ZH_ORAL_ALIASES_PATH
 FX_PATTERN_CSV = Path(__file__).resolve().parent / "packs" / "zh_fx_patterns.csv"
 
 # 跳过虚词/量词/口语连接（不参与输出）

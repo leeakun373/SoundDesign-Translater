@@ -1,0 +1,719 @@
+raw,canonical,slot,lang,priority,rule_type,review_status,ambiguity,tags,source,note
+金属,Metal,material,zh,100,phrase,keep,low,material,manual,
+铁,Iron,material,zh,95,stable_single,keep,low,material,manual,
+钢,Steel,material,zh,95,stable_single,keep,low,material,manual,
+钢铁,Steel,material,zh,100,phrase,keep,low,material,manual,
+铝,Aluminum,material,zh,95,stable_single,keep,low,material,manual,
+铜,Copper,material,zh,95,stable_single,keep,low,material,manual,
+黄铜,Brass,material,zh,100,phrase,keep,low,material,manual,
+木头,Wood,material,zh,100,phrase,keep,low,material,manual,
+木,Wood,material,zh,95,stable_single,keep,low,material,manual,
+木制,Wood,material,zh,95,phrase,keep,low,material,manual,
+玻璃,Glass,material,zh,100,phrase,keep,low,material,manual,
+布,Cloth,material,zh,100,stable_single,keep,low,material,manual,
+布料,Cloth,material,zh,100,phrase,keep,low,material,manual,
+塑料,Plastic,material,zh,100,phrase,keep,low,material,manual,
+石头,Stone,material,zh,100,phrase,keep,low,material,manual,
+石材,Stone,material,zh,95,phrase,keep,low,material,manual,
+冰,Ice,material,zh,100,stable_single,keep,low,material,manual,
+水,Water,material,zh,100,stable_single,keep,low,material,manual,
+火,Fire,material,zh,100,stable_single,keep,low,material,manual,
+纸,Paper,material,zh,100,stable_single,keep,low,material,manual,
+纸张,Paper,material,zh,100,phrase,keep,low,material,manual,
+皮革,Leather,material,zh,100,phrase,keep,low,material,manual,
+橡胶,Rubber,material,zh,100,phrase,keep,low,material,manual,
+陶瓷,Ceramic,material,zh,100,phrase,keep,low,material,manual,
+混凝土,Concrete,material,zh,100,phrase,keep,low,material,manual,
+泥土,Dirt,material,zh,95,phrase,keep,low,material,manual,
+沙子,Sand,material,zh,100,phrase,keep,low,material,manual,
+碎石,Gravel,material,zh,100,phrase,keep,low,material,manual,
+骨头,Bone,material,zh,100,phrase,keep,low,material,manual,
+肉,Flesh,material,zh,90,stable_single,keep,low,material,manual,
+泡沫,Foam,material,zh,100,phrase,keep,low,material,manual,
+泡棉,Foam,material,zh,95,phrase,keep,low,material,manual,
+碳纤维,Carbon Fiber,material,zh,100,phrase,keep,low,material,manual,
+锡,Tin,material,zh,90,stable_single,keep,low,material,manual,
+银,Silver,material,zh,90,stable_single,keep,low,material,manual,
+门,Door,object,zh,100,stable_single,keep,low,object,manual,
+木门,Wood Door,object,zh,100,phrase,keep,low,door,manual,
+金属门,Metal Door,object,zh,100,phrase,keep,low,door,manual,
+玻璃门,Glass Door,object,zh,100,phrase,keep,low,door,manual,
+车门,Car Door,object,zh,100,phrase,keep,low,door/car,manual,
+抽屉,Drawer,object,zh,100,phrase,keep,low,object,manual,
+箱子,Box,object,zh,100,phrase,keep,low,object,manual,
+纸箱,Cardboard Box,object,zh,100,phrase,keep,low,object,manual,
+木箱,Wood Box,object,zh,100,phrase,keep,low,object,manual,
+金属箱,Metal Box,object,zh,100,phrase,keep,low,object,manual,
+杯子,Cup,object,zh,100,phrase,keep,low,object,manual,
+瓶子,Bottle,object,zh,100,phrase,keep,low,object,manual,
+玻璃瓶,Glass Bottle,object,zh,100,phrase,keep,low,object,manual,
+塑料瓶,Plastic Bottle,object,zh,100,phrase,keep,low,object,manual,
+袋子,Bag,object,zh,100,phrase,keep,low,object,manual,
+布袋,Cloth Bag,object,zh,100,phrase,keep,low,object,manual,
+窗户,Window,object,zh,100,phrase,keep,low,object,manual,
+地板,Floor,object,zh,100,phrase,keep,low,object,manual,
+桌子,Table,object,zh,100,phrase,keep,low,object,manual,
+椅子,Chair,object,zh,100,phrase,keep,low,object,manual,
+柜子,Cabinet,object,zh,100,phrase,keep,low,object,manual,
+锁,Lock,object,zh,100,stable_single,keep,low,object,manual,
+开关,Switch,object,zh,100,phrase,keep,low,object,manual,
+按钮,Button,object,zh,100,phrase,keep,low,object,manual,
+绳子,Rope,object,zh,100,phrase,keep,low,object,manual,
+链条,Chain,object,zh,100,phrase,keep,low,object,manual,
+房间,Room,object,zh,100,phrase,keep,low,room,manual,
+房间底噪,Room Tone,object,zh,100,phrase,keep,low,roomtone,manual,
+办公室,Office,object,zh,100,phrase,keep,low,room,manual,
+走廊,Hallway,object,zh,100,phrase,keep,low,room,manual,
+大厅,Hall,object,zh,100,phrase,keep,low,room,manual,
+管道,Pipe,object,zh,100,phrase,keep,low,object,manual,
+轮胎,Tire,object,zh,100,phrase,keep,low,vehicle,manual,
+车轮,Wheel,object,zh,100,phrase,keep,low,vehicle,manual,
+钥匙,Key,object,zh,100,phrase,keep,low,object,manual,
+火箭,Rocket,source,zh,100,phrase,keep,low,source,manual,
+引擎,Engine,source,zh,100,phrase,keep,low,engine,manual,
+发动机,Engine,source,zh,100,phrase,keep,low,engine,manual,
+车辆,Vehicle,source,zh,100,phrase,keep,low,vehicle,manual,
+汽车,Car,source,zh,100,phrase,keep,low,car,manual,
+卡车,Truck,source,zh,100,phrase,keep,low,vehicle,manual,
+摩托车,Motorcycle,source,zh,100,phrase,keep,low,vehicle,manual,
+自行车,Bicycle,source,zh,100,phrase,keep,low,vehicle,manual,
+飞机,Aircraft,source,zh,100,phrase,keep,low,vehicle,manual,
+直升机,Helicopter,source,zh,100,phrase,keep,low,vehicle,manual,
+火车,Train,source,zh,100,phrase,keep,low,vehicle,manual,
+轮船,Ship,source,zh,100,phrase,keep,low,vehicle,manual,
+机器人,Robot,source,zh,100,phrase,keep,low,source,manual,
+机器,Machine,source,zh,100,phrase,keep,low,machine,manual,
+风扇,Fan,source,zh,100,phrase,keep,low,machine,manual,
+空调,Air Conditioner,source,zh,100,phrase,keep,low,machine,manual,
+电机,Motor,source,zh,100,phrase,keep,low,machine,manual,
+发电机,Generator,source,zh,100,phrase,keep,low,machine,manual,
+武器,Weapon,source,zh,100,phrase,keep,low,weapon,manual,
+手枪,Pistol,source,zh,100,phrase,keep,low,weapon,manual,
+步枪,Rifle,source,zh,100,phrase,keep,low,weapon,manual,
+霰弹枪,Shotgun,source,zh,100,phrase,keep,low,weapon,manual,
+大炮,Cannon,source,zh,100,phrase,keep,low,weapon,manual,
+弓箭,Bow And Arrow,source,zh,100,phrase,keep,low,weapon,manual,
+生物,Creature,source,zh,100,phrase,keep,low,creature,manual,
+怪物,Monster,source,zh,100,phrase,keep,low,creature,manual,
+狗,Dog,source,zh,100,stable_single,keep,low,animal,manual,
+狼,Wolf,source,zh,100,stable_single,keep,low,animal,manual,
+鸟,Bird,source,zh,100,stable_single,keep,low,animal,manual,
+人群,Crowd,source,zh,100,phrase,keep,low,crowd,manual,
+人类,Human,source,zh,100,phrase,keep,low,human,manual,
+无人机,Drone,source,zh,100,phrase,keep,low,vehicle,manual,
+飞船,Spaceship,source,zh,100,phrase,keep,low,vehicle,manual,
+电脑,Computer,source,zh,100,phrase,keep,low,machine,manual,
+撞,Impact,action,zh,80,stable_single,keep,medium,impact,manual,声音语境默认撞击
+撞击,Impact,action,zh,100,phrase,keep,low,impact,manual,
+碰撞,Impact,action,zh,95,phrase,keep,low,impact,manual,
+砸,Impact,action,zh,75,stable_single,keep,medium,impact,manual,默认高力度 Impact
+重击,Heavy Impact,action,zh,100,phrase,keep,low,impact/heavy,manual,
+敲,Knock,action,zh,65,stable_single_low_confidence,keep,medium,knock/tap,manual,可能需要 Tap/Knock 区分
+敲击,Knock,action,zh,100,phrase,keep,low,knock,manual,
+轻敲,Tap,action,zh,100,phrase,keep,low,tap,manual,
+拍打,Slap,action,zh,100,phrase,keep,low,slap,manual,
+刮,Scrape,action,zh,90,stable_single,keep,low,scrape,manual,稳定单字
+刮擦,Scrape,action,zh,100,phrase,keep,low,scrape,manual,大面积粗糙刮擦
+摩擦,Friction,action,zh,100,phrase,keep,low,friction,manual,默认物理摩擦状态
+拖,Drag,action,zh,100,stable_single,keep,low,drag,manual,
+拖动,Drag,action,zh,100,phrase,keep,low,drag,manual,
+滑动,Slide,action,zh,100,phrase,keep,low,slide,manual,
+滑开,Slide Open,action,zh,100,phrase,keep,low,open,manual,
+推开,Push Open,action,zh,100,phrase,keep,low,open,manual,
+拉开,Pull Open,action,zh,100,phrase,keep,low,open,manual,
+关闭,Close,action,zh,100,phrase,keep,low,close,manual,
+关门,Door Close,action,zh,100,phrase,keep,low,door,manual,
+开门,Door Open,action,zh,100,phrase,keep,low,door,manual,
+掉落,Drop,action,zh,100,phrase,keep,low,drop,manual,
+落下,Drop,action,zh,90,phrase,keep,low,drop,manual,
+摔落,Drop,action,zh,100,phrase,keep,low,drop,manual,
+滚动,Roll,action,zh,100,phrase,keep,low,roll,manual,
+旋转,Spin,action,zh,100,phrase,keep,low,spin,manual,
+摇晃,Shake,action,zh,100,phrase,keep,low,shake,manual,
+震动,Vibration,action,zh,100,phrase,keep,low,vibration,manual,
+破裂,Break,action,zh,100,phrase,keep,low,break,manual,
+破碎,Break,action,zh,100,phrase,keep,low,break,manual,
+碎裂,Shatter,action,zh,100,phrase,keep,low,shatter,manual,
+撕裂,Tear,action,zh,100,phrase,keep,low,tear,manual,
+撕开,Tear Open,action,zh,100,phrase,keep,low,tear,manual,
+切割,Cut,action,zh,100,phrase,keep,low,cut,manual,
+刺穿,Pierce,action,zh,100,phrase,keep,low,pierce,manual,
+挤压,Squeeze,action,zh,100,phrase,keep,low,squeeze,manual,
+按下,Press,action,zh,100,phrase,keep,low,press,manual,
+点击,Click,action,zh,100,phrase,keep,low,click,manual,
+弹开,Pop Open,action,zh,100,phrase,keep,low,open,manual,
+锁定,Lock,action,zh,100,phrase,keep,low,lock,manual,
+解锁,Unlock,action,zh,100,phrase,keep,low,lock,manual,
+启动,Start,action,zh,100,phrase,keep,low,start,manual,
+停止,Stop,action,zh,100,phrase,keep,low,stop,manual,
+加速,Accelerate,action,zh,100,phrase,keep,low,vehicle,manual,
+减速,Decelerate,action,zh,100,phrase,keep,low,vehicle,manual,
+怠速,Idle,action,zh,100,phrase,keep,low,vehicle,manual,
+爆炸,Explosion,action,zh,100,phrase,keep,low,explosion,manual,
+发射,Launch,action,zh,100,phrase,keep,low,launch,manual,
+开火,Fire,action,zh,100,phrase,keep,low,weapon,manual,
+射击,Shot,action,zh,100,phrase,keep,low,weapon,manual,
+装填,Reload,action,zh,100,phrase,keep,low,weapon,manual,
+脚步,Footstep,action,zh,100,phrase,keep,low,footstep,manual,
+脚步声,Footstep,action,zh,100,phrase,keep,low,footstep,manual,
+走路,Walk,action,zh,100,phrase,keep,low,footstep,manual,
+跑步,Run,action,zh,100,phrase,keep,low,footstep,manual,
+跳跃,Jump,action,zh,100,phrase,keep,low,movement,manual,
+落地,Land,action,zh,100,phrase,keep,low,movement,manual,
+折断,Snap,action,zh,100,phrase,keep,low,break,manual,
+弯曲,Bend,action,zh,100,phrase,keep,low,bend,manual,
+燃烧,Burn,action,zh,100,phrase,keep,low,fire,manual,
+点燃,Ignite,action,zh,100,phrase,keep,low,fire,manual,
+喷射,Spray,action,zh,100,phrase,keep,low,spray,manual,
+甩动,Swipe,motion,zh,90,phrase,keep,low,swipe,manual,
+嗖,,motion,zh,0,ambiguous_single,review,high,whoosh/onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+呼啸,Whoosh,motion,zh,100,phrase,keep,low,whoosh,manual,
+挥动,Whoosh,motion,zh,95,phrase,keep,low,whoosh,manual,
+掠过,Flyby,motion,zh,100,phrase,keep,low,flyby,manual,
+飞过,Flyby,motion,zh,100,phrase,keep,low,flyby,manual,
+驶过,Driveby,motion,zh,100,phrase,keep,low,driveby,manual,
+摆动,Swing,motion,zh,100,phrase,keep,low,movement,manual,
+扫过,Sweep,motion,zh,100,phrase,keep,low,movement,manual,
+快速移动,Fast Movement,motion,zh,100,phrase,keep,low,movement,manual,
+缓慢移动,Slow Movement,motion,zh,100,phrase,keep,low,movement,manual,
+移动,Movement,motion,zh,100,phrase,keep,low,movement,manual,
+上升,Rise,motion,zh,100,phrase,keep,low,movement,manual,
+下降,Fall,motion,zh,100,phrase,keep,low,movement,manual,
+接近,Approach,motion,zh,100,phrase,keep,low,movement,manual,
+远离,Recede,motion,zh,100,phrase,keep,low,movement,manual,
+环绕,Orbit,motion,zh,100,phrase,keep,low,movement,manual,
+回旋,Swirl,motion,zh,100,phrase,keep,low,movement,manual,
+穿过,Pass Through,motion,zh,100,phrase,keep,low,movement,manual,
+划过,,motion,zh,0,ambiguous_phrase,review,high,swipe/passby/slide,manual,需上下文
+飞越,Flyover,motion,zh,100,phrase,keep,low,flyby,manual,
+冲过,Rushby,motion,zh,100,phrase,keep,low,movement,manual,
+长尾,Long Tail,detail,zh,100,phrase,keep,low,tail,manual,
+尾音长,Long Tail,detail,zh,100,phrase,keep,low,tail,manual,
+短促,Short,detail,zh,100,phrase,keep,low,length,manual,
+硬,Hard,detail,zh,80,stable_single,keep,low,texture,manual,
+柔软,Soft,detail,zh,80,phrase,keep,low,texture,manual,
+重,Heavy,detail,zh,85,stable_single,keep,low,weight,manual,
+轻,Light,detail,zh,85,stable_single,keep,low,weight,manual,
+快速,Fast,detail,zh,90,phrase,keep,low,speed,manual,
+缓慢,Slow,detail,zh,90,phrase,keep,low,speed,manual,
+单次,Single,detail,zh,100,phrase,keep,low,count,manual,
+连续,Continuous,detail,zh,100,phrase,keep,low,count,manual,
+双重,Double,detail,zh,100,phrase,keep,low,count,manual,
+多次,Multiple,detail,zh,100,phrase,keep,low,count,manual,
+干脆,Crisp,detail,zh,100,phrase,keep,low,texture,manual,
+沉闷,Dull,detail,zh,100,phrase,keep,low,texture,manual,
+明亮,Bright,detail,zh,100,phrase,keep,low,tone,manual,
+尖锐,Sharp,detail,zh,100,phrase,keep,low,tone,manual,
+低沉,Deep,detail,zh,100,phrase,keep,low,tone,manual,
+高频,High Frequency,detail,zh,100,phrase,keep,low,frequency,manual,
+低频,Low Frequency,detail,zh,100,phrase,keep,low,frequency,manual,
+厚重,Heavy,detail,zh,100,phrase,keep,low,weight,manual,
+微小,Tiny,detail,zh,100,phrase,keep,low,size,manual,
+巨大,Huge,detail,zh,100,phrase,keep,low,size,manual,
+短尾,Short Tail,detail,zh,100,phrase,keep,low,tail,manual,
+长混响,Long Reverb,detail,zh,100,phrase,keep,low,reverb,manual,
+短混响,Short Reverb,detail,zh,100,phrase,keep,low,reverb,manual,
+干声,Dry,detail,zh,100,phrase,keep,low,reverb,manual,
+湿声,Wet,detail,zh,100,phrase,keep,low,reverb,manual,
+细小,Small,detail,zh,100,phrase,keep,low,size,manual,
+强烈,Intense,detail,zh,100,phrase,keep,low,intensity,manual,
+室内,Interior,modifier,zh,100,phrase,keep,low,perspective,manual,
+室外,Exterior,modifier,zh,100,phrase,keep,low,perspective,manual,
+远处,Distant,modifier,zh,100,phrase,keep,low,perspective,manual,
+近处,Close,modifier,zh,100,phrase,keep,low,perspective,manual,
+水下,Underwater,modifier,zh,100,phrase,keep,low,perspective,manual,
+空旷,Open,modifier,zh,100,phrase,keep,low,space,manual,
+封闭,Enclosed,modifier,zh,100,phrase,keep,low,space,manual,
+空房间,Empty Room,modifier,zh,100,phrase,keep,low,space,manual,
+大空间,Large Space,modifier,zh,100,phrase,keep,low,space,manual,
+小空间,Small Space,modifier,zh,100,phrase,keep,low,space,manual,
+地下室,Basement,modifier,zh,100,phrase,keep,low,space,manual,
+户外,Outdoor,modifier,zh,100,phrase,keep,low,perspective,manual,
+外部,Exterior,modifier,zh,100,phrase,keep,low,perspective,manual,
+内部,Interior,modifier,zh,100,phrase,keep,low,perspective,manual,
+左侧,Left,modifier,zh,100,phrase,keep,low,direction,manual,
+右侧,Right,modifier,zh,100,phrase,keep,low,direction,manual,
+前方,Front,modifier,zh,100,phrase,keep,low,direction,manual,
+后方,Rear,modifier,zh,100,phrase,keep,low,direction,manual,
+上方,Above,modifier,zh,100,phrase,keep,low,direction,manual,
+下方,Below,modifier,zh,100,phrase,keep,low,direction,manual,
+中心,Center,modifier,zh,100,phrase,keep,low,direction,manual,
+环绕声,Surround,modifier,zh,100,phrase,keep,low,perspective,manual,
+混响,Reverberant,modifier,zh,100,phrase,keep,low,reverb,manual,
+无混响,Dry,modifier,zh,100,phrase,keep,low,reverb,manual,
+远景,Distant,modifier,zh,100,phrase,keep,low,perspective,manual,
+近景,Close,modifier,zh,100,phrase,keep,low,perspective,manual,
+头顶,Overhead,modifier,zh,100,phrase,keep,low,direction,manual,
+背后,Behind,modifier,zh,100,phrase,keep,low,direction,manual,
+开阔,Open,modifier,zh,100,phrase,keep,low,space,manual,
+密闭,Enclosed,modifier,zh,100,phrase,keep,low,space,manual,
+刮过,Scrape Across,action,zh,85,phrase,keep,medium,scrape,manual,强调横穿表面
+来回摩擦,Rub,action,zh,90,phrase,keep,low,rub,manual,具体来回动作
+蹭,Rub,action,zh,70,stable_single_low_confidence,keep,medium,rub/scuff,manual,可能也可 Scuff
+剐蹭,Scuff,action,zh,85,phrase,keep,medium,scuff,manual,轻微碰擦
+划,Scratch,action,zh,75,stable_single_low_confidence,keep,medium,scratch/slash,manual,默认表面划痕
+打,,action,zh,0,ambiguous_single,review,high,hit/knock/fire/play,manual,太宽
+击,,action,zh,0,suffix_only,review,high,hit/impact/strike,manual,通常是组合词后缀
+碰,,action,zh,0,ambiguous_single,review,high,touch/bump/impact/clink,manual,力度不明
+响,,unknown,zh,0,weak_token,review,high,ring/sound/resonance,manual,结果词不是动作
+动,,unknown,zh,0,weak_token,review,high,move/motion,manual,信息量太低
+甩,,motion,zh,0,ambiguous_single,review,high,swing/flick/whip/flap,manual,对象决定英文
+打门,Door Knock,action,zh,95,phrase,keep,low,door,manual,
+砸门,Door Bang,action,zh,90,phrase,keep,medium,door,manual,
+敲门,Door Knock,action,zh,100,phrase,keep,low,door,manual,
+打鼓,Drum Hit,action,zh,95,phrase,keep,low,drum,manual,
+打枪,Gun Fire,action,zh,95,phrase,keep,low,gun,manual,
+碰杯,Glass Clink,action,zh,100,phrase,keep,low,glass,manual,
+轻碰,Bump,action,zh,80,phrase,keep,medium,bump,manual,
+甩衣服,Cloth Flap,motion,zh,90,phrase,keep,medium,cloth,manual,
+甩鞭,Whip Crack,motion,zh,95,phrase,keep,low,whip,manual,
+铃响,Bell Ring,action,zh,100,phrase,keep,low,bell/ring,manual,batch_repair_v0.2 governed phrase update
+金属响,Metal Resonance,detail,zh,80,phrase,keep,medium,metal/resonance,manual,
+擦蹭,Friction,action,zh,95,phrase,keep,low,friction,manual,batch_repair_v0.1 natural alias
+磨蹭,Friction,action,zh,90,phrase,keep,low,friction/rub,manual,batch_repair_v0.1 reviewed surface alias
+铁链,Chain,object,zh,95,phrase,keep,low,chain,manual,batch_repair_v0.1 natural object alias
+锁链,Chain,object,zh,95,phrase,keep,low,chain,manual,batch_repair_v0.1 natural object alias
+桌边,Table,object,zh,90,phrase,keep,low,table,manual,batch_repair_v0.1 contextual object alias
+滑过,Slide,action,zh,85,phrase,keep,medium,slide,manual,batch_repair_v0.1 contextual action alias
+打字,Keyboard Typing,action,zh,100,phrase,keep,low,keyboard/typing,manual,batch_repair_v0.1 governed phrase
+打雷,Thunder Rumble,action,zh,100,phrase,keep,low,thunder,manual,batch_repair_v0.1 governed phrase
+打滑轮胎,Tire Skid,action,zh,100,phrase,keep,low,tire/skid,manual,batch_repair_v0.1 governed phrase
+车轮打滑,Tire Skid,action,zh,100,phrase,keep,low,tire/skid,manual,batch_repair_v0.1 governed phrase
+转旋钮,Knob Turn,action,zh,100,phrase,keep,low,knob/turn,manual,batch_repair_v0.1 governed phrase
+关保险柜,Safe Close,action,zh,100,phrase,keep,low,safe/close,manual,batch_repair_v0.1 governed phrase
+打火机,Lighter Click,action,zh,100,phrase,keep,low,lighter/click,manual,batch_repair_v0.1 governed phrase
+打水漂,Stone Skip Water,action,zh,100,phrase,keep,low,stone/water,manual,batch_repair_v0.1 governed phrase
+打蛋,Egg Whisk,action,zh,100,phrase,keep,low,egg/whisk,manual,batch_repair_v0.1 governed phrase
+碰到麦架,Mic Stand Bump,action,zh,100,phrase,keep,low,mic/stand/bump,manual,batch_repair_v0.1 governed phrase
+碰倒玻璃杯,Glass Cup Knock Over,action,zh,100,phrase,keep,low,glass/cup/knock,manual,batch_repair_v0.1 governed compound phrase
+石头互碰,Rock Clack,action,zh,100,phrase,keep,low,rock/clack,manual,batch_repair_v0.1 governed phrase
+塑料盒互碰,Plastic Box Clack,action,zh,100,phrase,keep,low,plastic/box/clack,manual,batch_repair_v0.1 governed phrase
+金属杆相碰,Metal Rod Clank,action,zh,100,phrase,keep,low,metal/rod/clank,manual,batch_repair_v0.1 governed phrase
+身体碰墙,Body Bump Wall,action,zh,100,phrase,keep,low,body/wall/bump,manual,batch_repair_v0.1 governed phrase
+甩毛巾,Towel Flap,motion,zh,100,phrase,keep,low,towel/flap,manual,batch_repair_v0.1 governed phrase
+甩尾巴,Tail Swing,motion,zh,100,phrase,keep,low,tail/swing,manual,batch_repair_v0.1 governed phrase
+甩棍,Stick Whoosh,motion,zh,100,phrase,keep,low,stick/whoosh,manual,batch_repair_v0.1 governed phrase
+摔书,Book Drop,action,zh,100,phrase,keep,low,book/drop,manual,batch_repair_v0.1 governed phrase
+墙皮脱落,Plaster Crumble,action,zh,100,phrase,keep,low,plaster/crumble,manual,batch_repair_v0.1 governed phrase
+拉链拉开再拉上,Zipper Open Close,action,zh,100,phrase,keep,low,zipper/open/close,manual,batch_repair_v0.1 governed compound phrase
+水倒入杯中溅出,Water Pour Splash,action,zh,100,phrase,keep,low,water/pour/splash,manual,batch_repair_v0.1 governed compound phrase
+摩擦皮革,Leather Friction,action,zh,100,phrase,keep,low,leather/friction,manual,batch_repair_v0.1 governed phrase
+冰块刮擦冰砖,Ice Scrape Ice Brick,action,zh,100,phrase,keep,low,ice/scrape,manual,batch_repair_v0.1 governed phrase
+轮胎摩擦,Tire Friction,action,zh,100,phrase,keep,low,tire/friction,manual,batch_repair_v0.1 governed phrase
+敲木门,Wood Door Knock,action,zh,100,phrase,keep,low,wood/door/knock,manual,batch_repair_v0.1 governed phrase
+划船,Boat Row,action,zh,100,phrase,keep,low,boat/row,manual,batch_repair_v0.1 governed phrase
+刮风,Wind Gust,action,zh,100,phrase,keep,low,wind/gust,manual,batch_repair_v0.1 governed phrase
+蹭衣服,Cloth Rub,action,zh,100,phrase,keep,low,cloth/rub,manual,batch_repair_v0.1 governed phrase
+骨头断裂,Bone Crack,action,zh,100,phrase,keep,low,bone/crack,manual,batch_repair_v0.1 governed phrase
+石头碎裂,Rock Crack,action,zh,100,phrase,keep,low,rock/crack,manual,batch_repair_v0.1 governed phrase
+金属断裂,Metal Snap,action,zh,100,phrase,keep,low,metal/snap,manual,batch_repair_v0.1 governed phrase
+来回蹭地毯,Carpet Rub,action,zh,100,phrase,keep,low,carpet/rub,manual,batch_repair_v0.1 governed phrase
+来回摩擦毛毯,Carpet Rub,action,zh,100,phrase,keep,low,carpet/rub,manual,batch_repair_v0.1 governed phrase
+晃链条,Chain Rattle,action,zh,100,phrase,keep,low,chain/rattle,manual,batch_repair_v0.1 governed phrase
+轻碰桌边,Table Bump,action,zh,100,phrase,keep,low,table/bump,manual,batch_repair_v0.1 governed phrase
+苹果掉地上,Apple Drop Floor,action,zh,100,phrase,keep,low,apple/drop/floor,manual,batch_repair_v0.1 governed phrase
+开瓶盖,Bottle Cap Open,action,zh,100,phrase,keep,low,bottle/cap/open,manual,batch_repair_v0.1 real-input phrase
+砖墙坍塌,Brick Wall Collapse,action,zh,100,phrase,keep,low,brick/wall/collapse,manual,batch_repair_v0.1 real-input phrase
+猫叫,Cat Meow,source,zh,100,phrase,keep,low,animal/cat,manual,batch_repair_v0.1 real-input phrase
+牛叫,Cow Moo,source,zh,100,phrase,keep,low,animal/cow,manual,batch_repair_v0.1 real-input phrase
+猪叫,Pig Oink,source,zh,100,phrase,keep,low,animal/pig,manual,batch_repair_v0.1 real-input phrase
+鸡叫,Chicken Cluck,source,zh,100,phrase,keep,low,animal/chicken,manual,batch_repair_v0.1 real-input phrase
+海鸥叫,Seagull Call,source,zh,100,phrase,keep,low,animal/seagull,manual,batch_repair_v0.1 real-input phrase
+鲸鱼叫声,Whale Call,source,zh,100,phrase,keep,low,animal/whale,manual,batch_repair_v0.1 complete real-input phrase
+摔,,action,zh,0,ambiguous_single,review,high,drop/slam/fall,manual,batch_repair_v0.2 review-only broad token; no runtime output
+抽屉拉开又关上,Drawer Open Close,action,zh,100,phrase,keep,low,drawer/open/close,manual,batch_repair_v0.2 governed compound phrase
+警报响,Alarm Ring,action,zh,100,phrase,keep,low,alarm/ring,manual,batch_repair_v0.2 governed phrase
+金属片响,Metal Sheet Rattle,action,zh,100,phrase,keep,low,metal/sheet/rattle,manual,batch_repair_v0.2 governed phrase
+硬币响,Coin Jingle,action,zh,100,phrase,keep,low,coin/jingle,manual,batch_repair_v0.2 governed phrase
+链条响,Chain Rattle,action,zh,100,phrase,keep,low,chain/rattle,manual,batch_repair_v0.2 governed phrase
+风扇响,Fan Whir,action,zh,100,phrase,keep,low,fan/whir,manual,batch_repair_v0.2 governed phrase
+肚子响,Stomach Growl,source,zh,100,phrase,keep,low,stomach/growl,manual,batch_repair_v0.2 governed phrase
+甩水,Water Flick,motion,zh,100,phrase,keep,low,water/flick,manual,batch_repair_v0.2 governed phrase
+甩刀,Knife Whoosh,motion,zh,100,phrase,keep,medium,knife/whoosh,manual,batch_repair_v0.2 governed phrase
+甩手,Hand Whoosh,motion,zh,100,phrase,keep,medium,hand/whoosh,manual,batch_repair_v0.2 governed phrase
+甩门,Door Slam,action,zh,100,phrase,keep,low,door/slam,manual,batch_repair_v0.2 governed phrase
+甩绳子,Rope Swing,motion,zh,100,phrase,keep,low,rope/swing,manual,batch_repair_v0.2 governed phrase
+门打开后撞到墙,Door Open Impact Wall,action,zh,100,phrase,keep,low,door/open/impact/wall,manual,batch_repair_v0.2 governed compound phrase
+拿起杯子放下,Cup Pick Up Put Down,action,zh,100,phrase,keep,low,cup/pick-up/put-down,manual,batch_repair_v0.2 governed compound phrase
+金属盒打开合上,Metal Box Open Close,action,zh,100,phrase,keep,low,metal/box/open/close,manual,batch_repair_v0.2 governed compound phrase
+纸张揉皱展开,Paper Crumple Unfold,action,zh,100,phrase,keep,low,paper/crumple/unfold,manual,batch_repair_v0.2 governed compound phrase
+布料甩动落地,Cloth Flap Drop,action,zh,100,phrase,keep,medium,cloth/flap/drop,manual,batch_repair_v0.2 governed compound phrase
+陶瓷破碎,Ceramic Shatter,action,zh,100,phrase,keep,low,ceramic/shatter,manual,batch_repair_v0.2 governed phrase
+电话铃声,Telephone Bell,source,zh,100,phrase,keep,low,telephone/bell,manual,batch_repair_v0.2 complete real-input phrase
+风声呼啸,Wind Whoosh,source,zh,100,phrase,keep,low,wind/whoosh,manual,batch_repair_v0.2 complete real-input phrase
+欢呼声,Cheer,source,zh,100,phrase,keep,low,crowd/cheer,manual,batch_repair_v0.2 complete real-input phrase
+战场呐喊,Battle Shout,source,zh,100,phrase,keep,medium,battle/shout,manual,batch_repair_v0.2 complete real-input phrase
+僵尸呻吟,Zombie Groan,source,zh,100,phrase,keep,medium,creature/zombie/groan,manual,batch_repair_v0.2 complete real-input phrase
+高跟鞋踩地,High Heel Footstep,action,zh,100,phrase,keep,low,footstep/high-heel,manual,batch_repair_v0.2 complete real-input phrase
+闪光灯充能,Camera Flash Charge,action,zh,100,phrase,keep,low,camera/flash/charge,manual,batch_repair_v0.2 complete real-input phrase
+溪流潺潺,Stream Flow,source,zh,100,phrase,keep,low,water/stream/flow,manual,batch_repair_v0.2 complete real-input phrase
+电钻钻孔,Power Drill Drilling,action,zh,100,phrase,keep,low,tool/drill,manual,batch_repair_v0.2 complete real-input phrase
+刮擦铁板,Metal Plate Scrape,action,zh,100,phrase,keep,low,metal/plate/scrape,manual,batch_repair_v0.2 rule-bug repair
+打磨金属,Metal Grind,action,zh,100,phrase,keep,low,metal/grind,manual,batch_repair_v0.2 rule-bug repair
+轻碰麦克风,Mic Bump,action,zh,100,phrase,keep,low,mic/bump,manual,batch_repair_v0.2 rule-bug repair
+划玻璃,Glass Scratch,action,zh,100,phrase,keep,low,glass/scratch,manual,batch_repair_v0.2 rule-bug repair
+蹭地板,Floor Scuff,action,zh,100,phrase,keep,low,floor/scuff,manual,batch_repair_v0.2 rule-bug repair
+滑板滑行,Skateboard Roll,motion,zh,100,phrase,keep,low,skateboard/roll,manual,batch_repair_v0.2 rule-bug repair
+锤子砸铁板,Hammer Hit Metal Plate,action,zh,100,phrase,keep,medium,hammer/hit/metal/plate,manual,batch_repair_v0.2 governed contextual phrase
+车辆碰撞,Car Crash,action,zh,100,phrase,keep,low,car/crash,manual,batch_repair_v0.2 rule-bug repair
+刺耳,Harsh,modifier,zh,100,phrase,keep,low,harsh/abrasive,manual,user-authorized token-boundary parser test
+吸尘器,Vacuum Cleaner,source,zh,100,phrase,keep,low,appliance/vacuum,ai_reviewed_batch,coverage_sprint_v0.1
+微波炉,Microwave,source,zh,100,phrase,keep,low,appliance/kitchen,ai_reviewed_batch,coverage_sprint_v0.1
+咖啡机,Espresso Machine,source,zh,100,phrase,keep,low,appliance/kitchen,ai_reviewed_batch,coverage_sprint_v0.1
+工具箱,Toolbox,object,zh,100,phrase,keep,low,tool/container,ai_reviewed_batch,coverage_sprint_v0.1
+气球,Balloon,object,zh,100,phrase,keep,low,object/toy,ai_reviewed_batch,coverage_sprint_v0.1
+书本,Book,object,zh,100,phrase,keep,low,object/paper,ai_reviewed_batch,coverage_sprint_v0.1
+购物袋,Shopping Bag,object,zh,100,phrase,keep,low,object/bag,ai_reviewed_batch,coverage_sprint_v0.1
+斧头,Axe,object,zh,100,phrase,keep,low,tool/weapon,ai_reviewed_batch,coverage_sprint_v0.1
+蔬菜,Vegetables,source,zh,100,phrase,keep,low,food/vegetable,ai_reviewed_batch,coverage_sprint_v0.1
+铝罐,Aluminum Can,object,zh,100,phrase,keep,low,container/metal,ai_reviewed_batch,coverage_sprint_v0.1
+沙发,Couch,object,zh,100,phrase,keep,low,furniture,ai_reviewed_batch,coverage_sprint_v0.1
+靠垫,Pillow,object,zh,100,phrase,keep,low,furniture/soft,ai_reviewed_batch,coverage_sprint_v0.1
+木琴,Xylophone,source,zh,100,phrase,keep,low,instrument/percussion,ai_reviewed_batch,coverage_sprint_v0.1
+旱冰鞋,Roller Skate,source,zh,100,phrase,keep,low,sports/skate,ai_reviewed_batch,coverage_sprint_v0.1
+风铃,Chime,source,zh,100,phrase,keep,low,instrument/bell,ai_reviewed_batch,coverage_sprint_v0.1
+钢球,Steel Ball,object,zh,100,phrase,keep,low,object/metal,ai_reviewed_batch,coverage_sprint_v0.1
+哑铃,Dumbbell,object,zh,100,phrase,keep,low,object/fitness,ai_reviewed_batch,coverage_sprint_v0.1
+西瓜,Watermelon,source,zh,100,phrase,keep,low,food/fruit,ai_reviewed_batch,coverage_sprint_v0.1
+卷心菜,Cabbage,source,zh,100,phrase,keep,low,food/vegetable,ai_reviewed_batch,coverage_sprint_v0.1
+磁铁,Magnet,object,zh,100,phrase,keep,low,object/metal,ai_reviewed_batch,coverage_sprint_v0.1
+瓷砖,Tile,object,zh,100,phrase,keep,low,surface/tile,ai_reviewed_batch,coverage_sprint_v0.1
+背包,Backpack,object,zh,100,phrase,keep,low,object/bag,ai_reviewed_batch,coverage_sprint_v0.1
+拳击手套,Boxing Glove,object,zh,100,phrase,keep,low,sports/boxing,ai_reviewed_batch,coverage_sprint_v0.1
+狗玩具,Dog Toy,object,zh,100,phrase,keep,low,object/toy,ai_reviewed_batch,coverage_sprint_v0.1
+干冰,Dry Ice,material,zh,100,phrase,keep,low,material/special,ai_reviewed_batch,coverage_sprint_v0.1
+缝纫机,Sewing Machine,source,zh,100,phrase,keep,low,machine/sewing,ai_reviewed_batch,coverage_sprint_v0.1
+手轮,Handwheel,object,zh,100,phrase,keep,low,machine/part,ai_reviewed_batch,coverage_sprint_v0.1
+碳化钨,Tungsten Carbide,material,zh,100,phrase,keep,low,material/metal,ai_reviewed_batch,coverage_sprint_v0.1
+街机摇杆,Arcade Stick,object,zh,100,phrase,keep,low,game/controller,ai_reviewed_batch,coverage_sprint_v0.1
+风鸣器,Wind Singer,source,zh,100,phrase,keep,low,instrument/wind,ai_reviewed_batch,coverage_sprint_v0.1
+气泡膜,Bubble Wrap,material,zh,100,phrase,keep,low,material/plastic,ai_reviewed_batch,coverage_sprint_v0.1
+干燥箱门,Dry Box Door,object,zh,95,phrase,keep,medium,door/special,ai_reviewed_batch,coverage_sprint_v0.1
+奥林巴斯相机,Olympus Camera,source,zh,100,phrase,keep,low,camera/device,ai_reviewed_batch,coverage_sprint_v0.1
+陶瓷碗,Ceramic Bowl,object,zh,100,phrase,keep,low,object/ceramic,ai_reviewed_batch,coverage_sprint_v0.1
+竹筷,Bamboo Chopsticks,object,zh,100,phrase,keep,low,object/utensil,ai_reviewed_batch,coverage_sprint_v0.1
+木棍,Wood Stick,object,zh,100,phrase,keep,low,object/wood,ai_reviewed_batch,coverage_sprint_v0.1
+水气球,Water Balloon,object,zh,100,phrase,keep,low,object/toy,ai_reviewed_batch,coverage_sprint_v0.1
+汽油罐,Gas Can,object,zh,100,phrase,keep,low,container/fuel,ai_reviewed_batch,coverage_sprint_v0.1
+烤盘,Baking Pan,object,zh,100,phrase,keep,low,kitchen/pan,ai_reviewed_batch,coverage_sprint_v0.1
+铜盖,Copper Lid,object,zh,100,phrase,keep,low,object/metal,ai_reviewed_batch,coverage_sprint_v0.1
+叉子,Fork,object,zh,100,phrase,keep,low,utensil/metal,ai_reviewed_batch,coverage_sprint_v0.1
+楼梯扶手,Ladder Handrail,object,zh,95,phrase,keep,medium,ladder/part,ai_reviewed_batch,coverage_sprint_v0.1
+楼梯踏板,Ladder Tread,object,zh,95,phrase,keep,medium,ladder/part,ai_reviewed_batch,coverage_sprint_v0.1
+螺母,Nut,object,zh,100,phrase,keep,low,hardware/metal,ai_reviewed_batch,coverage_sprint_v0.1
+勺子,Spoon,object,zh,100,phrase,keep,low,utensil/metal,ai_reviewed_batch,coverage_sprint_v0.1
+音叉,Tuning Fork,object,zh,100,phrase,keep,low,instrument/metal,ai_reviewed_batch,coverage_sprint_v0.1
+铜罐,Copper Can,object,zh,100,phrase,keep,low,container/metal,ai_reviewed_batch,coverage_sprint_v0.1
+金属签,Metal Skewer,object,zh,100,phrase,keep,low,utensil/metal,ai_reviewed_batch,coverage_sprint_v0.1
+大冰块,Large Ice Cubes,object,zh,100,phrase,keep,low,ice/object,ai_reviewed_batch,coverage_sprint_v0.1
+胡桃夹,Nutcracker,object,zh,100,phrase,keep,low,tool/kitchen,ai_reviewed_batch,coverage_sprint_v0.1
+锡纸盘,Tin Foil Pan,object,zh,100,phrase,keep,low,container/kitchen,ai_reviewed_batch,coverage_sprint_v0.1
+直玻璃,Straight Glass,object,zh,100,phrase,keep,low,glass/object,ai_reviewed_batch,coverage_sprint_v0.1
+牛叫盒,Moo Box,object,zh,95,phrase,keep,medium,toy/novelty,ai_reviewed_batch,coverage_sprint_v0.1
+铁板,Metal Plate,object,zh,100,phrase,keep,low,metal/plate,ai_reviewed_batch,coverage_sprint_v0.1
+厚玻璃,Thick Glass,object,zh,100,phrase,keep,low,glass/thick,ai_reviewed_batch,coverage_sprint_v0.1
+铁杆,Iron Bar,object,zh,100,phrase,keep,low,metal/bar,ai_reviewed_batch,coverage_sprint_v0.1
+泥刀,Trowel,object,zh,100,phrase,keep,low,tool/masonry,ai_reviewed_batch,coverage_sprint_v0.1
+橡胶棒,Rubber Rod,object,zh,100,phrase,keep,low,rubber/tool,ai_reviewed_batch,coverage_sprint_v0.1
+纹理瓷砖,Textured Tile,object,zh,95,phrase,keep,medium,tile/textured,ai_reviewed_batch,coverage_sprint_v0.1
+中型石头,Medium Rock,object,zh,100,phrase,keep,low,rock/medium,ai_reviewed_batch,coverage_sprint_v0.1
+钢墙,Steel Wall,object,zh,95,phrase,keep,medium,wall/metal,ai_reviewed_batch,coverage_sprint_v0.1
+碎屑堆,Debris Pile,object,zh,95,phrase,keep,medium,debris/rock,ai_reviewed_batch,coverage_sprint_v0.1
+石堆,Pile,object,zh,95,phrase,keep,medium,rock/pile,ai_reviewed_batch,coverage_sprint_v0.1
+脆饼,Crispbread,object,zh,100,phrase,keep,low,food/cracker,ai_reviewed_batch,coverage_sprint_v0.1
+卡片,Card,object,zh,100,phrase,keep,low,game/card,ai_reviewed_batch,coverage_sprint_v0.1
+海豹,Harbor Seal,source,zh,100,phrase,keep,low,animal/seal,ai_reviewed_batch,coverage_sprint_v0.1
+死亡哨,Death Whistle,source,zh,95,phrase,keep,medium,instrument/whistle,ai_reviewed_batch,coverage_sprint_v0.1
+火花,Spark,source,zh,100,phrase,keep,low,electricity/spark,ai_reviewed_batch,coverage_sprint_v0.1
+热铁,Hot Iron,object,zh,100,phrase,keep,low,tool/iron,ai_reviewed_batch,coverage_sprint_v0.1
+黄油,Butter,material,zh,100,phrase,keep,low,food/dairy,ai_reviewed_batch,coverage_sprint_v0.1
+酒精,Alcohol,material,zh,100,phrase,keep,low,liquid/chemical,ai_reviewed_batch,coverage_sprint_v0.1
+内脏,Guts,material,zh,100,phrase,keep,low,body/gore,ai_reviewed_batch,coverage_sprint_v0.1
+薄冰,Thin Ice,material,zh,100,phrase,keep,low,ice/thin,ai_reviewed_batch,coverage_sprint_v0.1
+乳胶,Latex,material,zh,100,phrase,keep,low,material/rubber,ai_reviewed_batch,coverage_sprint_v0.1
+放气,Deflate,action,zh,100,phrase,keep,low,air/release,ai_reviewed_batch,coverage_sprint_v0.1
+滚落,Trickle Down,action,zh,95,phrase,keep,medium,motion/fall,ai_reviewed_batch,coverage_sprint_v0.1
+重摔,Drop Hard,action,zh,100,phrase,keep,low,impact/drop,ai_reviewed_batch,coverage_sprint_v0.1
+组装,Assemble,action,zh,100,phrase,keep,low,mechanism/build,ai_reviewed_batch,coverage_sprint_v0.1
+滴水,Drip,action,zh,100,phrase,keep,low,liquid/water,ai_reviewed_batch,coverage_sprint_v0.1
+降噪,Denoise,action,zh,100,phrase,keep,low,audio/process,ai_reviewed_batch,coverage_sprint_v0.1
+刺入,Stab,action,zh,100,phrase,keep,low,pierce/weapon,ai_reviewed_batch,coverage_sprint_v0.1
+拍击,Hit,action,zh,95,phrase,keep,medium,impact/hand,ai_reviewed_batch,coverage_sprint_v0.1
+弓击,Bow,action,zh,95,phrase,keep,medium,bell/strike,ai_reviewed_batch,coverage_sprint_v0.1
+乞求,Beg,action,zh,100,phrase,keep,low,crowd/vocal,ai_reviewed_batch,coverage_sprint_v0.1
+气爆,Air Burst,action,zh,100,phrase,keep,low,air/explosion,ai_reviewed_batch,coverage_sprint_v0.1
+滚过,Roll On,motion,zh,100,phrase,keep,low,roll/surface,ai_reviewed_batch,coverage_sprint_v0.1
+吹气,Blow,action,zh,100,phrase,keep,low,air/breath,ai_reviewed_batch,coverage_sprint_v0.1
+脱模,Demold,action,zh,100,phrase,keep,low,mold/release,ai_reviewed_batch,coverage_sprint_v0.1
+鸣响,Ring,action,zh,95,phrase,keep,medium,resonance/sound,ai_reviewed_batch,coverage_sprint_v0.1
+激活,Activate,action,zh,100,phrase,keep,low,magic/trigger,ai_reviewed_batch,coverage_sprint_v0.1
+充能,Charge,action,zh,100,phrase,keep,low,energy/charge,ai_reviewed_batch,coverage_sprint_v0.1
+低语,Whisper,action,zh,100,phrase,keep,low,vocal/ghost,ai_reviewed_batch,coverage_sprint_v0.1
+颤动,Tremble,action,zh,100,phrase,keep,low,vibration/shake,ai_reviewed_batch,coverage_sprint_v0.1
+呻吟,Groan,action,zh,100,phrase,keep,low,vocal/creature,ai_reviewed_batch,coverage_sprint_v0.1
+吱呀,Creak,action,zh,100,phrase,keep,low,door/wood,ai_reviewed_batch,coverage_sprint_v0.1
+尖叫,Scream,action,zh,100,phrase,keep,low,vocal/screech,ai_reviewed_batch,coverage_sprint_v0.1
+堆叠,Stack,action,zh,100,phrase,keep,low,stack/layer,ai_reviewed_batch,coverage_sprint_v0.1
+大爆炸,Big Blast,action,zh,100,phrase,keep,low,explosion/big,ai_reviewed_batch,coverage_sprint_v0.1
+飘动,Flutter,motion,zh,100,phrase,keep,low,movement/light,ai_reviewed_batch,coverage_sprint_v0.1
+动作,Action,motion,zh,100,phrase,keep,low,movement/action,ai_reviewed_batch,coverage_sprint_v0.1
+变焦,Zoom,action,zh,100,phrase,keep,low,camera/zoom,ai_reviewed_batch,coverage_sprint_v0.1
+进出,In Out,action,zh,95,phrase,keep,medium,camera/movement,ai_reviewed_batch,coverage_sprint_v0.1
+失败,Fail,action,zh,100,phrase,keep,low,magic/spell,ai_reviewed_batch,coverage_sprint_v0.1
+过载,Overload,action,zh,100,phrase,keep,low,energy/overload,ai_reviewed_batch,coverage_sprint_v0.1
+魔法撞击,Magic Impact,action,zh,95,phrase,keep,medium,magic/impact,ai_reviewed_batch,coverage_sprint_v0.1
+奥术碰撞,Arcane Collision,action,zh,95,phrase,keep,medium,magic/collision,ai_reviewed_batch,coverage_sprint_v0.1
+电涌反弹,Power Surge Rebound,action,zh,95,phrase,keep,medium,magic/rebound,ai_reviewed_batch,coverage_sprint_v0.1
+魔法挥动,Magic Whoosh,motion,zh,95,phrase,keep,medium,magic/whoosh,ai_reviewed_batch,coverage_sprint_v0.1
+电流碎裂,Electric Shatter,action,zh,95,phrase,keep,medium,magic/shatter,ai_reviewed_batch,coverage_sprint_v0.1
+高音,High,detail,zh,100,phrase,keep,low,tone/pitch,ai_reviewed_batch,coverage_sprint_v0.1
+深沉,Deep,detail,zh,100,phrase,keep,low,tone/resonance,ai_reviewed_batch,coverage_sprint_v0.1
+共振,Resonance,detail,zh,100,phrase,keep,low,tone/resonance,ai_reviewed_batch,coverage_sprint_v0.1
+滤波,Filtered,modifier,zh,100,phrase,keep,low,audio/filter,ai_reviewed_batch,coverage_sprint_v0.1
+轻柔,Airy,detail,zh,100,phrase,keep,low,texture/soft,ai_reviewed_batch,coverage_sprint_v0.1
+清脆,Crisp,detail,zh,100,phrase,keep,low,texture/crisp,ai_reviewed_batch,coverage_sprint_v0.1
+脆响,Crunchy,detail,zh,100,phrase,keep,low,texture/crunch,ai_reviewed_batch,coverage_sprint_v0.1
+激烈,Aggressive,detail,zh,100,phrase,keep,low,intensity/aggressive,ai_reviewed_batch,coverage_sprint_v0.1
+尾音,Tail,detail,zh,100,phrase,keep,low,tail/duration,ai_reviewed_batch,coverage_sprint_v0.1
+频移,Freq Shift,detail,zh,95,phrase,keep,medium,audio/frequency,ai_reviewed_batch,coverage_sprint_v0.1
+延迟,Delay,detail,zh,100,phrase,keep,low,audio/effect,ai_reviewed_batch,coverage_sprint_v0.1
+老旧,Old,detail,zh,100,phrase,keep,low,age/condition,ai_reviewed_batch,coverage_sprint_v0.1
+纹理,Texture,detail,zh,100,phrase,keep,low,surface/texture,ai_reviewed_batch,coverage_sprint_v0.1
+相互,Mutual,detail,zh,100,phrase,keep,low,interaction/mutual,ai_reviewed_batch,coverage_sprint_v0.1
+复杂,Complex,detail,zh,100,phrase,keep,low,layer/complex,ai_reviewed_batch,coverage_sprint_v0.1
+多层,Several Layers,detail,zh,95,phrase,keep,medium,layer/paper,ai_reviewed_batch,coverage_sprint_v0.1
+近距离,Close,modifier,zh,100,phrase,keep,low,perspective/close,ai_reviewed_batch,coverage_sprint_v0.1
+长条,Long Piece,detail,zh,100,phrase,keep,low,size/long,ai_reviewed_batch,coverage_sprint_v0.1
+小块,Small Piece,detail,zh,100,phrase,keep,low,size/small,ai_reviewed_batch,coverage_sprint_v0.1
+空气感,Airy,detail,zh,100,phrase,keep,low,texture/airy,ai_reviewed_batch,coverage_sprint_v0.1
+绕卷,Winding,action,zh,100,phrase,keep,low,motion/winding,ai_reviewed_batch,coverage_sprint_v0.1
+向后,Backward,modifier,zh,100,phrase,keep,low,direction/back,ai_reviewed_batch,coverage_sprint_v0.1
+褶皱,Crinkle,action,zh,100,phrase,keep,low,paper/wrap,ai_reviewed_batch,coverage_sprint_v0.1
+余响,Ringout,detail,zh,95,phrase,keep,medium,reverb/tail,ai_reviewed_batch,coverage_sprint_v0.1
+洞口,Cave Mouth,modifier,zh,95,phrase,keep,medium,cave/entrance,ai_reviewed_batch,coverage_sprint_v0.1
+地面,Ground,object,zh,100,phrase,keep,low,surface/ground,ai_reviewed_batch,coverage_sprint_v0.1
+洞穴,Cave,modifier,zh,100,phrase,keep,low,space/cave,ai_reviewed_batch,coverage_sprint_v0.1
+返回,Back,modifier,zh,100,phrase,keep,low,direction/back,ai_reviewed_batch,coverage_sprint_v0.1
+锁扣,Lock,object,zh,100,phrase,keep,low,hardware/lock,ai_reviewed_batch,coverage_sprint_v0.1
+平静,Calm,detail,zh,100,phrase,keep,low,mood/calm,ai_reviewed_batch,coverage_sprint_v0.1
+基础,Basic,detail,zh,100,phrase,keep,low,style/basic,ai_reviewed_batch,coverage_sprint_v0.1
+圆形,Round,detail,zh,100,phrase,keep,low,shape/round,ai_reviewed_batch,coverage_sprint_v0.1
+叫声,Caw,action,zh,95,phrase,keep,medium,animal/vocal,ai_reviewed_batch,coverage_sprint_v0.1
+哨声,Whistle,detail,zh,100,phrase,keep,low,sound/whistle,ai_reviewed_batch,coverage_sprint_v0.1
+气流,Air Movement,motion,zh,100,phrase,keep,low,air/flow,ai_reviewed_batch,coverage_sprint_v0.1
+乡村,Countryside,modifier,zh,100,phrase,keep,low,ambience/rural,ai_reviewed_batch,coverage_sprint_v0.1
+牛棚,Cow Barn,modifier,zh,100,phrase,keep,low,ambience/farm,ai_reviewed_batch,coverage_sprint_v0.1
+夜晚,Night,modifier,zh,100,phrase,keep,low,time/night,ai_reviewed_batch,coverage_sprint_v0.1
+比利时,Belgium,modifier,zh,100,phrase,keep,low,place/belgium,ai_reviewed_batch,coverage_sprint_v0.1
+阿兹特克,Aztec,modifier,zh,100,phrase,keep,low,culture/aztec,ai_reviewed_batch,coverage_sprint_v0.1
+提尔,Tyr,modifier,zh,100,phrase,keep,low,myth/norse,ai_reviewed_batch,coverage_sprint_v0.1
+全员登船,All Aboard,source,zh,95,phrase,keep,medium,vocal/crowd,ai_reviewed_batch,coverage_sprint_v0.1
+桌面,On Table,modifier,zh,95,phrase,keep,medium,surface/table,ai_reviewed_batch,coverage_sprint_v0.1
+摇杆,Rocker,object,zh,100,phrase,keep,low,control/stick,ai_reviewed_batch,coverage_sprint_v0.1
+界面,Interface,object,zh,100,phrase,keep,low,ui/digital,ai_reviewed_batch,coverage_sprint_v0.1
+粉尘,Dust,detail,zh,100,phrase,keep,low,magic/particle,ai_reviewed_batch,coverage_sprint_v0.1
+科幻,Sci-fi,modifier,zh,100,phrase,keep,low,genre/scifi,ai_reviewed_batch,coverage_sprint_v0.1
+奥术,Arcane,source,zh,100,phrase,keep,low,magic/arcane,ai_reviewed_batch,coverage_sprint_v0.1
+电涌,Power Surge,source,zh,100,phrase,keep,low,energy/electric,ai_reviewed_batch,coverage_sprint_v0.1
+符文,Rune,source,zh,100,phrase,keep,low,magic/rune,ai_reviewed_batch,coverage_sprint_v0.1
+传送门,Portal,source,zh,100,phrase,keep,low,magic/portal,ai_reviewed_batch,coverage_sprint_v0.1
+魔法,Magic,source,zh,100,phrase,keep,low,magic/design,ai_reviewed_batch,coverage_sprint_v0.1
+能量,Energy,source,zh,100,phrase,keep,low,energy/scifi,ai_reviewed_batch,coverage_sprint_v0.1
+护盾,Shield,object,zh,100,phrase,keep,low,magic/shield,ai_reviewed_batch,coverage_sprint_v0.1
+mana,Mana,source,mixed,100,phrase,keep,low,magic/mana,ai_reviewed_batch,coverage_sprint_v0.1
+void,Void,source,mixed,100,phrase,keep,low,magic/void,ai_reviewed_batch,coverage_sprint_v0.1
+core,Core,object,mixed,100,phrase,keep,low,energy/core,ai_reviewed_batch,coverage_sprint_v0.1
+demon,Demon,source,mixed,100,phrase,keep,low,creature/demon,ai_reviewed_batch,coverage_sprint_v0.1
+机关,Mechanism,object,zh,100,phrase,keep,low,machine/mechanism,ai_reviewed_batch,coverage_sprint_v0.1
+0.5kg,0.5kg,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+Alerted,Alerted,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+ArcadeButton,Arcade Button,object,mixed,100,phrase,keep,low,sprint/object,ai_reviewed_batch,coverage_sprint_v0.2
+ArcadeStick,Arcade Stick,object,mixed,100,phrase,keep,low,sprint/object,ai_reviewed_batch,coverage_sprint_v0.2
+Backward,Backward,modifier,mixed,100,phrase,keep,low,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+BubbleWarp,Bubble Wrap,material,mixed,100,phrase,keep,low,sprint/material,ai_reviewed_batch,coverage_sprint_v0.2
+CLS,Close,modifier,mixed,100,phrase,keep,low,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+CS-3e,CS-3e,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+CUX-100K,CUX-100K,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+Cabbage,Cabbage,source,mixed,100,phrase,keep,low,sprint/source,ai_reviewed_batch,coverage_sprint_v0.2
+CabinetFriction,Cabinet Friction,action,mixed,100,phrase,keep,low,sprint/action,ai_reviewed_batch,coverage_sprint_v0.2
+Carronade,Carronade,source,mixed,100,phrase,keep,low,sprint/source,ai_reviewed_batch,coverage_sprint_v0.2
+Clavier,Clavier,object,mixed,100,phrase,keep,low,sprint/object,ai_reviewed_batch,coverage_sprint_v0.2
+Constant,Constant,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+Craze,Craze,unknown,mixed,100,phrase,keep,low,sprint/unknown,ai_reviewed_batch,coverage_sprint_v0.2
+Crowbar,Crowbar,object,mixed,100,phrase,keep,low,sprint/object,ai_reviewed_batch,coverage_sprint_v0.2
+DP,DP,modifier,mixed,100,phrase,keep,medium,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+Dampened,Dampened,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+Debris-,Debris-,unknown,mixed,100,phrase,keep,low,sprint/unknown,ai_reviewed_batch,coverage_sprint_v0.2
+Dragunov,Dragunov,modifier,mixed,100,phrase,keep,low,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+Driven,Driven,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+Dryfire,Dryfire,action,mixed,100,phrase,keep,low,sprint/action,ai_reviewed_batch,coverage_sprint_v0.2
+Eternal,Eternal,modifier,mixed,100,phrase,keep,low,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+Extinguish,Extinguish,action,mixed,100,phrase,keep,low,sprint/action,ai_reviewed_batch,coverage_sprint_v0.2
+Filter,Filter,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+Forward,Forward,modifier,mixed,100,phrase,keep,low,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+GLASSBALL,Glass Ball,object,mixed,100,phrase,keep,low,sprint/object,ai_reviewed_batch,coverage_sprint_v0.2
+Geofon,Geofon,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+Gesture,Gesture,action,mixed,100,phrase,keep,low,sprint/action,ai_reviewed_batch,coverage_sprint_v0.2
+Gnarly,Gnarly,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+Greasy,Greasy,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+HUD,HUD,object,mixed,100,phrase,keep,low,sprint/object,ai_reviewed_batch,coverage_sprint_v0.2
+Handed,Handed,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+Handrail,Handrail,object,mixed,100,phrase,keep,low,sprint/object,ai_reviewed_batch,coverage_sprint_v0.2
+Handwheel,Handwheel,object,mixed,100,phrase,keep,low,sprint/object,ai_reviewed_batch,coverage_sprint_v0.2
+Horizontal,Horizontal,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+II,II,modifier,mixed,100,phrase,keep,medium,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+Inch,Inch,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+Ithaca,Ithaca,modifier,mixed,100,phrase,keep,low,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+LG,Large,detail,mixed,100,phrase,keep,medium,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+LITESOUND,Lite Sound,source,mixed,100,phrase,keep,low,sprint/source,ai_reviewed_batch,coverage_sprint_v0.2
+Last,Last,modifier,mixed,100,phrase,keep,low,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+Layer,Layer,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+Lee,Lee,modifier,mixed,100,phrase,keep,low,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+Left,Left,modifier,mixed,100,phrase,keep,low,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+Lower,Lower,modifier,mixed,100,phrase,keep,low,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+MED,Medium,modifier,mixed,100,phrase,keep,low,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+Madness,Madness,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+Mark,Mark,modifier,mixed,100,phrase,keep,low,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+MasterMix,MasterMix,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+Mid,Medium,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+Mk,Mk,modifier,mixed,100,phrase,keep,medium,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+Multiple,Multiple,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+Mutual,Mutual,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+Ninja,Ninja,modifier,mixed,100,phrase,keep,low,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+OnSelf,On Self,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+PPD,PPD,modifier,mixed,100,phrase,keep,low,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+PSL,PSL,modifier,mixed,100,phrase,keep,low,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+Paving,Paving,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+Playful,Playful,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+Prick,Prick,action,mixed,100,phrase,keep,low,sprint/action,ai_reviewed_batch,coverage_sprint_v0.2
+Progressive,Progressive,modifier,mixed,100,phrase,keep,low,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+Retract,Retract,unknown,mixed,100,phrase,keep,low,sprint/unknown,ai_reviewed_batch,coverage_sprint_v0.2
+Right,Right,modifier,mixed,100,phrase,keep,low,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+Ringout,Ringout,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+Rod,Rod,unknown,mixed,100,phrase,keep,low,sprint/unknown,ai_reviewed_batch,coverage_sprint_v0.2
+RubberRod,Rubber Rod,object,mixed,100,phrase,keep,low,sprint/object,ai_reviewed_batch,coverage_sprint_v0.2
+Rubbery,Rubbery,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+SHT,Short,modifier,mixed,100,phrase,keep,low,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+SVT,SVT,modifier,mixed,100,phrase,keep,low,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+Sheath,Sheath,object,mixed,100,phrase,keep,low,sprint/object,ai_reviewed_batch,coverage_sprint_v0.2
+Sign,Sign,object,mixed,100,phrase,keep,low,sprint/object,ai_reviewed_batch,coverage_sprint_v0.2
+Snarl,Snarl,action,mixed,100,phrase,keep,low,sprint/action,ai_reviewed_batch,coverage_sprint_v0.2
+Src,Source,modifier,mixed,100,phrase,keep,low,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+Swrod,Sword,object,mixed,100,phrase,keep,low,sprint/object,ai_reviewed_batch,coverage_sprint_v0.2
+ThickEnd,Thick End,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+Tokarev,Tokarev,modifier,mixed,100,phrase,keep,low,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+Tulip,Tulip,object,mixed,100,phrase,keep,low,sprint/object,ai_reviewed_batch,coverage_sprint_v0.2
+TungstenCarbide,Tungsten Carbide,material,mixed,100,phrase,keep,low,sprint/material,ai_reviewed_batch,coverage_sprint_v0.2
+Two,Two,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+UnSheath,Unsheath,action,mixed,100,phrase,keep,low,sprint/action,ai_reviewed_batch,coverage_sprint_v0.2
+Under,Under,unknown,mixed,100,phrase,keep,low,sprint/unknown,ai_reviewed_batch,coverage_sprint_v0.2
+Unequip,Unequip,action,mixed,100,phrase,keep,low,sprint/action,ai_reviewed_batch,coverage_sprint_v0.2
+Upwards,Upwards,modifier,mixed,100,phrase,keep,low,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+Vi,Vi,modifier,mixed,100,phrase,keep,medium,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+WINDSINGER,Wind Singer,source,mixed,100,phrase,keep,low,sprint/source,ai_reviewed_batch,coverage_sprint_v0.2
+Watermelon,Watermelon,source,mixed,100,phrase,keep,low,sprint/source,ai_reviewed_batch,coverage_sprint_v0.2
+Webley,Webley,modifier,mixed,100,phrase,keep,low,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+achievement,Achievement,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+alternate,Alternate,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+beta,Beta,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+fail,Fail,action,mixed,100,phrase,keep,low,sprint/action,ai_reviewed_batch,coverage_sprint_v0.2
+implant,Implant,object,mixed,100,phrase,keep,low,sprint/object,ai_reviewed_batch,coverage_sprint_v0.2
+iridium,Iridium,material,mixed,100,phrase,keep,low,sprint/material,ai_reviewed_batch,coverage_sprint_v0.2
+overcharge,Overcharge,action,mixed,100,phrase,keep,low,sprint/action,ai_reviewed_batch,coverage_sprint_v0.2
+overload,Overload,action,mixed,100,phrase,keep,low,sprint/action,ai_reviewed_batch,coverage_sprint_v0.2
+perspective,Perspective,modifier,mixed,100,phrase,keep,low,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+preview,Preview,detail,mixed,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+rebound,Rebound,action,mixed,100,phrase,keep,low,sprint/action,ai_reviewed_batch,coverage_sprint_v0.2
+不好听,Bad Sound,detail,zh,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+不要,Do Not,modifier,zh,100,phrase,keep,medium,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+不要用,Do Not Use,modifier,zh,100,phrase,keep,low,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+临时,Temp,detail,zh,100,phrase,keep,medium,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+乱七八糟,Messy,detail,zh,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+僵尸,Zombie,source,zh,100,phrase,keep,medium,sprint/source,ai_reviewed_batch,coverage_sprint_v0.2
+嘶叫,Shriek,action,zh,100,phrase,keep,medium,sprint/action,ai_reviewed_batch,coverage_sprint_v0.2
+太怪,Weird,detail,zh,100,phrase,keep,medium,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+太长,Too Long,detail,zh,100,phrase,keep,medium,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+摔倒,Fall,action,zh,100,phrase,keep,medium,sprint/action,ai_reviewed_batch,coverage_sprint_v0.2
+更短,Shorter,detail,zh,100,phrase,keep,medium,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+更远,Farther,modifier,zh,100,phrase,keep,medium,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+松果,Pinecone,object,zh,100,phrase,keep,medium,sprint/object,ai_reviewed_batch,coverage_sprint_v0.2
+样本,Sample,detail,zh,100,phrase,keep,medium,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+测试样本,Test Sample,detail,zh,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+版本,Version,detail,zh,100,phrase,keep,medium,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+版本号,Version,detail,zh,100,phrase,keep,low,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+请忽略,Please Ignore,modifier,zh,100,phrase,keep,low,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+轰鸣,Rumble,detail,zh,100,phrase,keep,medium,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+这个,This,modifier,zh,100,phrase,keep,medium,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+铃声,Chime,detail,zh,100,phrase,keep,medium,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+饥饿,Hungry,detail,zh,100,phrase,keep,medium,sprint/detail,ai_reviewed_batch,coverage_sprint_v0.2
+魔鬼,Devil,source,zh,100,phrase,keep,medium,sprint/source,ai_reviewed_batch,coverage_sprint_v0.2
+反弹,Rebound,action,zh,100,phrase,keep,medium,sprint/action,ai_reviewed_batch,coverage_sprint_v0.2
+混合,Mixed,modifier,zh,100,phrase,keep,medium,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+等离子,Plasma,source,zh,100,phrase,keep,low,sprint/source,ai_reviewed_batch,coverage_sprint_v0.2
+远近,Close Far,modifier,zh,100,phrase,keep,medium,sprint/modifier,ai_reviewed_batch,coverage_sprint_v0.2
+嘎吱,Creak,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+嘎吱嘎吱,Creak,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+咯吱,Creak,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+咯吱咯吱,Creak,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+咔哒,Click,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+咔嗒,Click,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+咔嚓,Crack,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+哐当,Clank,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+咣当,Clang,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+哐啷,Clatter,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+喀啦,Clatter,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+咔啦,Clatter,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+噼啪,Crackle,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+噼里啪啦,Crackle,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+嗡嗡,Hum,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+轰隆,Rumble,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+轰隆隆,Rumble,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+沙沙,Rustle,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+窸窣,Rustle,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+呼呼,Whoosh,motion,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+嗖嗖,Whoosh,motion,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+咚咚,Thump,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+咕噜,Gurgle,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+咕噜咕噜,Gurgle,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+滴答,Tick,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+滴滴答答,Drip,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+叮当,Jingle,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+叮咚,Chime,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+叮铃,Jingle,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+哔哔,Beep,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+嘶嘶,Hiss,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+呲呲,Sizzle,action,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+唰唰,Swish,motion,zh,100,phrase,keep,low,onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+滋滋,,action,zh,0,ambiguous_phrase,review,medium,buzz/sizzle/onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+嗞嗞,,action,zh,0,ambiguous_phrase,review,medium,buzz/sizzle/onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+哗啦,,action,zh,0,ambiguous_phrase,review,medium,splash/rustle/onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+哗啦啦,,action,zh,0,ambiguous_phrase,review,medium,splash/rustle/onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+扑通,,action,zh,0,ambiguous_phrase,review,medium,thud/splash/onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+啪啪,,action,zh,0,ambiguous_phrase,review,medium,slap/clap/onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+嘟嘟,,action,zh,0,ambiguous_phrase,review,medium,beep/honk/onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+刷刷,,action,zh,0,ambiguous_phrase,review,medium,brush/swish/onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+砰砰,,action,zh,0,ambiguous_phrase,review,medium,bang/knock/impact/onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+砰,,action,zh,0,ambiguous_single,review,high,bang/impact/onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+啪,,action,zh,0,ambiguous_single,review,high,slap/clap/snap/onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+叮,,action,zh,0,ambiguous_single,review,high,jingle/chime/onomatopoeia/sound-symbolic,ai_reviewed_batch,onomatopoeia_v0.1
+涡轮,Turbine,object,zh,95,phrase,keep,low,boom/object,boom_mined,boom_one_mining_v0.1_b001
+稳定,Steady,modifier,zh,92,phrase,keep,low,boom/modifier,boom_mined,boom_one_mining_v0.1_b001
+序列,Sequence,detail,zh,92,phrase,keep,low,boom/detail,boom_mined,boom_one_mining_v0.1_b001
+波音,Boeing,source,zh,75,phrase,keep,medium,boom/proper_noun/aircraft,boom_mined,boom_one_mining_v0.1_b001
+奥古斯塔,Augusta,source,zh,75,phrase,keep,medium,boom/proper_noun/aircraft,boom_mined,boom_one_mining_v0.1_b001
+Augusta,Augusta,source,en,75,phrase,keep,medium,boom/proper_noun/aircraft,boom_mined,boom_one_mining_v0.1_b001
+起飞,Take Off,action,zh,90,phrase,keep,medium,boom/action,boom_mined,boom_one_mining_v0.1_b001
+飞行,Fly,action,zh,90,phrase,keep,medium,boom/action,boom_mined,boom_one_mining_v0.1_b001
+Globemaster,Globemaster,source,en,75,phrase,keep,medium,boom/proper_noun/aircraft,boom_mined,boom_one_mining_v0.1_b001
+Lancer,Lancer,source,en,75,phrase,keep,medium,boom/proper_noun/aircraft,boom_mined,boom_one_mining_v0.1_b001
+Stratofortress,Stratofortress,source,en,75,phrase,keep,medium,boom/proper_noun/aircraft,boom_mined,boom_one_mining_v0.1_b001
+开关关闭,Switch Off,action,zh,90,phrase,keep,medium,boom/action,boom_mined,boom_one_mining_v0.1_b001
+开关关闭序列,Switch Off Sequence,action,zh,90,phrase,keep,medium,boom/action,boom_mined,boom_one_mining_v0.1_b001
+涡轮增压,Turbine Rev Up,action,zh,90,phrase,keep,medium,boom/action,boom_mined,boom_one_mining_v0.1_b001
+近距,Close,detail,zh,92,phrase,keep,low,boom/detail,boom_mined,boom_one_mining_v0.1_b001
+飞走,Fly Away,action,zh,90,phrase,keep,medium,boom/action,boom_mined,boom_one_mining_v0.1_b001
+Flanker,Flanker,source,en,75,phrase,keep,medium,boom/proper_noun/aircraft,boom_mined,boom_one_mining_v0.1_b001
+Maverick,Maverick,source,en,75,phrase,keep,medium,boom/proper_noun/aircraft,boom_mined,boom_one_mining_v0.1_b001
+着陆,Land,action,zh,90,phrase,keep,medium,boom/action,boom_mined,boom_one_mining_v0.1_b001
+吱吱声,Creak,action,zh,90,phrase,keep,medium,boom/action,boom_mined,boom_one_mining_v0.1_b001
+猪群,Pigs Herd,object,zh,95,phrase,keep,low,boom/object,boom_mined,boom_one_mining_v0.1_b001

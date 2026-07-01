@@ -35,8 +35,10 @@ from translator import segment as seg  # noqa: E402
 from translator.fxname_mode import EN_DROP, ZH_STOP, _title  # noqa: E402
 
 DATA_DIR = ROOT / "docs" / "训练数据"
-OUT_PATH = ROOT / "translator" / "data" / "fx_overrides_bilingual.csv"
-PHRASE_PATH = ROOT / "translator" / "data" / "fx_overrides_phrase.csv"
+from translator.paths import FX_OVERRIDES_BILINGUAL_PATH, FX_OVERRIDES_PHRASE_PATH
+
+OUT_PATH = FX_OVERRIDES_BILINGUAL_PATH
+PHRASE_PATH = FX_OVERRIDES_PHRASE_PATH
 HOLDOUT_PATH = ROOT / "translator" / "data" / "jingfan_holdout.csv"
 
 PHRASE_MIN_SUPPORT = 5   # 短语(2-gram)支持度下限（比单词严，防噪声）

@@ -21,9 +21,7 @@ from rapidfuzz import fuzz
 
 from translator import align
 
-BOOM_INDEX_PATH = (
-    Path(__file__).resolve().parent.parent / "glossary" / "boom_style_index.sqlite"
-)
+from translator.paths import BOOM_INDEX_PATH
 
 # 阈值（可在验收中迭代）
 PHRASE_COMMON = 5      # 多词短语视为「BOOM 常见」的频次

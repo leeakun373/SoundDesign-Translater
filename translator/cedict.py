@@ -14,13 +14,7 @@ import re
 from functools import lru_cache
 from pathlib import Path
 
-CEDICT_PATH = (
-    Path(__file__).resolve().parent.parent
-    / "glossary"
-    / "sources"
-    / "cc-cedict"
-    / "cedict_ts.u8"
-)
+from translator.paths import CEDICT_PATH
 
 _LINE_RE = re.compile(r"^(\S+)\s+(\S+)\s+\[[^\]]*\]\s+/(.+)/\s*$")
 _PAREN_RE = re.compile(r"\([^)]*\)")

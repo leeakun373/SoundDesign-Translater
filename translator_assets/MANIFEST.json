@@ -1,0 +1,177 @@
+{
+  "version": 1,
+  "built_at": "2026-07-01T14:51:26+00:00",
+  "assets_root": "translator_assets",
+  "env_override": "TRANSLATOR_ASSETS_ROOT",
+  "files": [
+    {
+      "path": "fxname/fx_overrides.csv",
+      "role": "fxname_manual",
+      "sync_mode": "data",
+      "rebuild": "",
+      "size": 152145,
+      "sha256": "3e63d3e17cf1fe813e69c3afa1a40e093b3600d0f91e725e69b19aeff2891f33"
+    },
+    {
+      "path": "fxname/fx_overrides_auto.csv",
+      "role": "fxname_auto",
+      "sync_mode": "data",
+      "rebuild": "",
+      "size": 1053787,
+      "sha256": "cf732faa004200a2ddb1c220e18c6035fea03246b29bd264db514e418a32b3ad"
+    },
+    {
+      "path": "fxname/fx_overrides_bilingual.csv",
+      "role": "fxname_bilingual",
+      "sync_mode": "data",
+      "rebuild": "",
+      "size": 62142,
+      "sha256": "b232b20e1d2e99ac729c61cc294b3a658727290c99496f84d58e616caa7ea118"
+    },
+    {
+      "path": "fxname/fx_overrides_phrase.csv",
+      "role": "fxname_phrase",
+      "sync_mode": "data",
+      "rebuild": "",
+      "size": 94077,
+      "sha256": "39d6f8d9cda7f3a5286c07cab05fd525a1a68dc2d90b5b1e4bfa511be10bbac8"
+    },
+    {
+      "path": "fxname/zh_en_alignment.csv",
+      "role": "zh_en_alignment",
+      "sync_mode": "generated",
+      "rebuild": "python -m translator.align",
+      "size": 6353506,
+      "sha256": "d5543323dfce8c0d5054e0a3e8ef5b819d9729ea5b7818722e6b1bd52511d872"
+    },
+    {
+      "path": "generated/jieba_userdict.txt",
+      "role": "jieba_userdict",
+      "sync_mode": "generated",
+      "rebuild": "python -m translator.segment --build",
+      "size": 1545582,
+      "sha256": "92b075b8186776da1d83a87355a3f3eeb7b049260b6e8e6f0fc19dd83f6088b2"
+    },
+    {
+      "path": "canonical/canonical_tokens.csv",
+      "role": "canonical_snapshot",
+      "sync_mode": "data",
+      "rebuild": "copy from fxengine/data/canonical_tokens.csv",
+      "size": 64878,
+      "sha256": "9b22c33787ef416cd8f059054e96ff247ebf176e7c476a179b06bb8812d5091f"
+    },
+    {
+      "path": "glossary/user_overrides.csv",
+      "role": "glossary_user",
+      "sync_mode": "data",
+      "rebuild": "",
+      "size": 6801,
+      "sha256": "ab81471c56b49de3ba54fc172905d2ff8ef0b536404ff31fc61367106439d6ca"
+    },
+    {
+      "path": "glossary/zh_oral_aliases.csv",
+      "role": "glossary_oral",
+      "sync_mode": "data",
+      "rebuild": "",
+      "size": 637,
+      "sha256": "d2d159ae33d881831bad1370ed532089cb06c89d42139abb750140af4e40fad4"
+    },
+    {
+      "path": "glossary/sources/MyKeyWordV1.csv",
+      "role": "mykeyword",
+      "sync_mode": "data",
+      "rebuild": "",
+      "size": 28373,
+      "sha256": "1debca9c2b9bb370799c615ff0dd20ebce1babe72339bc81b8d48c1373a1cc04"
+    },
+    {
+      "path": "glossary/sources/ucs_catid_list.csv",
+      "role": "ucs_catid",
+      "sync_mode": "data",
+      "rebuild": "",
+      "size": 303463,
+      "sha256": "1481ac9b9b36c8a6af50a964908c6c0c53232d4c9861f5daa8c8e4a04a668ddf"
+    },
+    {
+      "path": "glossary/sources/ucs_categorylist.csv",
+      "role": "ucs_official",
+      "sync_mode": "data",
+      "rebuild": "",
+      "size": 1573491,
+      "sha256": "2476cf627cb46cb0822ec986c487df8cbfb35da609be13cb169df66e75d2037f"
+    },
+    {
+      "path": "dictionaries/cedict_ts.u8",
+      "role": "cedict",
+      "sync_mode": "data",
+      "rebuild": "",
+      "size": 9871271,
+      "sha256": "30f3f8e3e20c738341f3b8850c4e4ba24642f474a8f0f08e8222431ee2f6f8b3"
+    },
+    {
+      "path": "indexes/audio_glossary.sqlite",
+      "role": "audio_glossary_db",
+      "sync_mode": "data",
+      "rebuild": "python glossary/build_glossary.py",
+      "size": 1015808,
+      "sha256": "726fa3236618e1a5ad66b89dae71935afbf428d1abd6078e4b977db43e604158"
+    },
+    {
+      "path": "indexes/boom_style_index.sqlite",
+      "role": "boom_style_index",
+      "sync_mode": "large",
+      "rebuild": "",
+      "size": 439365632,
+      "sha256": "cf2653a15beb1ff62bce98f3ebd37bbe02dedac96ba8a5617b67634e84d57540"
+    },
+    {
+      "path": "supplements/pillars_data.csv",
+      "role": "pillars_source",
+      "sync_mode": "data",
+      "rebuild": "",
+      "size": 4406,
+      "sha256": "dfaa6a555e5e4c26b675c9a187e4beac4fae3cffe949c2e68eae4419342084f4"
+    },
+    {
+      "path": "supplements/lol_skinlines_zh.csv",
+      "role": "lol_skinlines",
+      "sync_mode": "data",
+      "rebuild": "",
+      "size": 3421,
+      "sha256": "3ab4a6405f25ef1265be28cfef187ff8137c44be51dac63454397b5331b23cf4"
+    },
+    {
+      "path": "supplements/en_synonym_groups.csv",
+      "role": "en_synonyms",
+      "sync_mode": "data",
+      "rebuild": "",
+      "size": 19137,
+      "sha256": "21aacd1cf4be7d154220d28bc7e53886b061f5391916b765a7f191996a0e3939"
+    },
+    {
+      "path": "supplements/soundminer.tth",
+      "role": "soundminer_source",
+      "sync_mode": "data",
+      "rebuild": "",
+      "size": 12231,
+      "sha256": "c2ab138f8e47987ed7a30d434ea9d7fc87b92463db4735b2d6b8c7f947c29faf"
+    },
+    {
+      "path": "supplements/presets.json",
+      "role": "presets",
+      "sync_mode": "data",
+      "rebuild": "",
+      "size": 5172,
+      "sha256": "1a18c194f48154aa8397d05f6959926e401051e90dce2a646176c70d4997e543"
+    },
+    {
+      "path": "supplements/ucs_catid_list.csv",
+      "role": "ucs_catid_supplement",
+      "sync_mode": "data",
+      "rebuild": "",
+      "size": 303463,
+      "sha256": "1481ac9b9b36c8a6af50a964908c6c0c53232d4c9861f5daa8c8e4a04a668ddf"
+    }
+  ],
+  "missing": []
+}

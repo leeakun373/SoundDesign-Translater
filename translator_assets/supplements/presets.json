@@ -1,0 +1,199 @@
+{
+    "version": "1.2",
+    "encoding": "utf-8",
+    "presets": [
+  
+      {
+        "name": "Magic / Fantasy",
+        "filter_keywords": [
+          "Magic", "Fantasy", "Spell", "Arcane", "Mystic",
+          "Supernatural", "Enchantment"
+        ],
+        "gravity_stakes": [
+          "Fire", "Ice", "Water", "Wind", "Lightning",
+          "Earth", "Stone", "Nature", "Poison",
+          "Light", "Holy", "Dark", "Shadow", "Void", "Arcane",
+  
+          "Energy", "Aura", "Wisp", "Glow", "Pulse", "Radiance",
+  
+          "Cast", "Charge", "Channel", "Release", "Burst",
+          "Impact", "Summon", "Conjure", "Enchant",
+  
+          "Swirl", "Spiral", "Trail", "Rise", "Fall", "Explosion"
+        ]
+      },
+  
+      {
+        "name": "Sci-Fi",
+        "filter_keywords": [
+          "Sci-Fi", "Science Fiction", "Futuristic",
+          "Future", "Cyber", "Alien", "Space", "Technology"
+        ],
+        "gravity_stakes": [
+          "Laser", "Plasma", "Beam", "Ion", "Photon", "Railgun",
+          "Energy Weapon",
+  
+          "Charge", "Power Up", "Power Down", "Overload",
+          "Cool Down", "Core", "Reactor",
+  
+          "Servo", "Motor", "Mechanism", "Hydraulic",
+          "Circuit", "Interface", "System",
+  
+          "Scan", "Deploy", "Teleport", "Warp",
+          "Flyby", "Pass By", "Whoosh"
+        ]
+      },
+  
+      {
+        "name": "Cinematic",
+        "filter_keywords": [
+          "Cinematic", "Trailer", "Epic",
+          "Film", "Score", "Orchestral"
+        ],
+        "gravity_stakes": [
+          "Impact", "Hit", "Boom", "Sub",
+          "Rise", "Downer", "Transition",
+          "Whoosh", "Swell", "Pulse",
+          "Braam", "Riser", "Drop"
+        ]
+      },
+  
+      {
+        "name": "Cinematic Horror",
+        "filter_keywords": [
+          "Horror", "Cinematic Horror",
+          "Scary", "Creepy", "Dark",
+          "Tension", "Suspense"
+        ],
+        "gravity_stakes": [
+          "Drone", "Texture", "Noise", "Sub",
+          "Pulse", "Heartbeat",
+  
+          "Whisper", "Breath", "Scream", "Moan",
+  
+          "Stinger", "Impact", "Hit",
+          "Rise", "Drop", "Dissonance"
+        ]
+      },
+  
+      {
+        "name": "Creature / Alien",
+        "filter_keywords": [
+          "Creature", "Monster", "Alien",
+          "Beast", "Animal"
+        ],
+        "gravity_stakes": [
+          "Roar", "Growl", "Snarl",
+          "Breath", "Vocal", "Screech",
+  
+          "Idle", "Movement", "Footstep",
+          "Attack", "Bite", "Claw",
+  
+          "Pain", "Death", "Effort"
+        ]
+      },
+  
+      {
+        "name": "Mechanical / Industrial",
+        "filter_keywords": [
+          "Mechanical", "Industrial", "Machine",
+          "Factory", "Engine"
+        ],
+        "gravity_stakes": [
+          "Motor", "Servo", "Hydraulic", "Pneumatic",
+          "Gear", "Chain", "Metal",
+  
+          "Loop", "Idle", "Start", "Stop",
+          "Acceleration", "Deceleration",
+  
+          "Rattle", "Grind", "Clank", "Impact"
+        ]
+      },
+  
+      {
+        "name": "Vehicle",
+        "filter_keywords": [
+          "Vehicle", "Car", "Aircraft",
+          "Ship", "Engine", "Transport"
+        ],
+        "gravity_stakes": [
+          "Engine", "Idle", "Start", "Stop",
+          "Acceleration", "Deceleration",
+  
+          "Pass By", "Flyby", "Doppler",
+          "Interior", "Exterior",
+  
+          "Impact", "Crash", "Skid"
+        ]
+      },
+  
+      {
+        "name": "UI / UX (Modern)",
+        "filter_keywords": [
+          "UI", "UX", "Interface",
+          "Menu", "Modern UI", "System"
+        ],
+        "gravity_stakes": [
+          "Click", "Tap", "Beep", "Tick",
+  
+          "Confirm", "Accept", "Success",
+          "Cancel", "Error", "Warning",
+  
+          "Hover", "Focus", "Transition",
+          "Open", "Close"
+        ]
+      },
+  
+      {
+        "name": "UI / Casual / Mobile",
+        "filter_keywords": [
+          "Casual", "Mobile", "Game UI",
+          "Puzzle", "Kids"
+        ],
+        "gravity_stakes": [
+          "Pop", "Pluck", "Boop", "Blip",
+          "Slide", "Bounce",
+  
+          "Confirm", "Reward", "Collect",
+          "Fail", "Retry",
+  
+          "Whoosh", "Transition"
+        ]
+      },
+  
+      {
+        "name": "Cartoon / Stylized",
+        "filter_keywords": [
+          "Cartoon", "Stylized",
+          "Toon", "Comic", "Animated"
+        ],
+        "gravity_stakes": [
+          "Boing", "Stretch", "Squash",
+          "Slide", "Spin",
+  
+          "Impact", "Pop", "Hit",
+  
+          "Exaggerated", "Funny", "Silly"
+        ]
+      },
+  
+      {
+        "name": "Nature / Field Recording",
+        "filter_keywords": [
+          "Nature", "Natural",
+          "Field Recording",
+          "Environment", "Outdoor"
+        ],
+        "gravity_stakes": [
+          "Wind", "Water", "Rain", "Thunder",
+          "Forest", "Jungle",
+  
+          "Bird", "Insect", "Animal",
+  
+          "Distant", "Close", "Ambience"
+        ]
+      }
+  
+    ]
+  }
+  

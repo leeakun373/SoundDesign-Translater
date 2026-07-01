@@ -7,7 +7,9 @@ import sqlite3
 from dataclasses import dataclass
 from pathlib import Path
 
-DEFAULT_DB = Path(__file__).resolve().parent / "audio_glossary.sqlite"
+from translator.paths import AUDIO_GLOSSARY_DB
+
+DEFAULT_DB = AUDIO_GLOSSARY_DB
 
 
 class GlossaryNotFoundError(FileNotFoundError):

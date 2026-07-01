@@ -15,7 +15,7 @@ import jieba
 
 from translator import cedict, overrides
 
-USERDICT_PATH = Path(__file__).resolve().parent / "data" / "jieba_userdict.txt"
+from translator.paths import USERDICT_PATH
 
 _CJK_RE = re.compile(r"[\u4e00-\u9fff\u3400-\u4dbf]+")
 

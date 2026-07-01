@@ -25,7 +25,7 @@ from pathlib import Path
 from typing import Dict, List, Optional
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_CEDICT_PATH = ROOT / "glossary" / "sources" / "cc-cedict" / "cedict_ts.u8"
+DEFAULT_CEDICT_PATH = __import__("translator.paths", fromlist=["CEDICT_PATH"]).CEDICT_PATH
 
 # CC-CEDICT line format: ``繁體 简体 [pin1 yin1] /gloss 1/gloss 2/``
 _LINE_RE = re.compile(r"^(\S+)\s(\S+)\s\[([^\]]*)\]\s/(.*)/\s*$")

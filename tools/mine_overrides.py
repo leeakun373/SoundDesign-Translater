@@ -24,7 +24,9 @@ sys.path.insert(0, str(ROOT))
 from glossary.fx_slots import infer_slot  # noqa: E402
 from translator import align, boom_snap, cedict, overrides  # noqa: E402
 
-OUT_PATH = ROOT / "translator" / "data" / "fx_overrides_auto.csv"
+from translator.paths import FX_OVERRIDES_AUTO_PATH
+
+OUT_PATH = FX_OVERRIDES_AUTO_PATH
 
 
 def _title(text: str) -> str:

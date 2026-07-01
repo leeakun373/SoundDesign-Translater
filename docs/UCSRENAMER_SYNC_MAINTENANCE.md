@@ -106,11 +106,14 @@ jieba 给出完整词元但四表 + cedict 均未命中时，用已知 override 
 
 | SoundDesign Translater 变更 | UCSRenamer 操作 |
 |---|---|
-| `translator/`、`fxengine/`、轻量 glossary 代码/CSV、CC-CEDICT、jieba、对齐表 | 常规同步 |
-| `glossary/audio_glossary.sqlite` | 常规同步加 `--include-glossary-db` |
-| `glossary/boom_style_index.sqlite` | 大型 FXName 资产同步 |
+| `translator_assets/**` 仅 CSV/SQLite（逻辑未改） | `tools/sync_translator_assets.py --source <目录> --apply --data-only` |
+| `translator/`、`fxengine/`、glossary 代码 | 常规 `sync_sounddesign_translator.py` |
+| `translator_assets/indexes/audio_glossary.sqlite` | 常规同步加 `--include-glossary-db` |
+| `translator_assets/indexes/boom_style_index.sqlite` | `sync_translator_fxname_assets.py --apply` |
 | `nllb_int8_model/` | `tools/sync_translator_model_asset.py --source <目录> --apply` |
 | 仅文档或源项目测试 | 不需要运行时资产同步 |
+
+数据根目录见 [`translator_assets/README.md`](../translator_assets/README.md)；运行时通过 `translator/paths.py` 解析，可用 `TRANSLATOR_ASSETS_ROOT` 覆盖。
 
 ## 审计与回滚
 

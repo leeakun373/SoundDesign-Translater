@@ -17,13 +17,7 @@ from pathlib import Path
 
 from translator import cedict, overrides
 
-ALIGN_PATH = Path(__file__).resolve().parent / "data" / "zh_en_alignment.csv"
-CANDIDATES_PATH = (
-    Path(__file__).resolve().parent.parent
-    / "docs"
-    / "boom_mining"
-    / "boom_one_mining_v0_1_b001_candidates.csv"
-)
+from translator.paths import ALIGN_PATH, CANDIDATES_PATH
 
 
 def _add(table: dict[str, dict[str, int]], zh: str, en: str, support: int) -> None:

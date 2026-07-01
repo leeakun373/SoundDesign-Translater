@@ -19,17 +19,18 @@ BUILD_DIR = ROOT / "build" / "pyinstaller_fxname"
 SPEC_DIR = ROOT / "build"
 SPEC_PATH = SPEC_DIR / "SoundDesignFXName.spec"
 
+from translator import paths as tpaths
+
 DATA_FILES = (
-    ("translator/data/fx_overrides.csv", "translator/data"),
-    ("translator/data/fx_overrides_auto.csv", "translator/data"),
-    ("translator/data/fx_overrides_bilingual.csv", "translator/data"),
-    ("translator/data/fx_overrides_phrase.csv", "translator/data"),
-    ("translator/data/zh_en_alignment.csv", "translator/data"),
-    # Optional cache. If missing, translator.segment rebuilds it on first run.
-    ("translator/data/jieba_userdict.txt", "translator/data"),
-    ("fxengine/data/canonical_tokens.csv", "fxengine/data"),
-    ("glossary/boom_style_index.sqlite", "glossary"),
-    ("glossary/sources/cc-cedict/cedict_ts.u8", "glossary/sources/cc-cedict"),
+    (tpaths.FX_OVERRIDES_PATH, "translator_assets/fxname"),
+    (tpaths.FX_OVERRIDES_AUTO_PATH, "translator_assets/fxname"),
+    (tpaths.FX_OVERRIDES_BILINGUAL_PATH, "translator_assets/fxname"),
+    (tpaths.FX_OVERRIDES_PHRASE_PATH, "translator_assets/fxname"),
+    (tpaths.ALIGN_PATH, "translator_assets/fxname"),
+    (tpaths.USERDICT_PATH, "translator_assets/generated"),
+    (tpaths.CANONICAL_PATH, "fxengine/data"),
+    (tpaths.BOOM_INDEX_PATH, "translator_assets/indexes"),
+    (tpaths.CEDICT_PATH, "translator_assets/dictionaries"),
 )
 
 
@@ -37,9 +38,9 @@ def _add_data_args() -> list[str]:
     sep = os.pathsep
     args: list[str] = []
     for src, dest in DATA_FILES:
-        path = ROOT / src
+        path = Path(src)
         if not path.exists():
-            if src.endswith("jieba_userdict.txt"):
+            if path.name == "jieba_userdict.txt":
                 continue
             raise FileNotFoundError(path)
         args.extend(["--add-data", f"{path}{sep}{dest}"])

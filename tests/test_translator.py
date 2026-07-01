@@ -106,3 +106,14 @@ def test_fxname_whoosh_fly_by_drops_yisheng():
     assert result.output_fxname == "Whoosh Fly By"
     assert any(trace.decision == "dropped_suffix" and trace.source_text == "一声"
                for trace in result.traces)
+
+
+def test_fxname_lol_star_guardian_skinline():
+    result = fxname_mode.normalize("星之守护者技能")
+    assert result.output_fxname == "Star Guardian Skill"
+    assert not any(trace.decision == "unknown" for trace in result.traces)
+
+
+def test_fxname_lol_blood_moon_skinline():
+    result = fxname_mode.normalize("腥红之月")
+    assert result.output_fxname == "Blood Moon"

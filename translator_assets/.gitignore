@@ -1,0 +1,7 @@
+# Generated / large runtime assets (rebuild or download separately)
+generated/jieba_userdict.txt
+fxname/zh_en_alignment.csv
+indexes/boom_style_index.sqlite
+indexes/audio_glossary.sqlite
+
+# Supplement ingest reports stay in reports/
